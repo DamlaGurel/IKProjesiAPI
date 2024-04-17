@@ -10,6 +10,6 @@ namespace IKProjesiAPI.Domain.Entities
 {
     public class SiteManager:AppUser
     {
-        
+        public List<Company> Companies { get; set; }
     }
 }
