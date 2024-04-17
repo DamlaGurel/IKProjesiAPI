@@ -26,5 +26,8 @@ namespace IKProjesiAPI.Domain.Entities
         public DateTime EndContractDate { get; set; }
         public Status Status { get; set; }
 
+        public CompanyManager CompanyManager { get; set; }
+        public SiteManager SiteManager { get; set; }
+
     }
 }

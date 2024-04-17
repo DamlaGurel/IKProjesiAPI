@@ -10,6 +10,6 @@ namespace IKProjesiAPI.Domain.Entities
 {
     public class CompanyManager:AppUser
     {
-       
+        public Company Company { get; set; }
     }
 }
