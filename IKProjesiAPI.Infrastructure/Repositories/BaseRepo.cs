@@ -1,4 +1,5 @@
-﻿using IKProjesiAPI.Domain.Repositories;
+﻿using IKProjesiAPI.Domain.Entities;
+using IKProjesiAPI.Domain.Repositories;
 using IKProjesiAPI.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,19 +19,22 @@ namespace IKProjesiAPI.Infrastructure.Repositories
             _context = context;
             _dbSet = _context.Set<T>();
         }
-        public Task Create(T entity)
+        public async Task Create(T entity)
         {
-            throw new NotImplementedException();
+            await _dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Delete(T entity)
+        public async Task Delete(T entity)
         {
-            throw new NotImplementedException();
+            _context.Entry<T>(entity).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
         }
 
-        public Task Update(T entity)
+        public async Task Update(T entity)
         {
-            throw new NotImplementedException();
+            _context.Entry<T>(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
     }
 }
