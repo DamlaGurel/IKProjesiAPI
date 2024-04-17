@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKProjesiAPI.Domain", "IKPr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKProjesiAPI.Infrastructure", "IKProjesiAPI.Infrastructure\IKProjesiAPI.Infrastructure.csproj", "{05F303BA-FC1F-4428-9728-B4E395ACE099}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IkProjesiAPI.API", "IkProjesiAPI.API\IkProjesiAPI.API.csproj", "{8E8413C6-5758-4DB5-9F8E-108A278283E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKProjesiAPI.API", "IkProjesiAPI.API\IKProjesiAPI.API.csproj", "{8E8413C6-5758-4DB5-9F8E-108A278283E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
