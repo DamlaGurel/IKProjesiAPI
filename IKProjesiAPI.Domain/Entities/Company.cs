@@ -29,5 +29,6 @@ namespace IKProjesiAPI.Domain.Entities
         public CompanyManager CompanyManager { get; set; }
         public SiteManager SiteManager { get; set; }
 
+
     }
 }
