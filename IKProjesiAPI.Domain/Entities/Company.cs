@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Domain.Entities
 {
-    public class Company
+    public class Company : IBaseEntity
     {
         public string CompanyName { get; set; }
         public string CompanyTitle { get; set; }
@@ -24,11 +24,11 @@ namespace IKProjesiAPI.Domain.Entities
         public DateTime FoundationYear { get; set; }
         public DateTime StartContractDate { get; set; }
         public DateTime EndContractDate { get; set; }
+
+        public List<CompanyManager> CompanyManagers { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public DateTime? DeletedDate { get; set; }
         public Status Status { get; set; }
-
-        public CompanyManager CompanyManager { get; set; }
-        public SiteManager SiteManager { get; set; }
-
-
     }
 }
