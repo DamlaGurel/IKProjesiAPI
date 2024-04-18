@@ -10,7 +10,15 @@
     <Folder Include="AutoMapper\" />
     <Folder Include="Extensions\" />
     <Folder Include="IoC\" />
-    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IKProjesiAPI.Domain\IKProjesiAPI.Domain.csproj" />
   </ItemGroup>
 
 </Project>

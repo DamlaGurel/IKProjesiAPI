@@ -22,7 +22,8 @@ namespace IKProjesiAPI.Infrastructure.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           
+            
+                optionsBuilder.UseSqlServer("Server=tcp:gadi.database.windows.net,1433;Initial Catalog=Gadi;Persist Security Info=False;User ID=gadi;Password=bilgeadam123**;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }
     }
 }
