@@ -1,4 +1,6 @@
 ﻿using IKProjesiAPI.Domain.Entities;
+using IKProjesiAPI.Infrastructure.EntityTypeConfig;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Infrastructure.Context
 {
-    public class AppDbContext : IdentityDbContext<AppUser>
+    public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
     {
         public AppDbContext()
         {
@@ -27,6 +29,12 @@ namespace IKProjesiAPI.Infrastructure.Context
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<SiteManager> SiteManagers { get; set; }
         public DbSet<CompanyManager> CompanyManagers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfiguration(new AppUserConfig());
+            base.OnModelCreating(builder);
+        }
 
     }
 }
