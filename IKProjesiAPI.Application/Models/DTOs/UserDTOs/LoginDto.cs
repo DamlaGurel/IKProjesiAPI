@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IKProjesiAPI.Application.Models.DTOs
+namespace IKProjesiAPI.Application.Models.DTOs.UserDTOs
 {
     public class LoginDto
     {
-        [Required(ErrorMessage ="E-Posta adresinizi giriniz.")]
-        [Display(Name ="E-Posta")]
+        [Required(ErrorMessage = "E-Posta adresinizi giriniz.")]
+        [Display(Name = "E-Posta")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Şifrenizi giriniz.")]
