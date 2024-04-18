@@ -1,0 +1,38 @@
+﻿@using IKProjesiAPI.Application.Models.DTOs
+@model LoginDto
+@{
+    Layout = "_Layout";
+}
+
+<div class="container-fluid mb-5 ">
+    <div class="container-fluid pt-5 ">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5">
+                <span class="px-2">Giriş Yap</span>
+            </h2>
+        </div>
+        <div class="row px-xl-5">
+            <div class="col-lg-7 mb-5 offset-3">
+                <div class="contact-form">
+                    <div id="success"></div>
+                    <form asp-controller="Home" asp-action="Index" method="post" id="contactForm" novalidate="novalidate">
+                        <div class="control-group">
+                            <input asp-for="Email" class="form-control" placeholder="Kullanıcı Adı" required="required" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <div class="control-group">
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Şifre" required="required" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="logout">Çıkış Yap</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

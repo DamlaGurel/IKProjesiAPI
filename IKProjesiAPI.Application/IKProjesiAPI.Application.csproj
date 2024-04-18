@@ -10,7 +10,6 @@
     <Folder Include="AutoMapper\" />
     <Folder Include="Extensions\" />
     <Folder Include="IoC\" />
-    <Folder Include="Models\DTOs\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

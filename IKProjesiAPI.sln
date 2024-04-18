@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKProjesiAPI.Application", "IKProjesiAPI.Application\IKProjesiAPI.Application.csproj", "{96604591-F993-4006-8D36-BAA18B6D4BCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IKProjesiAPI.Application", "IKProjesiAPI.Application\IKProjesiAPI.Application.csproj", "{96604591-F993-4006-8D36-BAA18B6D4BCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKProjesiAPI.Domain", "IKProjesiAPI.Domain\IKProjesiAPI.Domain.csproj", "{DC256CC7-519B-48FC-824C-7691B518D18A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IKProjesiAPI.Domain", "IKProjesiAPI.Domain\IKProjesiAPI.Domain.csproj", "{DC256CC7-519B-48FC-824C-7691B518D18A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKProjesiAPI.Infrastructure", "IKProjesiAPI.Infrastructure\IKProjesiAPI.Infrastructure.csproj", "{05F303BA-FC1F-4428-9728-B4E395ACE099}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IKProjesiAPI.Infrastructure", "IKProjesiAPI.Infrastructure\IKProjesiAPI.Infrastructure.csproj", "{05F303BA-FC1F-4428-9728-B4E395ACE099}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKProjesiAPI.API", "IkProjesiAPI.API\IKProjesiAPI.API.csproj", "{8E8413C6-5758-4DB5-9F8E-108A278283E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IKProjesiAPI.API", "IkProjesiAPI.API\IKProjesiAPI.API.csproj", "{8E8413C6-5758-4DB5-9F8E-108A278283E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
