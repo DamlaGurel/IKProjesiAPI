@@ -16,9 +16,7 @@ namespace IKProjesiAPI.Infrastructure.SeedData
             modelBuilder.Entity<SiteManager>().HasData(
                 new SiteManager
                 {
-                    FirstName="Admin",
-                    LastName="Admin",
-                    Email="arslanilkay06@gmail.com"
+
                 });
         }
     }
