@@ -10,6 +10,8 @@
     <Folder Include="AutoMapper\" />
     <Folder Include="Extensions\" />
     <Folder Include="IoC\" />
+    <Folder Include="Services\CompanyManagerService\" />
+    <Folder Include="Models\DTOs\CompanyManagerDTOs\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,4 +22,8 @@
     <ProjectReference Include="..\IKProjesiAPI.Domain\IKProjesiAPI.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Services\CompanyManagerService\" />
+    <None Remove="Models\DTOs\CompanyManagerDTOs\" />
+  </ItemGroup>
 </Project>
