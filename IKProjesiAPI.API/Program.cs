@@ -1,3 +1,6 @@
+using IKProjesiAPI.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
+
 namespace IkProjesiAPI.API
 {
     public class Program

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,9 @@ namespace IKProjesiAPI.Domain.Entities
 
         public string LastName { get; set; }
         public string? SecondLastName { get; set; }
+        public string Password { get; set; }
         public string ImagePath { get; set; }
+        [NotMapped]
         public IFormFile ProfilePicture { get; set; }
         public DateTime BirthDate { get; set; }
         public string BirthPlace { get; set; }

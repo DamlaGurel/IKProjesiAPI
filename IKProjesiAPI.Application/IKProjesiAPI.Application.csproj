@@ -10,8 +10,14 @@
     <Folder Include="AutoMapper\" />
     <Folder Include="Extensions\" />
     <Folder Include="IoC\" />
-    <Folder Include="Models\DTOs\" />
-    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IKProjesiAPI.Domain\IKProjesiAPI.Domain.csproj" />
   </ItemGroup>
 
 </Project>
