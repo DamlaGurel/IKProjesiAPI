@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="AutoMapper\" />
     <Folder Include="Extensions\" />
     <Folder Include="IoC\" />
   </ItemGroup>
