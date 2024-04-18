@@ -24,7 +24,7 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
 
             var superAdmin = new AppUser
             {
-                Id = "1",
+                Id = 1,
                 FirstName = "Super",
                 LastName = "Admin",
                 Email = "super@admin.com",
