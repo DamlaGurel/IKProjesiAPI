@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using IKProjesiAPI.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,10 @@ namespace IKProjesiAPI.Infrastructure.Context
 {
     public class AppDbContext : IdentityDbContext<AppUser>
     {
+        public AppDbContext()
+        {
+            
+        }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
@@ -17,7 +22,7 @@ namespace IKProjesiAPI.Infrastructure.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
+           
         }
     }
 }
