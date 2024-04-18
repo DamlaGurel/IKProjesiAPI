@@ -27,7 +27,8 @@ namespace IKProjesiAPI.Domain.Entities
         public DateTime StartDateOfWork { get; set; }
         public DateTime FinishDateOfWork { get; set; }
 
-        public DateTime HiredDate { get; set; }
+
+        public DateTime HiredDate { get; set; } 
         public Job JobName { get; set; }
         public Department DepartmentName { get; set; }
         public string Address { get; set; }

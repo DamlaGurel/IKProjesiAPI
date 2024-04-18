@@ -6,6 +6,17 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 	public interface ICompanyManagerService
 	{
         Task Create(CreateCompanyManagerDto model);
+
+        Task Update(UpdateCompanyManagerDto model);
+
+        Task Delete(int id);
+
+        Task<List<ListCompanyManagerDto>> GetCompanyManagers();
+
+        Task<UpdateCompanyManagerDto> GetCompanyManagerById(int id);
+
+        Task<List<UpdateCompanyManagerDto>> GetCompanyManagersByCompany(int companyId);
+
     }
 }
 

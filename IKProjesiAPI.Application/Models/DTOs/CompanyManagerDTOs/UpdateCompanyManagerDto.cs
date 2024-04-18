@@ -1,15 +1,17 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using IKProjesiAPI.Application.Extensions;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Enums;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
 {
-    public class CreateCompanyManagerDto
-    {
-
+	public class UpdateCompanyManagerDto
+	{
+        public int? Id { get; set; }
+        // string mi int mi aldık??
         [Required(ErrorMessage = "Şirket yöneticisi isminin girilmesi zorunludur.")]
         [Display(Name = "İsim")]
         public string FirstName { get; set; }
@@ -27,6 +29,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
         [Display(Name = "Profil Fotoğrafı")]
         [PictureFileExtension]
         public IFormFile? ProfilePicture { get; set; }
+        public string? ImagePath { get; set; }
 
         [Display(Name = "Doğum Tarihi")]
         public DateTime BirthDate { get; set; }
@@ -57,15 +60,13 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
         [Display(Name = "E-posta")]
         public string Email { get; set; }
 
-        public DateTime CreatedDate => DateTime.Now;
+        public DateTime UpdateDate => DateTime.Now;
 
-        public Status Status => Status.Active;
+        public Status Status => Status.Modified;
 
         //Company Seçim 
         public int CompanyId { get; set; }
         public List<Company> Companies { get; set; } //burada list içerisine vm dto companyden alınıp koyulca!!
-
-
     }
 }
 
