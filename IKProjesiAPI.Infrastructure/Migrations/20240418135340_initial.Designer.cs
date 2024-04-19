@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IKProjesiAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240418125452_init3")]
-    partial class init3
+    [Migration("20240418135340_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -164,8 +164,8 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "691bdaf8-f68d-492b-95ed-a73f8d6de636",
-                            CreatedDate = new DateTime(2024, 4, 18, 15, 54, 52, 326, DateTimeKind.Local).AddTicks(7990),
+                            ConcurrencyStamp = "921da0c8-be7e-4f68-8c28-9de26b84863e",
+                            CreatedDate = new DateTime(2024, 4, 18, 16, 53, 40, 71, DateTimeKind.Local).AddTicks(7334),
                             DepartmentName = 0,
                             Email = "super@admin.com",
                             EmailConfirmed = false,
@@ -176,9 +176,9 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                             LastName = "Admin",
                             LockoutEnabled = false,
                             Password = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAECY9zg4CAmuJL3WBgwhmwHC2HCL8nd0yd/QwBgtRBnVo+PSM3alr36wecTnk/9igiA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEATvlxVcsvzlIcmlSindhIrdi1r5qks2y9sCcLJlJamyhxahcTYecy/3bRngaop82A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "94c0e979-3192-4e93-ac08-d11d45935c72",
+                            SecurityStamp = "665640d3-63b8-4ccc-bfca-2d642a46265f",
                             StartDateOfWork = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             TwoFactorEnabled = false
