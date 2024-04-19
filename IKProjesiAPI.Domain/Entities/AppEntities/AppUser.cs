@@ -24,10 +24,10 @@ namespace IKProjesiAPI.Domain.Entities.AppEntities
         public DateTime? BirthDate { get; set; }
         public string? BirthPlace { get; set; }
         public string? IdentityNumber { get; set; }
-        public DateTime StartDateOfWork { get; set; }
+        public DateTime? StartDateOfWork { get; set; }
         public DateTime? FinishDateOfWork { get; set; }
-        public Job JobName { get; set; }
-        public Department DepartmentName { get; set; }
+        public Job? JobName { get; set; }
+        public Department? DepartmentName { get; set; }
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
 
