@@ -5,7 +5,7 @@ namespace IKProjesiAPI.Application.Services.CompanyService
 {
     public interface ICompanyService
     {
-        Task Add(AddCompanyDto model);
+        Task Create(CreateCompanyDto model);
         Task<Company> GetCompany(int id);
         Task<CompanyDetailsDto> GetCompanyDetails(int id);
         Task<List<Company>> GetCompanies();

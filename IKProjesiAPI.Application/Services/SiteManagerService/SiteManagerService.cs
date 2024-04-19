@@ -17,7 +17,7 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
             _mapper = mapper;
         }
 
-        public async Task Add(AddSiteManagerDto model)
+        public async Task Create(CreateSiteManagerDto model)
         {
             var siteManager = _mapper.Map<SiteManager>(model);
 
