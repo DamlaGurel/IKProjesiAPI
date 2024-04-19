@@ -1,4 +1,5 @@
-﻿using IKProjesiAPI.Domain.Enums;
+﻿using IKProjesiAPI.Domain.Entities;
+using IKProjesiAPI.Domain.Enums;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IKProjesiAPI.Domain.Entities
+namespace IKProjesiAPI.Application.Models.DTOs.CompanyDTOs
 {
-    public class Company : IBaseEntity
+    public class CompanyDto
     {
         public int Id { get; set; }
         public string CompanyName { get; set; }
@@ -29,13 +30,13 @@ namespace IKProjesiAPI.Domain.Entities
         public DateTime EndContractDate { get; set; }
 
         public List<CompanyManager> CompanyManagers { get; set; }
-        public Company()
+        public CompanyDto()
         {
             CompanyManagers = new List<CompanyManager>();
         }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
-        public Status? Status { get; set; }
+        public Status Status { get; set; }
     }
 }

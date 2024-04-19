@@ -7,6 +7,7 @@ using IKProjesiAPI.Infrastructure.Context;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]

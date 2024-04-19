@@ -1,5 +1,5 @@
 ﻿using IKProjesiAPI.Application.Models.DTOs.UserDTOs;
-using IKProjesiAPI.Domain.Entities;
+using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Repositories;
 using Microsoft.AspNetCore.Identity;
 using System;

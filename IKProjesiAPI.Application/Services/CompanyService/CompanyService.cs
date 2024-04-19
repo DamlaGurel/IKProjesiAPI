@@ -3,24 +3,17 @@ using IKProjesiAPI.Application.Models.DTOs.CompanyDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Application.Services.CompanyService
 {
     public class CompanyService:ICompanyService
     {
-        private readonly ICompanyService _companyService;
         private readonly ICompanyRepo _companyRepo;
         private readonly IMapper _mapper;
 
 
-        public CompanyService(ICompanyService companyService, IMapper mapper, ICompanyRepo companyRepo)
+        public CompanyService(IMapper mapper, ICompanyRepo companyRepo)
         {
-            _companyService = companyService;
             _mapper = mapper;
             _companyRepo = companyRepo;
         }
@@ -37,29 +30,26 @@ namespace IKProjesiAPI.Application.Services.CompanyService
             return company;
         }
 
-        //public async Task<CompanyDetailsDto> GetCompanyDetails(int id)
-        //{
-        //    var company= await _companyRepo.GetFilteredFirstOrDefault(
-        //        select: x => _mapper.Map<CompanyDetailsDto>(x),
-        //        where: x => x.Id.Equals(id) && x.Status != Status.Pasive);
-        //    return company;
-        //}
-
         public async Task<CompanyDetailsDto> GetCompanyDetails(int id)
         {
-            var company = await _companyRepo.GetFilteredFirstOrDefault(
-                select: x => new CompanyDetailsDto
-                {
-                    CompanyManagers = x.CompanyManagers,
-                    CompanyName = x.CompanyName//CompanyDetailsDto has two properties
-                },
+            var company= await _companyRepo.GetFilteredFirstOrDefault(
+                select: x => _mapper.Map<CompanyDetailsDto>(x),
                 where: x => x.Id.Equals(id) && x.Status != Status.Pasive);
             return company;
         }
 
+        public async Task<List<Company>> GetCompanies()
+        {
+            var companies = await _companyRepo.GetFilteredList(
+                select: x => _mapper.Map<Company>(x),
+                where: x => x.Status != Status.Pasive,
+                orderBy: x => x.OrderBy(x => x.CompanyName));
+
+            return companies;
+        }
+
 
         //GetById
-        //GetCompanies
 
         public async Task Delete(int id)
         {

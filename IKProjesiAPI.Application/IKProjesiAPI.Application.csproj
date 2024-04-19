@@ -8,12 +8,16 @@
 
   <ItemGroup>
     <Folder Include="Extensions\" />
+<<<<<<< HEAD
     <Folder Include="IoC\" />
     <Folder Include="Services\CompanyManagerService\" />
     <Folder Include="Models\DTOs\CompanyManagerDTOs\" />
+=======
+>>>>>>> origin/master
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
   </ItemGroup>

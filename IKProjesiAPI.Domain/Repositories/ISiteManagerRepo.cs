@@ -1,4 +1,4 @@
-﻿using IKProjesiAPI.Domain.Entities.AppEntities;
+﻿using IKProjesiAPI.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Domain.Repositories
 {
-    public interface IAppUserRepo : IBaseRepo<AppUser>
+    public interface ISiteManagerRepo : IBaseRepo<SiteManager>
     {
     }
 }

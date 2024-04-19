@@ -1,5 +1,7 @@
+using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Infrastructure.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -16,7 +18,6 @@ namespace IkProjesiAPI.API
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-            // Veritabaný baðlantý seçeneklerini oluþturun
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
@@ -75,6 +76,10 @@ namespace IkProjesiAPI.API
                 });
             });
 
+
+            builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>();
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -90,7 +95,9 @@ namespace IkProjesiAPI.API
 
             app.UseAuthorization();
 
-            app.MapControllers();
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=User}/{action=Login}/{id?}");
 
             app.Run();
         }
