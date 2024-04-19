@@ -26,6 +26,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         {
             var companyManager = _mapper.Map<CompanyManager>(model);
             await _companyManagerRepo.Create(companyManager);
+           
         }
 
         public async Task Delete(int id)

@@ -47,9 +47,9 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCompanyManager([FromBody] CompanyManager companyManager)
+        public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
         {
-            var companyManager = await _companyManagerService.Create();
+            var companyManager = await _companyManagerService.Create(createCompanyManager);
             return Ok(companyManager);
 
 
