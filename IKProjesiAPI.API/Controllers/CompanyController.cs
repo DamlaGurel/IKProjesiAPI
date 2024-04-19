@@ -1,4 +1,5 @@
-﻿using IKProjesiAPI.Application.Services.CompanyService;
+﻿using IKProjesiAPI.Application.Models.DTOs.CompanyDTOs;
+using IKProjesiAPI.Application.Services.CompanyService;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Infrastructure.Context;
 using Microsoft.AspNetCore.Http;
@@ -19,10 +20,29 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Company>> Index()
+        [Route("Index")]
+        public async Task<List<CompanyListDto>> Index()
         {
             var companyList = await _companyService.GetCompanies();
             return companyList;
+        }
+
+        [HttpGet]
+        [Route("Create")]
+        public IActionResult Create()
+        {
+            return Ok();
+        }
+        [HttpPost]
+        [Route("Create")]
+        public async Task<IActionResult> Create([FromBody] CreateCompanyDto model)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return 
+            //}
+            await _companyService.Create(model);
+            return Ok();
         }
     }
 }
