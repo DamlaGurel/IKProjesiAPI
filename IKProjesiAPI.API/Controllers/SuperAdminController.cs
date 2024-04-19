@@ -25,11 +25,11 @@ namespace IKProjesiAPI.API.Controllers
             return Ok(_siteManagerService.Create(siteManager));
         }
 
-        [HttpPut]
-        public IActionResult UpdateSiteManager(SiteManagerUpdateDto siteManager)
-        {
-            return Ok(_siteManagerService.Update(siteManager));
-        }
+        //[HttpPut]
+        //public IActionResult UpdateSiteManager(SiteManagerUpdateDto siteManager)
+        //{
+        //    return Ok(_siteManagerService.Update(siteManager));
+        //}
 
         [HttpDelete]
         public void DeleteSiteManager(int id)
