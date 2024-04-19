@@ -92,6 +92,9 @@ namespace IkProjesiAPI.API
                 builder.RegisterModule(new DependencyResolver());
             });
 
+
+           
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -14,7 +14,7 @@ using AutoMapper;
 
 namespace IKProjesiAPI.API.Controllers
 {
-    [Route("api/CompanyManager")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CompanyManagerController : ControllerBase
     {
