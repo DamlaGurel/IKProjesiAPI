@@ -23,11 +23,11 @@ namespace IKProjesiAPI.API.Controllers
             _companyService = companyService;
         }
 
-        [HttpPut("ID")]
-        //[Route("UpdateSiteManager")]
-        public IActionResult UpdateSiteManager(int id, [FromBody] SiteManagerUpdateDto siteManager)
+        [HttpPut]
+        public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManager)
         {
-            return Ok(_siteManagerService.Update(siteManager));
+            await _siteManagerService.Update(siteManager);
+            return Ok("KAYIT GÜNCELLENDİ");
         }
 
     }
