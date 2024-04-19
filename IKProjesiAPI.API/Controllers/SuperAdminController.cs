@@ -9,7 +9,7 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "SuperAdmin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class SuperAdminController : ControllerBase
     {
         private readonly ISiteManagerService _siteManagerService;
