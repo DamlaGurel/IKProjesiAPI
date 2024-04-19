@@ -29,7 +29,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyDTOs
         public DateTime StartContractDate { get; set; }
         public DateTime EndContractDate { get; set; }
 
-        public List<CompanyManager> CompanyManagers { get; set; }
+        public List<CompanyManager>? CompanyManagers { get; set; }
         public CompanyDto()
         {
             CompanyManagers = new List<CompanyManager>();

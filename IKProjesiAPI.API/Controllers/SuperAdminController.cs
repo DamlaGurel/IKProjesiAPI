@@ -19,8 +19,8 @@ namespace IKProjesiAPI.API.Controllers
             _siteManagerService = siteManagerService;
         }
 
-        [HttpPost]
-        public IActionResult AddSiteManager([FromBody] CreateSiteManagerDto siteManager)
+        [HttpPost("CreateSiteManager")]
+        public IActionResult CreateSiteManager([FromBody] CreateSiteManagerDto siteManager)
         {
             return Ok(_siteManagerService.Create(siteManager));
         }
