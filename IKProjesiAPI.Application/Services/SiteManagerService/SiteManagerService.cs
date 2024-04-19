@@ -24,14 +24,18 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
             siteManager.JobName = Job.SiteManager;
             siteManager.CreatedDate = DateTime.Now;
             siteManager.Status = Status.Active;
-           
+
             await _siteManagerRepo.Create(siteManager);
         }
 
         public async Task<SiteManager> GetSiteManager(int id)
         {
-            var sitemanager = await _siteManagerRepo.GetDefault(x => x.Id == id);
-            return sitemanager;
+            var sitemanager = await _siteManagerRepo.GetDefault(x => x.Id == id && x.Status != Status.Pasive);
+
+            if (sitemanager is not null)
+                return sitemanager;
+            else
+                throw new Exception("Site manager not found ! ");
         }
 
         public async Task<SiteManagerDetailsDto> GetSiteManagerDetails(int id)
@@ -62,7 +66,25 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
             await _siteManagerRepo.Update(siteManager);
         }
 
+        public async Task Delete(int id)
+        {
+            var siteManager = await GetSiteManager(id);
 
+            if (siteManager != null)
+                await _siteManagerRepo.Delete(siteManager);
+        }
+
+        public async Task SoftDelete(int id)
+        {
+            var siteManager = await GetSiteManager(id);
+
+            if (siteManager is not null)
+            {
+                siteManager.Status = Domain.Enums.Status.Pasive;
+                siteManager.DeletedDate = DateTime.Now;
+                await _siteManagerRepo.Update(siteManager);
+            }
+        }
 
     }
 }
