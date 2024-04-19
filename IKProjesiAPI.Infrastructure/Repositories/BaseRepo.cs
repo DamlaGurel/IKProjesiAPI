@@ -16,7 +16,7 @@ namespace IKProjesiAPI.Infrastructure.Repositories
     {
         private readonly AppDbContext _context;
         protected DbSet<T> _dbSet;
-        public BaseRepo(AppDbContext context) 
+        public BaseRepo(AppDbContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>();
@@ -41,7 +41,8 @@ namespace IKProjesiAPI.Infrastructure.Repositories
 
         public async Task<T> GetDefault(Expression<Func<T, bool>> expression)
         {
-            return await _dbSet.FirstOrDefaultAsync(expression);
+            //return await _dbSet.FirstOrDefaultAsync(expression);
+            return _dbSet.FirstOrDefaultAsync(expression).GetAwaiter().GetResult();
         }
 
         public async Task<List<T>> GetDefaults(Expression<Func<T, bool>> expression)

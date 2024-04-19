@@ -21,6 +21,7 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
         {
             var siteManager = _mapper.Map<SiteManager>(model);
 
+            siteManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadam.com";
             siteManager.JobName = Job.SiteManager;
             siteManager.CreatedDate = DateTime.Now;
             siteManager.Status = Status.Active;
@@ -30,10 +31,10 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
 
         public async Task<SiteManager> GetSiteManager(int id)
         {
-            var sitemanager = await _siteManagerRepo.GetDefault(x => x.Id == id && x.Status != Status.Pasive);
+            var siteManager = await _siteManagerRepo.GetDefault(x => x.Id == id);
 
-            if (sitemanager is not null)
-                return sitemanager;
+            if (siteManager is not null)
+                return siteManager;
             else
                 throw new Exception("Site manager not found ! ");
         }
@@ -75,6 +76,9 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
 
             if (siteManager != null)
                 await _siteManagerRepo.Delete(siteManager);
+            else
+                throw new Exception("Site manager not found ! ");
+
         }
 
         public async Task SoftDelete(int id)
