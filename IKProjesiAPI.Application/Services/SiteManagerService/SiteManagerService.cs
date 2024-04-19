@@ -20,8 +20,8 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
         public async Task Add(AddSiteManagerDto model)
         {
             var siteManager = _mapper.Map<SiteManager>(model);
-            
-            //siteManager.JobName = Job.SiteManager;
+
+            siteManager.JobName = Job.SiteManager;
             siteManager.CreatedDate = DateTime.Now;
             siteManager.Status = Status.Active;
            
