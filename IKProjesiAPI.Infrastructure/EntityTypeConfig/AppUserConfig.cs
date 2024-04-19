@@ -1,4 +1,4 @@
-﻿using IKProjesiAPI.Domain.Entities;
+﻿using IKProjesiAPI.Domain.Entities.AppEntities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -30,7 +30,8 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
                 Email = "super@admin.com",
                 Password = "admin",
                 SecurityStamp = Guid.NewGuid().ToString(),
-                CreatedDate = DateTime.Now
+                CreatedDate = DateTime.Now,
+                AccessFailedCount = 0
             };
 
             superAdmin.PasswordHash = HashPassword(superAdmin, superAdmin.Password);

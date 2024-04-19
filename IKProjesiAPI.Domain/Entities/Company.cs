@@ -33,9 +33,9 @@ namespace IKProjesiAPI.Domain.Entities
         {
             CompanyManagers = new List<CompanyManager>();
         }
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
     }
 }

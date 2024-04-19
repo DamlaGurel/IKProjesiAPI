@@ -1,4 +1,4 @@
-﻿using IKProjesiAPI.Domain.Entities;
+﻿using IKProjesiAPI.Domain.Entities.AppEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
