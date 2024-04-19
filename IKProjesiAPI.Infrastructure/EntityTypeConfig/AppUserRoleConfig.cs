@@ -13,14 +13,12 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
     {
         public override void Configure(EntityTypeBuilder<AppUserRole> builder)
         {
-            //builder.HasKey(x => new { x.RoleId, x.UserId });
-
             builder.HasData(new AppUserRole
             {
                 RoleId = 1,
                 UserId = 1,
                 CreatedDate = DateTime.Now,
-                //Status = Status.Active
+                Status = Status.Active
             });
 
             base.Configure(builder);

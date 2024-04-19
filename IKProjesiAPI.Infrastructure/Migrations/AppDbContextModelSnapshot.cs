@@ -68,10 +68,34 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "6ba6e53e-e826-430c-a7ea-4673e9f07a0a",
-                            CreatedDate = new DateTime(2024, 4, 19, 12, 35, 48, 446, DateTimeKind.Local).AddTicks(5119),
+                            ConcurrencyStamp = "2645ad0b-60f8-4527-9019-4aa80754b6fd",
+                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5387),
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMİN"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "3752c7c3-1894-4e5d-8edd-3b4a540186fa",
+                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5398),
+                            Name = "SiteManager",
+                            NormalizedName = "SİTEMANAGER"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConcurrencyStamp = "e10c804f-01cc-470b-89a5-9a1e6e8c1661",
+                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5406),
+                            Name = "CompanyManager",
+                            NormalizedName = "COMPANYMANAGER"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ConcurrencyStamp = "219e8bd6-4ba6-4a70-9fbb-863f615e70e6",
+                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5420),
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
                         });
                 });
 
@@ -127,9 +151,6 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("HiredDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("IdentityNumber")
                         .HasColumnType("nvarchar(max)");
@@ -215,20 +236,17 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "81f096c2-0556-415c-a863-5bb84b49be7a",
-                            CreatedDate = new DateTime(2024, 4, 19, 12, 35, 48, 439, DateTimeKind.Local).AddTicks(5837),
+                            ConcurrencyStamp = "6d1a8748-fc79-4ba8-839a-650501d976b9",
+                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 138, DateTimeKind.Local).AddTicks(6757),
                             Email = "super@admin.com",
                             EmailConfirmed = false,
-                            FinishDateOfWork = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Super",
-                            HiredDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            JobName = 0,
                             LastName = "Admin",
                             LockoutEnabled = false,
                             Password = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJzwSs/GiHLJT6n97cl6lxrAdhVg6KLzYrZ8GwucxLcgutPiEPmKEZcV7F4DTqmYeQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENpoc4Yo8WolKjga/IXP5VIC/6Kz1R4hcn78ADzY/HNCxNs+tuLQEmggZ2/E3Uwn9A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1655f886-e20a-4270-a5b8-20572262678c",
+                            SecurityStamp = "382894f3-b19c-4858-8e84-318bcdba6336",
                             TwoFactorEnabled = false
                         });
                 });
@@ -304,36 +322,6 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Company");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -469,7 +457,8 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         {
                             UserId = 1,
                             RoleId = 1,
-                            CreatedDate = new DateTime(2024, 4, 19, 12, 35, 48, 446, DateTimeKind.Local).AddTicks(5556)
+                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5960),
+                            Status = 1
                         });
                 });
 

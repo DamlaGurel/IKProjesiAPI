@@ -1,4 +1,5 @@
-﻿using IKProjesiAPI.Domain.Entities.AppEntities;
+﻿using IKProjesiAPI.Domain.Entities;
+using IKProjesiAPI.Domain.Entities.AppEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -18,7 +19,7 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
 
             builder.Property(x => x.Name);
 
-            var admin = new AppRole
+            var superAdmin = new AppRole
             {
                 Id = 1,
                 Name = "SuperAdmin",
@@ -27,7 +28,33 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
                 CreatedDate = DateTime.Now
             };
 
-            builder.HasData(admin);
+            var siteManager = new AppRole
+            {
+                Id = 2,
+                Name = "SiteManager",
+                NormalizedName = "SiteManager".ToUpper(),
+                ConcurrencyStamp = Guid.NewGuid().ToString(),
+                CreatedDate = DateTime.Now
+            };
+
+            var companyManager = new AppRole
+            {
+                Id = 3,
+                Name = "CompanyManager",
+                NormalizedName = "CompanyManager".ToUpper(),
+                ConcurrencyStamp = Guid.NewGuid().ToString(),
+                CreatedDate = DateTime.Now
+            };
+            var employee = new AppRole
+            {
+                Id = 4,
+                Name = "Employee",
+                NormalizedName = "Employee".ToUpper(),
+                ConcurrencyStamp = Guid.NewGuid().ToString(),
+                CreatedDate = DateTime.Now
+            };
+
+            builder.HasData(superAdmin, siteManager, companyManager, employee);
 
             base.Configure(builder);
         }

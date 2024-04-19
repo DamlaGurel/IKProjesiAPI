@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IKProjesiAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240418135340_initial")]
-    partial class initial
+    [Migration("20240419112912_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,84 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppUser", b =>
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "2645ad0b-60f8-4527-9019-4aa80754b6fd",
+                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5387),
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMİN"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "3752c7c3-1894-4e5d-8edd-3b4a540186fa",
+                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5398),
+                            Name = "SiteManager",
+                            NormalizedName = "SİTEMANAGER"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConcurrencyStamp = "e10c804f-01cc-470b-89a5-9a1e6e8c1661",
+                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5406),
+                            Name = "CompanyManager",
+                            NormalizedName = "COMPANYMANAGER"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ConcurrencyStamp = "219e8bd6-4ba6-4a70-9fbb-863f615e70e6",
+                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5420),
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
+                        });
+                });
+
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,7 +115,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("BirthPlace")
@@ -48,13 +125,14 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DepartmentName")
+                    b.Property<int?>("DepartmentName")
                         .HasColumnType("int");
 
                     b.Property<string>("Discriminator")
@@ -69,15 +147,12 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("FinishDateOfWork")
+                    b.Property<DateTime?>("FinishDateOfWork")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("HiredDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("IdentityNumber")
                         .HasColumnType("nvarchar(max)");
@@ -85,7 +160,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("JobName")
+                    b.Property<int?>("JobName")
                         .HasColumnType("int");
 
                     b.Property<string>("LastName")
@@ -128,10 +203,10 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartDateOfWork")
+                    b.Property<DateTime?>("StartDateOfWork")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
+                    b.Property<int?>("Status")
                         .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -163,24 +238,17 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "921da0c8-be7e-4f68-8c28-9de26b84863e",
-                            CreatedDate = new DateTime(2024, 4, 18, 16, 53, 40, 71, DateTimeKind.Local).AddTicks(7334),
-                            DepartmentName = 0,
+                            ConcurrencyStamp = "6d1a8748-fc79-4ba8-839a-650501d976b9",
+                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 138, DateTimeKind.Local).AddTicks(6757),
                             Email = "super@admin.com",
                             EmailConfirmed = false,
-                            FinishDateOfWork = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Super",
-                            HiredDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            JobName = 0,
                             LastName = "Admin",
                             LockoutEnabled = false,
                             Password = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEATvlxVcsvzlIcmlSindhIrdi1r5qks2y9sCcLJlJamyhxahcTYecy/3bRngaop82A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENpoc4Yo8WolKjga/IXP5VIC/6Kz1R4hcn78ADzY/HNCxNs+tuLQEmggZ2/E3Uwn9A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "665640d3-63b8-4ccc-bfca-2d642a46265f",
-                            StartDateOfWork = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = 0,
+                            SecurityStamp = "382894f3-b19c-4858-8e84-318bcdba6336",
                             TwoFactorEnabled = false
                         });
                 });
@@ -213,7 +281,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedDate")
@@ -247,7 +315,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Property<DateTime>("StartContractDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
+                    b.Property<int?>("Status")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -256,36 +324,6 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Company");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -365,11 +403,17 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<int>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -391,9 +435,38 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppUserRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<int>");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasDiscriminator().HasValue("AppUserRole");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1,
+                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5960),
+                            Status = 1
+                        });
+                });
+
             modelBuilder.Entity("IKProjesiAPI.Domain.Entities.CompanyManager", b =>
                 {
-                    b.HasBaseType("IKProjesiAPI.Domain.Entities.AppUser");
+                    b.HasBaseType("IKProjesiAPI.Domain.Entities.AppEntities.AppUser");
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
@@ -405,14 +478,14 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("IKProjesiAPI.Domain.Entities.SiteManager", b =>
                 {
-                    b.HasBaseType("IKProjesiAPI.Domain.Entities.AppUser");
+                    b.HasBaseType("IKProjesiAPI.Domain.Entities.AppEntities.AppUser");
 
                     b.HasDiscriminator().HasValue("SiteManager");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                    b.HasOne("IKProjesiAPI.Domain.Entities.AppEntities.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -421,7 +494,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("IKProjesiAPI.Domain.Entities.AppUser", null)
+                    b.HasOne("IKProjesiAPI.Domain.Entities.AppEntities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -430,7 +503,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("IKProjesiAPI.Domain.Entities.AppUser", null)
+                    b.HasOne("IKProjesiAPI.Domain.Entities.AppEntities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -439,13 +512,13 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                    b.HasOne("IKProjesiAPI.Domain.Entities.AppEntities.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IKProjesiAPI.Domain.Entities.AppUser", null)
+                    b.HasOne("IKProjesiAPI.Domain.Entities.AppEntities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -454,7 +527,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("IKProjesiAPI.Domain.Entities.AppUser", null)
+                    b.HasOne("IKProjesiAPI.Domain.Entities.AppEntities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
