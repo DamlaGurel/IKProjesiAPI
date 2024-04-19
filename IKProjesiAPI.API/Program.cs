@@ -77,7 +77,7 @@ namespace IkProjesiAPI.API
             });
 
 
-            builder.Services.AddIdentity<AppUser, IdentityRole>().AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>();
 
 
             var app = builder.Build();
@@ -95,7 +95,9 @@ namespace IkProjesiAPI.API
 
             app.UseAuthorization();
 
-            app.MapControllers();
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=User}/{action=Login}/{id?}");
 
             app.Run();
         }

@@ -12,7 +12,6 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "SuperAdmin")]
     public class UserController : ControllerBase
     {
         private readonly AppDbContext _context;
