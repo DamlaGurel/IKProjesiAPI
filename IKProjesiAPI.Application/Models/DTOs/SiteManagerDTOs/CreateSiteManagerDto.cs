@@ -19,16 +19,16 @@ namespace IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs
         public string Password { get; set; }
         public string? ImagePath { get; set; }
         [NotMapped]
-        public IFormFile ProfilePicture { get; set; }
-        public DateTime BirthDate { get; set; }
+        public IFormFile? ProfilePicture { get; set; }
+        public DateTime? BirthDate { get; set; }
         public string? BirthPlace { get; set; }
         public string? IdentityNumber { get; set; }
-        public DateTime StartDateOfWork { get; set; }
+        public DateTime? StartDateOfWork { get; set; }
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
 
-        public DateTime CreatedDate { get; set; }
-        public Status Status { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public Status? Status { get; set; }
 
     }
 }

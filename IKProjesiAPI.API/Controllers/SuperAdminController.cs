@@ -9,7 +9,7 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "SuperAdmin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class SuperAdminController : ControllerBase
     {
         private readonly ISiteManagerService _siteManagerService;
@@ -19,17 +19,17 @@ namespace IKProjesiAPI.API.Controllers
             _siteManagerService = siteManagerService;
         }
 
-        [HttpPost]
-        public IActionResult AddSiteManager([FromBody] CreateSiteManagerDto siteManager)
+        [HttpPost("CreateSiteManager")]
+        public IActionResult CreateSiteManager([FromBody] CreateSiteManagerDto siteManager)
         {
             return Ok(_siteManagerService.Create(siteManager));
         }
 
-        [HttpPut]
-        public IActionResult UpdateSiteManager(SiteManagerUpdateDto siteManager)
-        {
-            return Ok(_siteManagerService.Update(siteManager));
-        }
+        //[HttpPut]
+        //public IActionResult UpdateSiteManager(SiteManagerUpdateDto siteManager)
+        //{
+        //    return Ok(_siteManagerService.Update(siteManager));
+        //}
 
         [HttpDelete]
         public void DeleteSiteManager(int id)
