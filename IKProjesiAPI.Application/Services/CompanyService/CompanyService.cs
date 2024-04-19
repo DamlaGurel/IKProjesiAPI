@@ -37,29 +37,26 @@ namespace IKProjesiAPI.Application.Services.CompanyService
             return company;
         }
 
-        //public async Task<CompanyDetailsDto> GetCompanyDetails(int id)
-        //{
-        //    var company= await _companyRepo.GetFilteredFirstOrDefault(
-        //        select: x => _mapper.Map<CompanyDetailsDto>(x),
-        //        where: x => x.Id.Equals(id) && x.Status != Status.Pasive);
-        //    return company;
-        //}
-
         public async Task<CompanyDetailsDto> GetCompanyDetails(int id)
         {
-            var company = await _companyRepo.GetFilteredFirstOrDefault(
-                select: x => new CompanyDetailsDto
-                {
-                    CompanyManagers = x.CompanyManagers,
-                    CompanyName = x.CompanyName//CompanyDetailsDto has two properties
-                },
+            var company= await _companyRepo.GetFilteredFirstOrDefault(
+                select: x => _mapper.Map<CompanyDetailsDto>(x),
                 where: x => x.Id.Equals(id) && x.Status != Status.Pasive);
             return company;
         }
 
+        public async Task<List<Company>> GetCompanies()
+        {
+            var companies = await _companyRepo.GetFilteredList(
+                select: x => _mapper.Map<Company>(x),
+                where: x => x.Status != Status.Pasive,
+                orderBy: x => x.OrderBy(x => x.CompanyName));
+
+            return companies;
+        }
+
 
         //GetById
-        //GetCompanies
 
         public async Task Delete(int id)
         {

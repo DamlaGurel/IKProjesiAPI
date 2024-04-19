@@ -1,4 +1,5 @@
-﻿using IKProjesiAPI.Domain.Enums;
+﻿using IKProjesiAPI.Domain.Entities.AppEntities;
+using IKProjesiAPI.Domain.Enums;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
