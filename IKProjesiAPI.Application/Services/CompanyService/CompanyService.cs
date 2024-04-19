@@ -38,10 +38,10 @@ namespace IKProjesiAPI.Application.Services.CompanyService
             return company;
         }
 
-        public async Task<List<Company>> GetCompanies()
+        public async Task<List<CompanyListDto>> GetCompanies()
         {
             var companies = await _companyRepo.GetFilteredList(
-                select: x => _mapper.Map<Company>(x),
+                select: x => _mapper.Map<CompanyListDto>(x),
                 where: x => x.Status != Status.Pasive,
                 orderBy: x => x.OrderBy(x => x.CompanyName));
 

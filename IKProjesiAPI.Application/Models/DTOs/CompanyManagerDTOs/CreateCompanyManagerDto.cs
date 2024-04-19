@@ -27,7 +27,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
 
         //[Display(Name = "Profil Fotoğrafı")]
        // [PictureFileExtension]
-        public IFormFile? ProfilePicture { get; set; }
+        //public IFormFile? ProfilePicture { get; set; }
 
         //[Display(Name = "Doğum Tarihi")]
         public DateTime BirthDate { get; set; }

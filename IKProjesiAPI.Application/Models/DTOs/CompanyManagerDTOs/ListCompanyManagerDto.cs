@@ -40,7 +40,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
 
         //Company gösterme
         public int CompanyId { get; set; }
-        public Company CompanyManagersCompany { get; set; }
+        public Company? CompanyManagersCompany { get; set; }
     }
 }
 

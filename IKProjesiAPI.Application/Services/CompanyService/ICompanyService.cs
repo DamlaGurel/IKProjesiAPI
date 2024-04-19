@@ -8,7 +8,7 @@ namespace IKProjesiAPI.Application.Services.CompanyService
         Task Create(CreateCompanyDto model);
         Task<Company> GetCompany(int id);
         Task<CompanyDetailsDto> GetCompanyDetails(int id);
-        Task<List<Company>> GetCompanies();
+        Task<List<CompanyListDto>> GetCompanies();
         Task Delete(int id);
         Task SoftDelete(int id);
     }
