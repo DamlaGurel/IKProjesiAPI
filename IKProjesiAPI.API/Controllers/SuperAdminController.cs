@@ -16,10 +16,10 @@ namespace IKProjesiAPI.API.Controllers
             _siteManagerService = siteManagerService;
         }
 
-        [HttpPost]
-        public IActionResult AddSiteManager(SiteManager siteManager)
-        {
-            return Ok(_siteManagerService.Add(siteManager));
-        }
+       // [HttpPost]
+       // public IActionResult AddSiteManager(SiteManager siteManager)
+       // {
+        //    return Ok(_siteManagerService.Add(siteManager));
+        //}
     }
 }

@@ -24,14 +24,8 @@ namespace IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs
         public string? BirthPlace { get; set; }
         public string? IdentityNumber { get; set; }
         public DateTime StartDateOfWork { get; set; }
-<<<<<<< HEAD:IKProjesiAPI.Domain/Entities/AppUser.cs
-        public DateTime FinishDateOfWork { get; set; }
 
-
-        public DateTime HiredDate { get; set; } 
-=======
         public DateTime? FinishDateOfWork { get; set; }
->>>>>>> origin/master:IKProjesiAPI.Application/Models/DTOs/SiteManagerDTOs/SiteManagerDetailsDto.cs
         public Job JobName { get; set; }
         public Department DepartmentName { get; set; }
         public string? Address { get; set; }

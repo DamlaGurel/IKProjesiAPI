@@ -1,4 +1,9 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using IKProjesiAPI.Application.IoC;
+using IKProjesiAPI.Application.Services.SiteManagerService;
 using IKProjesiAPI.Domain.Entities.AppEntities;
+using IKProjesiAPI.Domain.Repositories;
 using IKProjesiAPI.Infrastructure.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -57,7 +62,7 @@ namespace IkProjesiAPI.API
                     Scheme = "Bearer",
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,
-                    Description = "Bearer ve yanýna üretilen Token deðerini girin."
+                    Description = "Bearer ve yanï¿½na ï¿½retilen Token deï¿½erini girin."
                 });
 
                 option.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -79,6 +84,12 @@ namespace IkProjesiAPI.API
 
             builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>();
 
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+            builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+            {
+                builder.RegisterModule(new DependencyResolver());
+            });
 
             var app = builder.Build();
 
