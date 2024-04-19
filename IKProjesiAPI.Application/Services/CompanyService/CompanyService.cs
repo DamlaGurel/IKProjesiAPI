@@ -3,24 +3,17 @@ using IKProjesiAPI.Application.Models.DTOs.CompanyDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Application.Services.CompanyService
 {
     public class CompanyService:ICompanyService
     {
-        private readonly ICompanyService _companyService;
         private readonly ICompanyRepo _companyRepo;
         private readonly IMapper _mapper;
 
 
-        public CompanyService(ICompanyService companyService, IMapper mapper, ICompanyRepo companyRepo)
+        public CompanyService(IMapper mapper, ICompanyRepo companyRepo)
         {
-            _companyService = companyService;
             _mapper = mapper;
             _companyRepo = companyRepo;
         }
