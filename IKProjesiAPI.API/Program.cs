@@ -1,5 +1,11 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using IKProjesiAPI.Application.IoC;
+using IKProjesiAPI.Application.Services.SiteManagerService;
 using IKProjesiAPI.Domain.Entities.AppEntities;
+using IKProjesiAPI.Domain.Repositories;
 using IKProjesiAPI.Infrastructure.Context;
+using IKProjesiAPI.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -79,6 +85,12 @@ namespace IkProjesiAPI.API
 
             builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>();
 
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+            builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+            {
+                builder.RegisterModule(new DependencyResolver());
+            });
 
             var app = builder.Build();
 
@@ -95,9 +107,7 @@ namespace IkProjesiAPI.API
 
             app.UseAuthorization();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=User}/{action=Login}/{id?}");
+            app.MapControllers();
 
             app.Run();
         }
