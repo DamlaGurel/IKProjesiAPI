@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IKProjesiAPI.Application\IKProjesiAPI.Application.csproj" />
     <ProjectReference Include="..\IKProjesiAPI.Domain\IKProjesiAPI.Domain.csproj" />
   </ItemGroup>
 

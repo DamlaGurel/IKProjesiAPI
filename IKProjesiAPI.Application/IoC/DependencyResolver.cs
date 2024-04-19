@@ -1,11 +1,8 @@
 ﻿using Autofac;
 using IKProjesiAPI.Application.Services.SiteManagerService;
 using IKProjesiAPI.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using IKProjesiAPI.Infrastructure.Repositories;
+
 
 namespace IKProjesiAPI.Application.IoC
 {
@@ -13,9 +10,7 @@ namespace IKProjesiAPI.Application.IoC
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ISiteManagerRepo>().As<ISiteManagerRepo>().InstancePerLifetimeScope();
-
-
+            builder.RegisterType<SiteManagerRepo>().As<ISiteManagerRepo>().InstancePerLifetimeScope();
             builder.RegisterType<SiteManagerService>().As<ISiteManagerService>().InstancePerLifetimeScope();
 
 
