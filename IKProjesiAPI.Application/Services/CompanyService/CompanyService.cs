@@ -18,7 +18,7 @@ namespace IKProjesiAPI.Application.Services.CompanyService
             _companyRepo = companyRepo;
         }
 
-        public async Task Add(AddCompanyDto model)
+        public async Task Create(CreateCompanyDto model)
         {
             var company = _mapper.Map<Company>(model);
             await _companyRepo.Create(company);

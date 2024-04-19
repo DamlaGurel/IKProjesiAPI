@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace IKProjesiAPI.Application.Models.DTOs.CompanyDTOs
 {
-    public class AddCompanyDto
+    public class CreateCompanyDto
     {
         public string CompanyName { get; set; }
         public string CompanyTitle { get; set; }

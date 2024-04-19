@@ -8,16 +8,18 @@
 
   <ItemGroup>
     <Folder Include="Extensions\" />
+    <Folder Include="IoC\" />
+    <Folder Include="Services\CompanyManagerService\" />
+    <Folder Include="Models\DTOs\CompanyManagerDTOs\" />
+
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="8.0.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\IKProjesiAPI.Domain\IKProjesiAPI.Domain.csproj" />
+    <PackageReference Include="Autofac" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,7 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IKProjesiAPI.Domain\IKProjesiAPI.Domain.csproj" />
+    <None Remove="Services\CompanyManagerService\" />
+    <None Remove="Models\DTOs\CompanyManagerDTOs\" />
   </ItemGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\IKProjesiAPI.Domain\IKProjesiAPI.Domain.csproj" />
+    <ProjectReference Include="..\IKProjesiAPI.Infrastructure\IKProjesiAPI.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>

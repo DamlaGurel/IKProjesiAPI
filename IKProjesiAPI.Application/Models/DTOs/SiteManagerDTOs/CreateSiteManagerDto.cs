@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs
 {
-    public class AddSiteManagerDto
+    public class CreateSiteManagerDto
     {
         public string FirstName { get; set; }
         public string? SecondName { get; set; }
