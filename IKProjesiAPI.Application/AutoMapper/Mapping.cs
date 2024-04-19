@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
 using IKProjesiAPI.Application.Models.DTOs.CompanyDTOs;
+
+using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+
 using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
+
 using IKProjesiAPI.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,10 +20,21 @@ namespace IKProjesiAPI.Application.AutoMapper
         {
             CreateMap<Company, CreateCompanyDto>().ReverseMap();
 
-            CreateMap<SiteManager, CreateSiteManagerDto>().ReverseMap();
+
+
+
+            CreateMap<CompanyManager, CreateCompanyManagerDto>().ReverseMap();
+            CreateMap<CompanyManager, UpdateCompanyManagerDto>().ReverseMap();
+            CreateMap<CompanyManager, ListCompanyManagerDto>().ReverseMap();
+
+
+
+
+            CreateMap<SiteManager, AddSiteManagerDto>().ReverseMap();
             CreateMap<SiteManager, SiteManagerUpdateDto>().ReverseMap();
             CreateMap<SiteManagerDetailsDto, SiteManager>().ReverseMap();
             CreateMap<SiteManagerSummaryDto, SiteManager>().ReverseMap();
+
 
         }
     }

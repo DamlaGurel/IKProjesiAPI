@@ -63,7 +63,7 @@ namespace IkProjesiAPI.API
                     Scheme = "Bearer",
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,
-                    Description = "Bearer ve yanýna üretilen Token deðerini girin."
+                    Description = "Bearer ve yanï¿½na ï¿½retilen Token deï¿½erini girin."
                 });
 
                 option.AddSecurityRequirement(new OpenApiSecurityRequirement
