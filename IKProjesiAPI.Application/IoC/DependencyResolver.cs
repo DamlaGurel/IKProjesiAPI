@@ -21,24 +21,16 @@ namespace IKProjesiAPI.Application.IoC
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<SiteManagerRepo>().As<ISiteManagerRepo>().InstancePerLifetimeScope();
-
-
-
             builder.RegisterType<SiteManagerService>().As<ISiteManagerService>().InstancePerLifetimeScope();
 
             builder.RegisterType<CompanyService>().As<ICompanyService>().InstancePerLifetimeScope();
             builder.RegisterType<CompanyRepo>().As<ICompanyRepo>().InstancePerLifetimeScope();
 
-
-
             builder.RegisterType<CompanyManagerService>().As<ICompanyManagerService>().InstancePerLifetimeScope();
             builder.RegisterType<CompanyManagerRepo>().As<ICompanyManagerRepo>().InstancePerLifetimeScope();
 
-
-
             builder.Register(context => new MapperConfiguration(config =>
             {
-                
                 config.AddProfile<Mapping>();
             })).AsSelf().SingleInstance();
 
@@ -47,11 +39,8 @@ namespace IKProjesiAPI.Application.IoC
                 var config = context.Resolve<MapperConfiguration>();
                 return config.CreateMapper(context.Resolve);
 
-            })
-                .As<IMapper>()
-                .InstancePerLifetimeScope();
-
-
+            }).As<IMapper>()
+              .InstancePerLifetimeScope();
 
             base.Load(builder);
         }
