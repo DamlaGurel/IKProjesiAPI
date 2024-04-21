@@ -37,11 +37,32 @@ namespace IKProjesiAPI.API.Controllers
         [Route("Create")]
         public async Task<IActionResult> Create([FromBody] CreateCompanyDto model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return 
-            //}
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             await _companyService.Create(model);
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("Detail")]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var companyDetails = await _companyService.GetCompanyDetails(id);
+
+            if (companyDetails == null)
+            {
+                return NotFound("Company bulunamadı.");
+            }
+
+            return Ok(companyDetails);
+        }
+        [HttpGet]
+        [Route("Delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _companyService.SoftDelete(id);
             return Ok();
         }
     }
