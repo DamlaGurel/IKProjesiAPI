@@ -51,7 +51,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
 
         //[Display(Name = "Adres")]
         public string Address { get; set; }
-
+        
         //[Display(Name = "Telefon Numarası")]
         public string PhoneNumber { get; set; }
 
