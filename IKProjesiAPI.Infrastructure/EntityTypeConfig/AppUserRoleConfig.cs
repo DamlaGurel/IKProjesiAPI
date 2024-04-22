@@ -21,6 +21,27 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
                 Status = Status.Active
             });
 
+            builder.HasData(new AppUserRole
+            {
+                RoleId = 2,
+                UserId = 2,
+                CreatedDate = DateTime.Now,
+                Status = Status.Active
+            });
+            builder.HasData(new AppUserRole
+            {
+                RoleId = 3,
+                UserId = 3,
+                CreatedDate = DateTime.Now,
+                Status = Status.Active
+            });
+            builder.HasData(new AppUserRole
+            {
+                RoleId = 4,
+                UserId = 4,
+                CreatedDate = DateTime.Now,
+                Status = Status.Active
+            });
             base.Configure(builder);
         }
     }

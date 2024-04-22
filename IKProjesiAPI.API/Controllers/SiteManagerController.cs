@@ -1,5 +1,7 @@
 ﻿using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+
 using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
+
 using IKProjesiAPI.Application.Services.CompanyManagerService;
 using IKProjesiAPI.Application.Services.CompanyService;
 using IKProjesiAPI.Application.Services.SiteManagerService;
@@ -14,7 +16,7 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    //[Authorize(AuthenticationSchemes = "Bearer")]
     public class SiteManagerController : Controller
     {
         private readonly ISiteManagerService _siteManagerService;
@@ -28,11 +30,18 @@ namespace IKProjesiAPI.API.Controllers
             _companyService = companyService;
         }
 
+        
+
         [HttpPost]
         [Route("AddCompanyManager")]
         public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
         {
             //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
+            //{
+            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            //}
+
+            //if (!User.IsInRole("SiteManager"))
             //{
             //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
             //}
@@ -48,6 +57,31 @@ namespace IKProjesiAPI.API.Controllers
             await _siteManagerService.Update(siteManager);
             return Ok("KAYIT GÜNCELLENDİ");
         }
+
+            //[HttpGet]
+        // public async Task<IActionResult> GetAllCompanyManagers()
+        // {
+        //   var companyManagers = await _companyManagerService.GetCompanyManagers();
+        //   if (companyManagers.Count > 0)
+        //       return Ok(companyManagers);
+        //  else if (companyManagers.Count == 0)
+        //      return BadRequest("Şirket Yöneticisi bulunamadı");
+        //   else
+        //     return NotFound();
+        //  }
+
+
+        //  [HttpGet("ID")]
+        //  public async Task<IActionResult> GetCompanysCompanyManagers([FromBody] int companyId)
+        // {
+        // var companyManagers = await _companyManagerService.GetCompanyManagersByCompany(companyId);
+        //     if (companyManagers.Count > 0)
+        //        return Ok(companyManagers);
+        //    else if (companyManagers.Count == 0)
+        //       return BadRequest("Bu şirkete ait Şirket Yöneticisi bulunamadı");
+        //   else
+        //         return NotFound();
+        // }
 
     }
 }

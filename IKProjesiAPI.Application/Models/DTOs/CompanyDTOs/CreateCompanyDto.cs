@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Enums;
 using Microsoft.AspNetCore.Http;
@@ -27,7 +28,10 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyDTOs
         public DateTime FoundationYear { get; set; }
         public DateTime StartContractDate { get; set; }
         public DateTime EndContractDate { get; set; }
+        public DateTime CreatedDate => DateTime.Now;
 
-        public List<CompanyManager>? CompanyManagers { get; set; }
+        public Status Status => Status.Active;
+
+       // public List<ListCompanyManagerDto>? CompanyManagers { get; set; }
     }
 }

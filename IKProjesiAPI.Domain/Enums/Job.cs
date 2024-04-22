@@ -9,8 +9,8 @@ namespace IKProjesiAPI.Domain.Enums
     public enum Job
     {
         SuperAdmin = 1,
-        SiteManager = 2,
-        CompanyManager = 3,
-        Personel = 4
+        SiteManager,
+        CompanyManager,
+        Personel
     }
 }

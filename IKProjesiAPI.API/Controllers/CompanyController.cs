@@ -42,6 +42,7 @@ namespace IKProjesiAPI.API.Controllers
                 return BadRequest(ModelState);
             }
             await _companyService.Create(model);
+           
             return Ok();
         }
 
