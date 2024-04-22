@@ -31,6 +31,22 @@ namespace IKProjesiAPI.API.Controllers
         public async Task<IActionResult> CreateSiteManagerAsync([FromBody] CreateSiteManagerDto siteManager)
         {
             await _siteManagerService.Create(siteManager);
+
+            var user = await _userManager.FindByNameAsync(siteManager.FirstName);
+
+            if (user != null)
+            {
+                string roleName = "SiteManager";
+                var role = await _roleManager.FindByNameAsync(roleName);
+                if (!await _roleManager.RoleExistsAsync(roleName))
+                {
+                    role = new AppRole { Name = roleName };
+                    await _roleManager.CreateAsync(role);
+                }
+
+                // Kullanıcıya rolü ata
+                await _userManager.AddToRoleAsync(user, roleName);
+            }
             return Ok("KAYIT BAŞARILI");
         }
 

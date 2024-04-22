@@ -31,7 +31,6 @@ namespace IKProjesiAPI.Application.IoC
             builder.RegisterType<CompanyManagerService>().As<ICompanyManagerService>().InstancePerLifetimeScope();
             builder.RegisterType<CompanyManagerRepo>().As<ICompanyManagerRepo>().InstancePerLifetimeScope();
 
-            //builder.RegisterType<UserManager<SiteManager>>().As<UserManager<SiteManager>>(); => yazılan yer burası ama hala hata vermeye devam ediyor. gpt yazdırdı.
 
             builder.Register(context => new MapperConfiguration(config =>
             {
