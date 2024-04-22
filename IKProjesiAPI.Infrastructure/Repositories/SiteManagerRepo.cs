@@ -1,6 +1,7 @@
 ﻿using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Repositories;
 using IKProjesiAPI.Infrastructure.Context;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,6 @@ namespace IKProjesiAPI.Infrastructure.Repositories
         public SiteManagerRepo(AppDbContext context) : base(context)
         {
         }
+
     }
 }

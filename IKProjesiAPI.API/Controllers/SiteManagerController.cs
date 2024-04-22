@@ -1,4 +1,5 @@
-﻿using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
+﻿using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
 using IKProjesiAPI.Application.Services.CompanyManagerService;
 using IKProjesiAPI.Application.Services.CompanyService;
 using IKProjesiAPI.Application.Services.SiteManagerService;
@@ -9,7 +10,7 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    //[Authorize(Roles = "SiteManager")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class SiteManagerController : Controller
     {
         private readonly ISiteManagerService _siteManagerService;
@@ -21,6 +22,20 @@ namespace IKProjesiAPI.API.Controllers
             _siteManagerService = siteManagerService;
             _companyManagerService = companyManagerService;
             _companyService = companyService;
+        }
+
+        [HttpPost]
+        [Route("AddCompanyManager")]
+        public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
+        {
+            if (!User.IsInRole("SiteManager"))
+            {
+                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            }
+
+            await _companyManagerService.Create(createCompanyManager);
+            return Ok($"{createCompanyManager.IdentityNumber} TC Kimlik numaralı Şirket Yöneticisi oluşturuldu.");
+
         }
 
         [HttpPut]
