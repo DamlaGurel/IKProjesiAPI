@@ -12,6 +12,7 @@ namespace IKProjesiAPI.API.Controllers
     [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = "Bearer")]
+    //[Authorize(AuthenticationSchemes = "Bearer",Roles = "SiteManager")]
     public class SiteManagerController : Controller
     {
         private readonly ISiteManagerService _siteManagerService;
@@ -43,13 +44,36 @@ namespace IKProjesiAPI.API.Controllers
 
 
         // SiteManager
+
+        [HttpGet]
+        public async Task<IActionResult> SiteManagerSummary(int id)
+        {
+            var siteManagerSummary = await _siteManagerService.GetSiteManagerSummary(id);
+
+            if (siteManagerSummary != null)
+                return Ok(siteManagerSummary);
+            else
+                return NotFound("kullanıcı bulunamadı");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SiteManagerDetails(int id)
+        {
+            var siteManagerDetails = await _siteManagerService.GetSiteManagerDetails(id);
+
+            if (siteManagerDetails != null)
+                return Ok(siteManagerDetails);
+            else
+                return NotFound("kullanıcı bulunamadı");
+        }
+
         [HttpPut]
         public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManager)
         {
-            if (!User.IsInRole("SiteManager"))
-            {
-                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            }
+            //if (!User.IsInRole("SiteManager"))
+            //{
+            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            //}
 
             await _siteManagerService.Update(siteManager);
             return Ok("KAYIT GÜNCELLENDİ");
