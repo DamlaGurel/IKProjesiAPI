@@ -58,17 +58,17 @@ namespace IKProjesiAPI.API.Controllers
             return Ok("KAYIT GÜNCELLENDİ");
         }
 
-            //[HttpGet]
-        // public async Task<IActionResult> GetAllCompanyManagers()
-        // {
-        //   var companyManagers = await _companyManagerService.GetCompanyManagers();
-        //   if (companyManagers.Count > 0)
-        //       return Ok(companyManagers);
-        //  else if (companyManagers.Count == 0)
-        //      return BadRequest("Şirket Yöneticisi bulunamadı");
-        //   else
-        //     return NotFound();
-        //  }
+        [HttpGet]
+        public async Task<IActionResult> GetAllCompanyManagers()
+        {
+            var companyManagers = await _companyManagerService.GetCompanyManagers();
+            if (companyManagers.Count > 0)
+                return Ok(companyManagers);
+            else if (companyManagers.Count == 0)
+                return BadRequest("Şirket Yöneticisi bulunamadı");
+            else
+                return NotFound();
+        }
 
 
         //  [HttpGet("ID")]
