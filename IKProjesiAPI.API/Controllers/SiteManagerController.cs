@@ -1,11 +1,17 @@
 ﻿using IKProjesiAPI.Application.Models.DTOs.CompanyDTOs;
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+
 using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
+
 using IKProjesiAPI.Application.Services.CompanyManagerService;
 using IKProjesiAPI.Application.Services.CompanyService;
 using IKProjesiAPI.Application.Services.SiteManagerService;
+using IKProjesiAPI.Domain.Entities;
+using IKProjesiAPI.Domain.Entities.AppEntities;
+using IKProjesiAPI.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -32,10 +38,15 @@ namespace IKProjesiAPI.API.Controllers
         [Route("AddCompanyManager")]
         public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
         {
-            if (!User.IsInRole("SiteManager"))
-            {
-                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            }
+            //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
+            //{
+            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            //}
+
+            //if (!User.IsInRole("SiteManager"))
+            //{
+            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            //}
 
             await _companyManagerService.Create(createCompanyManager);
             return Ok($"{createCompanyManager.IdentityNumber} TC Kimlik numaralı Şirket Yöneticisi oluşturuldu.");

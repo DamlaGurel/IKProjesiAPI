@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IKProjesiAPI.Infrastructure.Migrations
 {
-    public partial class rolduzenleme : Migration
+    public partial class deneme : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,42 +14,42 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "ConcurrencyStamp", "CreatedDate" },
-                values: new object[] { "31dcc273-4855-4763-9989-583c92e12985", new DateTime(2024, 4, 22, 1, 56, 27, 200, DateTimeKind.Local).AddTicks(288) });
+                values: new object[] { "5e9a3ae2-6947-407c-a7c4-42eb944d2f94", new DateTime(2024, 4, 21, 22, 18, 43, 692, DateTimeKind.Local).AddTicks(1360) });
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 2,
                 columns: new[] { "ConcurrencyStamp", "CreatedDate" },
-                values: new object[] { "17f38760-a001-403e-94c2-5a994170ad56", new DateTime(2024, 4, 22, 1, 56, 27, 200, DateTimeKind.Local).AddTicks(299) });
+                values: new object[] { "c9bc7d39-2a82-44d8-86ae-05641a2581b5", new DateTime(2024, 4, 21, 22, 18, 43, 692, DateTimeKind.Local).AddTicks(1380) });
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 3,
                 columns: new[] { "ConcurrencyStamp", "CreatedDate" },
-                values: new object[] { "5ffee499-6b0d-4dc9-9340-1551c8a31734", new DateTime(2024, 4, 22, 1, 56, 27, 200, DateTimeKind.Local).AddTicks(306) });
+                values: new object[] { "b89a8390-6350-4773-960d-758579184162", new DateTime(2024, 4, 21, 22, 18, 43, 692, DateTimeKind.Local).AddTicks(1380) });
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 4,
                 columns: new[] { "ConcurrencyStamp", "CreatedDate" },
-                values: new object[] { "b36db89d-fa27-4f9f-8a1a-ea153e63f7ac", new DateTime(2024, 4, 22, 1, 56, 27, 200, DateTimeKind.Local).AddTicks(314) });
+                values: new object[] { "34276aad-cfbf-4ed2-8e6d-081e5bf87e87", new DateTime(2024, 4, 21, 22, 18, 43, 692, DateTimeKind.Local).AddTicks(1390) });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
                 keyValues: new object[] { 1, 1 },
                 column: "CreatedDate",
-                value: new DateTime(2024, 4, 22, 1, 56, 27, 200, DateTimeKind.Local).AddTicks(759));
+                value: new DateTime(2024, 4, 21, 22, 18, 43, 692, DateTimeKind.Local).AddTicks(1690));
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "ConcurrencyStamp", "CreatedDate", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "f7e39f4f-7e7e-424b-b4f1-b5652309dd89", new DateTime(2024, 4, 22, 1, 56, 27, 192, DateTimeKind.Local).AddTicks(7439), "AQAAAAEAACcQAAAAELctk/rKJtHhJp1b6n4KBBZfNkoXQVNauAebCrO/0THN9fYCctZBcHMf2ycRJVUtqw==", "6d116ad6-a9a2-45c0-b619-a0cc742e08f4" });
+                values: new object[] { "2d8525dd-6b6f-4e0c-9da6-7c640cb2fd5d", new DateTime(2024, 4, 21, 22, 18, 43, 650, DateTimeKind.Local).AddTicks(6660), "AQAAAAIAAYagAAAAEDIAJiRDsMpZV4HA97s9R7K0ptWOLNeJSLZ7SC1tPig1gCHuE+uySiVLII073A4xFw==", "4e45a42e-ce12-4a20-a7ba-c18153d2c4a4" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -59,42 +59,42 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "ConcurrencyStamp", "CreatedDate" },
-                values: new object[] { "d21275be-8efb-44d4-840f-fd726e53c239", new DateTime(2024, 4, 19, 21, 58, 5, 318, DateTimeKind.Local).AddTicks(5766) });
+                values: new object[] { "1ee74e73-66d7-4c20-9fa3-9013c73fbc80", new DateTime(2024, 4, 20, 13, 35, 6, 962, DateTimeKind.Local).AddTicks(7540) });
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 2,
                 columns: new[] { "ConcurrencyStamp", "CreatedDate" },
-                values: new object[] { "470ce04f-1a82-4fd6-89c8-6fa7d2ab16c0", new DateTime(2024, 4, 19, 21, 58, 5, 318, DateTimeKind.Local).AddTicks(5777) });
+                values: new object[] { "383f0779-be50-44f5-a2e6-5be597a657a3", new DateTime(2024, 4, 20, 13, 35, 6, 962, DateTimeKind.Local).AddTicks(7560) });
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 3,
                 columns: new[] { "ConcurrencyStamp", "CreatedDate" },
-                values: new object[] { "eaa3cb01-3ddd-4ba8-b66e-33ba07b51c7f", new DateTime(2024, 4, 19, 21, 58, 5, 318, DateTimeKind.Local).AddTicks(5785) });
+                values: new object[] { "92b39863-22c1-404a-92b9-86dd6d404cb5", new DateTime(2024, 4, 20, 13, 35, 6, 962, DateTimeKind.Local).AddTicks(7560) });
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 4,
                 columns: new[] { "ConcurrencyStamp", "CreatedDate" },
-                values: new object[] { "4db165c8-9a07-4758-8ba8-f755bdb17d88", new DateTime(2024, 4, 19, 21, 58, 5, 318, DateTimeKind.Local).AddTicks(5797) });
+                values: new object[] { "4cd69021-5771-4ff8-8381-85b583ee4976", new DateTime(2024, 4, 20, 13, 35, 6, 962, DateTimeKind.Local).AddTicks(7570) });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
                 keyValues: new object[] { 1, 1 },
                 column: "CreatedDate",
-                value: new DateTime(2024, 4, 19, 21, 58, 5, 318, DateTimeKind.Local).AddTicks(6211));
+                value: new DateTime(2024, 4, 20, 13, 35, 6, 962, DateTimeKind.Local).AddTicks(7890));
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "ConcurrencyStamp", "CreatedDate", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "63e6fc43-4ab4-4fd3-b721-64ba7d6abf7d", new DateTime(2024, 4, 19, 21, 58, 5, 311, DateTimeKind.Local).AddTicks(5082), "AQAAAAEAACcQAAAAECbNXiYETZ1zJkuGAVB0W7W2C7xEPsE6nCqYHJKdK+RZtgFmRJ1Fm9pL2okDSBQV3Q==", "6e29e77b-9c8e-4917-af27-a3ce3e5e694b" });
+                values: new object[] { "d4e3502c-1930-48b2-be6f-2d18ff6997b3", new DateTime(2024, 4, 20, 13, 35, 6, 919, DateTimeKind.Local).AddTicks(8840), "AQAAAAIAAYagAAAAEHT7zluZwM/HqTmIxXp2HCUKYQ4JDcNjzlBTi/c7imlfFIXBvEVGdvKPyUswQywQrQ==", "227553f6-33b3-41d7-8a3e-4a883aad0195" });
         }
     }
 }

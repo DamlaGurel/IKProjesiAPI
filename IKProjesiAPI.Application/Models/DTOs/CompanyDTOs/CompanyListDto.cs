@@ -15,8 +15,8 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyDTOs
         //Logo,Ad,Unvan,Email,Telefon)
         public string CompanyName { get; set; }
         public string CompanyTitle { get; set; }      
-        [NotMapped]
-        public IFormFile Logo { get; set; }
+        //[NotMapped]
+        //public IFormFile Logo { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }       
     }

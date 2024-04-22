@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IKProjesiAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-<<<<<<<< HEAD:IKProjesiAPI.Infrastructure/Migrations/20240421201543_initiial.Designer.cs
-    [Migration("20240421201543_initiial")]
-    partial class initiial
-========
-    [Migration("20240422114032_init")]
-    partial class init
->>>>>>>> origin/master:IKProjesiAPI.Infrastructure/Migrations/20240422114032_init.Designer.cs
+    [Migration("20240420103126_tabloayirmadeneme2")]
+    partial class tabloayirmadeneme2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,52 +70,32 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-<<<<<<<< HEAD:IKProjesiAPI.Infrastructure/Migrations/20240421201543_initiial.Designer.cs
-                            ConcurrencyStamp = "c88f53fb-7140-4f1f-89a2-4b5f878492cc",
-                            CreatedDate = new DateTime(2024, 4, 21, 23, 15, 43, 193, DateTimeKind.Local).AddTicks(8889),
-========
-                            ConcurrencyStamp = "b99a55ed-ecd7-4661-9497-7c7aa7b95366",
-                            CreatedDate = new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3308),
->>>>>>>> origin/master:IKProjesiAPI.Infrastructure/Migrations/20240422114032_init.Designer.cs
+                            ConcurrencyStamp = "0a1fe396-0fc4-41a0-96df-dced0ae0ce16",
+                            CreatedDate = new DateTime(2024, 4, 20, 13, 31, 25, 857, DateTimeKind.Local).AddTicks(7280),
                             Name = "SuperAdmin",
-                            NormalizedName = "SUPERADMİN"
+                            NormalizedName = "SUPERADMIN"
                         },
                         new
                         {
                             Id = 2,
-<<<<<<<< HEAD:IKProjesiAPI.Infrastructure/Migrations/20240421201543_initiial.Designer.cs
-                            ConcurrencyStamp = "deb593c3-72fc-423e-85ed-21a02e200c6c",
-                            CreatedDate = new DateTime(2024, 4, 21, 23, 15, 43, 193, DateTimeKind.Local).AddTicks(8901),
-========
-                            ConcurrencyStamp = "12dbf727-3abf-4617-8ffe-79a8cb854e67",
-                            CreatedDate = new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3320),
->>>>>>>> origin/master:IKProjesiAPI.Infrastructure/Migrations/20240422114032_init.Designer.cs
+                            ConcurrencyStamp = "569845ad-80d9-41d8-9def-415576aa703b",
+                            CreatedDate = new DateTime(2024, 4, 20, 13, 31, 25, 857, DateTimeKind.Local).AddTicks(7300),
                             Name = "SiteManager",
-                            NormalizedName = "SİTEMANAGER"
+                            NormalizedName = "SITEMANAGER"
                         },
                         new
                         {
                             Id = 3,
-<<<<<<<< HEAD:IKProjesiAPI.Infrastructure/Migrations/20240421201543_initiial.Designer.cs
-                            ConcurrencyStamp = "c8232590-bc11-4a3f-8247-6027f14f464b",
-                            CreatedDate = new DateTime(2024, 4, 21, 23, 15, 43, 193, DateTimeKind.Local).AddTicks(8908),
-========
-                            ConcurrencyStamp = "6c1c8c64-5985-4bd6-a566-c091c9a5f0d5",
-                            CreatedDate = new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3342),
->>>>>>>> origin/master:IKProjesiAPI.Infrastructure/Migrations/20240422114032_init.Designer.cs
+                            ConcurrencyStamp = "669d2603-0763-4cb6-9d87-c1dd7f685958",
+                            CreatedDate = new DateTime(2024, 4, 20, 13, 31, 25, 857, DateTimeKind.Local).AddTicks(7310),
                             Name = "CompanyManager",
                             NormalizedName = "COMPANYMANAGER"
                         },
                         new
                         {
                             Id = 4,
-<<<<<<<< HEAD:IKProjesiAPI.Infrastructure/Migrations/20240421201543_initiial.Designer.cs
-                            ConcurrencyStamp = "a4091c00-10cb-4214-97b7-cabac59e9ebd",
-                            CreatedDate = new DateTime(2024, 4, 21, 23, 15, 43, 193, DateTimeKind.Local).AddTicks(8915),
-========
-                            ConcurrencyStamp = "3aaca0aa-4282-4156-a3e7-078b1560dc86",
-                            CreatedDate = new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3350),
->>>>>>>> origin/master:IKProjesiAPI.Infrastructure/Migrations/20240422114032_init.Designer.cs
+                            ConcurrencyStamp = "ed3e58fe-ff15-4efa-a996-8d43a1dc4465",
+                            CreatedDate = new DateTime(2024, 4, 20, 13, 31, 25, 857, DateTimeKind.Local).AddTicks(7320),
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -159,10 +134,6 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
                     b.Property<int?>("DepartmentName")
                         .HasColumnType("int");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -256,35 +227,22 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
                     b.ToTable("AspNetUsers", (string)null);
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("AppUser");
-
                     b.HasData(
                         new
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:IKProjesiAPI.Infrastructure/Migrations/20240421201543_initiial.Designer.cs
-                            ConcurrencyStamp = "6951aee6-c950-42fa-bd28-74b8a0977141",
-                            CreatedDate = new DateTime(2024, 4, 21, 23, 15, 43, 186, DateTimeKind.Local).AddTicks(7621),
-========
-                            ConcurrencyStamp = "cb52fef8-0086-41a3-afe6-7541577d5a19",
-                            CreatedDate = new DateTime(2024, 4, 22, 14, 40, 31, 962, DateTimeKind.Local).AddTicks(872),
->>>>>>>> origin/master:IKProjesiAPI.Infrastructure/Migrations/20240422114032_init.Designer.cs
+                            ConcurrencyStamp = "b12198e4-a595-446b-8fde-f022d4a23ff2",
+                            CreatedDate = new DateTime(2024, 4, 20, 13, 31, 25, 814, DateTimeKind.Local).AddTicks(8530),
                             Email = "super@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Super",
                             LastName = "Admin",
                             LockoutEnabled = false,
                             Password = "admin",
-<<<<<<<< HEAD:IKProjesiAPI.Infrastructure/Migrations/20240421201543_initiial.Designer.cs
-                            PasswordHash = "AQAAAAEAACcQAAAAEDXxZPiN/G/TAs6wp9F5UjAIcGN7bH/bYQfQOrjpH5am6nZtpYENLuuFJDprCOIOsw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM2iHhNAHBexQ3/Zigqq7VYZR45/DC6iLpx1dyvNF7FArIKeP/plu9hJto5OMXuGCg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2318504d-ce22-4dcf-89f4-8d0c60426a4d",
-========
-                            PasswordHash = "AQAAAAEAACcQAAAAELPVG8A/33cszkWUpmJRMoegGHvfWmkrSau6TH0/cLbTZHV42WuvJA7/zoXB2y6/6Q==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "94691dc8-9b2f-44bf-a5d8-f6a0fba78726",
->>>>>>>> origin/master:IKProjesiAPI.Infrastructure/Migrations/20240422114032_init.Designer.cs
+                            SecurityStamp = "23dd6b84-0e15-46f9-87ae-e56c73682a5d",
                             TwoFactorEnabled = false
                         });
                 });
@@ -335,6 +293,10 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
                     b.Property<DateTime>("FoundationYear")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("LogoPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MersisNumber")
                         .IsRequired()
@@ -491,11 +453,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         {
                             UserId = 1,
                             RoleId = 1,
-<<<<<<<< HEAD:IKProjesiAPI.Infrastructure/Migrations/20240421201543_initiial.Designer.cs
-                            CreatedDate = new DateTime(2024, 4, 21, 23, 15, 43, 193, DateTimeKind.Local).AddTicks(9434),
-========
-                            CreatedDate = new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3820),
->>>>>>>> origin/master:IKProjesiAPI.Infrastructure/Migrations/20240422114032_init.Designer.cs
+                            CreatedDate = new DateTime(2024, 4, 20, 13, 31, 25, 857, DateTimeKind.Local).AddTicks(7580),
                             Status = 1
                         });
                 });
@@ -509,14 +467,14 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.HasDiscriminator().HasValue("CompanyManager");
+                    b.ToTable("CompanyManager", (string)null);
                 });
 
             modelBuilder.Entity("IKProjesiAPI.Domain.Entities.SiteManager", b =>
                 {
                     b.HasBaseType("IKProjesiAPI.Domain.Entities.AppEntities.AppUser");
 
-                    b.HasDiscriminator().HasValue("SiteManager");
+                    b.ToTable("SiteManager", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -578,7 +536,22 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("IKProjesiAPI.Domain.Entities.AppEntities.AppUser", null)
+                        .WithOne()
+                        .HasForeignKey("IKProjesiAPI.Domain.Entities.CompanyManager", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
                     b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.SiteManager", b =>
+                {
+                    b.HasOne("IKProjesiAPI.Domain.Entities.AppEntities.AppUser", null)
+                        .WithOne()
+                        .HasForeignKey("IKProjesiAPI.Domain.Entities.SiteManager", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("IKProjesiAPI.Domain.Entities.Company", b =>

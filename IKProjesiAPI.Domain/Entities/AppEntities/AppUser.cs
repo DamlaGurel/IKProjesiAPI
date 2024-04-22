@@ -15,9 +15,9 @@ namespace IKProjesiAPI.Domain.Entities.AppEntities
         public string FirstName { get; set; }
         public string? SecondName { get; set; }
 
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
         public string? SecondLastName { get; set; }
-        public string Password { get; set; }
+        public string? Password { get; set; }
         public string? ImagePath { get; set; }
         //[NotMapped]
         //public IFormFile? ProfilePicture { get; set; }
