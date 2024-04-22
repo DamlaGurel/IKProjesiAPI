@@ -3,6 +3,7 @@ using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 namespace IKProjesiAPI.Application.Services.SiteManagerService
 {
@@ -10,11 +11,13 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
     {
         private readonly ISiteManagerRepo _siteManagerRepo;
         private readonly IMapper _mapper;
+        private readonly UserManager<SiteManager> _userManager;
 
-        public SiteManagerService(ISiteManagerRepo siteManagerRepo, IMapper mapper)
+        public SiteManagerService(ISiteManagerRepo siteManagerRepo, IMapper mapper, UserManager<SiteManager> userManager)
         {
             _siteManagerRepo = siteManagerRepo;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public async Task Create(CreateSiteManagerDto model)
@@ -27,6 +30,7 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
             siteManager.Status = Status.Active;
 
             await _siteManagerRepo.Create(siteManager);
+            await _userManager.AddToRoleAsync(siteManager, "SiteManager"); //Burası hata verdiği için dependencyresolver'daki yer yazıldı.
         }
 
         public async Task<SiteManager> GetSiteManager(int id)

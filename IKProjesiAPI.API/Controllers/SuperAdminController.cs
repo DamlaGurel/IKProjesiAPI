@@ -1,22 +1,30 @@
 ﻿using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
+using IKProjesiAPI.Application.Services.AppUserService;
 using IKProjesiAPI.Application.Services.SiteManagerService;
 using IKProjesiAPI.Domain.Entities;
+using IKProjesiAPI.Domain.Entities.AppEntities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles = "SuperAdmin")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class SuperAdminController : ControllerBase
     {
         private readonly ISiteManagerService _siteManagerService;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<AppRole> _roleManager;
 
-        public SuperAdminController(ISiteManagerService siteManagerService)
+        public SuperAdminController(ISiteManagerService siteManagerService, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             _siteManagerService = siteManagerService;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         [HttpPost("CreateSiteManager")]
@@ -32,10 +40,11 @@ namespace IKProjesiAPI.API.Controllers
         //    return Ok(_siteManagerService.Update(siteManager));
         //}
 
-        [HttpDelete]
-        public async void DeleteSiteManager(int id)
+        [HttpDelete("DeleteSiteManager")]
+        public async Task<IActionResult> DeleteSiteManager(int id)
         {
             await _siteManagerService.Delete(id);
+            return Ok("SİLME BAŞARILI");
         }
 
     }

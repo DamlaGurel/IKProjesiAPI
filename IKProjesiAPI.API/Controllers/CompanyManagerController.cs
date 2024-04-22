@@ -56,9 +56,6 @@ namespace IKProjesiAPI.API.Controllers
         {
             await _companyManagerService.Create(createCompanyManager);
             return Ok($"{createCompanyManager.IdentityNumber} TC Kimlik numaralı Şirket Yöneticisi oluşturuldu.");
-
-
-
         }
 
         //  [HttpDelete("ID")]

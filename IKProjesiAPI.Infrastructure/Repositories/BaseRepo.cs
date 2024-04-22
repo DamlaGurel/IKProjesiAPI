@@ -1,6 +1,7 @@
 ﻿using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Repositories;
 using IKProjesiAPI.Infrastructure.Context;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
