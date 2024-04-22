@@ -41,6 +41,11 @@ namespace IKProjesiAPI.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManager)
         {
+            if (!User.IsInRole("SiteManager"))
+            {
+                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            }
+
             await _siteManagerService.Update(siteManager);
             return Ok("KAYIT GÜNCELLENDİ");
         }
