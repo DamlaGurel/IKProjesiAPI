@@ -68,32 +68,32 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "d21275be-8efb-44d4-840f-fd726e53c239",
-                            CreatedDate = new DateTime(2024, 4, 19, 21, 58, 5, 318, DateTimeKind.Local).AddTicks(5766),
+                            ConcurrencyStamp = "c88f53fb-7140-4f1f-89a2-4b5f878492cc",
+                            CreatedDate = new DateTime(2024, 4, 21, 23, 15, 43, 193, DateTimeKind.Local).AddTicks(8889),
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMİN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "470ce04f-1a82-4fd6-89c8-6fa7d2ab16c0",
-                            CreatedDate = new DateTime(2024, 4, 19, 21, 58, 5, 318, DateTimeKind.Local).AddTicks(5777),
+                            ConcurrencyStamp = "deb593c3-72fc-423e-85ed-21a02e200c6c",
+                            CreatedDate = new DateTime(2024, 4, 21, 23, 15, 43, 193, DateTimeKind.Local).AddTicks(8901),
                             Name = "SiteManager",
                             NormalizedName = "SİTEMANAGER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "eaa3cb01-3ddd-4ba8-b66e-33ba07b51c7f",
-                            CreatedDate = new DateTime(2024, 4, 19, 21, 58, 5, 318, DateTimeKind.Local).AddTicks(5785),
+                            ConcurrencyStamp = "c8232590-bc11-4a3f-8247-6027f14f464b",
+                            CreatedDate = new DateTime(2024, 4, 21, 23, 15, 43, 193, DateTimeKind.Local).AddTicks(8908),
                             Name = "CompanyManager",
                             NormalizedName = "COMPANYMANAGER"
                         },
                         new
                         {
                             Id = 4,
-                            ConcurrencyStamp = "4db165c8-9a07-4758-8ba8-f755bdb17d88",
-                            CreatedDate = new DateTime(2024, 4, 19, 21, 58, 5, 318, DateTimeKind.Local).AddTicks(5797),
+                            ConcurrencyStamp = "a4091c00-10cb-4214-97b7-cabac59e9ebd",
+                            CreatedDate = new DateTime(2024, 4, 21, 23, 15, 43, 193, DateTimeKind.Local).AddTicks(8915),
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -236,17 +236,17 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "63e6fc43-4ab4-4fd3-b721-64ba7d6abf7d",
-                            CreatedDate = new DateTime(2024, 4, 19, 21, 58, 5, 311, DateTimeKind.Local).AddTicks(5082),
+                            ConcurrencyStamp = "6951aee6-c950-42fa-bd28-74b8a0977141",
+                            CreatedDate = new DateTime(2024, 4, 21, 23, 15, 43, 186, DateTimeKind.Local).AddTicks(7621),
                             Email = "super@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Super",
                             LastName = "Admin",
                             LockoutEnabled = false,
                             Password = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAECbNXiYETZ1zJkuGAVB0W7W2C7xEPsE6nCqYHJKdK+RZtgFmRJ1Fm9pL2okDSBQV3Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDXxZPiN/G/TAs6wp9F5UjAIcGN7bH/bYQfQOrjpH5am6nZtpYENLuuFJDprCOIOsw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6e29e77b-9c8e-4917-af27-a3ce3e5e694b",
+                            SecurityStamp = "2318504d-ce22-4dcf-89f4-8d0c60426a4d",
                             TwoFactorEnabled = false
                         });
                 });
@@ -453,7 +453,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         {
                             UserId = 1,
                             RoleId = 1,
-                            CreatedDate = new DateTime(2024, 4, 19, 21, 58, 5, 318, DateTimeKind.Local).AddTicks(6211),
+                            CreatedDate = new DateTime(2024, 4, 21, 23, 15, 43, 193, DateTimeKind.Local).AddTicks(9434),
                             Status = 1
                         });
                 });

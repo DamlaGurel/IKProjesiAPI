@@ -20,20 +20,14 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpPost("CreateSiteManager")]
-        public async Task<IActionResult> CreateSiteManagerAsync([FromBody] CreateSiteManagerDto siteManager)
+        public async Task<IActionResult> CreateSiteManager([FromBody] CreateSiteManagerDto siteManager)
         {
             await _siteManagerService.Create(siteManager);
             return Ok("KAYIT BAŞARILI");
         }
 
-        //[HttpPut]
-        //public IActionResult UpdateSiteManager(SiteManagerUpdateDto siteManager)
-        //{
-        //    return Ok(_siteManagerService.Update(siteManager));
-        //}
-
         [HttpDelete]
-        public async void DeleteSiteManager(int id)
+        public async Task DeleteSiteManager(int id)
         {
             await _siteManagerService.Delete(id);
         }
