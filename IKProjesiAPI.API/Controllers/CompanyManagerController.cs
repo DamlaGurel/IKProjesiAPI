@@ -38,7 +38,16 @@ namespace IKProjesiAPI.API.Controllers
         //        return NotFound("Şirket Yöneticisi bulunamadı");
         //  }
 
-     
+
+        [HttpPost]
+    [Route("AddCompanyManager")]
+
+        public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
+        {
+            await _companyManagerService.Create(createCompanyManager);
+            return Ok($"{createCompanyManager.IdentityNumber} TC Kimlik numaralı Şirket Yöneticisi oluşturuldu.");
+        }
+
 
         //  [HttpDelete("ID")]
         //  public async Task<IActionResult> DeleteCompanyManager(int id)

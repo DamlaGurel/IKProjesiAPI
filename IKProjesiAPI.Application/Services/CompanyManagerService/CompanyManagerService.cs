@@ -4,6 +4,7 @@ using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace IKProjesiAPI.Application.Services.CompanyManagerService
 {
@@ -25,6 +26,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         public async Task Create(CreateCompanyManagerDto model)
         {
             var companyManager = _mapper.Map<CompanyManager>(model);
+            companyManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadam.com";
             await _companyManagerRepo.Create(companyManager);
            
         }

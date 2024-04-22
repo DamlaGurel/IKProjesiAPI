@@ -1,16 +1,13 @@
 ﻿using IKProjesiAPI.Domain.Entities.AppEntities;
-using IKProjesiAPI.Domain.Enums;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IKProjesiAPI.Domain.Entities
+namespace IKProjesiAPI.Domain.Repositories
 {
-    public class SiteManager:AppUser
+    public interface IAppRoleRepo : IBaseRepo<AppRole>
     {
-
     }
 }

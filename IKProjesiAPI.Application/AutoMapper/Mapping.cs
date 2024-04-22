@@ -19,12 +19,14 @@ namespace IKProjesiAPI.Application.AutoMapper
         public Mapping()
         {
             CreateMap<Company, CreateCompanyDto>().ReverseMap();
+            CreateMap<Company, CompanyListDto>().ReverseMap();
 
             CreateMap<CompanyManager, CreateCompanyManagerDto>().ReverseMap();
             CreateMap<CompanyManager, UpdateCompanyManagerDto>().ReverseMap();
             CreateMap<CompanyManager, ListCompanyManagerDto>().ReverseMap();
 
             CreateMap<SiteManager, CreateSiteManagerDto>().ReverseMap();
+            CreateMap<CreateSiteManagerDto, SiteManager>().ReverseMap();
             CreateMap<SiteManager, SiteManagerUpdateDto>().ReverseMap();
             CreateMap<SiteManagerDetailsDto, SiteManager>().ReverseMap();
             CreateMap<SiteManagerSummaryDto, SiteManager>().ReverseMap();

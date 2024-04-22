@@ -33,12 +33,15 @@ namespace IKProjesiAPI.Infrastructure.Context
         public DbSet<AppUserRole> AppUserRoles { get; set; }
        public DbSet<SiteManager> SiteManagers { get; set; }
         public DbSet<CompanyManager> CompanyManagers { get; set; }
+        public DbSet<Company> Companies { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new AppUserConfig())
                     .ApplyConfiguration(new AppRoleConfig())
-                    .ApplyConfiguration(new AppUserRoleConfig());
+                    .ApplyConfiguration(new AppUserRoleConfig())
+                    .ApplyConfiguration(new AppCompanyConfig());
 
             //builder.Entity<AppUser>(b =>
             //{

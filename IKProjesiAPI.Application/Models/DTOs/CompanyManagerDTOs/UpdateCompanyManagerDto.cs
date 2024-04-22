@@ -66,7 +66,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
 
         //Company Seçim 
         public int CompanyId { get; set; }
-        public List<Company> Companies { get; set; } //burada list içerisine vm dto companyden alınıp koyulca!!
+        public List<Company>? Companies { get; set; } //burada list içerisine vm dto companyden alınıp koyulca!!
     }
 }
 
