@@ -1,4 +1,5 @@
-﻿using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+﻿using IKProjesiAPI.Application.Models.DTOs.CompanyDTOs;
+using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
 using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
 using IKProjesiAPI.Application.Services.CompanyManagerService;
 using IKProjesiAPI.Application.Services.CompanyService;
@@ -24,6 +25,8 @@ namespace IKProjesiAPI.API.Controllers
             _companyService = companyService;
         }
 
+        // CompanyManager
+
         [HttpPost]
         [Route("AddCompanyManager")]
         public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
@@ -38,6 +41,8 @@ namespace IKProjesiAPI.API.Controllers
 
         }
 
+
+        // SiteManager
         [HttpPut]
         public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManager)
         {
@@ -49,6 +54,57 @@ namespace IKProjesiAPI.API.Controllers
             await _siteManagerService.Update(siteManager);
             return Ok("KAYIT GÜNCELLENDİ");
         }
+
+
+        // Company
+
+        [HttpGet]
+        [Route("Index")]
+        public async Task<List<CompanyListDto>> Index()
+        {
+            var companyList = await _companyService.GetCompanies();
+            return companyList;
+        }
+
+        [HttpGet]
+        [Route("Create")]
+        public IActionResult Create()
+        {
+            return Ok();
+        }
+        [HttpPost]
+        [Route("Create")]
+        public async Task<IActionResult> Create([FromBody] CreateCompanyDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            await _companyService.Create(model);
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("Detail")]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var companyDetails = await _companyService.GetCompanyDetails(id);
+
+            if (companyDetails == null)
+            {
+                return NotFound("Company bulunamadı.");
+            }
+
+            return Ok(companyDetails);
+        }
+        [HttpGet]
+        [Route("Delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _companyService.SoftDelete(id);
+            return Ok();
+        }
+
 
     }
 }
