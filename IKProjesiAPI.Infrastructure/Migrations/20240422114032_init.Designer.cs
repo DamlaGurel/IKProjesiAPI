@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IKProjesiAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240419112912_init")]
+    [Migration("20240422114032_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,32 +70,32 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "2645ad0b-60f8-4527-9019-4aa80754b6fd",
-                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5387),
+                            ConcurrencyStamp = "b99a55ed-ecd7-4661-9497-7c7aa7b95366",
+                            CreatedDate = new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3308),
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMİN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "3752c7c3-1894-4e5d-8edd-3b4a540186fa",
-                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5398),
+                            ConcurrencyStamp = "12dbf727-3abf-4617-8ffe-79a8cb854e67",
+                            CreatedDate = new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3320),
                             Name = "SiteManager",
                             NormalizedName = "SİTEMANAGER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "e10c804f-01cc-470b-89a5-9a1e6e8c1661",
-                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5406),
+                            ConcurrencyStamp = "6c1c8c64-5985-4bd6-a566-c091c9a5f0d5",
+                            CreatedDate = new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3342),
                             Name = "CompanyManager",
                             NormalizedName = "COMPANYMANAGER"
                         },
                         new
                         {
                             Id = 4,
-                            ConcurrencyStamp = "219e8bd6-4ba6-4a70-9fbb-863f615e70e6",
-                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5420),
+                            ConcurrencyStamp = "3aaca0aa-4282-4156-a3e7-078b1560dc86",
+                            CreatedDate = new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3350),
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -238,17 +238,17 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6d1a8748-fc79-4ba8-839a-650501d976b9",
-                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 138, DateTimeKind.Local).AddTicks(6757),
+                            ConcurrencyStamp = "cb52fef8-0086-41a3-afe6-7541577d5a19",
+                            CreatedDate = new DateTime(2024, 4, 22, 14, 40, 31, 962, DateTimeKind.Local).AddTicks(872),
                             Email = "super@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Super",
                             LastName = "Admin",
                             LockoutEnabled = false,
                             Password = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAENpoc4Yo8WolKjga/IXP5VIC/6Kz1R4hcn78ADzY/HNCxNs+tuLQEmggZ2/E3Uwn9A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELPVG8A/33cszkWUpmJRMoegGHvfWmkrSau6TH0/cLbTZHV42WuvJA7/zoXB2y6/6Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "382894f3-b19c-4858-8e84-318bcdba6336",
+                            SecurityStamp = "94691dc8-9b2f-44bf-a5d8-f6a0fba78726",
                             TwoFactorEnabled = false
                         });
                 });
@@ -299,10 +299,6 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
                     b.Property<DateTime>("FoundationYear")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("LogoPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MersisNumber")
                         .IsRequired()
@@ -459,7 +455,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         {
                             UserId = 1,
                             RoleId = 1,
-                            CreatedDate = new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5960),
+                            CreatedDate = new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3820),
                             Status = 1
                         });
                 });

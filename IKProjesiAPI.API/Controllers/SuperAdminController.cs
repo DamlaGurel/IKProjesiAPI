@@ -3,6 +3,7 @@ using IKProjesiAPI.Application.Services.AppUserService;
 using IKProjesiAPI.Application.Services.SiteManagerService;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
+using IKProjesiAPI.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -30,21 +31,18 @@ namespace IKProjesiAPI.API.Controllers
         [HttpPost("CreateSiteManager")]
         public async Task<IActionResult> CreateSiteManagerAsync([FromBody] CreateSiteManagerDto siteManager)
         {
+            //if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
+            //{
+            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            //}
+            //else
+            //{
             await _siteManagerService.Create(siteManager);
-
-            var user = await _userManager.FindByNameAsync(siteManager.FirstName);
-
+            var user = await _userManager.FindByNameAsync(siteManager.UserName.ToUpper());
+            user.SecurityStamp = Guid.NewGuid().ToString();
             if (user != null)
             {
-                string roleName = "SiteManager";
-                var role = await _roleManager.FindByNameAsync(roleName);
-                if (!await _roleManager.RoleExistsAsync(roleName))
-                {
-                    role = new AppRole { Name = roleName };
-                    await _roleManager.CreateAsync(role);
-                }
-
-                // Kullanıcıya rolü ata
+                string roleName = Job.SiteManager.ToString().ToUpper();
                 await _userManager.AddToRoleAsync(user, roleName);
             }
             return Ok("KAYIT BAŞARILI");

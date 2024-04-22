@@ -23,6 +23,8 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
             var siteManager = _mapper.Map<SiteManager>(model);
 
             siteManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadam.com";
+            siteManager.UserName = model.UserName;
+            siteManager.NormalizedUserName = model.UserName.ToUpper();
             siteManager.JobName = Job.SiteManager;
             siteManager.CreatedDate = DateTime.Now;
             siteManager.Status = Status.Active;

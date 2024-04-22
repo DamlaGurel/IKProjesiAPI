@@ -57,6 +57,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
 
         //[Display(Name = "E-posta")]
         public string Email { get; set; }
+        public string Password { get; set; }
 
         public DateTime CreatedDate => DateTime.Now;
 

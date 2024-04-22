@@ -39,7 +39,6 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     MersisNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CompanyTaxNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CompanyTaxOffice = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LogoPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -225,21 +224,21 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "DeletedDate", "Name", "NormalizedName", "Status", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, "2645ad0b-60f8-4527-9019-4aa80754b6fd", new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5387), null, "SuperAdmin", "SUPERADMİN", null, null },
-                    { 2, "3752c7c3-1894-4e5d-8edd-3b4a540186fa", new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5398), null, "SiteManager", "SİTEMANAGER", null, null },
-                    { 3, "e10c804f-01cc-470b-89a5-9a1e6e8c1661", new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5406), null, "CompanyManager", "COMPANYMANAGER", null, null },
-                    { 4, "219e8bd6-4ba6-4a70-9fbb-863f615e70e6", new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5420), null, "Employee", "EMPLOYEE", null, null }
+                    { 1, "b99a55ed-ecd7-4661-9497-7c7aa7b95366", new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3308), null, "SuperAdmin", "SUPERADMİN", null, null },
+                    { 2, "12dbf727-3abf-4617-8ffe-79a8cb854e67", new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3320), null, "SiteManager", "SİTEMANAGER", null, null },
+                    { 3, "6c1c8c64-5985-4bd6-a566-c091c9a5f0d5", new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3342), null, "CompanyManager", "COMPANYMANAGER", null, null },
+                    { 4, "3aaca0aa-4282-4156-a3e7-078b1560dc86", new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3350), null, "Employee", "EMPLOYEE", null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BirthDate", "BirthPlace", "ConcurrencyStamp", "CreatedDate", "DeletedDate", "DepartmentName", "Discriminator", "Email", "EmailConfirmed", "FinishDateOfWork", "FirstName", "IdentityNumber", "ImagePath", "JobName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecondLastName", "SecondName", "SecurityStamp", "StartDateOfWork", "Status", "TwoFactorEnabled", "UpdatedDate", "UserName" },
-                values: new object[] { 1, 0, null, null, null, "6d1a8748-fc79-4ba8-839a-650501d976b9", new DateTime(2024, 4, 19, 14, 29, 12, 138, DateTimeKind.Local).AddTicks(6757), null, null, "AppUser", "super@admin.com", false, null, "Super", null, null, null, "Admin", false, null, null, null, "admin", "AQAAAAEAACcQAAAAENpoc4Yo8WolKjga/IXP5VIC/6Kz1R4hcn78ADzY/HNCxNs+tuLQEmggZ2/E3Uwn9A==", null, false, null, null, "382894f3-b19c-4858-8e84-318bcdba6336", null, null, false, null, null });
+                values: new object[] { 1, 0, null, null, null, "cb52fef8-0086-41a3-afe6-7541577d5a19", new DateTime(2024, 4, 22, 14, 40, 31, 962, DateTimeKind.Local).AddTicks(872), null, null, "AppUser", "super@admin.com", false, null, "Super", null, null, null, "Admin", false, null, null, null, "admin", "AQAAAAEAACcQAAAAELPVG8A/33cszkWUpmJRMoegGHvfWmkrSau6TH0/cLbTZHV42WuvJA7/zoXB2y6/6Q==", null, false, null, null, "94691dc8-9b2f-44bf-a5d8-f6a0fba78726", null, null, false, null, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId", "CreatedDate", "DeletedDate", "Discriminator", "Status", "UpdatedDate" },
-                values: new object[] { 1, 1, new DateTime(2024, 4, 19, 14, 29, 12, 145, DateTimeKind.Local).AddTicks(5960), null, "AppUserRole", 1, null });
+                values: new object[] { 1, 1, new DateTime(2024, 4, 22, 14, 40, 31, 969, DateTimeKind.Local).AddTicks(3820), null, "AppUserRole", 1, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
