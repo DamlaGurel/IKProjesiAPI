@@ -33,7 +33,6 @@ namespace IKProjesiAPI.API.Controllers
         
 
         [HttpPost]
-        [Route("AddCompanyManager")]
         public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
         {
             //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
