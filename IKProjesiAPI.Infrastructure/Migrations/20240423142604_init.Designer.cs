@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IKProjesiAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240420094821_tabloayirmadeneme")]
-    partial class tabloayirmadeneme
+    [Migration("20240423142604_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,35 +70,71 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "83c72b42-2c49-472f-b07a-02a1723f5d8c",
-                            CreatedDate = new DateTime(2024, 4, 20, 12, 48, 21, 255, DateTimeKind.Local).AddTicks(9320),
+                            ConcurrencyStamp = "f175a7e6-49ec-4225-9be7-4db7b446a328",
+                            CreatedDate = new DateTime(2024, 4, 23, 17, 26, 4, 209, DateTimeKind.Local).AddTicks(1583),
                             Name = "SuperAdmin",
-                            NormalizedName = "SUPERADMIN"
+                            NormalizedName = "SUPERADMİN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "11f73161-2b92-4d42-9089-7dc9f754d037",
-                            CreatedDate = new DateTime(2024, 4, 20, 12, 48, 21, 255, DateTimeKind.Local).AddTicks(9340),
+                            ConcurrencyStamp = "4e551337-e434-4d71-b7b3-59990a9dacf9",
+                            CreatedDate = new DateTime(2024, 4, 23, 17, 26, 4, 209, DateTimeKind.Local).AddTicks(1606),
                             Name = "SiteManager",
-                            NormalizedName = "SITEMANAGER"
+                            NormalizedName = "SİTEMANAGER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "5ce0e6c7-9762-4697-b42b-10055ffd4b61",
-                            CreatedDate = new DateTime(2024, 4, 20, 12, 48, 21, 255, DateTimeKind.Local).AddTicks(9350),
+                            ConcurrencyStamp = "4a457a61-937a-451b-9759-b1db7d8e07e4",
+                            CreatedDate = new DateTime(2024, 4, 23, 17, 26, 4, 209, DateTimeKind.Local).AddTicks(1613),
                             Name = "CompanyManager",
                             NormalizedName = "COMPANYMANAGER"
                         },
                         new
                         {
                             Id = 4,
-                            ConcurrencyStamp = "463fc91e-8126-440f-9b71-c356580ebd1b",
-                            CreatedDate = new DateTime(2024, 4, 20, 12, 48, 21, 255, DateTimeKind.Local).AddTicks(9360),
+                            ConcurrencyStamp = "a1b785af-6636-49fb-85c8-d9ccfe021e37",
+                            CreatedDate = new DateTime(2024, 4, 23, 17, 26, 4, 209, DateTimeKind.Local).AddTicks(1621),
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
+                });
+
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppRoleClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppUser", b =>
@@ -152,8 +188,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("AppUserFirstName");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdentityNumber")
                         .HasColumnType("nvarchar(max)");
@@ -239,22 +274,73 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1eb21920-7af0-42c2-9357-d5aab0ee4e83",
-                            CreatedDate = new DateTime(2024, 4, 20, 12, 48, 21, 212, DateTimeKind.Local).AddTicks(8220),
+                            ConcurrencyStamp = "47a7540d-72a7-445d-a61a-cdc3e88343ec",
+                            CreatedDate = new DateTime(2024, 4, 23, 17, 26, 4, 180, DateTimeKind.Local).AddTicks(6959),
                             Email = "super@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Super",
                             LastName = "Admin",
                             LockoutEnabled = false,
                             Password = "admin",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPRln7JG00hlZzdeaCfSFKLEmgI/kzhw6BMlqlwkbRyh6QNk55WsO4h3+/2O47HwYw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEECC1UdRiDrbv1b254m1CaP6xb+x3g58K8XDz//wOBCobohyrWbn1aySc3YNnPXqAA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3e3677a5-ece8-4524-898c-be1c2502f8e3",
+                            SecurityStamp = "887777be-0667-4143-85f4-23b4c3cc6072",
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4a7e2829-3754-416b-9f3e-e7f1d38c147d",
+                            CreatedDate = new DateTime(2024, 4, 23, 17, 26, 4, 180, DateTimeKind.Local).AddTicks(6984),
+                            Email = "companymanager@seeddata.com",
+                            EmailConfirmed = false,
+                            FirstName = "CompanyManagerName",
+                            LastName = "CompanyManagerLastName",
+                            LockoutEnabled = false,
+                            Password = "companymanager",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHcTbDCunk5k88r4IvJich8dElhFz9icf2fdh30HCmVUoC9nDMoSNLkQ60zegFoB0A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "99fc6f4d-073d-47ba-a9fe-69c81fd54321",
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "75f91072-a944-4275-b580-d57bae4b53bd",
+                            CreatedDate = new DateTime(2024, 4, 23, 17, 26, 4, 180, DateTimeKind.Local).AddTicks(6979),
+                            Email = "sitemanager@seeddata.com",
+                            EmailConfirmed = false,
+                            FirstName = "SiteManagerName",
+                            LastName = "SiteManagerLastName",
+                            LockoutEnabled = false,
+                            Password = "sitemanager",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE7TKq6H+/PfktZnf/9b2+HzT8NGhuzP0lH9INXDAAhbSknrmddQkeW7qLXIVcVSHw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "fe2656d2-6aab-4744-b111-f049ff5a3af9",
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "66c2f1c7-9488-40e3-9ff9-d24383b420b6",
+                            CreatedDate = new DateTime(2024, 4, 23, 17, 26, 4, 180, DateTimeKind.Local).AddTicks(7001),
+                            Email = "employee@seeddata.com",
+                            EmailConfirmed = false,
+                            FirstName = "EmployeeName",
+                            LastName = "EmployeeLastName",
+                            LockoutEnabled = false,
+                            Password = "employee",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO9Xyd5RBggjO9jmw+AqckKhtsu5VfIOJ69ilbbvi3fdPVnijy/6gKCTF0vNflG4Ag==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "768890b4-1b12-4a68-ac32-49668c67921f",
                             TwoFactorEnabled = false
                         });
                 });
 
-            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.Company", b =>
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppUserClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -262,24 +348,10 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Address")
-                        .IsRequired()
+                    b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyTaxNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyTaxOffice")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyTitle")
-                        .IsRequired()
+                    b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedDate")
@@ -288,82 +360,11 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EmployeeNumber")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndContractDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("FoundationYear")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LogoPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MersisNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartContractDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("Status")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Company");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -375,7 +376,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppUserLogin", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -383,8 +384,20 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Property<string>("ProviderKey")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -396,49 +409,13 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppUserRole", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<int>");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppUserRole", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<int>");
 
                     b.Property<DateTime?>("CreatedDate")
                         .IsRequired()
@@ -453,15 +430,142 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.HasDiscriminator().HasValue("AppUserRole");
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
 
                     b.HasData(
                         new
                         {
                             UserId = 1,
                             RoleId = 1,
-                            CreatedDate = new DateTime(2024, 4, 20, 12, 48, 21, 255, DateTimeKind.Local).AddTicks(9610),
+                            CreatedDate = new DateTime(2024, 4, 23, 17, 26, 4, 209, DateTimeKind.Local).AddTicks(2101),
                             Status = 1
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 2,
+                            CreatedDate = new DateTime(2024, 4, 23, 17, 26, 4, 209, DateTimeKind.Local).AddTicks(2112),
+                            Status = 1
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 3,
+                            CreatedDate = new DateTime(2024, 4, 23, 17, 26, 4, 209, DateTimeKind.Local).AddTicks(2115),
+                            Status = 1
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            RoleId = 4,
+                            CreatedDate = new DateTime(2024, 4, 23, 17, 26, 4, 209, DateTimeKind.Local).AddTicks(2118),
+                            Status = 1
+                        });
+                });
+
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppUserToken", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.Company", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyTaxNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyTaxOffice")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EmployeeNumber")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("EndContractDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FoundationYear")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MersisNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("StartContractDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Companies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CompanyName = "Company",
+                            CreatedDate = new DateTime(2024, 4, 23, 17, 26, 4, 209, DateTimeKind.Local).AddTicks(2691)
                         });
                 });
 
@@ -469,7 +573,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 {
                     b.HasBaseType("IKProjesiAPI.Domain.Entities.AppEntities.AppUser");
 
-                    b.Property<int>("CompanyId")
+                    b.Property<int?>("CompanyId")
                         .HasColumnType("int");
 
                     b.HasIndex("CompanyId");
@@ -484,7 +588,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("SiteManager");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppRoleClaim", b =>
                 {
                     b.HasOne("IKProjesiAPI.Domain.Entities.AppEntities.AppRole", null)
                         .WithMany()
@@ -493,7 +597,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppUserClaim", b =>
                 {
                     b.HasOne("IKProjesiAPI.Domain.Entities.AppEntities.AppUser", null)
                         .WithMany()
@@ -502,7 +606,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppUserLogin", b =>
                 {
                     b.HasOne("IKProjesiAPI.Domain.Entities.AppEntities.AppUser", null)
                         .WithMany()
@@ -511,7 +615,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppUserRole", b =>
                 {
                     b.HasOne("IKProjesiAPI.Domain.Entities.AppEntities.AppRole", null)
                         .WithMany()
@@ -526,7 +630,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppUserToken", b =>
                 {
                     b.HasOne("IKProjesiAPI.Domain.Entities.AppEntities.AppUser", null)
                         .WithMany()
@@ -539,9 +643,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 {
                     b.HasOne("IKProjesiAPI.Domain.Entities.Company", "Company")
                         .WithMany("CompanyManagers")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CompanyId");
 
                     b.Navigation("Company");
                 });

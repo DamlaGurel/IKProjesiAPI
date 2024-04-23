@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using IKProjesiAPI.Domain.Entities.AppEntities;
+using IKProjesiAPI.Domain.Enums;
 namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
@@ -27,13 +28,22 @@ namespace IKProjesiAPI.API.Controllers
         public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
             var login = _context.AppUsers.SingleOrDefault(a => a.Email == model.Email && a.Password == model.Password);
+
             if (login != null)
             {
+                var roles = _context.AppUserRoles.Where(x => x.UserId == login.Id).ToList();
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, login.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
+                if (roles.Any())
+                {
+                    foreach(var role in roles)
+                    {
+                        authClaims.Add(new Claim(ClaimTypes.Role, ((Job)role.RoleId).ToString().ToUpper()));
+                    }
+                }
 
                 var token = GetToken(authClaims);
 

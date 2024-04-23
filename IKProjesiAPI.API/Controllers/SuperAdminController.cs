@@ -31,12 +31,11 @@ namespace IKProjesiAPI.API.Controllers
         [HttpPost("CreateSiteManager")]
         public async Task<IActionResult> CreateSiteManager([FromBody] CreateSiteManagerDto siteManager)
         {
-            //if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
-            //else
-            //{
+            if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
+            {
+                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            }
+
             await _siteManagerService.Create(siteManager);
             var user = await _userManager.FindByNameAsync(siteManager.UserName.ToUpper());
             user.SecurityStamp = Guid.NewGuid().ToString();
