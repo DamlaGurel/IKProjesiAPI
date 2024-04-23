@@ -27,6 +27,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         {
             var companyManager = _mapper.Map<CompanyManager>(model);
             companyManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadam.com";
+           
             await _companyManagerRepo.Create(companyManager);
            
         }
