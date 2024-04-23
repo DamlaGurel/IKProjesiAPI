@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Infrastructure.Context
 {
-    public class AppDbContext : IdentityDbContext<AppUser,AppRole,int>
+    public class AppDbContext : IdentityDbContext<AppUser,AppRole,int,AppUserClaim,AppUserRole,AppUserLogin,AppRoleClaim,AppUserToken>
     {
         public AppDbContext()
         {

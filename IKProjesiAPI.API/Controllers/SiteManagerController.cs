@@ -38,10 +38,10 @@ namespace IKProjesiAPI.API.Controllers
         [Route("AddCompanyManager")]
         public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
         {
-            //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
+            if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
+            {
+                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            }
 
             //if (!User.IsInRole("SiteManager"))
             //{
