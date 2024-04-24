@@ -43,9 +43,17 @@ namespace IKProjesiAPI.API.Controllers
             if (user != null)
             {
                 string roleName = Job.SiteManager.ToString().ToUpper();
-                string normalizedRoleName = _roleManager.NormalizeKey(roleName);
-                await _userManager.AddToRoleAsync(user, normalizedRoleName);
+                await _roleManager.RoleExistsAsync(roleName.ToUpper());
+                await _userManager.AddToRoleAsync(user, roleName);
             }
+
+
+            //_roleManager.Roles.Single();
+
+            //if (!await _userManager.IsInRoleAsync(user, "SiteManager"))
+            //{ 
+            //    await _userManager.AddToRoleAsync(user, "SiteManager"); 
+            //}
             return Ok("KAYIT BAŞARILI");
         }
 

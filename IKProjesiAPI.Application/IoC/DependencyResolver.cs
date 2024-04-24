@@ -35,6 +35,10 @@ namespace IKProjesiAPI.Application.IoC
             builder.RegisterType<AppUserRepo>().As<IAppUserRepo>().InstancePerLifetimeScope();
             builder.RegisterType<AppUserService>().As<IAppUserService>().InstancePerLifetimeScope();
 
+            builder.RegisterType<AppRoleRepo>().As<IAppRoleRepo>().InstancePerLifetimeScope();
+
+            builder.RegisterType<AppUserRoleRepo>().As<IAppUserRoleRepo>().InstancePerLifetimeScope();
+
             builder.Register(context => new MapperConfiguration(config =>
             {
                 config.AddProfile<Mapping>();
