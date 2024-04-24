@@ -11,6 +11,7 @@ namespace IKProjesiAPI.Domain.Entities
 {
     public class Company : IBaseEntity
     {
+        
         public int Id { get; set; }
         public string CompanyName { get; set; }
         public string? CompanyTitle { get; set; }

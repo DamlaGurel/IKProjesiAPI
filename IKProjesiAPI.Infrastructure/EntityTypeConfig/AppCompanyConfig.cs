@@ -11,7 +11,9 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
         {
             builder.HasKey(t => t.Id);
 
+           
             builder.Property(t => t.CompanyName).IsRequired();
+
 
 
             var company = new Company
@@ -19,6 +21,7 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
                 Id = 1,
                 CompanyName = "Company",
                 CreatedDate = DateTime.Now,
+                
             };
 
 
