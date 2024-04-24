@@ -18,5 +18,11 @@ namespace IKProjesiAPI.API.Controllers
             _companyService = companyService;
             _context = context;
         }
+
+
+
+
+
+
     }
 }
