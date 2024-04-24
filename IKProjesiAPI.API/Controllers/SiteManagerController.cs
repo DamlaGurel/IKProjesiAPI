@@ -15,7 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace IKProjesiAPI.API.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     //[Authorize(AuthenticationSchemes = "Bearer")]
     //[Authorize(AuthenticationSchemes = "Bearer",Roles = "SiteManager")]
@@ -36,6 +36,7 @@ namespace IKProjesiAPI.API.Controllers
         // CompanyManager
 
         [HttpPost]
+        [Route("AddCompanyManager")]
         public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
         {
             if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
@@ -57,6 +58,7 @@ namespace IKProjesiAPI.API.Controllers
         // SiteManager
 
         [HttpGet]
+        [Route("SiteManagerSummary")]
         public async Task<IActionResult> SiteManagerSummary(int id)
         {
             var siteManagerSummary = await _siteManagerService.GetSiteManagerSummary(id);
@@ -68,6 +70,7 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpGet]
+        [Route("SiteManagerDetails")]
         public async Task<IActionResult> SiteManagerDetails(int id)
         {
             var siteManagerDetails = await _siteManagerService.GetSiteManagerDetails(id);
@@ -79,6 +82,7 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpPut]
+        [Route("UpdateSiteManager")]
         public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManager)
         {
             //if (!User.IsInRole("SiteManager"))
@@ -95,7 +99,7 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpGet]
         [Route("CompanyIndex")]
-        public async Task<List<CompanyListDto>> Index()
+        public async Task<List<CompanyListDto>> CompanyIndex()
         {
             var companyList = await _companyService.GetCompanies();
             return companyList;
@@ -104,7 +108,7 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpPost]
         [Route("CreateCompany")]
-        public async Task<IActionResult> Create([FromBody] CreateCompanyDto model)
+        public async Task<IActionResult> CreateCompany([FromBody] CreateCompanyDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -114,20 +118,10 @@ namespace IKProjesiAPI.API.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllCompanyManagers()
-        {
-            var companyManagers = await _companyManagerService.GetCompanyManagers();
-            if (companyManagers.Count > 0)
-                return Ok(companyManagers);
-            else if (companyManagers.Count == 0)
-                return BadRequest("Şirket Yöneticisi bulunamadı");
-            else
-                return NotFound();
-        }
+
         [HttpGet]
         [Route("CompanyDetails/{id}")]
-        public async Task<IActionResult> Detail(int id)
+        public async Task<IActionResult> CompanyDetails(int id)
         {
             var companyDetails = await _companyService.GetCompanyDetails(id);
 
@@ -138,14 +132,26 @@ namespace IKProjesiAPI.API.Controllers
 
             return Ok(companyDetails);
         }
-        [HttpGet]
+
+        [HttpDelete]
         [Route("DeleteCompany")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteCompany(int id)
         {
             await _companyService.SoftDelete(id);
             return Ok();
         }
 
-
+        [HttpGet]
+        [Route("GetAllCompanyManagers")]
+        public async Task<IActionResult> GetAllCompanyManagers()
+        {
+            var companyManagers = await _companyManagerService.GetCompanyManagers();
+            if (companyManagers.Count > 0)
+                return Ok(companyManagers);
+            else if (companyManagers.Count == 0)
+                return BadRequest("Şirket Yöneticisi bulunamadı");
+            else
+                return NotFound();
+        }
     }
 }
