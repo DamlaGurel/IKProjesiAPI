@@ -19,52 +19,10 @@ namespace IKProjesiAPI.API.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        [Route("Index")]
-        public async Task<List<CompanyListDto>> Index()
-        {
-            var companyList = await _companyService.GetCompanies();
-            return companyList;
-        }
 
-        //[HttpGet]
-        //[Route("Create")]
-        //public async Task<IActionResult> Create()
-        //{
-        //    return Ok();
-        //}
-        [HttpPost]
-        [Route("CreateCompany")]
-        public async Task<IActionResult> CreateCompany([FromBody] CreateCompanyDto model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            await _companyService.Create(model);
-           
-            return Ok();
-        }
 
-        [HttpGet]
-        [Route("CompanyDetails/{id}")]
-        public async Task<IActionResult> CompanyDetails(int id)
-        {
-            var companyDetails = await _companyService.GetCompanyDetails(id);
 
-            if (companyDetails == null)
-            {
-                return NotFound("Company bulunamadı.");
-            }
 
-            return Ok(companyDetails);
-        }
-        [HttpDelete]
-        [Route("Delete")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await _companyService.SoftDelete(id);
-            return Ok();
-        }
+
     }
 }

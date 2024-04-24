@@ -15,7 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace IKProjesiAPI.API.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     //[Authorize(AuthenticationSchemes = "Bearer")]
     //[Authorize(AuthenticationSchemes = "Bearer",Roles = "SiteManager")]
@@ -58,6 +58,7 @@ namespace IKProjesiAPI.API.Controllers
         // SiteManager
 
         [HttpGet]
+        [Route("SiteManagerSummary")]
         public async Task<IActionResult> SiteManagerSummary(int id)
         {
             var siteManagerSummary = await _siteManagerService.GetSiteManagerSummary(id);
@@ -69,6 +70,7 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpGet]
+        [Route("SiteManagerDetails")]
         public async Task<IActionResult> SiteManagerDetails(int id)
         {
             var siteManagerDetails = await _siteManagerService.GetSiteManagerDetails(id);
@@ -80,6 +82,7 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpPut]
+        [Route("UpdateSiteManager")]
         public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManager)
         {
             //if (!User.IsInRole("SiteManager"))
@@ -95,29 +98,63 @@ namespace IKProjesiAPI.API.Controllers
         // Company
 
         [HttpGet]
-        [Route("Index")]
-        public async Task<List<CompanyListDto>> Index()
+        [Route("CompanyIndex")]
+        public async Task<List<CompanyListDto>> CompanyIndex()
         {
             var companyList = await _companyService.GetCompanies();
             return companyList;
         }
 
-        [HttpGet]
-        [Route("Create")]
-        public IActionResult Create()
-        {
-            return Ok();
-        }
 
         [HttpPost]
-        [Route("Create")]
-        public async Task<IActionResult> Create([FromBody] CreateCompanyDto model)
+        [Route("CreateCompany")]
+        public async Task<IActionResult> CreateCompany([FromBody] CreateCompanyDto model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             await _companyService.Create(model);
+            return Ok();
+        }
+
+
+        [HttpGet]
+<<<<<<< HEAD
+        [Route("GetAllCompanyManagers")]
+        public async Task<IActionResult> GetAllCompanyManagers()
+        {
+            var companyManagers = await _companyManagerService.GetCompanyManagers();
+            if (companyManagers.Count > 0)
+                return Ok(companyManagers);
+            else if (companyManagers.Count == 0)
+                return BadRequest("Şirket Yöneticisi bulunamadı");
+            else
+                return NotFound();
+        }
+        [HttpGet]
+        [Route("Detail")]
+        public async Task<IActionResult> Detail(int id)
+=======
+        [Route("CompanyDetails/{id}")]
+        public async Task<IActionResult> CompanyDetails(int id)
+>>>>>>> origin/master
+        {
+            var companyDetails = await _companyService.GetCompanyDetails(id);
+
+            if (companyDetails == null)
+            {
+                return NotFound("Company bulunamadı.");
+            }
+
+            return Ok(companyDetails);
+        }
+
+        [HttpDelete]
+        [Route("DeleteCompany")]
+        public async Task<IActionResult> DeleteCompany(int id)
+        {
+            await _companyService.SoftDelete(id);
             return Ok();
         }
 
@@ -133,27 +170,5 @@ namespace IKProjesiAPI.API.Controllers
             else
                 return NotFound();
         }
-        [HttpGet]
-        [Route("Detail")]
-        public async Task<IActionResult> Detail(int id)
-        {
-            var companyDetails = await _companyService.GetCompanyDetails(id);
-
-            if (companyDetails == null)
-            {
-                return NotFound("Company bulunamadı.");
-            }
-
-            return Ok(companyDetails);
-        }
-        [HttpGet]
-        [Route("Delete")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await _companyService.SoftDelete(id);
-            return Ok();
-        }
-
-
     }
 }
