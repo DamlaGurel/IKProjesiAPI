@@ -95,22 +95,16 @@ namespace IKProjesiAPI.API.Controllers
         // Company
 
         [HttpGet]
-        [Route("Index")]
+        [Route("CompanyIndex")]
         public async Task<List<CompanyListDto>> Index()
         {
             var companyList = await _companyService.GetCompanies();
             return companyList;
         }
 
-        [HttpGet]
-        [Route("Create")]
-        public IActionResult Create()
-        {
-            return Ok();
-        }
 
         [HttpPost]
-        [Route("Create")]
+        [Route("CreateCompany")]
         public async Task<IActionResult> Create([FromBody] CreateCompanyDto model)
         {
             if (!ModelState.IsValid)
@@ -133,7 +127,7 @@ namespace IKProjesiAPI.API.Controllers
                 return NotFound();
         }
         [HttpGet]
-        [Route("Detail")]
+        [Route("CompanyDetails/{id}")]
         public async Task<IActionResult> Detail(int id)
         {
             var companyDetails = await _companyService.GetCompanyDetails(id);
@@ -146,7 +140,7 @@ namespace IKProjesiAPI.API.Controllers
             return Ok(companyDetails);
         }
         [HttpGet]
-        [Route("Delete")]
+        [Route("DeleteCompany")]
         public async Task<IActionResult> Delete(int id)
         {
             await _companyService.SoftDelete(id);
