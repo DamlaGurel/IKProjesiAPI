@@ -19,6 +19,7 @@ namespace IKProjesiAPI.API.Controllers
     [ApiController]
     //[Authorize(AuthenticationSchemes = "Bearer")]
     //[Authorize(AuthenticationSchemes = "Bearer",Roles = "SiteManager")]
+
     public class SiteManagerController : Controller
     {
         private readonly ISiteManagerService _siteManagerService;
