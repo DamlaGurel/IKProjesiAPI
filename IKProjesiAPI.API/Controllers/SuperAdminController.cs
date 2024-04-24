@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Text;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -42,7 +43,8 @@ namespace IKProjesiAPI.API.Controllers
             if (user != null)
             {
                 string roleName = Job.SiteManager.ToString().ToUpper();
-                await _userManager.AddToRoleAsync(user, roleName);
+                string normalizedRoleName = _roleManager.NormalizeKey(roleName);
+                await _userManager.AddToRoleAsync(user, normalizedRoleName);
             }
             return Ok("KAYIT BAŞARILI");
         }
