@@ -58,7 +58,7 @@ namespace IKProjesiAPI.API.Controllers
         // SiteManager
 
         [HttpGet]
-        [Route("SiteManagerSummary")]
+        [Route("SiteManagerSummary/{id}")]
         public async Task<IActionResult> SiteManagerSummary(int id)
         {
             var siteManagerSummary = await _siteManagerService.GetSiteManagerSummary(id);

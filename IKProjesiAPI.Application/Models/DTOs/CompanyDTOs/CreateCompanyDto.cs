@@ -30,7 +30,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyDTOs
         public DateTime EndContractDate { get; set; }
         public DateTime CreatedDate => DateTime.Now;
 
-        public Status Status => Status.Active;
+        //public Status Status => Status.Active;
 
        // public List<ListCompanyManagerDto>? CompanyManagers { get; set; }
     }

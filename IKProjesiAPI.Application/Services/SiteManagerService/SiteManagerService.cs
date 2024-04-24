@@ -65,11 +65,15 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
 
         public async Task<SiteManagerSummaryDto> GetSiteManagerSummary(int id)
         {
-            var siteManager = await _siteManagerRepo.GetFilteredFirstOrDefault(
-                select: x => _mapper.Map<SiteManagerSummaryDto>(x),
-                where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
+            //var siteManager = await _siteManagerRepo.GetFilteredFirstOrDefault(
+            //    select: x => _mapper.Map<SiteManagerSummaryDto>(x),
+            //    where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
 
-            return siteManager;
+            var siteManager = await GetSiteManager(id);
+                //await _siteManagerRepo.GetDefault(x => x.Id == id);
+            var siteManagerDto = _mapper.Map<SiteManagerSummaryDto>(siteManager);
+
+            return siteManagerDto;
         }
 
         public async Task Update(SiteManagerUpdateDto model)
