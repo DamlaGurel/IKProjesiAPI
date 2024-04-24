@@ -47,6 +47,16 @@ namespace IKProjesiAPI.API.Controllers
 
                 var token = GetToken(authClaims);
 
+                // Token'i bir cookie olarak ekleyin
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true, // HTTPS üzerinden iletişimde bulunulduğunda true olarak işaretlenmeli
+                    SameSite = SameSiteMode.Strict,
+                    Expires = token.ValidTo // Token'in geçerlilik süresi kadar ayarlanmalıdır
+                };
+                HttpContext.Response.Cookies.Append("auth_token", new JwtSecurityTokenHandler().WriteToken(token), cookieOptions);
+
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
