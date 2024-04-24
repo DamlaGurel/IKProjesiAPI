@@ -120,25 +120,9 @@ namespace IKProjesiAPI.API.Controllers
 
 
         [HttpGet]
-<<<<<<< HEAD
-        [Route("GetAllCompanyManagers")]
-        public async Task<IActionResult> GetAllCompanyManagers()
-        {
-            var companyManagers = await _companyManagerService.GetCompanyManagers();
-            if (companyManagers.Count > 0)
-                return Ok(companyManagers);
-            else if (companyManagers.Count == 0)
-                return BadRequest("Şirket Yöneticisi bulunamadı");
-            else
-                return NotFound();
-        }
-        [HttpGet]
-        [Route("Detail")]
-        public async Task<IActionResult> Detail(int id)
-=======
         [Route("CompanyDetails/{id}")]
         public async Task<IActionResult> CompanyDetails(int id)
->>>>>>> origin/master
+
         {
             var companyDetails = await _companyService.GetCompanyDetails(id);
 
