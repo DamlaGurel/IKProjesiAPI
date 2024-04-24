@@ -50,8 +50,21 @@ namespace IKProjesiAPI.API.Controllers
             //}
 
             await _companyManagerService.Create(createCompanyManager);
-            return Ok($"{createCompanyManager.IdentityNumber} TC Kimlik numaralı Şirket Yöneticisi oluşturuldu.");
+            return Ok("Şirket Yöneticisi oluşturuldu.");
 
+        }
+
+        [HttpGet]
+        [Route("GetAllCompanyManagers")]
+        public async Task<IActionResult> GetAllCompanyManagers()
+        {
+            var companyManagers = await _companyManagerService.GetCompanyManagers();
+            if (companyManagers.Count > 0)
+                return Ok(companyManagers);
+            else if (companyManagers.Count == 0)
+                return BadRequest("Şirket Yöneticisi bulunamadı");
+            else
+                return NotFound();
         }
 
 
@@ -118,27 +131,12 @@ namespace IKProjesiAPI.API.Controllers
             return Ok();
         }
 
+       
 
         [HttpGet]
-<<<<<<< HEAD
-        [Route("GetAllCompanyManagers")]
-        public async Task<IActionResult> GetAllCompanyManagers()
-        {
-            var companyManagers = await _companyManagerService.GetCompanyManagers();
-            if (companyManagers.Count > 0)
-                return Ok(companyManagers);
-            else if (companyManagers.Count == 0)
-                return BadRequest("Şirket Yöneticisi bulunamadı");
-            else
-                return NotFound();
-        }
-        [HttpGet]
-        [Route("Detail")]
-        public async Task<IActionResult> Detail(int id)
-=======
         [Route("CompanyDetails/{id}")]
         public async Task<IActionResult> CompanyDetails(int id)
->>>>>>> origin/master
+
         {
             var companyDetails = await _companyService.GetCompanyDetails(id);
 
@@ -158,17 +156,6 @@ namespace IKProjesiAPI.API.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        [Route("GetAllCompanyManagers")]
-        public async Task<IActionResult> GetAllCompanyManagers()
-        {
-            var companyManagers = await _companyManagerService.GetCompanyManagers();
-            if (companyManagers.Count > 0)
-                return Ok(companyManagers);
-            else if (companyManagers.Count == 0)
-                return BadRequest("Şirket Yöneticisi bulunamadı");
-            else
-                return NotFound();
-        }
+        
     }
 }
