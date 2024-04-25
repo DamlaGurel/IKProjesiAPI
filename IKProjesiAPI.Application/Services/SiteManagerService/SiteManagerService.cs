@@ -77,9 +77,10 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
         public async Task UpdateSiteManager(SiteManagerUpdateDto model)
         {
             var siteManager = await _siteManagerRepo.GetDefault(x => x.Id == model.Id);
-            siteManager.Address = model.Address;
 
-            //var updateSiteManager = _mapper.Map<SiteManager>(model);
+            siteManager.Address = model.Address;
+            siteManager.PhoneNumber = model.PhoneNumber;
+            siteManager.ImagePath = model.ImagePath;
 
             siteManager.Status = Status.Modified;
             siteManager.UpdatedDate = DateTime.Now;
