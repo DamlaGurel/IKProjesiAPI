@@ -25,16 +25,17 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
         public string? BirthPlace { get; set; }
         public string? IdentityNumber { get; set; }
         public DateTime? StartDateOfWork { get; set; }
-        public Department? DepartmentName { get; set; }
+        public string? DepartmentName { get; set; }
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
-        public DateTime CreatedDate => DateTime.Now;
-        public Status Status => Status.Active;
+        public DateTime CreatedDate { get; set; }
+        public string CompanyName { get; set; }
+        // public Status Status { get; set; }
 
-       // //Company Seçim 
-       // public int? CompanyId { get; set; }
-        
-       //public List<CompanyListDto>? Companies { get; set; } //burada list içerisine vm dto companyden alınıp koyulca!!
+        // //Company Seçim 
+        // public int? CompanyId { get; set; }
+
+        //public List<CompanyListDto>? Companies { get; set; } //burada list içerisine vm dto companyden alınıp koyulca!!
 
 
     }

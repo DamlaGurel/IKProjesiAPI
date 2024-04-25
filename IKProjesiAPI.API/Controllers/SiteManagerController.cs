@@ -37,8 +37,9 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpPost]
         [Route("AddCompanyManager")]
-        public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
+        public async Task<IActionResult> AddCompanyManager([FromBody]CreateCompanyManagerDto createCompanyManager)
         {
+
             //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
             //{
             //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
@@ -48,9 +49,18 @@ namespace IKProjesiAPI.API.Controllers
             //{
             //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
             //}
+            try
+            {
+                await _companyManagerService.Create(createCompanyManager);
+            return Ok(createCompanyManager);
+            }
+            catch (Exception ex)
+            {
+                // Hata durumunu loglayın veya uygun şekilde işleyin
+                Console.WriteLine($"Hata oluştu: {ex.Message}");
+                return StatusCode(500, "Bir hata oluştu, Şirket Yöneticisi eklenemedi.");
+            }
 
-            await _companyManagerService.Create(createCompanyManager);
-            return Ok("Şirket Yöneticisi oluşturuldu.");
 
         }
 
