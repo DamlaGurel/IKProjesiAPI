@@ -33,6 +33,8 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
             siteManager.Status = Status.Active;
 
             await _siteManagerRepo.Create(siteManager);
+
+
         }
         //public async Task<string> GetUserEmail(string firstName, string lastName)
         //{

@@ -47,6 +47,15 @@ namespace IKProjesiAPI.API.Controllers
 
                 var token = GetToken(authClaims);
 
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = token.ValidTo.AddMinutes(10)
+                };
+                HttpContext.Response.Cookies.Append("auth_token", new JwtSecurityTokenHandler().WriteToken(token), cookieOptions);
+
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),

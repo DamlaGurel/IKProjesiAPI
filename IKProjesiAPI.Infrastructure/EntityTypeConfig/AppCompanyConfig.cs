@@ -21,7 +21,6 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
                 Id = 1,
                 CompanyName = "Company",
                 CreatedDate = DateTime.Now,
-                
             };
 
 

@@ -13,7 +13,7 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
     {
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {
-            builder.Property(x => x.CreatedDate).IsRequired();
+            builder.Property(x => x.CreatedDate).IsRequired(false);
             builder.Property(x => x.UpdatedDate).IsRequired(false);
             builder.Property(x => x.DeletedDate).IsRequired(false);
 

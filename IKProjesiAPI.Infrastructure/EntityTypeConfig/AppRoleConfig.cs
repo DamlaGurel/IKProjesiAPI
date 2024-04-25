@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
 {
-    internal class AppRoleConfig : BaseEntityConfiguration<AppRole>
+    public class AppRoleConfig : BaseEntityConfiguration<AppRole>
     {
         public override void Configure(EntityTypeBuilder<AppRole> builder)
         {

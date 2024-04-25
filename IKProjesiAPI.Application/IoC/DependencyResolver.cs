@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using IKProjesiAPI.Application.AutoMapper;
+using IKProjesiAPI.Application.Services.AppUserService;
 using IKProjesiAPI.Application.Services.CompanyManagerService;
 using IKProjesiAPI.Application.Services.CompanyService;
 using IKProjesiAPI.Application.Services.SiteManagerService;
@@ -31,6 +32,12 @@ namespace IKProjesiAPI.Application.IoC
             builder.RegisterType<CompanyManagerService>().As<ICompanyManagerService>().InstancePerLifetimeScope();
             builder.RegisterType<CompanyManagerRepo>().As<ICompanyManagerRepo>().InstancePerLifetimeScope();
 
+            builder.RegisterType<AppUserRepo>().As<IAppUserRepo>().InstancePerLifetimeScope();
+            builder.RegisterType<AppUserService>().As<IAppUserService>().InstancePerLifetimeScope();
+
+            builder.RegisterType<AppRoleRepo>().As<IAppRoleRepo>().InstancePerLifetimeScope();
+
+            builder.RegisterType<AppUserRoleRepo>().As<IAppUserRoleRepo>().InstancePerLifetimeScope();
 
             builder.Register(context => new MapperConfiguration(config =>
             {

@@ -24,6 +24,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
 
        // [Display(Name = "İkinci Soyisim")]
         public string? SecondLastName { get; set; }
+        public string UserName { get; set; }
 
         //[Display(Name = "Profil Fotoğrafı")]
         // [PictureFileExtension]
