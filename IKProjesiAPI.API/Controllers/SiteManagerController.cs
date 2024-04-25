@@ -65,6 +65,19 @@ namespace IKProjesiAPI.API.Controllers
 
         }
 
+        [HttpGet]
+        [Route("GetAllCompanyManagers")]
+        public async Task<IActionResult> GetAllCompanyManagers()
+        {
+            var companyManagers = await _companyManagerService.GetCompanyManagers();
+            if (companyManagers.Count > 0)
+                return Ok(companyManagers);
+            else if (companyManagers.Count == 0)
+                return BadRequest("Şirket Yöneticisi bulunamadı");
+            else
+                return NotFound();
+        }
+
 
         // SiteManager
 
@@ -156,17 +169,6 @@ namespace IKProjesiAPI.API.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        [Route("GetAllCompanyManagers")]
-        public async Task<IActionResult> GetAllCompanyManagers()
-        {
-            var companyManagers = await _companyManagerService.GetCompanyManagers();
-            if (companyManagers.Count > 0)
-                return Ok(companyManagers);
-            else if (companyManagers.Count == 0)
-                return BadRequest("Şirket Yöneticisi bulunamadı");
-            else
-                return NotFound();
-        }
+        
     }
 }
