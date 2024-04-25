@@ -15,11 +15,8 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-<<<<<<< HEAD
-   // [Authorize(AuthenticationSchemes = "Bearer")]
-=======
-    //[Authorize(AuthenticationSchemes = "Bearer")]
->>>>>>> origin/master
+    [Authorize(AuthenticationSchemes = "Bearer")]
+
     public class SuperAdminController : ControllerBase
     {
         private readonly ISiteManagerService _siteManagerService;
@@ -47,12 +44,9 @@ namespace IKProjesiAPI.API.Controllers
             if (user != null)
             {
                 string roleName = Job.SiteManager.ToString().ToUpper();
-<<<<<<< HEAD
                 await _userManager.AddToRoleAsync(user, "SiteManager");
-=======
                 await _roleManager.RoleExistsAsync(roleName.ToUpper());
                 await _userManager.AddToRoleAsync(user, roleName);
->>>>>>> origin/master
             }
 
 
