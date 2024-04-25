@@ -36,7 +36,7 @@ namespace IKProjesiAPI.API.Controllers
             //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
             //}
 
-            await _siteManagerService.Create(siteManager);
+            await _siteManagerService.CreateSiteManager(siteManager);
             var user = await _userManager.FindByNameAsync(siteManager.UserName.ToUpper());
             user.SecurityStamp = Guid.NewGuid().ToString();
             if (user != null)
@@ -56,7 +56,7 @@ namespace IKProjesiAPI.API.Controllers
         [HttpDelete("DeleteSiteManager")]
         public async Task<IActionResult> DeleteSiteManager(int id)
         {
-            await _siteManagerService.Delete(id);
+            await _siteManagerService.DeleteSiteManager(id);
             return Ok("SİLME BAŞARILI");
         }
 

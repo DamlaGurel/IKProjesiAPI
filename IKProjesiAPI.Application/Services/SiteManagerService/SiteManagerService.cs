@@ -21,7 +21,7 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
         }
 
 
-        public async Task Create(CreateSiteManagerDto model)
+        public async Task CreateSiteManager(CreateSiteManagerDto model)
         {
             var siteManager = _mapper.Map<SiteManager>(model);
 
@@ -65,18 +65,14 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
 
         public async Task<SiteManagerSummaryDto> GetSiteManagerSummary(int id)
         {
-            //var siteManager = await _siteManagerRepo.GetFilteredFirstOrDefault(
-            //    select: x => _mapper.Map<SiteManagerSummaryDto>(x),
-            //    where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
+            var siteManager = await _siteManagerRepo.GetFilteredFirstOrDefault(
+                select: x => _mapper.Map<SiteManagerSummaryDto>(x),
+                where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
 
-            var siteManager = await GetSiteManager(id);
-                //await _siteManagerRepo.GetDefault(x => x.Id == id);
-            var siteManagerDto = _mapper.Map<SiteManagerSummaryDto>(siteManager);
-
-            return siteManagerDto;
+            return siteManager;
         }
 
-        public async Task Update(SiteManagerUpdateDto model)
+        public async Task UpdateSiteManager(SiteManagerUpdateDto model)
         {
             var siteManager = await _siteManagerRepo.GetDefault(x => x.Id == model.Id);
             siteManager.Address = model.Address;
@@ -89,7 +85,7 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
             await _siteManagerRepo.Update(siteManager);
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteSiteManager(int id)
         {
             var siteManager = await GetSiteManager(id);
 
@@ -100,7 +96,7 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
 
         }
 
-        public async Task SoftDelete(int id)
+        public async Task SoftDeleteSiteManager(int id)
         {
             var siteManager = await GetSiteManager(id);
 
