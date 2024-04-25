@@ -136,6 +136,7 @@ namespace IKProjesiAPI.API.Controllers
         [HttpGet]
         [Route("CompanyDetails/{id}")]
         public async Task<IActionResult> CompanyDetails(int id)
+
         {
             var companyDetails = await _companyService.GetCompanyDetails(id);
 
