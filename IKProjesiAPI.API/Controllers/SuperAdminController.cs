@@ -9,12 +9,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Text;
 
 namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+<<<<<<< HEAD
    // [Authorize(AuthenticationSchemes = "Bearer")]
+=======
+    //[Authorize(AuthenticationSchemes = "Bearer")]
+>>>>>>> origin/master
     public class SuperAdminController : ControllerBase
     {
         private readonly ISiteManagerService _siteManagerService;
@@ -31,10 +36,10 @@ namespace IKProjesiAPI.API.Controllers
         [HttpPost("CreateSiteManager")]
         public async Task<IActionResult> CreateSiteManager([FromBody] CreateSiteManagerDto siteManager)
         {
-            if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
-            {
-                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            }
+            //if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
+            //{
+            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            //}
 
             await _siteManagerService.Create(siteManager);
             var user = await _userManager.FindByNameAsync(siteManager.UserName.ToUpper());
@@ -42,8 +47,21 @@ namespace IKProjesiAPI.API.Controllers
             if (user != null)
             {
                 string roleName = Job.SiteManager.ToString().ToUpper();
+<<<<<<< HEAD
                 await _userManager.AddToRoleAsync(user, "SiteManager");
+=======
+                await _roleManager.RoleExistsAsync(roleName.ToUpper());
+                await _userManager.AddToRoleAsync(user, roleName);
+>>>>>>> origin/master
             }
+
+
+            //_roleManager.Roles.Single();
+
+            //if (!await _userManager.IsInRoleAsync(user, "SiteManager"))
+            //{ 
+            //    await _userManager.AddToRoleAsync(user, "SiteManager"); 
+            //}
             return Ok("KAYIT BAŞARILI");
         }
 

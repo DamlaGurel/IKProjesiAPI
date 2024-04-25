@@ -16,6 +16,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
         public string? SecondName { get; set; }
         public string? LastName { get; set; }
         public string? SecondLastName { get; set; }
+        public string UserName { get; set; }
 
         //[Display(Name = "Profil Fotoğrafı")]
         // [PictureFileExtension]

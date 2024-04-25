@@ -10,14 +10,16 @@ using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.IdentityModel.Tokens;
 
 namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     //[Authorize(AuthenticationSchemes = "Bearer",Roles = "SiteManager")]
 
     public class SiteManagerController : Controller
@@ -25,42 +27,52 @@ namespace IKProjesiAPI.API.Controllers
         private readonly ISiteManagerService _siteManagerService;
         private readonly ICompanyManagerService _companyManagerService;
         private readonly ICompanyService _companyService;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<AppRole> _roleManager;
 
-        public SiteManagerController(ISiteManagerService siteManagerService, ICompanyManagerService companyManagerService, ICompanyService companyService)
+        public SiteManagerController(ISiteManagerService siteManagerService, ICompanyManagerService companyManagerService, ICompanyService companyService, RoleManager<AppRole> roleManager, UserManager<AppUser> userManager)
         {
             _siteManagerService = siteManagerService;
             _companyManagerService = companyManagerService;
             _companyService = companyService;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         // CompanyManager
 
         [HttpPost]
         [Route("AddCompanyManager")]
-        public async Task<IActionResult> AddCompanyManager([FromBody]CreateCompanyManagerDto createCompanyManager)
+        public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
         {
 
-            //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
+            if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
+            {
+                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            }
+            await _companyManagerService.Create(createCompanyManager);
 
-            //if (!User.IsInRole("SiteManager"))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
+            var user = await _userManager.FindByNameAsync(createCompanyManager.UserName.ToUpper());
+
+            user.SecurityStamp = Guid.NewGuid().ToString();
+            if (user != null)
+            {
+                string roleName = Job.CompanyManager.ToString().ToUpper();
+                await _roleManager.RoleExistsAsync(roleName.ToUpper());
+                await _userManager.AddToRoleAsync(user, roleName);
+            }
+
             try
             {
                 await _companyManagerService.Create(createCompanyManager);
-            return Ok(createCompanyManager);
+                return Ok(createCompanyManager);
             }
             catch (Exception ex)
             {
-                // Hata durumunu loglayın veya uygun şekilde işleyin
+
                 Console.WriteLine($"Hata oluştu: {ex.Message}");
                 return StatusCode(500, "Bir hata oluştu, Şirket Yöneticisi eklenemedi.");
             }
-
 
         }
 
@@ -81,7 +93,7 @@ namespace IKProjesiAPI.API.Controllers
         // SiteManager
 
         [HttpGet]
-        [Route("SiteManagerSummary")]
+        [Route("SiteManagerSummary/{id}")]
         public async Task<IActionResult> SiteManagerSummary(int id)
         {
             var siteManagerSummary = await _siteManagerService.GetSiteManagerSummary(id);
@@ -108,10 +120,10 @@ namespace IKProjesiAPI.API.Controllers
         [Route("UpdateSiteManager")]
         public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManager)
         {
-            //if (!User.IsInRole("SiteManager"))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
+            if (!User.IsInRole("SiteManager"))
+            {
+                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            }
 
             await _siteManagerService.Update(siteManager);
             return Ok("KAYIT GÜNCELLENDİ");
@@ -133,6 +145,10 @@ namespace IKProjesiAPI.API.Controllers
         [Route("CreateCompany")]
         public async Task<IActionResult> CreateCompany([FromBody] CreateCompanyDto model)
         {
+            if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
+            {
+                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -140,8 +156,6 @@ namespace IKProjesiAPI.API.Controllers
             await _companyService.Create(model);
             return Ok();
         }
-
-       
 
         [HttpGet]
         [Route("CompanyDetails/{id}")]
@@ -166,6 +180,6 @@ namespace IKProjesiAPI.API.Controllers
             return Ok();
         }
 
-        
+
     }
 }

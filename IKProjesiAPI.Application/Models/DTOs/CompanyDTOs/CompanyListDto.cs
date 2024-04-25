@@ -13,6 +13,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyDTOs
     public class CompanyListDto
     {
         //Logo,Ad,Unvan,Email,Telefon)
+        public int Id { get; set; }
         public string CompanyName { get; set; }
         public string CompanyTitle { get; set; }      
         //[NotMapped]
