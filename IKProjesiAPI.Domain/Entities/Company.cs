@@ -18,9 +18,7 @@ namespace IKProjesiAPI.Domain.Entities
         public string? MersisNumber { get; set; }
         public string? CompanyTaxNumber { get; set; }
         public string? CompanyTaxOffice { get; set; }
-        //[NotMapped]
-        //public IFormFile? Logo { get; set; }
-        //public string LogoPath { get; set; }
+        public byte[]? LogoBytes { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Address { get; set; }
         public string? Email { get; set; }
