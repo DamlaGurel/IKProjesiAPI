@@ -20,7 +20,8 @@ namespace IKProjesiAPI.Application.Services.CompanyService
 
         public async Task Create(CreateCompanyDto model)
         {
-            var company = _mapper.Map<Company>(model);
+           var company= _mapper.Map<Company>(model);
+            company.LogoBytes = Convert.FromBase64String(model.LogoString);
             await _companyRepo.Create(company);
         }
 

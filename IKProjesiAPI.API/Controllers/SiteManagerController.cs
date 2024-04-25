@@ -19,7 +19,7 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    //[Authorize(AuthenticationSchemes = "Bearer")]
     //[Authorize(AuthenticationSchemes = "Bearer",Roles = "SiteManager")]
 
     public class SiteManagerController : Controller
@@ -145,10 +145,10 @@ namespace IKProjesiAPI.API.Controllers
         [Route("CreateCompany")]
         public async Task<IActionResult> CreateCompany([FromBody] CreateCompanyDto model)
         {
-            if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
-            {
-                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            }
+            //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
+            //{
+            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            //}
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
