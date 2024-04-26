@@ -6,7 +6,7 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
 {
     public interface ISiteManagerService
     {
-        Task CreateSiteManager(CreateSiteManagerDto model);
+        Task<CreateSiteManagerDto> CreateSiteManager(CreateSiteManagerDto model);
         Task UpdateSiteManager(SiteManagerUpdateDto model);
         Task DeleteSiteManager(int id);
         Task SoftDeleteSiteManager(int id);

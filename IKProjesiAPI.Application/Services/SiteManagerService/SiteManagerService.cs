@@ -21,18 +21,21 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
         }
 
 
-        public async Task CreateSiteManager(CreateSiteManagerDto model)
+        public async Task<CreateSiteManagerDto> CreateSiteManager(CreateSiteManagerDto model)
         {
             var siteManager = _mapper.Map<SiteManager>(model);
 
-            siteManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadam.com";
+            siteManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadamboost.com";
             siteManager.UserName = siteManager.Email;
-            siteManager.NormalizedUserName = model.UserName.ToUpper();
+            siteManager.NormalizedUserName = siteManager.Email.ToUpper();
             siteManager.JobName = Job.SiteManager;
             siteManager.CreatedDate = DateTime.Now;
             siteManager.Status = Status.Active;
 
             await _siteManagerRepo.Create(siteManager);
+
+            var siteManager1 = _mapper.Map<CreateSiteManagerDto>(siteManager);
+            return siteManager1;
 
 
         }
