@@ -13,15 +13,16 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
         private readonly ICompanyManagerRepo _companyManagerRepo;
         private readonly ICompanyRepo _companyRepo;
+        private readonly IPersonelRepo _personelRepo;
         private readonly IMapper _mapper;
 
 
-        public CompanyManagerService(ICompanyManagerRepo companyManagerRepo, ICompanyRepo companyRepo, IMapper mapper)
+        public CompanyManagerService(ICompanyManagerRepo companyManagerRepo, ICompanyRepo companyRepo, IMapper mapper, IPersonelRepo personelRepo)
         {
             _companyRepo = companyRepo;
             _companyManagerRepo = companyManagerRepo;
             _mapper = mapper;
-
+            _personelRepo = personelRepo;
         }
         public async Task Create(CreateCompanyManagerDto model)
         {
@@ -94,7 +95,9 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
         public async Task CreatePersonel(CreatePersonelDto model)
         {
-            //var personel= _mapper.Map()
+            var personel = _mapper.Map<Personel>(model);
+
+            await _personelRepo.Create(personel);
         }
     }
 }
