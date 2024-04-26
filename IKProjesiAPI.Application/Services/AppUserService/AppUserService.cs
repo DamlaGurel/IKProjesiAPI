@@ -27,9 +27,9 @@ namespace IKProjesiAPI.Application.Services.AppUserService
             return result;
         }
 
-        public Task LogOut()
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task LogOut()
+        //{
+        //    return await _signInManager.SignOutAsync();
+        //}
     }
 }
