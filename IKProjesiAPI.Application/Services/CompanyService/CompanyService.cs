@@ -20,7 +20,8 @@ namespace IKProjesiAPI.Application.Services.CompanyService
 
         public async Task Create(CreateCompanyDto model)
         {
-            var company = _mapper.Map<Company>(model);
+           var company= _mapper.Map<Company>(model);
+            company.LogoBytes = Convert.FromBase64String(model.LogoString);
             await _companyRepo.Create(company);
         }
 
@@ -35,6 +36,15 @@ namespace IKProjesiAPI.Application.Services.CompanyService
             var company= await _companyRepo.GetFilteredFirstOrDefault(
                 select: x => _mapper.Map<CompanyDetailsDto>(x),
                 where: x => x.Id.Equals(id) && x.Status != Status.Pasive);
+            
+            string logoString = null;
+
+            if (company != null && company.LogoBytes != null)
+            {
+                logoString = Convert.ToBase64String(company.LogoBytes);
+            }
+            company.LogoString = logoString;
+
             return company;
         }
 
@@ -43,7 +53,18 @@ namespace IKProjesiAPI.Application.Services.CompanyService
             var companies = await _companyRepo.GetFilteredList(
                 select: x => _mapper.Map<CompanyListDto>(x),
                 where: x => x.Status != Status.Pasive,
-                orderBy: x => x.OrderBy(x => x.CompanyName));
+                orderBy: x => x.OrderBy(x => x.CreatedDate));
+
+            foreach (var company in companies)
+            {
+                string logoString = null;
+
+                if (company != null && company.LogoBytes != null)
+                {
+                    logoString = Convert.ToBase64String(company.LogoBytes);
+                }
+                company.LogoString = logoString;
+            }
 
             return companies;
         }

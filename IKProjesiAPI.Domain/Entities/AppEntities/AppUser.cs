@@ -12,7 +12,7 @@ namespace IKProjesiAPI.Domain.Entities.AppEntities
 {
     public class AppUser : IdentityUser<int>, IBaseEntity
     {
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
         public string? SecondName { get; set; }
 
         public string? LastName { get; set; }

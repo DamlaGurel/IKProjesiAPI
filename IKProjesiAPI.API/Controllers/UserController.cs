@@ -10,6 +10,11 @@ using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;
+using Microsoft.AspNetCore.Http;
+using NuGet.Common;
+using IKProjesiAPI.Application.Services.AppUserService;
+using IKProjesiAPI.Application.Models.DTOs;
+using System.Data;
 namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
@@ -18,11 +23,15 @@ namespace IKProjesiAPI.API.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
-        public UserController(AppDbContext context, IConfiguration configuration)
+        private readonly IAppUserService _appUserService;
+
+        public UserController(AppDbContext context, IConfiguration configuration, IAppUserService appUserService)
         {
             _context = context;
             _configuration = configuration;
+            _appUserService = appUserService;
         }
+
         [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDto model)
@@ -31,22 +40,17 @@ namespace IKProjesiAPI.API.Controllers
 
             if (login != null)
             {
-                var roles = _context.AppUserRoles.Where(x => x.UserId == login.Id).ToList();
+                await _appUserService.Login(model);
+
+                var role = await _context.AppUserRoles.FirstAsync(x => x.UserId == login.Id);
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, login.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
-                if (roles.Any())
-                {
-                    foreach(var role in roles)
-                    {
-                        authClaims.Add(new Claim(ClaimTypes.Role, ((Job)role.RoleId).ToString().ToUpper()));
-                    }
-                }
 
                 var token = GetToken(authClaims);
-
+                var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
                 var cookieOptions = new CookieOptions
                 {
                     HttpOnly = true,
@@ -54,13 +58,10 @@ namespace IKProjesiAPI.API.Controllers
                     SameSite = SameSiteMode.Strict,
                     Expires = token.ValidTo.AddMinutes(10)
                 };
-                HttpContext.Response.Cookies.Append("auth_token", new JwtSecurityTokenHandler().WriteToken(token), cookieOptions);
+                HttpContext.Response.Cookies.Append("token", tokenString, cookieOptions);
 
-                return Ok(new
-                {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
-                });
+                return Ok(new TokenDto{ Token = tokenString, Expiration = token.ValidTo, Role = ((Job)role.RoleId).ToString().ToUpper() });
+
             }
             else
                 return Unauthorized("Kullanıcı yetkisiz");

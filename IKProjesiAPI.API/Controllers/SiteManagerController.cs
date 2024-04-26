@@ -105,7 +105,7 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpGet]
-        [Route("SiteManagerDetails")]
+        [Route("SiteManagerDetails/{id}")]
         public async Task<IActionResult> SiteManagerDetails(int id)
         {
             var siteManagerDetails = await _siteManagerService.GetSiteManagerDetails(id);
@@ -125,8 +125,8 @@ namespace IKProjesiAPI.API.Controllers
             //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
             //}
 
-            await _siteManagerService.Update(siteManager);
-            return Ok("KAYIT GÜNCELLENDİ");
+            await _siteManagerService.UpdateSiteManager(siteManager);
+            return Ok();
         }
 
 
