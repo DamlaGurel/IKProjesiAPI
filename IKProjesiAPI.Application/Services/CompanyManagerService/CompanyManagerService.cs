@@ -87,6 +87,15 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         // orderby: x => x.OrderBy(x => x.Id));
         //return companyManager;
         //}
+
+        //-------------------------------
+        //PERSONEL İŞLEMLERİ
+        //-------------------------------
+
+        public async Task CreatePersonel(CreatePersonelDto model)
+        {
+            //var personel= _mapper.Map()
+        }
     }
 }
 
