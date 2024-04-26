@@ -21,6 +21,13 @@ namespace IKProjesiAPI.Application.Services.AppUserService
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
+        public async Task<bool> ForgotPassword(LoginDto model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            return user;
+        }
+
         public async Task<SignInResult> Login(LoginDto model)
         {
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password,false,false);

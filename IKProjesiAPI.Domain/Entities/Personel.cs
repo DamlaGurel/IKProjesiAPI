@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Domain.Entities
 {
-    public class TemporaryPassword
+    public class Personel:AppUser
     {
-        public int Id { get; set; }
-        public string Password { get; set; }
-        public AppUser AppUser { get; set; }
     }
 }
