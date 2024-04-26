@@ -5,6 +5,8 @@ using System.Net.Mail;
 using System.Net;
 using IKProjesiAPI.Application.Models.DTOs.UserDTOs;
 using IKProjesiAPI.Domain.Entities;
+using IKProjesiAPI.Domain.Entities.AppEntities;
+using IKProjesiAPI.Infrastructure.Migrations;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -34,6 +36,7 @@ namespace IKProjesiAPI.API.Controllers
                 };
 
                 _context.TemporaryPassword.Add(temporaryPassword);
+                _context.AppUsers.Add(user);
                 _context.SaveChanges();
 
 
