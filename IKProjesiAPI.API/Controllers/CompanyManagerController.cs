@@ -29,7 +29,7 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpGet]
         [Route("CompanyManagerSummary/{id}")]
-        public async Task<IActionResult> CompanyManagerSummary(int id)
+        public async Task<IActionResult> GetCompanyManagerSummary(int id)
         {
             var companyManagerSummary = await _companyManagerService.GetCompanyManagerSummary(id);
 
@@ -42,7 +42,7 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpGet]
         [Route("CompanyManagerDetails/{id}")]
-        public async Task<IActionResult> CompanyManagerDetails(int id)
+        public async Task<IActionResult> GetCompanyManagerDetails(int id)
         {
             var companyManagerDetails = await _companyManagerService.GetCompanyManagerDetails(id);
 
@@ -54,7 +54,7 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpPut]
         [Route("CompanyManagerUpdate")]
-        public async Task<IActionResult> CompanyManagerUpdate([FromBody] UpdateCompanyManagerDto model)
+        public async Task<IActionResult> GetCompanyManagerUpdate([FromBody] UpdateCompanyManagerDto model)
         {
             await _companyManagerService.Update(model);
             return Ok();
