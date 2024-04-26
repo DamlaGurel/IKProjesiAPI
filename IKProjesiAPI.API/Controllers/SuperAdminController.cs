@@ -15,22 +15,21 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-<<<<<<< HEAD
-   // [Authorize(AuthenticationSchemes = "Bearer")]
-=======
-    //[Authorize(AuthenticationSchemes = "Bearer")]
->>>>>>> origin/master
+
+  //[Authorize(AuthenticationSchemes = "Bearer")]
+
     public class SuperAdminController : ControllerBase
     {
         private readonly ISiteManagerService _siteManagerService;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppRole> _roleManager;
-
+        
         public SuperAdminController(ISiteManagerService siteManagerService, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             _siteManagerService = siteManagerService;
             _userManager = userManager;
             _roleManager = roleManager;
+           
         }
 
         [HttpPost("CreateSiteManager")]
@@ -40,19 +39,17 @@ namespace IKProjesiAPI.API.Controllers
             //{
             //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
             //}
-
+           
             await _siteManagerService.Create(siteManager);
             var user = await _userManager.FindByNameAsync(siteManager.UserName.ToUpper());
             user.SecurityStamp = Guid.NewGuid().ToString();
             if (user != null)
             {
                 string roleName = Job.SiteManager.ToString().ToUpper();
-<<<<<<< HEAD
-                await _userManager.AddToRoleAsync(user, "SiteManager");
-=======
+
                 await _roleManager.RoleExistsAsync(roleName.ToUpper());
                 await _userManager.AddToRoleAsync(user, roleName);
->>>>>>> origin/master
+
             }
 
 
