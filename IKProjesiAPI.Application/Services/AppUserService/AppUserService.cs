@@ -22,6 +22,11 @@ namespace IKProjesiAPI.Application.Services.AppUserService
             _signInManager = signInManager;
         }
 
+        public Task<bool> ForgotPassword(LoginDto model)
+        {
+            throw new NotImplementedException();
+        }
+
         //public async Task<bool> ForgotPassword(LoginDto model)
         //{
         //    var user = await _userManager.FindByEmailAsync(model.Email);
@@ -34,9 +39,9 @@ namespace IKProjesiAPI.Application.Services.AppUserService
             return result;
         }
 
-        //public async Task LogOut()
-        //{
-        //    return await _signInManager.SignOutAsync();
-        //}
+        public async Task LogOut()
+        {
+            //return await _signInManager.SignOutAsync();
+        }
     }
 }
