@@ -22,11 +22,11 @@ namespace IKProjesiAPI.Application.Services.AppUserService
             _signInManager = signInManager;
         }
 
-        public async Task<bool> ForgotPassword(LoginDto model)
-        {
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            return user;
-        }
+        //public async Task<bool> ForgotPassword(LoginDto model)
+        //{
+        //    var user = await _userManager.FindByEmailAsync(model.Email);
+        //    return user;
+        //}
 
         public async Task<SignInResult> Login(LoginDto model)
         {
