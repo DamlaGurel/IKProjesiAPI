@@ -11,12 +11,14 @@
   "profiles": {
     "IkProjesiAPI.API": {
       "commandName": "Project",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:44828",
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:30299",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "dotnetRunMessages": true
+      }
+
     },
     "IIS Express": {
       "commandName": "IISExpress",
