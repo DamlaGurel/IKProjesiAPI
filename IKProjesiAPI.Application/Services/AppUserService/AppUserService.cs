@@ -24,8 +24,9 @@ namespace IKProjesiAPI.Application.Services.AppUserService
 
         public async Task<bool> ForgotPassword(LoginDto model)
         {
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            return user;
+            //var user = await _userManager.FindByEmailAsync(model.Email);
+            //return user;
+            return true;
         }
 
         public async Task<SignInResult> Login(LoginDto model)

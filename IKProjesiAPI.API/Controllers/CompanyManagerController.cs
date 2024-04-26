@@ -27,8 +27,31 @@ namespace IKProjesiAPI.API.Controllers
             
         }
 
+        [HttpGet]
+        [Route("CompanyManagerSummary/{id}")]
+        public async Task<IActionResult> CompanyManagerSummary(int id)
+        {
+            var companyManagerSummary = await _companyManagerService.GetCompanyManagerSummary(id);
 
-       
+            if (companyManagerSummary != null)
+                return Ok(companyManagerSummary);
+            else
+                return NotFound("kullanıcı bulunamadı");
+        }
+
+
+        [HttpGet]
+        [Route("CompanyManagerDetails/{id}")]
+        public async Task<IActionResult> CompanyManagerDetails(int id)
+        {
+            var companyManagerDetails = await _companyManagerService.GetCompanyManagerDetails(id);
+
+            if (companyManagerDetails != null)
+                return Ok(companyManagerDetails);
+            else
+                return NotFound("kullanıcı bulunamadı");
+        }
+
 
     }
 }
