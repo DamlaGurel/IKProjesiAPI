@@ -1,9 +1,11 @@
 ﻿using System;
 using AutoMapper;
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
+using IKProjesiAPI.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace IKProjesiAPI.Application.Services.CompanyManagerService
@@ -69,6 +71,25 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             return companyManager;
         }
 
+        public async Task<SummaryCompanyManagerDto> GetCompanyManagerSummary(int id)
+        {
+            var companyManager = await _companyManagerRepo.GetFilteredFirstOrDefault(
+                select: x => _mapper.Map<SummaryCompanyManagerDto>(x),
+                where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
+
+            return companyManager;
+        }
+
+        public async Task<DetailCompanyManagerDto> GetCompanyManagerDetails(int id)
+        {
+            var companyManager = await _companyManagerRepo.GetFilteredFirstOrDefault(
+                select: x => _mapper.Map<DetailCompanyManagerDto>(x),
+                where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
+
+            return companyManager;
+        }
+
+
         public async Task SoftDelete(int id)
         {
             var companyManager = await _companyManagerRepo.GetDefault(x => x.Id.Equals(id));
@@ -80,19 +101,20 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             }
         }
 
-        public Task Update(UpdateCompanyManagerDto model)
+        public async Task Update(UpdateCompanyManagerDto model)
         {
-            throw new NotImplementedException();
+            var companyManager = await _companyManagerRepo.GetDefault(x => x.Id == model.Id);
+
+            companyManager.Address = model.Address;
+            companyManager.PhoneNumber = model.PhoneNumber;
+            companyManager.ImagePath = model.ImagePath;
+
+            companyManager.Status = Status.Modified;
+            companyManager.UpdatedDate = DateTime.Now;
+
+            await _companyManagerRepo.Update(companyManager);
         }
 
-        //public async Task Update(UpdateCompanyManagerDto model)
-        //{
-
-        //var companyManager = await _companyManagerRepo.GetFilteredList(select: x => _mapper.Map<UpdateCompanyManagerDto>(x),
-        //where: x => !x.Status.Equals(Status.Pasive),
-        // orderby: x => x.OrderBy(x => x.Id));
-        //return companyManager;
-        //}
 
         //-------------------------------
         //PERSONEL İŞLEMLERİ

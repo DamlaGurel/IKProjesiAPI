@@ -28,40 +28,38 @@ namespace IKProjesiAPI.API.Controllers
             
         }
 
-        [HttpPost]
-        [Route("CreatePersoneş")]
-        public async Task<IActionResult> CreatePersonel([FromBody]CreatePersonelDto model)
+        [HttpGet]
+        [Route("CompanyManagerSummary/{id}")]
+        public async Task<IActionResult> GetCompanyManagerSummary(int id)
         {
-            //if (!User.IsInRole(Job.CompanyManager.ToString().ToUpper()))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
-            await _companyManagerService.CreatePersonel(model);
+            var companyManagerSummary = await _companyManagerService.GetCompanyManagerSummary(id);
 
-            //var user = await _userManager.FindByNameAsync(createCompanyManager.UserName.ToUpper());
+            if (companyManagerSummary != null)
+                return Ok(companyManagerSummary);
+            else
+                return NotFound("kullanıcı bulunamadı");
+        }
 
-            //user.SecurityStamp = Guid.NewGuid().ToString();
-            //if (user != null)
-            //{
-            //    string roleName = Job.CompanyManager.ToString().ToUpper();
-            //    await _roleManager.RoleExistsAsync(roleName.ToUpper());
-            //    await _userManager.AddToRoleAsync(user, roleName);
-            //}
 
-            //try
-            //{
-            //    await _companyManagerService.Create(createCompanyManager);
-            //    return Ok(createCompanyManager);
-            //}
-            //catch (Exception ex)
-            //{
+        [HttpGet]
+        [Route("CompanyManagerDetails/{id}")]
+        public async Task<IActionResult> GetCompanyManagerDetails(int id)
+        {
+            var companyManagerDetails = await _companyManagerService.GetCompanyManagerDetails(id);
 
-            //    Console.WriteLine($"Hata oluştu: {ex.Message}");
-            //    return StatusCode(500, "Bir hata oluştu, Şirket Yöneticisi eklenemedi.");
-            //}
+            if (companyManagerDetails != null)
+                return Ok(companyManagerDetails);
+            else
+                return NotFound("kullanıcı bulunamadı");
+        }
+
+        [HttpPut]
+        [Route("CompanyManagerUpdate")]
+        public async Task<IActionResult> GetCompanyManagerUpdate([FromBody] UpdateCompanyManagerDto model)
+        {
+            await _companyManagerService.Update(model);
             return Ok();
         }
-       
 
     }
 }
