@@ -33,10 +33,10 @@ namespace IKProjesiAPI.API.Controllers
         [HttpPost("CreateSiteManager")]
         public async Task<IActionResult> CreateSiteManager([FromBody] CreateSiteManagerDto siteManager)
         {
-            //if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
+            if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
+            {
+                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            }
 
             await _siteManagerService.CreateSiteManager(siteManager);
             var user = await _userManager.FindByNameAsync(siteManager.UserName.ToUpper());
@@ -44,18 +44,9 @@ namespace IKProjesiAPI.API.Controllers
             if (user != null)
             {
                 string roleName = Job.SiteManager.ToString().ToUpper();
-                await _userManager.AddToRoleAsync(user, "SiteManager");
-                await _roleManager.RoleExistsAsync(roleName.ToUpper());
                 await _userManager.AddToRoleAsync(user, roleName);
             }
 
-
-            //_roleManager.Roles.Single();
-
-            //if (!await _userManager.IsInRoleAsync(user, "SiteManager"))
-            //{ 
-            //    await _userManager.AddToRoleAsync(user, "SiteManager"); 
-            //}
             return Ok("KAYIT BAŞARILI");
         }
 

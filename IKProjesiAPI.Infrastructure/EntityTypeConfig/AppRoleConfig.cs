@@ -1,5 +1,6 @@
 ﻿using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
+using IKProjesiAPI.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -31,8 +32,8 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
             var siteManager = new AppRole
             {
                 Id = 2,
-                Name = "SiteManager",
-                NormalizedName = "SiteManager".ToUpper(),
+                Name = Job.SiteManager.ToString(),
+                NormalizedName = Job.SiteManager.ToString().ToUpper(),
                 ConcurrencyStamp = Guid.NewGuid().ToString(),
                 CreatedDate = DateTime.Now
             };
