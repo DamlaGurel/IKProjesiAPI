@@ -10,7 +10,6 @@
     <Folder Include="Extensions\" />
     <Folder Include="IoC\" />
     <Folder Include="Services\CompanyManagerService\" />
-    <Folder Include="Models\DTOs\CompanyManagerDTOs\" />
 
   </ItemGroup>
 
