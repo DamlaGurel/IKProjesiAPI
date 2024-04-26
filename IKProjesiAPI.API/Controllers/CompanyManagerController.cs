@@ -52,6 +52,13 @@ namespace IKProjesiAPI.API.Controllers
                 return NotFound("kullanıcı bulunamadı");
         }
 
+        [HttpPut]
+        [Route("CompanyManagerUpdate")]
+        public async Task<IActionResult> CompanyManagerUpdate([FromBody] UpdateCompanyManagerDto model)
+        {
+            await _companyManagerService.Update(model);
+            return Ok();
+        }
 
     }
 }
