@@ -11,6 +11,6 @@ namespace IKProjesiAPI.Application.Services.AppUserService
     public interface IAppUserService
     {
         Task<SignInResult> Login(LoginDto model);
-        Task LogOut();
+        //Task LogOut();
     }
 }
