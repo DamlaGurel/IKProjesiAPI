@@ -41,8 +41,8 @@ namespace IKProjesiAPI.API.Controllers
 
         // CompanyManager
 
-        [HttpPost]
-        [Route("AddCompanyManager")]
+        [HttpPost("AddCompanyManager")]
+        //[Route("AddCompanyManager")]
         public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
         {
 

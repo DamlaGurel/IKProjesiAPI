@@ -25,13 +25,18 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         }
         public async Task Create(CreateCompanyManagerDto model)
         {
+            
             var companyManager = _mapper.Map<CompanyManager>(model);
-            companyManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadam.com";
-            companyManager.UserName = model.UserName;
-            companyManager.NormalizedUserName = model.UserName.ToUpper();
+            companyManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadamboost.com";
+            companyManager.UserName = companyManager.Email;
+            companyManager.NormalizedUserName = companyManager.Email.ToUpper();
+             await _companyManagerRepo.Create(companyManager);
+            
+
            
-            await _companyManagerRepo.Create(companyManager);
-           
+
+
+
         }
 
         public async Task Delete(int id)

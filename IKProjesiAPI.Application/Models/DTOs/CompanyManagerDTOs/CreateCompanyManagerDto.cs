@@ -17,20 +17,18 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
         public string? LastName { get; set; }
         public string? SecondLastName { get; set; }
         public string UserName { get; set; }
-
-        //[Display(Name = "Profil Fotoğrafı")]
-        // [PictureFileExtension]
-        //public IFormFile? ProfilePicture { get; set; }
         public string? Password { get; set; }
         public DateTime? BirthDate { get; set; }
         public string? BirthPlace { get; set; }
         public string? IdentityNumber { get; set; }
         public DateTime? StartDateOfWork { get; set; }
-        public string? DepartmentName { get; set; }
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public string CompanyName { get; set; }
+        public string? CompanyName { get; set; }
+        public Job? JobName { get; set; }
+        public Department? DepartmentName { get; set; }
+        public DateTime CreatedDate => DateTime.Now;
+        public Status Status => Status.Active;
         // public Status Status { get; set; }
 
         // //Company Seçim 
