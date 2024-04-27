@@ -12,7 +12,7 @@
     "IkProjesiAPI.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:44828",
+      "applicationUrl": "http://localhost:33881",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
