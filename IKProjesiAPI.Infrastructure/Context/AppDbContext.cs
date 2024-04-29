@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Infrastructure.Context
 {
-    public class AppDbContext : IdentityDbContext<AppUser,AppRole,int,AppUserClaim,AppUserRole,AppUserLogin,AppRoleClaim,AppUserToken>
+    public class AppDbContext : IdentityDbContext<AppUser, AppRole, int, AppUserClaim, AppUserRole, AppUserLogin, AppRoleClaim, AppUserToken>
     {
         public AppDbContext()
         {
-            
+
         }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -31,7 +31,7 @@ namespace IKProjesiAPI.Infrastructure.Context
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<AppUserRole> AppUserRoles { get; set; }
-       public DbSet<SiteManager> SiteManagers { get; set; }
+        public DbSet<SiteManager> SiteManagers { get; set; }
         public DbSet<CompanyManager> CompanyManagers { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<TemporaryPassword> TemporaryPassword { get; set; }
@@ -44,6 +44,7 @@ namespace IKProjesiAPI.Infrastructure.Context
                     .ApplyConfiguration(new AppRoleConfig())
                     .ApplyConfiguration(new AppUserRoleConfig())
                     .ApplyConfiguration(new AppCompanyConfig());
+
 
             //builder.Entity<AppUser>(b =>
             //{

@@ -19,9 +19,6 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         Task<List<ListCompanyManagerDto>> GetCompanyManagersByCompany(int companyId);
         Task<SummaryCompanyManagerDto> GetCompanyManagerSummary(int id);
         Task<DetailCompanyManagerDto> GetCompanyManagerDetails(int id);
-
-
-        Task CreatePersonel(CreatePersonelDto model);
     }
 }
 

@@ -8,6 +8,7 @@ using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Infrastructure.Migrations;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -28,9 +29,9 @@ namespace IKProjesiAPI.API.Controllers
         [Route("SendMail/{email}")]
         public async Task<IActionResult> SendMail(string email)
         {
-            //var user = _context.AppUsers.FirstOrDefault(u => u.Email == email);
+            var user = await _context.AppUsers.FirstOrDefaultAsync(u => u.Email == email);
 
-            var user = await _userManager.FindByEmailAsync(email);
+            //var user = await _userManager.FindByEmailAsync(email);
             if (user != null)
             {
                 Guid newGuid = Guid.NewGuid();
@@ -38,14 +39,12 @@ namespace IKProjesiAPI.API.Controllers
 
                 var temporaryPassword = new TemporaryPassword
                 {
-                    Password = guidString
+                    Password = guidString,
+                    UserId = user.Id
                 };
 
                 await _context.TemporaryPassword.AddAsync(temporaryPassword);
-                //var passwordHasher = new PasswordHasher<AppUser>();
-                //user.PasswordHash = passwordHasher.HashPassword(user, guidString);
-                //await _context.SaveChangesAsync();
-
+                await _context.SaveChangesAsync();
 
                 MailMessage message = new MailMessage();
                 message.From = new MailAddress("mailadresi@mail.com");
