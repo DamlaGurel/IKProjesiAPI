@@ -1,4 +1,5 @@
 ﻿using IKProjesiAPI.Domain.Entities.AppEntities;
+using IKProjesiAPI.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,5 +18,9 @@ namespace IKProjesiAPI.Domain.Entities
         public string Password { get; set; }
         public int UserId { get; set; }
         public AppUser AppUser { get; set; }
+        //public DateTime? CreatedDate { get ; set; }
+        //public DateTime? UpdatedDate { get; set; }
+        //public DateTime? DeletedDate { get; set; }
+        //public Status? Status { get; set; }
     }
 }
