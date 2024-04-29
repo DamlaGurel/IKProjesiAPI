@@ -45,34 +45,30 @@ namespace IKProjesiAPI.API.Controllers
         [Route("AddCompanyManager")]
         public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
         {
-            
-            
-            //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
-            //await _companyManagerService.Create(createCompanyManager);
-
-            //var user = await _userManager.FindByNameAsync(createCompanyManager.UserName.ToUpper());
-
-            //user.SecurityStamp = Guid.NewGuid().ToString();
-            //if (user != null)
-            //{
-            //    string roleName = Job.CompanyManager.ToString().ToUpper();
-            //    await _roleManager.RoleExistsAsync(roleName.ToUpper());
-            //    await _userManager.AddToRoleAsync(user, roleName);
-            //}
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            await _companyManagerService.Create(createCompanyManager);
+            var cm =await _companyManagerService.Create(createCompanyManager);
+
+            //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
+            //{
+            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            //}
+
+           
+            var user = await _userManager.FindByNameAsync(cm.UserName);
+
+            user.SecurityStamp = Guid.NewGuid().ToString();
+            if (user != null)
+            {
+                string roleName = Job.CompanyManager.ToString().ToUpper();
+                await _userManager.AddToRoleAsync(user, roleName);
+            }
+            
+          
 
             return Ok();
-
-               
-            
-
         }
        
 

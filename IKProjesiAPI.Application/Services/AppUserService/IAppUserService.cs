@@ -12,6 +12,6 @@ namespace IKProjesiAPI.Application.Services.AppUserService
     {
         Task<SignInResult> Login(LoginDto model);
         //Task<bool> ForgotPassword(LoginDto model);
-        //Task LogOut();
+        Task LogOut();
     }
 }

@@ -5,7 +5,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 {
 	public interface ICompanyManagerService
 	{
-        Task Create(CreateCompanyManagerDto model);
+        Task<CreateCompanyManagerDto> Create(CreateCompanyManagerDto model);
 
         Task Update(UpdateCompanyManagerDto model);
 
