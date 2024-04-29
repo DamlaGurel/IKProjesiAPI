@@ -36,15 +36,8 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             companyManager.Password= $"{model.FirstName}.{model.LastName}";
             Company company=await _companyRepo.GetDefault(c=>c.Id==model.CompanyId);
             companyManager.Company = company;
-                
             //companyManager.JobName = Job.CompanyManager;
             await _companyManagerRepo.Create(companyManager);
-            
-
-           
-
-
-
         }
 
         public async Task Delete(int id)
@@ -62,10 +55,14 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
         public async Task<List<ListCompanyManagerDto>> GetCompanyManagers()
         {
+            
+
+
             var companyManager = await _companyManagerRepo.GetFilteredList(select: x => _mapper.Map<ListCompanyManagerDto>(x),
                 where: x => !x.Status.Equals(Status.Pasive),
                 orderBy: x => x.OrderBy(x => x.Company));
            
+
             return companyManager;
         }
 
