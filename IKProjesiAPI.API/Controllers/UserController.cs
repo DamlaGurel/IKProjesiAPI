@@ -81,5 +81,12 @@ namespace IKProjesiAPI.API.Controllers
                 );
             return token;
         }
+        [HttpGet]
+        [Route("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _appUserService.LogOut();
+            return Ok();
+        }
     }
 }

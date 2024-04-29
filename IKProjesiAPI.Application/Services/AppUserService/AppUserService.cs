@@ -30,13 +30,16 @@ namespace IKProjesiAPI.Application.Services.AppUserService
 
         public async Task<SignInResult> Login(LoginDto model)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password,false,false);
+            var result = await _repo.PasswordSignInEmail(model.Email, model.Password);
             return result;
         }
 
         public async Task LogOut()
         {
-            //return await _signInManager.SignOutAsync();
+            await _signInManager.SignOutAsync();
         }
+
+        
+
     }
 }

@@ -46,7 +46,8 @@ namespace IKProjesiAPI.Infrastructure.Context
                     .ApplyConfiguration(new AppCompanyConfig());
 
 
-            builder.Entity<TemporaryPassword>().Property(t => t.Id).UseIdentityColumn().ValueGeneratedOnAdd();
+            builder.Entity<TemporaryPassword>().HasKey(t => t.Id);
+            builder.Entity<TemporaryPassword>().Property(t => t.Id).ValueGeneratedOnAdd();
 
             //builder.Entity<AppUser>(b =>
             //{

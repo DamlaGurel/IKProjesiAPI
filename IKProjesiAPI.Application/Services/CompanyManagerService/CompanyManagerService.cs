@@ -37,14 +37,8 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             Company company=await _companyRepo.GetDefault(c=>c.Id==model.CompanyId);
             companyManager.Company = company;
                 
-            //companyManager.JobName = Job.CompanyManager;
+            companyManager.JobName = Job.CompanyManager;
             await _companyManagerRepo.Create(companyManager);
-            
-
-           
-
-
-
         }
 
         public async Task Delete(int id)
