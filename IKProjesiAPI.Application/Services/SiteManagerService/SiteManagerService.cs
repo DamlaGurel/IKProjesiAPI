@@ -26,7 +26,8 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
             var siteManager = _mapper.Map<SiteManager>(model);
 
             siteManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadamboost.com";
-            siteManager.UserName = siteManager.Email;
+            siteManager.NormalizedEmail = siteManager.Email.ToUpper();
+            siteManager.UserName = $"{model.FirstName}.{model.LastName}@bilgeadamboost.com";
             siteManager.NormalizedUserName = siteManager.Email.ToUpper();
             siteManager.JobName = Job.SiteManager;
             siteManager.CreatedDate = DateTime.Now;
@@ -36,8 +37,6 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
 
             var siteManager1 = _mapper.Map<CreateSiteManagerDto>(siteManager);
             return siteManager1;
-
-
         }
         //public async Task<string> GetUserEmail(string firstName, string lastName)
         //{

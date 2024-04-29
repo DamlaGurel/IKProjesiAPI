@@ -43,8 +43,8 @@ namespace IKProjesiAPI.API.Controllers
                     UserId = user.Id
                 };
 
-                _context.TemporaryPassword.Add(temporaryPassword);
-                _context.SaveChanges();
+                await _context.TemporaryPassword.AddAsync(temporaryPassword);
+                await _context.SaveChangesAsync();
 
                 MailMessage message = new MailMessage();
                 message.From = new MailAddress("mailadresi@mail.com");
