@@ -6,6 +6,7 @@ using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
 using IKProjesiAPI.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace IKProjesiAPI.Application.Services.CompanyManagerService
@@ -27,8 +28,6 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
         public async Task Create(CreateCompanyManagerDto model)
         {
-            
-           
             var companyManager = _mapper.Map<CompanyManager>(model);
             companyManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadamboost.com";
             companyManager.UserName = companyManager.Email;
@@ -36,7 +35,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             companyManager.Password= $"{model.FirstName}.{model.LastName}";
             Company company=await _companyRepo.GetDefault(c=>c.Id==model.CompanyId);
             companyManager.Company = company;
-            //companyManager.JobName = Job.CompanyManager;
+            companyManager.JobName = Job.CompanyManager;
             await _companyManagerRepo.Create(companyManager);
         }
 
@@ -58,12 +57,38 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             
 
 
-            var companyManager = await _companyManagerRepo.GetFilteredList(select: x => _mapper.Map<ListCompanyManagerDto>(x),
-                where: x => !x.Status.Equals(Status.Pasive),
-                orderBy: x => x.OrderBy(x => x.Company));
-           
+            //var companyManager = await _companyManagerRepo.GetFilteredList(select: x => _mapper.Map<ListCompanyManagerDto>(x),
+            //    where: x => !x.Status.Equals(Status.Pasive),
+            //    orderBy: x => x.OrderBy(x => x.CompanyId),
+            //    include: query => query.Include(x => x.Company));
 
-            return companyManager;
+
+            
+
+
+            //return companyManager;
+
+            
+                var companyManager = await _companyManagerRepo.GetFilteredList(
+                    select: x => new ListCompanyManagerDto
+                    {
+                        FirstName = x.FirstName,
+                        SecondName = x.SecondName,
+                        LastName = x.LastName,
+                        SecondLastName = x.SecondLastName,
+                        Email = x.Email,
+                        PhoneNumber = x.PhoneNumber,
+                        CompanyId = x.CompanyId,
+                        CompanyName = x.Company.CompanyName,
+                        Address = x.Company.Address 
+                    },
+                    where: x => !x.Status.Equals(Status.Pasive),
+                    orderBy: x => x.OrderBy(x => x.CompanyId),
+                    include: query => query.Include(x => x.Company)); 
+
+                return companyManager;
+            
+
         }
 
         public async Task<List<ListCompanyManagerDto>> GetCompanyManagersByCompany(int companyId)
