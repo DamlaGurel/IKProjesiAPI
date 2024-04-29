@@ -7,6 +7,7 @@ using IKProjesiAPI.Application.Models.DTOs.UserDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Infrastructure.Migrations;
+using Microsoft.AspNetCore.Identity;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -16,15 +17,20 @@ namespace IKProjesiAPI.API.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
-        public MailController(AppDbContext context, IConfiguration configuration)
+        private readonly UserManager<AppUser> _userManager;
+        public MailController(AppDbContext context, IConfiguration configuration, UserManager<AppUser> userManager)
         {
             _context = context;
             _configuration = configuration;
+            _userManager = userManager;
         }
         [HttpPost]
-        public IActionResult SendMail(string email)
+        [Route("SendMail/{email}")]
+        public async Task<IActionResult> SendMail(string email)
         {
-            var user = _context.AppUsers.FirstOrDefault(u => u.Email == email);
+            //var user = _context.AppUsers.FirstOrDefault(u => u.Email == email);
+
+            var user = await _userManager.FindByEmailAsync(email);
             if (user != null)
             {
                 Guid newGuid = Guid.NewGuid();
@@ -35,9 +41,10 @@ namespace IKProjesiAPI.API.Controllers
                     Password = guidString
                 };
 
-                _context.TemporaryPassword.Add(temporaryPassword);
-                _context.AppUsers.Add(user);
-                _context.SaveChanges();
+                await _context.TemporaryPassword.AddAsync(temporaryPassword);
+                //var passwordHasher = new PasswordHasher<AppUser>();
+                //user.PasswordHash = passwordHasher.HashPassword(user, guidString);
+                //await _context.SaveChangesAsync();
 
 
                 MailMessage message = new MailMessage();
@@ -56,7 +63,7 @@ namespace IKProjesiAPI.API.Controllers
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                 smtp.Send(message);
-                return Ok("Geçici şifre mail olarak gönderildi.");
+                return Ok(temporaryPassword.Password);
             }
             else
             {

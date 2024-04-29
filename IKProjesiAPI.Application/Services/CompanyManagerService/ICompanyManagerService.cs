@@ -12,13 +12,16 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         Task Delete(int id);
         Task SoftDelete(int id);
 
-
         Task<List<ListCompanyManagerDto>> GetCompanyManagers();
 
         Task<UpdateCompanyManagerDto> GetCompanyManagerById(int id);
 
         Task<List<ListCompanyManagerDto>> GetCompanyManagersByCompany(int companyId);
+        Task<SummaryCompanyManagerDto> GetCompanyManagerSummary(int id);
+        Task<DetailCompanyManagerDto> GetCompanyManagerDetails(int id);
 
+
+        Task CreatePersonel(CreatePersonelDto model);
     }
 }
 

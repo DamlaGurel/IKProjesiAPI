@@ -1,9 +1,11 @@
 ﻿using System;
 using AutoMapper;
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
+using IKProjesiAPI.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace IKProjesiAPI.Application.Services.CompanyManagerService
@@ -13,15 +15,16 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
         private readonly ICompanyManagerRepo _companyManagerRepo;
         private readonly ICompanyRepo _companyRepo;
+        private readonly IPersonelRepo _personelRepo;
         private readonly IMapper _mapper;
 
 
-        public CompanyManagerService(ICompanyManagerRepo companyManagerRepo, ICompanyRepo companyRepo, IMapper mapper)
+        public CompanyManagerService(ICompanyManagerRepo companyManagerRepo, ICompanyRepo companyRepo, IMapper mapper, IPersonelRepo personelRepo)
         {
             _companyRepo = companyRepo;
             _companyManagerRepo = companyManagerRepo;
             _mapper = mapper;
-
+            _personelRepo = personelRepo;
         }
         public async Task Create(CreateCompanyManagerDto model)
         {
@@ -68,6 +71,25 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             return companyManager;
         }
 
+        public async Task<SummaryCompanyManagerDto> GetCompanyManagerSummary(int id)
+        {
+            var companyManager = await _companyManagerRepo.GetFilteredFirstOrDefault(
+                select: x => _mapper.Map<SummaryCompanyManagerDto>(x),
+                where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
+
+            return companyManager;
+        }
+
+        public async Task<DetailCompanyManagerDto> GetCompanyManagerDetails(int id)
+        {
+            var companyManager = await _companyManagerRepo.GetFilteredFirstOrDefault(
+                select: x => _mapper.Map<DetailCompanyManagerDto>(x),
+                where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
+
+            return companyManager;
+        }
+
+
         public async Task SoftDelete(int id)
         {
             var companyManager = await _companyManagerRepo.GetDefault(x => x.Id.Equals(id));
@@ -79,19 +101,20 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             }
         }
 
-        public Task Update(UpdateCompanyManagerDto model)
+        public async Task Update(UpdateCompanyManagerDto model)
         {
-            throw new NotImplementedException();
+            var companyManager = await _companyManagerRepo.GetDefault(x => x.Id == model.Id);
+
+            companyManager.Address = model.Address;
+            companyManager.PhoneNumber = model.PhoneNumber;
+            companyManager.ImagePath = model.ImagePath;
+
+            companyManager.Status = Status.Modified;
+            companyManager.UpdatedDate = DateTime.Now;
+
+            await _companyManagerRepo.Update(companyManager);
         }
 
-        //public async Task Update(UpdateCompanyManagerDto model)
-        //{
-
-        //var companyManager = await _companyManagerRepo.GetFilteredList(select: x => _mapper.Map<UpdateCompanyManagerDto>(x),
-        //where: x => !x.Status.Equals(Status.Pasive),
-        // orderby: x => x.OrderBy(x => x.Id));
-        //return companyManager;
-        //}
 
         //-------------------------------
         //PERSONEL İŞLEMLERİ
@@ -99,7 +122,9 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
         public async Task CreatePersonel(CreatePersonelDto model)
         {
-            //var personel= _mapper.Map()
+            var personel = _mapper.Map<Personel>(model);
+
+            await _personelRepo.Create(personel);
         }
     }
 }

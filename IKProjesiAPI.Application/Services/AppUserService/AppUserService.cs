@@ -34,9 +34,9 @@ namespace IKProjesiAPI.Application.Services.AppUserService
             return result;
         }
 
-        //public async Task LogOut()
-        //{
-        //    return await _signInManager.SignOutAsync();
-        //}
+        public async Task LogOut()
+        {
+            //return await _signInManager.SignOutAsync();
+        }
     }
 }

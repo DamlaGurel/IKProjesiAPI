@@ -35,6 +35,7 @@ namespace IKProjesiAPI.Infrastructure.Context
         public DbSet<CompanyManager> CompanyManagers { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<TemporaryPassword> TemporaryPassword { get; set; }
+        public DbSet<Personel> Personels { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
