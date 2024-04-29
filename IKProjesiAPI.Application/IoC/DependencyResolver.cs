@@ -4,6 +4,7 @@ using IKProjesiAPI.Application.AutoMapper;
 using IKProjesiAPI.Application.Services.AppUserService;
 using IKProjesiAPI.Application.Services.CompanyManagerService;
 using IKProjesiAPI.Application.Services.CompanyService;
+using IKProjesiAPI.Application.Services.PersonelService;
 using IKProjesiAPI.Application.Services.SiteManagerService;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Repositories;
@@ -38,6 +39,9 @@ namespace IKProjesiAPI.Application.IoC
             builder.RegisterType<AppRoleRepo>().As<IAppRoleRepo>().InstancePerLifetimeScope();
 
             builder.RegisterType<AppUserRoleRepo>().As<IAppUserRoleRepo>().InstancePerLifetimeScope();
+
+            builder.RegisterType<PersonelRepo>().As<IPersonelRepo>().InstancePerLifetimeScope();
+            builder.RegisterType<PersonelService>().As<IPersonelService>().InstancePerLifetimeScope();
 
             builder.Register(context => new MapperConfiguration(config =>
             {

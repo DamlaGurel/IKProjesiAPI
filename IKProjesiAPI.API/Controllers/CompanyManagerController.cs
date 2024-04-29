@@ -12,6 +12,7 @@ using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
 using AutoMapper;
 using IKProjesiAPI.Domain.Enums;
+using IKProjesiAPI.Application.Services.PersonelService;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -20,12 +21,12 @@ namespace IKProjesiAPI.API.Controllers
     public class CompanyManagerController : ControllerBase
     {
         private readonly ICompanyManagerService _companyManagerService;
-       
+        private readonly IPersonelService _personelService;
 
-        public CompanyManagerController(ICompanyManagerService companyManagerService)
+        public CompanyManagerController(ICompanyManagerService companyManagerService, IPersonelService personelService)
         {
             _companyManagerService = companyManagerService;
-            
+            _personelService = personelService;
         }
 
         [HttpGet]
@@ -61,5 +62,21 @@ namespace IKProjesiAPI.API.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        [Route("AddPersonel")]
+        public async Task<IActionResult> AddPersonel([FromBody] CreatePersonelDto model)
+        {
+            //if (!User.IsInRole(Job.CompanyManager.ToString().ToUpper()))
+            //{
+            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            //}
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            await _personelService.CreatePersonel(model);
+            return Ok();
+        }
     }
 }
