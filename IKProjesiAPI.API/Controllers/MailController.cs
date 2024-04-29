@@ -8,6 +8,7 @@ using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Infrastructure.Migrations;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -28,7 +29,7 @@ namespace IKProjesiAPI.API.Controllers
         [Route("SendMail/{email}")]
         public async Task<IActionResult> SendMail(string email)
         {
-            var user = _context.AppUsers.FirstOrDefault(u => u.Email == email);
+            var user = await _context.AppUsers.FirstOrDefaultAsync(u => u.Email == email);
 
             //var user = await _userManager.FindByEmailAsync(email);
             if (user != null)
@@ -42,7 +43,7 @@ namespace IKProjesiAPI.API.Controllers
                     UserId = user.Id
                 };
 
-                await_context.TemporaryPassword.AddAsycn(temporaryPassword);
+                await _context.TemporaryPassword.AddAsync(temporaryPassword);
                 await _context.SaveChangesAsync();
 
                 MailMessage message = new MailMessage();
