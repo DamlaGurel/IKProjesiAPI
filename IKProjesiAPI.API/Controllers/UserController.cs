@@ -38,16 +38,27 @@ namespace IKProjesiAPI.API.Controllers
         {
             var login = _context.AppUsers.SingleOrDefault(a => a.Email == model.Email && a.Password == model.Password);
 
-            if (login != null)
+            if (login == null)
+            {
+                var temporaryLogin = _context.AppUsers.SingleOrDefault(t => t.Email == model.Email && t.TemporaryPassword == model.Password);
+                if (temporaryLogin != null)
+                {
+                    return Ok(new { RedirectUrl = "/api/User/ChangePassword" });
+                }
+                else
+                    return Unauthorized("Kullanıcı yetkisiz");
+            }
+
+            else
             {
                 await _appUserService.Login(model);
 
                 var role = await _context.AppUserRoles.FirstAsync(x => x.UserId == login.Id);
                 var authClaims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Email, login.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-                };
+        {
+            new Claim(ClaimTypes.Email, login.Email),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        };
 
                 var token = GetToken(authClaims);
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
@@ -60,12 +71,48 @@ namespace IKProjesiAPI.API.Controllers
                 };
                 HttpContext.Response.Cookies.Append("token", tokenString, cookieOptions);
 
-                return Ok(new TokenDto{ Token = tokenString, Expiration = token.ValidTo, Role = ((Job)role.RoleId).ToString().ToUpper() });
+                return Ok(new TokenDto { Token = tokenString, Expiration = token.ValidTo, Role = ((Job)role.RoleId).ToString().ToUpper() });
 
+
+                //if (login != null)
+                //{
+                //    await _appUserService.Login(model);
+
+                //    var role = await _context.AppUserRoles.FirstAsync(x => x.UserId == login.Id);
+                //    var authClaims = new List<Claim>
+                //    {
+                //        new Claim(ClaimTypes.Email, login.Email),
+                //        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                //    };
+
+                //    var token = GetToken(authClaims);
+                //    var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+                //    var cookieOptions = new CookieOptions
+                //    {
+                //        HttpOnly = true,
+                //        Secure = true,
+                //        SameSite = SameSiteMode.Strict,
+                //        Expires = token.ValidTo.AddMinutes(10)
+                //    };
+                //    HttpContext.Response.Cookies.Append("token", tokenString, cookieOptions);
+
+                //    return Ok(new TokenDto{ Token = tokenString, Expiration = token.ValidTo, Role = ((Job)role.RoleId).ToString().ToUpper() });
+                //}
+                //else
+                //    return Unauthorized("Kullanıcı yetkisiz");
             }
-            else
-                return Unauthorized("Kullanıcı yetkisiz");
         }
+
+
+        [HttpPost]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto changePassword)
+        {
+            await _appUserService.ChangePassword(changePassword);
+            await _context.SaveChangesAsync();
+            return Ok("Şifreniz Değiştirildi");
+        }
+
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
