@@ -29,8 +29,8 @@ namespace IKProjesiAPI.Domain.Entities.AppEntities
         public Department? DepartmentName { get; set; }
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
-        [NotMapped]
-        public TemporaryPassword? TemporaryPassword { get; set; }
+       
+        public string? TemporaryPassword { get; set; }
 
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
