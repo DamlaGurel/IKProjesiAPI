@@ -57,7 +57,7 @@ namespace IKProjesiAPI.API.Controllers
             //}
 
            
-            var user = await _userManager.FindByNameAsync(cm.UserName);
+            var user = await _userManager.FindByNameAsync(cm.UserName.ToUpper());
 
             user.SecurityStamp = Guid.NewGuid().ToString();
             if (user != null)
