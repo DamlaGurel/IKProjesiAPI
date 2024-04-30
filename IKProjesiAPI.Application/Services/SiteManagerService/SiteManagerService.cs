@@ -35,8 +35,8 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
 
             await _siteManagerRepo.Create(siteManager);
 
-            var siteManager1 = _mapper.Map<CreateSiteManagerDto>(siteManager);
-            return siteManager1;
+            var sm = _mapper.Map<CreateSiteManagerDto>(siteManager);
+            return sm;
         }
         //public async Task<string> GetUserEmail(string firstName, string lastName)
         //{

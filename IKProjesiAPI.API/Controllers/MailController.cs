@@ -37,14 +37,7 @@ namespace IKProjesiAPI.API.Controllers
                 Guid newGuid = Guid.NewGuid();
                 string guidString = newGuid.ToString();
 
-                var temporaryPassword = new TemporaryPassword
-                {
-                    Password = guidString,
-                    UserId = user.Id
-                };
 
-                _context.TemporaryPassword.Add(temporaryPassword);
-                await _context.SaveChangesAsync();
 
                 MailMessage message = new MailMessage();
                 message.From = new MailAddress("mailadresi@mail.com");
@@ -62,7 +55,19 @@ namespace IKProjesiAPI.API.Controllers
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                 smtp.Send(message);
-                return Ok(temporaryPassword.Password);
+
+                //user.Password = guidString;
+                //await _context.SaveChangesAsync();
+                var temporaryPassword = new TemporaryPassword
+                {
+                    OldPassword = user.Password,
+                    NewPassword = guidString,
+                    UserId = user.Id
+                };
+
+                _context.TemporaryPassword.Add(temporaryPassword);
+                await _context.SaveChangesAsync();
+                return Ok(user.Password);
             }
             else
             {

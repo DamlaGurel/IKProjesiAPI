@@ -40,8 +40,8 @@ namespace IKProjesiAPI.API.Controllers
             //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
             //}
 
-            var user1 = await _siteManagerService.CreateSiteManager(siteManager);
-            var user = await _userManager.FindByNameAsync(user1.UserName.ToUpper());
+            var sm = await _siteManagerService.CreateSiteManager(siteManager);
+            var user = await _userManager.FindByNameAsync(sm.UserName.ToUpper());
             user.SecurityStamp = Guid.NewGuid().ToString();
             if (user != null)
             {
