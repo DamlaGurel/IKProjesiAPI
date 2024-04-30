@@ -12,8 +12,8 @@ namespace IKProjesiAPI.Domain.Entities
 {
     public class TemporaryPassword
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Password { get; set; }
         public int UserId { get; set; }
