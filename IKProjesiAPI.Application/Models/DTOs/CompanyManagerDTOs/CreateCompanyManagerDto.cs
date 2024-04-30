@@ -31,7 +31,9 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
         public DateTime CreatedDate => DateTime.Now;
         public Status Status => Status.Active;
 
-    
+        public string? ImageString { get; set; }
+        public byte[]? ImageBytes { get; set; }
+
 
     }
 }

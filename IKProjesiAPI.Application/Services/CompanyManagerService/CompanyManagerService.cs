@@ -36,6 +36,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             Company company=await _companyRepo.GetDefault(c=>c.Id==model.CompanyId);
             companyManager.Company = company;
             companyManager.JobName = Job.CompanyManager;
+            companyManager.ImageBytes = Convert.FromBase64String(model.ImageString);
             await _companyManagerRepo.Create(companyManager);
 
 
@@ -74,10 +75,19 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
                     where: x => !x.Status.Equals(Status.Pasive),
                     orderBy: x => x.OrderBy(x => x.CompanyId),
                     include: query => query.Include(x => x.Company)); 
-
-                return companyManager;
             
+            foreach (var manager in companyManager)
+            {
+                string imageString = null;
 
+                if (manager !=null && manager.ImageBytes!=null)
+                {
+                    imageString = Convert.ToBase64String(manager.ImageBytes);
+                }
+                manager.ImageString = imageString;
+            }
+           
+            return companyManager;
         }
 
         public async Task<List<ListCompanyManagerDto>> GetCompanyManagersByCompany(int companyId)
@@ -94,6 +104,15 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
                 select: x => _mapper.Map<SummaryCompanyManagerDto>(x),
                 where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
 
+            string imageString = null;
+
+            if (companyManager != null && companyManager.ImageBytes != null)
+            {
+                imageString = Convert.ToBase64String(companyManager.ImageBytes);
+            }
+
+            companyManager.ImageString = imageString;
+
             return companyManager;
         }
 
@@ -102,6 +121,15 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             var companyManager = await _companyManagerRepo.GetFilteredFirstOrDefault(
                 select: x => _mapper.Map<DetailCompanyManagerDto>(x),
                 where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
+
+            string imageString = null;
+
+            if (companyManager!=null && companyManager.ImageBytes!=null)
+            {
+                imageString = Convert.ToBase64String(companyManager.ImageBytes);
+            }
+
+            companyManager.ImageString=imageString;
 
             return companyManager;
         }
@@ -124,7 +152,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
             companyManager.Address = model.Address;
             companyManager.PhoneNumber = model.PhoneNumber;
-            companyManager.ImagePath = model.ImagePath;
+            //companyManager.ImagePath = model.ImagePath;
 
             companyManager.Status = Status.Modified;
             companyManager.UpdatedDate = DateTime.Now;

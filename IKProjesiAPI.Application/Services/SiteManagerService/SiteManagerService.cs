@@ -82,7 +82,7 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
 
             siteManager.Address = model.Address;
             siteManager.PhoneNumber = model.PhoneNumber;
-            siteManager.ImagePath = model.ImagePath;
+            //siteManager.ImagePath = model.ImagePath;
 
             siteManager.Status = Status.Modified;
             siteManager.UpdatedDate = DateTime.Now;
