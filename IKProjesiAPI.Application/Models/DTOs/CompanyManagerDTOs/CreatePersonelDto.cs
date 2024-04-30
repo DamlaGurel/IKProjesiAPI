@@ -25,6 +25,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
         public string CompanyName { get; set; }
+        public string? Username { get; set; }
         public DateTime CreatedDate => DateTime.Now;
         public Status Status => Status.Active;
         // //Company Seçim 

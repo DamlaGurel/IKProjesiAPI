@@ -21,7 +21,7 @@ namespace IKProjesiAPI.Application.Services.PersonelService
             _mapper = mapper;
         }
                 
-        public async Task CreatePersonel(CreatePersonelDto model)
+        public async Task<CreatePersonelDto> CreatePersonel(CreatePersonelDto model)
         {
             var personel = _mapper.Map<Personel>(model);
             personel.Email=$"{personel.FirstName}.{personel.LastName}@bilgeadamboost.com";
@@ -29,6 +29,9 @@ namespace IKProjesiAPI.Application.Services.PersonelService
             personel.NormalizedUserName = personel.Email.ToUpper();
             personel.JobName = Domain.Enums.Job.Personel;
             await _personelRepo.Create(personel);
+
+            var p = _mapper.Map<CreatePersonelDto>(personel);
+            return p;
         }
     }
 }

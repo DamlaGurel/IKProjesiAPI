@@ -9,6 +9,6 @@ namespace IKProjesiAPI.Application.Services.PersonelService
 {
     public interface IPersonelService
     {
-        Task CreatePersonel(CreatePersonelDto model);
+        Task<CreatePersonelDto> CreatePersonel(CreatePersonelDto model);
     }
 }
