@@ -12,8 +12,14 @@ namespace IKProjesiAPI.Domain.Entities
 {
     public class CompanyManager:AppUser
     {
+        public CompanyManager()
+        {
+            Personels = new List<Personel>();
+        }
         public int? CompanyId { get; set; }
         public Company? Company { get; set; }
+
+        public ICollection<Personel> Personels { get; set; }
 
         public double? Payment { get; set; }
 

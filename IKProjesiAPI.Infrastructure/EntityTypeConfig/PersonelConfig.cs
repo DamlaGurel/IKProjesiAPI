@@ -10,9 +10,9 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
     {
         public override void Configure(EntityTypeBuilder<Personel> builder)
         {
-            builder.HasOne(x => x.Company)
+            builder.HasOne(x => x.CompanyManager)
                 .WithMany(x => x.Personels)
-                .HasForeignKey(x => x.CompanyId);
+                .HasForeignKey(x => x.CompanyManagerId);
 
             builder.HasMany(x => x.AdvancePayments)
              .WithOne(x => x.Personel)

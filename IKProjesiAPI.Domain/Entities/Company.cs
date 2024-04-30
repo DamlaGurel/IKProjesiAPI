@@ -14,7 +14,6 @@ namespace IKProjesiAPI.Domain.Entities
         public Company()
         {
             CompanyManagers = new List<CompanyManager>();
-            Personels = new List<Personel>();
         }
 
         public int? Id { get; set; }
@@ -31,8 +30,6 @@ namespace IKProjesiAPI.Domain.Entities
         public DateTime? FoundationYear { get; set; }
         public DateTime? StartContractDate { get; set; }
         public DateTime? EndContractDate { get; set; }
-
-        public List<Personel>? Personels { get; set; }
 
         public List<CompanyManager>? CompanyManagers { get; set; }
         

@@ -18,8 +18,8 @@ namespace IKProjesiAPI.Domain.Entities
         }
 
         public string? UserName { get; set; }
-        public int? CompanyId { get; set; }
-        public Company? Company { get; set; }
+        public int? CompanyManagerId { get; set; }
+        public CompanyManager? CompanyManager { get; set; }
         public int? DaysOffNumber { get; set; }
         public double? Payment { get; set; }
 
