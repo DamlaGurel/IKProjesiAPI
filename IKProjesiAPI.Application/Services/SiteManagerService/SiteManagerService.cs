@@ -35,8 +35,8 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
 
             await _siteManagerRepo.Create(siteManager);
 
-            var siteManager1 = _mapper.Map<CreateSiteManagerDto>(siteManager);
-            return siteManager1;
+            var sm = _mapper.Map<CreateSiteManagerDto>(siteManager);
+            return sm;
         }
         //public async Task<string> GetUserEmail(string firstName, string lastName)
         //{
@@ -82,7 +82,7 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
 
             siteManager.Address = model.Address;
             siteManager.PhoneNumber = model.PhoneNumber;
-            siteManager.ImagePath = model.ImagePath;
+            //siteManager.ImagePath = model.ImagePath;
 
             siteManager.Status = Status.Modified;
             siteManager.UpdatedDate = DateTime.Now;

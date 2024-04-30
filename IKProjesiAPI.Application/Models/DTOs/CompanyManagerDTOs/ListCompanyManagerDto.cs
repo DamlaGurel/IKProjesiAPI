@@ -19,6 +19,8 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
         public string PhoneNumber { get; set; }
         public string CompanyName { get; set; }
         public int? CompanyId { get; set; }
+        public string? ImageString { get; set; }
+        public byte[]? ImageBytes { get; set; }
     }
 }
 

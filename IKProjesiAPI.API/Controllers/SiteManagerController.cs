@@ -49,15 +49,14 @@ namespace IKProjesiAPI.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var cm =await _companyManagerService.Create(createCompanyManager);
+            var cm = await _companyManagerService.Create(createCompanyManager);
 
             //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
             //{
             //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
             //}
 
-           
-            var user = await _userManager.FindByNameAsync(cm.UserName);
+            var user = await _userManager.FindByNameAsync(cm.UserName.ToUpper());
 
             //user.SecurityStamp = Guid.NewGuid().ToString();
             if (user != null)
@@ -66,8 +65,6 @@ namespace IKProjesiAPI.API.Controllers
                 await _userManager.AddToRoleAsync(user, roleName);
             }
             
-          
-
             return Ok();
         }
        
