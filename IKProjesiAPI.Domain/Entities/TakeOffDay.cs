@@ -5,7 +5,9 @@ namespace IKProjesiAPI.Domain.Entities
 {
 	public class TakeOffDay
 	{
-		public int? PersonelId { get; set; }
+        public int? Id { get; set; }
+
+        public int? PersonelId { get; set; }
 		public Personel? Personel { get; set; }
 
 		public ApprovalType? ApprovalType { get; set; }

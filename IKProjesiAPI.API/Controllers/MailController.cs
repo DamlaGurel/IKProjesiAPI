@@ -6,7 +6,7 @@ using System.Net;
 using IKProjesiAPI.Application.Models.DTOs.UserDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
-using IKProjesiAPI.Infrastructure.Migrations;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -58,14 +58,14 @@ namespace IKProjesiAPI.API.Controllers
 
                 //user.Password = guidString;
                 //await _context.SaveChangesAsync();
-                var temporaryPassword = new TemporaryPassword
-                {
-                    OldPassword = user.Password,
-                    NewPassword = guidString,
-                    UserId = user.Id
-                };
+                //var temporaryPassword = new TemporaryPassword
+                //{
+                //    OldPassword = user.Password,
+                //    NewPassword = guidString,
+                //    UserId = user.Id
+                //};
 
-                _context.TemporaryPassword.Add(temporaryPassword);
+                //_context.TemporaryPassword.Add(temporaryPassword);
                 await _context.SaveChangesAsync();
                 return Ok(user.Password);
             }

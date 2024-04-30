@@ -34,8 +34,14 @@ namespace IKProjesiAPI.Infrastructure.Context
         public DbSet<SiteManager> SiteManagers { get; set; }
         public DbSet<CompanyManager> CompanyManagers { get; set; }
         public DbSet<Company> Companies { get; set; }
-        public DbSet<TemporaryPassword> TemporaryPassword { get; set; }
         public DbSet<Personel> Personels { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<AdvancePayment> AdvancePayments { get; set; }
+        public DbSet<TakeOffDay> TakeOffDays { get; set; }
+
+
+
+
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -43,27 +49,17 @@ namespace IKProjesiAPI.Infrastructure.Context
             builder.ApplyConfiguration(new AppUserConfig())
                     .ApplyConfiguration(new AppRoleConfig())
                     .ApplyConfiguration(new AppUserRoleConfig())
-                    .ApplyConfiguration(new AppCompanyConfig());
+                    .ApplyConfiguration(new AppCompanyConfig())
+                    .ApplyConfiguration(new AdvancePaymentConfig())
+                    .ApplyConfiguration(new CompanyManagerConfig())
+                    .ApplyConfiguration(new ExpenseConfig())
+                    .ApplyConfiguration(new PersonelConfig())
+                    .ApplyConfiguration(new SiteManagerConfig())
+                    .ApplyConfiguration(new TakeOffDayConfig());
 
 
             //builder.Entity<TemporaryPassword>().HasKey(t => t.Id);
             //builder.Entity<TemporaryPassword>().Property(t => t.Id).ValueGeneratedOnAdd();
-
-            //builder.Entity<AppUser>(b =>
-            //{
-            //    // Primary key
-            //    b.HasKey(u => u.Id);
-
-
-            //    // Maps to the AspNetUsers table
-            //    b.ToTable("AspNetUsers");
-
-            //});
-
-            //builder.Entity<CompanyManager>().ToTable("CompanyManager");
-            //builder.Entity<SiteManager>().ToTable("SiteManager");
-
-
 
             base.OnModelCreating(builder);
         }

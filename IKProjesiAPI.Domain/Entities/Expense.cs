@@ -5,6 +5,8 @@ namespace IKProjesiAPI.Domain.Entities
 {
 	public class Expense
 	{
+        public int? Id { get; set; }
+
         public int? PersonelId { get; set; }
         public Personel? Personel { get; set; }
 
