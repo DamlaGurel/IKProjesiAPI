@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "IkProjesiAPI.API": {
+    "IKProjesiAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

@@ -33,5 +33,13 @@ namespace IKProjesiAPI.Application.Services.PersonelService
             var p = _mapper.Map<CreatePersonelDto>(personel);
             return p;
         }
+
+
+        // Expence işlemleri 
+
+
+
+
+
     }
 }
