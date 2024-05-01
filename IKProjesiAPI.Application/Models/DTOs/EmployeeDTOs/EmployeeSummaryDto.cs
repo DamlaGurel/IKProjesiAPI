@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Application.Models.DTOs.PersonelDTOs
 {
-    public class PersonelSummaryDto
+    public class EmployeeSummaryDto
     {
         //Foto, Ad, Soyad, Email, Telefon, Adres,Meslek, Departman
 

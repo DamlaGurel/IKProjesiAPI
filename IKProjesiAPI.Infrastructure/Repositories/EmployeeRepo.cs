@@ -9,11 +9,10 @@ using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Infrastructure.Repositories
 {
-    public class PersonelRepo : BaseRepo<Personel>,IPersonelRepo
+    public class EmployeeRepo : BaseRepo<Employee>, IEmployeeRepo
     {
-        public PersonelRepo(AppDbContext context) : base(context)
+        public EmployeeRepo(AppDbContext context) : base(context)
         {
-            
         }
     }
 }

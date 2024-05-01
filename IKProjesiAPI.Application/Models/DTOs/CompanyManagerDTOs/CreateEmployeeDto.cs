@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
 {
-    public class CreatePersonelDto
+    public class CreateEmployeeDto
     {
         public string FirstName { get; set; }
         public string? SecondName { get; set; }

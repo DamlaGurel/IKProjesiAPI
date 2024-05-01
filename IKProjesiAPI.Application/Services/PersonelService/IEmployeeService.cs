@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Application.Services.PersonelService
 {
-    public interface IPersonelService
+    public interface IEmployeeService
     {
-        Task<CreatePersonelDto> CreatePersonel(CreatePersonelDto model);
+        Task<CreateEmployeeDto> CreateEmployee(CreateEmployeeDto model);
     }
 }

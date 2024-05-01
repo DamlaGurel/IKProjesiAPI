@@ -14,12 +14,12 @@ namespace IKProjesiAPI.Domain.Entities
     {
         public CompanyManager()
         {
-            Personels = new List<Personel>();
+            Employees = new List<Employee>();
         }
         public int? CompanyId { get; set; }
         public Company? Company { get; set; }
 
-        public ICollection<Personel> Personels { get; set; }
+        public ICollection<Employee> Employees { get; set; }
 
         public double? Payment { get; set; }
 

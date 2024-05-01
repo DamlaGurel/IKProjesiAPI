@@ -12,9 +12,9 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(x => x.Personel)
+            builder.HasOne(x => x.Employee)
                 .WithMany(x => x.TakeOffDays)
-                .HasForeignKey(x => x.PersonelId);
+                .HasForeignKey(x => x.EmployeeId);
         }
     }
 }
