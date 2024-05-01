@@ -37,7 +37,10 @@ namespace IKProjesiAPI.Application.Services.PersonelService
 
         // Expence işlemleri 
 
+        public async Task<CreateExpenceDto> CreateExpence()
+        {
 
+        }
 
 
 
