@@ -137,8 +137,10 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             companyManager.PhoneNumber = model.PhoneNumber;
             //companyManager.ImagePath = model.ImagePath;
 
+
             companyManager.Status = Status.Modified;
             companyManager.UpdatedDate = DateTime.Now;
+
 
             await _companyManagerRepo.Update(companyManager);
         }
