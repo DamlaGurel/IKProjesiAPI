@@ -6,8 +6,8 @@ namespace IKProjesiAPI.Domain.Entities.AppEntities
 	public class AdvancePayment
 	{
         public int? Id { get; set; }
-        public int? PersonelId { get; set; }
-        public Personel? Personel { get; set; }
+        public int? EmployeeId { get; set; }
+        public Employee? Employee { get; set; }
 
         public AdvanceType? AdvanceType { get; set; }
         public double? TotalAdvance { get; set; }

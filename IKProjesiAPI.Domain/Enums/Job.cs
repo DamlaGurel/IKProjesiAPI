@@ -11,6 +11,6 @@ namespace IKProjesiAPI.Domain.Enums
         SuperAdmin = 1,
         SiteManager,
         CompanyManager,
-        Personel
+        Employee
     }
 }

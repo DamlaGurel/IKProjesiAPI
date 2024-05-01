@@ -44,10 +44,10 @@ namespace IKProjesiAPI.API.Controllers
 
                 var role = await _context.AppUserRoles.FirstAsync(x => x.UserId == login.Id);
                 var authClaims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Email, login.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-                };
+                    {
+                        new Claim(ClaimTypes.Email, login.Email),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                    };
 
                 var token = GetToken(authClaims);
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
@@ -60,12 +60,20 @@ namespace IKProjesiAPI.API.Controllers
                 };
                 HttpContext.Response.Cookies.Append("token", tokenString, cookieOptions);
 
-                return Ok(new TokenDto{ Token = tokenString, Expiration = token.ValidTo, Role = ((Job)role.RoleId).ToString().ToUpper() });
-
+                return Ok(new TokenDto { Token = tokenString, Expiration = token.ValidTo, Role = ((Job)role.RoleId).ToString().ToUpper() });
             }
             else
                 return Unauthorized("Kullanıcı yetkisiz");
         }
+        [HttpPost]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto changePassword)
+        {
+            await _appUserService.ChangePassword(changePassword);
+            await _context.SaveChangesAsync();
+            return Ok("Şifreniz Değiştirildi");
+        }
+
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {

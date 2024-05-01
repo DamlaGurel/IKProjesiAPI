@@ -39,10 +39,10 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MoneyType")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PersonelId")
+                    b.Property<int?>("MoneyType")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("RequestDate")
@@ -56,7 +56,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonelId");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("AdvancePayments");
                 });
@@ -106,32 +106,32 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "1e4c4c28-9887-495c-b08a-08412ba2e44a",
-                            CreatedDate = new DateTime(2024, 4, 30, 16, 41, 45, 41, DateTimeKind.Local).AddTicks(4300),
+                            ConcurrencyStamp = "a5572f26-b6ca-4fbf-b37f-f73fb512a4a8",
+                            CreatedDate = new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(5819),
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMİN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "8e97665d-3446-49f6-8639-3f2b2e4d5a3d",
-                            CreatedDate = new DateTime(2024, 4, 30, 16, 41, 45, 41, DateTimeKind.Local).AddTicks(4343),
+                            ConcurrencyStamp = "dbba606f-56b4-438e-8039-cd73da0835ad",
+                            CreatedDate = new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(5971),
                             Name = "SiteManager",
                             NormalizedName = "SİTEMANAGER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "ab105042-9d9f-4a10-aa27-ecd96365e7a1",
-                            CreatedDate = new DateTime(2024, 4, 30, 16, 41, 45, 41, DateTimeKind.Local).AddTicks(4359),
+                            ConcurrencyStamp = "086092c3-80e8-4510-b559-70317cbeb71b",
+                            CreatedDate = new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(5995),
                             Name = "CompanyManager",
                             NormalizedName = "COMPANYMANAGER"
                         },
                         new
                         {
                             Id = 4,
-                            ConcurrencyStamp = "68be9d5a-c654-4754-b4c5-f0415f149f29",
-                            CreatedDate = new DateTime(2024, 4, 30, 16, 41, 45, 41, DateTimeKind.Local).AddTicks(4366),
+                            ConcurrencyStamp = "c28ad066-bdba-4dba-9475-e51abcda1bcd",
+                            CreatedDate = new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(6007),
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -312,68 +312,68 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5453149c-2eab-4d0b-9895-ae5a6120b56e",
-                            CreatedDate = new DateTime(2024, 4, 30, 16, 41, 45, 3, DateTimeKind.Local).AddTicks(9652),
+                            ConcurrencyStamp = "948fa84e-4816-4705-8956-945f4ac0d0a5",
+                            CreatedDate = new DateTime(2024, 5, 1, 15, 2, 3, 766, DateTimeKind.Local).AddTicks(7871),
                             Email = "super@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Super",
                             LastName = "Admin",
                             LockoutEnabled = false,
                             Password = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF7hB1pFemcuG/nexQI01MNBnRyQk8X6m9LznB1FM0SmEhW3w6/owBgoID8ljcFLFA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENGvNHB9+uT/fcUwoYSmD2ch58bqB1Madq85n8NKu9P9CMY/WjGqoRQhPzGb245g1A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ebc47e9a-ee9f-4bdf-b341-939f6b21994b",
+                            SecurityStamp = "009256f4-7b63-4f99-9e6b-79e2941845ff",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7aa8a451-2131-409a-b29d-2919d3a68284",
-                            CreatedDate = new DateTime(2024, 4, 30, 16, 41, 45, 3, DateTimeKind.Local).AddTicks(9692),
+                            ConcurrencyStamp = "5d18f89b-0c89-4f9c-a466-2427d7c4ad2d",
+                            CreatedDate = new DateTime(2024, 5, 1, 15, 2, 3, 766, DateTimeKind.Local).AddTicks(7906),
                             Email = "companymanager@seeddata.com",
                             EmailConfirmed = false,
                             FirstName = "CompanyManagerName",
                             LastName = "CompanyManagerLastName",
                             LockoutEnabled = false,
                             Password = "companymanager",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB9LtV3lWx/UpDjbqq3i6GQyiZAg0PDzHi9L9acuZOJMQYPkhGZYQZfY1S/0daslIQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDRnqNwu45rPKsqY0d7MyxftXPvKxMtYMFjYGpEMcS0Ifwov7TlHvtNfYEjclMLuSQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b22fbb26-7fa8-4f60-a92e-4687d9be0547",
+                            SecurityStamp = "62c84b35-9e48-4290-a311-e3b5239d3f60",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca1b0fbf-c2b0-4ba3-8905-1ef4e4cb6e54",
-                            CreatedDate = new DateTime(2024, 4, 30, 16, 41, 45, 3, DateTimeKind.Local).AddTicks(9684),
+                            ConcurrencyStamp = "1887707b-cf6f-4423-a283-f3e14ddd7f38",
+                            CreatedDate = new DateTime(2024, 5, 1, 15, 2, 3, 766, DateTimeKind.Local).AddTicks(7897),
                             Email = "sitemanager@seeddata.com",
                             EmailConfirmed = false,
                             FirstName = "SiteManagerName",
                             LastName = "SiteManagerLastName",
                             LockoutEnabled = false,
                             Password = "sitemanager",
-                            PasswordHash = "AQAAAAEAACcQAAAAECpdlO3ggD1jvzfKQXhJWDR1acDWwsxvVwEvq1YZbH4h1EhaKVAib7Bhjcks7+XX8g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJF32u7XpiTaag/DwROX/W+9dCx/CzGNX5BsjU2meqya2k2ikOAu6FYkilqmwkNlZQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6cf75df1-c5a3-4d5d-a52d-845bb72108bf",
+                            SecurityStamp = "13622f0b-54a3-4721-88d2-3fe2a9c1a2ae",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ff864a48-b68b-485f-b760-2c715f4d277c",
-                            CreatedDate = new DateTime(2024, 4, 30, 16, 41, 45, 3, DateTimeKind.Local).AddTicks(9698),
+                            ConcurrencyStamp = "d831365a-de57-4d35-adae-985dfade0597",
+                            CreatedDate = new DateTime(2024, 5, 1, 15, 2, 3, 766, DateTimeKind.Local).AddTicks(7915),
                             Email = "employee@seeddata.com",
                             EmailConfirmed = false,
                             FirstName = "EmployeeName",
                             LastName = "EmployeeLastName",
                             LockoutEnabled = false,
                             Password = "employee",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKGT9vQYFvUv75J47QQibJOuCHWswPvcTfYopNeSH0EILbaX3uwz1cpURSoH7IqOpQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKZc1SETM4KD6m350/e4cuccxKLZKJpGSoos3F9I7EJVElxBBdj6ZGC4uePkoZmREA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a0684e86-f4f8-44be-bfcf-662f4ff738ac",
+                            SecurityStamp = "b6478c05-2d9c-418e-aa9d-eb76027b372e",
                             TwoFactorEnabled = false
                         });
                 });
@@ -478,28 +478,28 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         {
                             UserId = 1,
                             RoleId = 1,
-                            CreatedDate = new DateTime(2024, 4, 30, 16, 41, 45, 41, DateTimeKind.Local).AddTicks(4903),
+                            CreatedDate = new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(6850),
                             Status = 1
                         },
                         new
                         {
                             UserId = 2,
                             RoleId = 2,
-                            CreatedDate = new DateTime(2024, 4, 30, 16, 41, 45, 41, DateTimeKind.Local).AddTicks(4917),
+                            CreatedDate = new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(6867),
                             Status = 1
                         },
                         new
                         {
                             UserId = 3,
                             RoleId = 3,
-                            CreatedDate = new DateTime(2024, 4, 30, 16, 41, 45, 41, DateTimeKind.Local).AddTicks(4921),
+                            CreatedDate = new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(6872),
                             Status = 1
                         },
                         new
                         {
                             UserId = 4,
                             RoleId = 4,
-                            CreatedDate = new DateTime(2024, 4, 30, 16, 41, 45, 41, DateTimeKind.Local).AddTicks(4923),
+                            CreatedDate = new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(6876),
                             Status = 1
                         });
                 });
@@ -604,7 +604,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                         {
                             Id = 1,
                             CompanyName = "Company",
-                            CreatedDate = new DateTime(2024, 4, 30, 16, 41, 45, 41, DateTimeKind.Local).AddTicks(7717)
+                            CreatedDate = new DateTime(2024, 5, 1, 15, 2, 3, 808, DateTimeKind.Local).AddTicks(503)
                         });
                 });
 
@@ -619,13 +619,13 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Property<int?>("ApprovalType")
                         .HasColumnType("int");
 
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ExpenseType")
                         .HasColumnType("int");
 
                     b.Property<int?>("MoneyType")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PersonelId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("RequestDate")
@@ -639,7 +639,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonelId");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Expenses");
                 });
@@ -667,7 +667,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Property<int?>("DayOffType")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PersonelId")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("RequestTime")
@@ -678,7 +678,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonelId");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("TakeOffDays");
                 });
@@ -698,7 +698,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("CompanyManager");
                 });
 
-            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.Personel", b =>
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.Employee", b =>
                 {
                     b.HasBaseType("IKProjesiAPI.Domain.Entities.AppEntities.AppUser");
 
@@ -710,11 +710,11 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
                     b.Property<double?>("Payment")
                         .HasColumnType("float")
-                        .HasColumnName("Personel_Payment");
+                        .HasColumnName("Employee_Payment");
 
                     b.HasIndex("CompanyManagerId");
 
-                    b.HasDiscriminator().HasValue("Personel");
+                    b.HasDiscriminator().HasValue("Employee");
                 });
 
             modelBuilder.Entity("IKProjesiAPI.Domain.Entities.SiteManager", b =>
@@ -726,11 +726,11 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AdvancePayment", b =>
                 {
-                    b.HasOne("IKProjesiAPI.Domain.Entities.Personel", "Personel")
+                    b.HasOne("IKProjesiAPI.Domain.Entities.Employee", "Employee")
                         .WithMany("AdvancePayments")
-                        .HasForeignKey("PersonelId");
+                        .HasForeignKey("EmployeeId");
 
-                    b.Navigation("Personel");
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("IKProjesiAPI.Domain.Entities.AppEntities.AppRoleClaim", b =>
@@ -786,20 +786,20 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("IKProjesiAPI.Domain.Entities.Expense", b =>
                 {
-                    b.HasOne("IKProjesiAPI.Domain.Entities.Personel", "Personel")
+                    b.HasOne("IKProjesiAPI.Domain.Entities.Employee", "Employee")
                         .WithMany("Expenses")
-                        .HasForeignKey("PersonelId");
+                        .HasForeignKey("EmployeeId");
 
-                    b.Navigation("Personel");
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("IKProjesiAPI.Domain.Entities.TakeOffDay", b =>
                 {
-                    b.HasOne("IKProjesiAPI.Domain.Entities.Personel", "Personel")
+                    b.HasOne("IKProjesiAPI.Domain.Entities.Employee", "Employee")
                         .WithMany("TakeOffDays")
-                        .HasForeignKey("PersonelId");
+                        .HasForeignKey("EmployeeId");
 
-                    b.Navigation("Personel");
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("IKProjesiAPI.Domain.Entities.CompanyManager", b =>
@@ -811,10 +811,10 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.Personel", b =>
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.Employee", b =>
                 {
                     b.HasOne("IKProjesiAPI.Domain.Entities.CompanyManager", "CompanyManager")
-                        .WithMany("Personels")
+                        .WithMany("Employees")
                         .HasForeignKey("CompanyManagerId");
 
                     b.Navigation("CompanyManager");
@@ -827,10 +827,10 @@ namespace IKProjesiAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("IKProjesiAPI.Domain.Entities.CompanyManager", b =>
                 {
-                    b.Navigation("Personels");
+                    b.Navigation("Employees");
                 });
 
-            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.Personel", b =>
+            modelBuilder.Entity("IKProjesiAPI.Domain.Entities.Employee", b =>
                 {
                     b.Navigation("AdvancePayments");
 

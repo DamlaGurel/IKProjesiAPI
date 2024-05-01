@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Domain.Repositories
 {
-    public interface IPersonelRepo: IBaseRepo<Personel>
+    public interface IEmployeeRepo: IBaseRepo<Employee>
     {
 
     }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IKProjesiAPI.Infrastructure.Migrations
 {
-    public partial class initial : Migration
+    public partial class updateemployee : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -111,9 +111,9 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CompanyId = table.Column<int>(type: "int", nullable: true),
                     Payment = table.Column<double>(type: "float", nullable: true),
-                    Personel_CompanyId = table.Column<int>(type: "int", nullable: true),
+                    CompanyManagerId = table.Column<int>(type: "int", nullable: true),
                     DaysOffNumber = table.Column<int>(type: "int", nullable: true),
-                    Personel_Payment = table.Column<double>(type: "float", nullable: true),
+                    Employee_Payment = table.Column<double>(type: "float", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
@@ -132,13 +132,13 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
+                        name: "FK_AspNetUsers_AspNetUsers_CompanyManagerId",
+                        column: x => x.CompanyManagerId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_Companies_Personel_CompanyId",
-                        column: x => x.Personel_CompanyId,
+                        name: "FK_AspNetUsers_Companies_CompanyId",
+                        column: x => x.CompanyId,
                         principalTable: "Companies",
                         principalColumn: "Id");
                 });
@@ -149,7 +149,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PersonelId = table.Column<int>(type: "int", nullable: true),
+                    EmployeeId = table.Column<int>(type: "int", nullable: true),
                     AdvanceType = table.Column<int>(type: "int", nullable: true),
                     TotalAdvance = table.Column<double>(type: "float", nullable: true),
                     MoneyType = table.Column<int>(type: "int", nullable: true),
@@ -162,8 +162,8 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_AdvancePayments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AdvancePayments_AspNetUsers_PersonelId",
-                        column: x => x.PersonelId,
+                        name: "FK_AdvancePayments_AspNetUsers_EmployeeId",
+                        column: x => x.EmployeeId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
@@ -275,7 +275,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PersonelId = table.Column<int>(type: "int", nullable: true),
+                    EmployeeId = table.Column<int>(type: "int", nullable: true),
                     ExpenseType = table.Column<int>(type: "int", nullable: true),
                     TotalExpense = table.Column<double>(type: "float", nullable: true),
                     MoneyType = table.Column<int>(type: "int", nullable: true),
@@ -287,8 +287,8 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Expenses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Expenses_AspNetUsers_PersonelId",
-                        column: x => x.PersonelId,
+                        name: "FK_Expenses_AspNetUsers_EmployeeId",
+                        column: x => x.EmployeeId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
@@ -299,7 +299,7 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PersonelId = table.Column<int>(type: "int", nullable: true),
+                    EmployeeId = table.Column<int>(type: "int", nullable: true),
                     ApprovalType = table.Column<int>(type: "int", nullable: true),
                     RequestTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DayOffStartTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -312,8 +312,8 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_TakeOffDays", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TakeOffDays_AspNetUsers_PersonelId",
-                        column: x => x.PersonelId,
+                        name: "FK_TakeOffDays_AspNetUsers_EmployeeId",
+                        column: x => x.EmployeeId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
@@ -323,10 +323,10 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "DeletedDate", "Name", "NormalizedName", "Status", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, "f370ec13-a395-4b79-81b9-faeacc59b716", new DateTime(2024, 4, 30, 15, 47, 52, 697, DateTimeKind.Local).AddTicks(1699), null, "SuperAdmin", "SUPERADMİN", null, null },
-                    { 2, "e4d3f016-5dda-4a9f-813b-d61d5a811835", new DateTime(2024, 4, 30, 15, 47, 52, 697, DateTimeKind.Local).AddTicks(1738), null, "SiteManager", "SİTEMANAGER", null, null },
-                    { 3, "c6256791-6fa8-403d-9b52-a6a959c05ab0", new DateTime(2024, 4, 30, 15, 47, 52, 697, DateTimeKind.Local).AddTicks(1802), null, "CompanyManager", "COMPANYMANAGER", null, null },
-                    { 4, "7b54ad00-3aff-4e4b-9df4-f324c7b68843", new DateTime(2024, 4, 30, 15, 47, 52, 697, DateTimeKind.Local).AddTicks(1821), null, "Employee", "EMPLOYEE", null, null }
+                    { 1, "a5572f26-b6ca-4fbf-b37f-f73fb512a4a8", new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(5819), null, "SuperAdmin", "SUPERADMİN", null, null },
+                    { 2, "dbba606f-56b4-438e-8039-cd73da0835ad", new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(5971), null, "SiteManager", "SİTEMANAGER", null, null },
+                    { 3, "086092c3-80e8-4510-b559-70317cbeb71b", new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(5995), null, "CompanyManager", "COMPANYMANAGER", null, null },
+                    { 4, "c28ad066-bdba-4dba-9475-e51abcda1bcd", new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(6007), null, "Employee", "EMPLOYEE", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -334,32 +334,32 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BirthDate", "BirthPlace", "ConcurrencyStamp", "CreatedDate", "DeletedDate", "DepartmentName", "Discriminator", "Email", "EmailConfirmed", "FinishDateOfWork", "FirstName", "IdentityNumber", "ImageBytes", "JobName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecondLastName", "SecondName", "SecurityStamp", "StartDateOfWork", "Status", "TemporaryPassword", "TwoFactorEnabled", "UpdatedDate", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, null, null, null, "11d1b8de-79fe-40c1-9877-a34c85becad8", new DateTime(2024, 4, 30, 15, 47, 52, 668, DateTimeKind.Local).AddTicks(9088), null, null, "AppUser", "super@admin.com", false, null, "Super", null, null, null, "Admin", false, null, null, null, "admin", "AQAAAAEAACcQAAAAEBnXRNjX30JzH6Jpc/UadbovcQEYXwxWYvbwOOVoF1c/FtzVXd4p9F+urV7s4ohOaA==", null, false, null, null, "bec1a51f-daf1-4a46-95a8-b4bd8557eb1c", null, null, null, false, null, null },
-                    { 2, 0, null, null, null, "9dab8c43-5ab9-4100-8e5b-3887cf70cabc", new DateTime(2024, 4, 30, 15, 47, 52, 668, DateTimeKind.Local).AddTicks(9126), null, null, "AppUser", "sitemanager@seeddata.com", false, null, "SiteManagerName", null, null, null, "SiteManagerLastName", false, null, null, null, "sitemanager", "AQAAAAEAACcQAAAAEHhMC4sbvG+iH6kiTJRebo2rGHyNd1X//nHJbiA/EPtaBU2LeldVAReJyEzu03gVNg==", null, false, null, null, "bff38df5-c8c1-4af5-9757-a9ff35af01c2", null, null, null, false, null, null },
-                    { 3, 0, null, null, null, "e894393c-786e-4919-9b31-da0c5bcf998b", new DateTime(2024, 4, 30, 15, 47, 52, 668, DateTimeKind.Local).AddTicks(9131), null, null, "AppUser", "companymanager@seeddata.com", false, null, "CompanyManagerName", null, null, null, "CompanyManagerLastName", false, null, null, null, "companymanager", "AQAAAAEAACcQAAAAEI0j5SeccM8jH3DRi4ClZ8mg4ylJ+DSElpXDWRLsOiw49l4fSp2ibMHFNAu79XU3nQ==", null, false, null, null, "3d2b35ad-5734-4264-80ba-22381c9f8b0b", null, null, null, false, null, null },
-                    { 4, 0, null, null, null, "6b925550-8609-4ab9-821c-279d7830a92c", new DateTime(2024, 4, 30, 15, 47, 52, 668, DateTimeKind.Local).AddTicks(9137), null, null, "AppUser", "employee@seeddata.com", false, null, "EmployeeName", null, null, null, "EmployeeLastName", false, null, null, null, "employee", "AQAAAAEAACcQAAAAEPiSVMce6gW21ZLvqgktViEUlHbOSUhGBlYZhLV96Zh55zAfPCK3GlG64g74aGGxdQ==", null, false, null, null, "112560e4-e889-4a88-aaca-cb8a2120c52c", null, null, null, false, null, null }
+                    { 1, 0, null, null, null, "948fa84e-4816-4705-8956-945f4ac0d0a5", new DateTime(2024, 5, 1, 15, 2, 3, 766, DateTimeKind.Local).AddTicks(7871), null, null, "AppUser", "super@admin.com", false, null, "Super", null, null, null, "Admin", false, null, null, null, "admin", "AQAAAAEAACcQAAAAENGvNHB9+uT/fcUwoYSmD2ch58bqB1Madq85n8NKu9P9CMY/WjGqoRQhPzGb245g1A==", null, false, null, null, "009256f4-7b63-4f99-9e6b-79e2941845ff", null, null, null, false, null, null },
+                    { 2, 0, null, null, null, "1887707b-cf6f-4423-a283-f3e14ddd7f38", new DateTime(2024, 5, 1, 15, 2, 3, 766, DateTimeKind.Local).AddTicks(7897), null, null, "AppUser", "sitemanager@seeddata.com", false, null, "SiteManagerName", null, null, null, "SiteManagerLastName", false, null, null, null, "sitemanager", "AQAAAAEAACcQAAAAEJF32u7XpiTaag/DwROX/W+9dCx/CzGNX5BsjU2meqya2k2ikOAu6FYkilqmwkNlZQ==", null, false, null, null, "13622f0b-54a3-4721-88d2-3fe2a9c1a2ae", null, null, null, false, null, null },
+                    { 3, 0, null, null, null, "5d18f89b-0c89-4f9c-a466-2427d7c4ad2d", new DateTime(2024, 5, 1, 15, 2, 3, 766, DateTimeKind.Local).AddTicks(7906), null, null, "AppUser", "companymanager@seeddata.com", false, null, "CompanyManagerName", null, null, null, "CompanyManagerLastName", false, null, null, null, "companymanager", "AQAAAAEAACcQAAAAEDRnqNwu45rPKsqY0d7MyxftXPvKxMtYMFjYGpEMcS0Ifwov7TlHvtNfYEjclMLuSQ==", null, false, null, null, "62c84b35-9e48-4290-a311-e3b5239d3f60", null, null, null, false, null, null },
+                    { 4, 0, null, null, null, "d831365a-de57-4d35-adae-985dfade0597", new DateTime(2024, 5, 1, 15, 2, 3, 766, DateTimeKind.Local).AddTicks(7915), null, null, "AppUser", "employee@seeddata.com", false, null, "EmployeeName", null, null, null, "EmployeeLastName", false, null, null, null, "employee", "AQAAAAEAACcQAAAAEKZc1SETM4KD6m350/e4cuccxKLZKJpGSoos3F9I7EJVElxBBdj6ZGC4uePkoZmREA==", null, false, null, null, "b6478c05-2d9c-418e-aa9d-eb76027b372e", null, null, null, false, null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Companies",
                 columns: new[] { "Id", "Address", "CompanyName", "CompanyTaxNumber", "CompanyTaxOffice", "CompanyTitle", "CreatedDate", "DeletedDate", "Email", "EmployeeNumber", "EndContractDate", "FoundationYear", "LogoBytes", "MersisNumber", "PhoneNumber", "StartContractDate", "Status", "UpdatedDate" },
-                values: new object[] { 1, null, "Company", null, null, null, new DateTime(2024, 4, 30, 15, 47, 52, 697, DateTimeKind.Local).AddTicks(4938), null, null, null, null, null, null, null, null, null, null, null });
+                values: new object[] { 1, null, "Company", null, null, null, new DateTime(2024, 5, 1, 15, 2, 3, 808, DateTimeKind.Local).AddTicks(503), null, null, null, null, null, null, null, null, null, null, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId", "CreatedDate", "DeletedDate", "Status", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2024, 4, 30, 15, 47, 52, 697, DateTimeKind.Local).AddTicks(2312), null, 1, null },
-                    { 2, 2, new DateTime(2024, 4, 30, 15, 47, 52, 697, DateTimeKind.Local).AddTicks(2326), null, 1, null },
-                    { 3, 3, new DateTime(2024, 4, 30, 15, 47, 52, 697, DateTimeKind.Local).AddTicks(2329), null, 1, null },
-                    { 4, 4, new DateTime(2024, 4, 30, 15, 47, 52, 697, DateTimeKind.Local).AddTicks(2332), null, 1, null }
+                    { 1, 1, new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(6850), null, 1, null },
+                    { 2, 2, new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(6867), null, 1, null },
+                    { 3, 3, new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(6872), null, 1, null },
+                    { 4, 4, new DateTime(2024, 5, 1, 15, 2, 3, 807, DateTimeKind.Local).AddTicks(6876), null, 1, null }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AdvancePayments_PersonelId",
+                name: "IX_AdvancePayments_EmployeeId",
                 table: "AdvancePayments",
-                column: "PersonelId");
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -399,9 +399,9 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_Personel_CompanyId",
+                name: "IX_AspNetUsers_CompanyManagerId",
                 table: "AspNetUsers",
-                column: "Personel_CompanyId");
+                column: "CompanyManagerId");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
@@ -411,14 +411,14 @@ namespace IKProjesiAPI.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Expenses_PersonelId",
+                name: "IX_Expenses_EmployeeId",
                 table: "Expenses",
-                column: "PersonelId");
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TakeOffDays_PersonelId",
+                name: "IX_TakeOffDays_EmployeeId",
                 table: "TakeOffDays",
-                column: "PersonelId");
+                column: "EmployeeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

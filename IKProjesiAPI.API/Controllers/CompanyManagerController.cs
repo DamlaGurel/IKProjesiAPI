@@ -24,13 +24,13 @@ namespace IKProjesiAPI.API.Controllers
     public class CompanyManagerController : ControllerBase
     {
         private readonly ICompanyManagerService _companyManagerService;
-        private readonly IPersonelService _personelService;
+        private readonly IEmployeeService _employeService;
         private readonly UserManager<AppUser> _userManager;
 
-        public CompanyManagerController(ICompanyManagerService companyManagerService, IPersonelService personelService, UserManager<AppUser> userManager)
+        public CompanyManagerController(ICompanyManagerService companyManagerService, IEmployeeService employeeService, UserManager<AppUser> userManager)
         {
             _companyManagerService = companyManagerService;
-            _personelService = personelService;
+            _employeService = employeeService;
             _userManager = userManager;
         }
 
@@ -69,7 +69,7 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpPost]
         [Route("AddPersonel")]
-        public async Task<IActionResult> AddPersonel([FromBody] CreatePersonelDto model)
+        public async Task<IActionResult> AddPersonel([FromBody] CreateEmployeeDto model)
         {
             //if (!User.IsInRole(Job.CompanyManager.ToString().ToUpper()))
             //{
@@ -80,12 +80,12 @@ namespace IKProjesiAPI.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var personel = await _personelService.CreatePersonel(model);
-            var p = await _userManager.FindByNameAsync(personel.Username.ToUpper());
+            var employee = await _employeService.CreateEmployee(model);
+            var p = await _userManager.FindByNameAsync(employee.Username.ToUpper());
             p.SecurityStamp = Guid.NewGuid().ToString();
             if (p != null)
             {
-                string roleName = Job.Personel.ToString().ToUpper();
+                string roleName = Job.Employee.ToString().ToUpper();
                 await _userManager.AddToRoleAsync(p, roleName);
             }
 

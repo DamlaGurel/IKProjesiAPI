@@ -2,7 +2,7 @@
 
 namespace IKProjesiAPI.API.Controllers
 {
-    public class PersonelController : Controller
+    public class EmployeeController : Controller
     {
         public IActionResult Index()
         {

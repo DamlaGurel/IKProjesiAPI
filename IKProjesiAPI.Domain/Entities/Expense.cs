@@ -7,8 +7,8 @@ namespace IKProjesiAPI.Domain.Entities
 	{
         public int? Id { get; set; }
 
-        public int? PersonelId { get; set; }
-        public Personel? Personel { get; set; }
+        public int? EmployeeId { get; set; }
+        public Employee? Employee { get; set; }
 
         public ExpenseType? ExpenseType { get; set; }
         public double? TotalExpense { get; set; }

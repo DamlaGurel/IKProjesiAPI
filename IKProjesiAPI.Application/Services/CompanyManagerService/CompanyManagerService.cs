@@ -70,23 +70,11 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
                         PhoneNumber = x.PhoneNumber,
                         CompanyId = x.CompanyId,
                         CompanyName = x.Company.CompanyName,
-                        Address = x.Company.Address 
                     },
                     where: x => !x.Status.Equals(Status.Pasive),
                     orderBy: x => x.OrderBy(x => x.CompanyId),
                     include: query => query.Include(x => x.Company)); 
             
-            foreach (var manager in companyManager)
-            {
-                string imageString = null;
-
-                if (manager !=null && manager.ImageBytes!=null)
-                {
-                    imageString = Convert.ToBase64String(manager.ImageBytes);
-                }
-                manager.ImageString = imageString;
-            }
-           
             return companyManager;
         }
 
