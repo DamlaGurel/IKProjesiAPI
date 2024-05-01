@@ -1,5 +1,4 @@
-﻿using System;
-using IKProjesiAPI.Domain.Enums;
+﻿using IKProjesiAPI.Domain.Enums;
 
 namespace IKProjesiAPI.Domain.Entities.AppEntities
 {

@@ -1,5 +1,4 @@
-﻿
-using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
+﻿using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
 using IKProjesiAPI.Domain.Entities;
 
 namespace IKProjesiAPI.Application.Services.SiteManagerService

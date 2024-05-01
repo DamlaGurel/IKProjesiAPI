@@ -1,16 +1,9 @@
 ﻿using AutoMapper;
 using IKProjesiAPI.Application.Models.DTOs.CompanyDTOs;
-
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
-
+using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
-
 using IKProjesiAPI.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Application.AutoMapper
 {
@@ -23,16 +16,15 @@ namespace IKProjesiAPI.Application.AutoMapper
             CreateMap<Company, CompanyDetailsDto>().ReverseMap();
 
             CreateMap<CompanyManager, CreateCompanyManagerDto>().ReverseMap();
-            //CreateMap<CreateCompanyManagerDto, CompanyManager>().ReverseMap();
-
             CreateMap<CompanyManager, UpdateCompanyManagerDto>().ReverseMap();
             CreateMap<CompanyManager, ListCompanyManagerDto>().ReverseMap();
+            //CreateMap<CreateCompanyManagerDto, CompanyManager>().ReverseMap();
             CreateMap<SummaryCompanyManagerDto, CompanyManager>().ReverseMap();
             CreateMap<DetailCompanyManagerDto, CompanyManager>().ReverseMap();
 
             CreateMap<SiteManager, CreateSiteManagerDto>().ReverseMap();
-            CreateMap<CreateSiteManagerDto, SiteManager>().ReverseMap();
             CreateMap<SiteManager, SiteManagerUpdateDto>().ReverseMap();
+            CreateMap<CreateSiteManagerDto, SiteManager>().ReverseMap();
             CreateMap<SiteManagerDetailsDto, SiteManager>().ReverseMap();
             CreateMap<SiteManagerSummaryDto, SiteManager>().ReverseMap();
 

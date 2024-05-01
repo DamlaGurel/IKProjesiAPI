@@ -1,13 +1,9 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
-using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
-using IKProjesiAPI.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace IKProjesiAPI.Application.Services.CompanyManagerService
 {

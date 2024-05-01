@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
 using IKProjesiAPI.Application.Models.DTOs.UserDTOs;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
@@ -7,14 +6,10 @@ using IKProjesiAPI.Infrastructure.Context;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.AspNetCore.Authorization;
-using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;
-using Microsoft.AspNetCore.Http;
-using NuGet.Common;
 using IKProjesiAPI.Application.Services.AppUserService;
 using IKProjesiAPI.Application.Models.DTOs;
-using System.Data;
+
 namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
