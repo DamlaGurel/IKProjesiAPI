@@ -1,14 +1,9 @@
 ﻿using AutoMapper;
-using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace IKProjesiAPI.Application.Services.PersonelService
+namespace IKProjesiAPI.Application.Services.EmployeeService
 {
     public class EmployeeService : IEmployeeService
     {
@@ -20,11 +15,11 @@ namespace IKProjesiAPI.Application.Services.PersonelService
             _employeeRepo = employeeRepo;
             _mapper = mapper;
         }
-                
+
         public async Task<CreateEmployeeDto> CreateEmployee(CreateEmployeeDto model)
         {
             var employee = _mapper.Map<Employee>(model);
-            employee.Email=$"{employee.FirstName}.{employee.LastName}@bilgeadamboost.com";
+            employee.Email = $"{employee.FirstName}.{employee.LastName}@bilgeadamboost.com";
             employee.UserName = employee.Email;
             employee.NormalizedUserName = employee.Email.ToUpper();
             employee.JobName = Domain.Enums.Job.Employee;

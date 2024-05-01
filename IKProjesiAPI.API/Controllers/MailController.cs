@@ -1,12 +1,8 @@
 ﻿using IKProjesiAPI.Infrastructure.Context;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mail;
 using System.Net;
-using IKProjesiAPI.Application.Models.DTOs.UserDTOs;
-using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
-
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

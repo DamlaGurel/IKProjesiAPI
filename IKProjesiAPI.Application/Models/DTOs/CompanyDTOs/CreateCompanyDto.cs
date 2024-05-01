@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
-using IKProjesiAPI.Domain.Entities;
-using IKProjesiAPI.Domain.Enums;
-using Microsoft.AspNetCore.Http;
+﻿using IKProjesiAPI.Domain.Enums;
 
 namespace IKProjesiAPI.Application.Models.DTOs.CompanyDTOs
 {

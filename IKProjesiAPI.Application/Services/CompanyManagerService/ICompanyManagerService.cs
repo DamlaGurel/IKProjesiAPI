@@ -1,5 +1,4 @@
-﻿using System;
-using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+﻿using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
 
 namespace IKProjesiAPI.Application.Services.CompanyManagerService
 {

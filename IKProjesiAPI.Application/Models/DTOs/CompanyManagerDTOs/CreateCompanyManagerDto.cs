@@ -1,12 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using IKProjesiAPI.Application.Extensions;
-using IKProjesiAPI.Application.Models.DTOs.CompanyDTOs;
-using IKProjesiAPI.Domain.Entities;
-using IKProjesiAPI.Domain.Enums;
-using IKProjesiAPI.Domain.Repositories;
-using Microsoft.AspNetCore.Http;
+﻿using IKProjesiAPI.Domain.Enums;
+
 
 namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
 {

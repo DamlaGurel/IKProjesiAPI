@@ -1,21 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using IKProjesiAPI.Application.Models.DTOs.UserDTOs;
-using System.Security.Claims;
-using Microsoft.EntityFrameworkCore;
-
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using IKProjesiAPI.Application.Services.CompanyManagerService;
-using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
-using AutoMapper;
 using IKProjesiAPI.Domain.Enums;
-using IKProjesiAPI.Application.Services.PersonelService;
 using System.Net.Mail;
 using System.Net;
 using IKProjesiAPI.Domain.Entities.AppEntities;
+using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
+using IKProjesiAPI.Application.Services.EmployeeService;
 
 namespace IKProjesiAPI.API.Controllers
 {

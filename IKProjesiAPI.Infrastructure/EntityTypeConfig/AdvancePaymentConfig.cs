@@ -1,6 +1,4 @@
-﻿using System;
-using IKProjesiAPI.Domain.Entities;
-using IKProjesiAPI.Domain.Entities.AppEntities;
+﻿using IKProjesiAPI.Domain.Entities.AppEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

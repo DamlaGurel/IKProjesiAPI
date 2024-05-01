@@ -1,19 +1,15 @@
 ﻿using IKProjesiAPI.Application.Models.DTOs.CompanyDTOs;
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
-
 using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
-
 using IKProjesiAPI.Application.Services.CompanyManagerService;
 using IKProjesiAPI.Application.Services.CompanyService;
 using IKProjesiAPI.Application.Services.SiteManagerService;
-using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using Microsoft.IdentityModel.Tokens;
+
 
 namespace IKProjesiAPI.API.Controllers
 {

@@ -1,5 +1,4 @@
-﻿using System;
-using IKProjesiAPI.Domain.Entities;
+﻿using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Repositories;
 using IKProjesiAPI.Infrastructure.Context;
 

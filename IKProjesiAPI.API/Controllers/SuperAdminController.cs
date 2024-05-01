@@ -1,15 +1,10 @@
 ﻿using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
-using IKProjesiAPI.Application.Services.AppUserService;
 using IKProjesiAPI.Application.Services.SiteManagerService;
-using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
-using System.Text;
 
 namespace IKProjesiAPI.API.Controllers
 {

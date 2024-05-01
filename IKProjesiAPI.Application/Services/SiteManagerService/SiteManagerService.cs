@@ -1,11 +1,8 @@
-﻿using System.Linq.Expressions;
-using AutoMapper;
+﻿using AutoMapper;
 using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace IKProjesiAPI.Application.Services.SiteManagerService
 {
