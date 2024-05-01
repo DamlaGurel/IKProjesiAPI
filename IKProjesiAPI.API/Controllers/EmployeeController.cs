@@ -17,6 +17,7 @@ namespace IKProjesiAPI.API.Controllers
             _employeeService = employeeService;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
