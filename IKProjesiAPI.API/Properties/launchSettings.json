@@ -9,14 +9,15 @@
     }
   },
   "profiles": {
-    "IkProjesiAPI.API": {
+    "IKProjesiAPI": {
       "commandName": "Project",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:51072",
+      "launchUrl": "swagger",
+      "applicationUrl": "https://localhost:7157;http://localhost:44828",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "dotnetRunMessages": true
+      }
     },
     "IIS Express": {
       "commandName": "IISExpress",
