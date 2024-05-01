@@ -1,11 +1,11 @@
-﻿using IKProjesiAPI.Domain.Enums;
+﻿
+using IKProjesiAPI.Domain.Entities;
+using IKProjesiAPI.Domain.Enums;
 
-namespace IKProjesiAPI.Domain.Entities
+namespace IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs
 {
-	public class Expense : IBaseEmployee
-	{
-        public int? Id { get; set; }
-
+    public class CreateExpenseDto
+    {
         public int? EmployeeId { get; set; }
         public Employee? Employee { get; set; }
 
@@ -18,4 +18,3 @@ namespace IKProjesiAPI.Domain.Entities
         //public string dosyaeklemepropu { get; set; }
     }
 }
-

@@ -60,8 +60,8 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpPost]
-        [Route("AddPersonel")]
-        public async Task<IActionResult> AddPersonel([FromBody] CreateEmployeeDto model)
+        [Route("CreateEmployee")]
+        public async Task<IActionResult> CreateEmployee([FromBody] CreateEmployeeDto model)
         {
             //if (!User.IsInRole(Job.CompanyManager.ToString().ToUpper()))
             //{

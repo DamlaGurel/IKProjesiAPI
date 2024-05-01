@@ -2,7 +2,7 @@
 
 namespace IKProjesiAPI.Domain.Entities.AppEntities
 {
-	public class AdvancePayment
+	public class AdvancePayment : IBaseEmployee
 	{
         public int? Id { get; set; }
         public int? EmployeeId { get; set; }

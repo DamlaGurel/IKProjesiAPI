@@ -2,7 +2,7 @@
 
 namespace IKProjesiAPI.Domain.Entities
 {
-	public class TakeOffDay
+	public class TakeOffDay : IBaseEmployee
 	{
         public int? Id { get; set; }
 

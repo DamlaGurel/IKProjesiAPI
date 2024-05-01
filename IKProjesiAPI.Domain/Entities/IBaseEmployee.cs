@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs
+namespace IKProjesiAPI.Domain.Entities
 {
-    public class CreateExpenceDto
+    public interface IBaseEmployee
     {
     }
 }

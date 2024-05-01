@@ -35,6 +35,11 @@ namespace IKProjesiAPI.Application.IoC
             builder.RegisterType<EmployeeService>().As<IEmployeeService>().InstancePerLifetimeScope();
             builder.RegisterType<EmployeeRepo>().As<IEmployeeRepo>().InstancePerLifetimeScope();
 
+            builder.RegisterType<ExpenseRepo>().As<IExpenseRepo>().InstancePerLifetimeScope();
+            builder.RegisterType<AdvancePaymentRepo>().As<IAdvancePaymentRepo>().InstancePerLifetimeScope();
+            builder.RegisterType<TakeOffDayRepo>().As<ITakeOffDayRepo>().InstancePerLifetimeScope();
+
+
 
 
             builder.Register(context => new MapperConfiguration(config =>

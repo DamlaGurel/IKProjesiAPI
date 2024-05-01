@@ -1,6 +1,6 @@
 ﻿using IKProjesiAPI.Domain.Enums;
 
-namespace IKProjesiAPI.Application.Models.DTOs.PersonelDTOs
+namespace IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs
 {
     public class EmployeeSummaryDto
     {
