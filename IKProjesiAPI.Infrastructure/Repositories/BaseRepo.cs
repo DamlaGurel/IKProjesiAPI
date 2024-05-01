@@ -55,24 +55,15 @@ namespace IKProjesiAPI.Infrastructure.Repositories
             IQueryable<T> query = _dbSet;
 
             if (where != null)
-            {
                 query = query.Where(where);
-            }
 
             if (include != null)
-            {
                 query = include(query);
-            }
 
             if (orderBy != null)
-            {
                 return await orderBy(query).Select(select).FirstOrDefaultAsync();
-            }
             else
-            {
                 return await query.Select(select).FirstOrDefaultAsync();
-            }
-
         }
 
         public async Task<List<TResult>> GetFilteredList<TResult>(Expression<Func<T, TResult>> select, Expression<Func<T, bool>> where, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
@@ -80,23 +71,15 @@ namespace IKProjesiAPI.Infrastructure.Repositories
             IQueryable<T> query = _dbSet;
 
             if (where != null)
-            {
                 query = query.Where(where);
-            }
 
             if (include != null)
-            {
                 query = include(query);
-            }
 
             if (orderBy != null)
-            {
                 return await orderBy(query).Select(select).ToListAsync();
-            }
             else
-            {
                 return await query.Select(select).ToListAsync();
-            }
         }
     }
 }
