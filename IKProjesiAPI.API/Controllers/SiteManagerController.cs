@@ -58,7 +58,7 @@ namespace IKProjesiAPI.API.Controllers
 
             var user = await _userManager.FindByNameAsync(cm.UserName.ToUpper());
 
-            user.SecurityStamp = Guid.NewGuid().ToString();
+            //user.SecurityStamp = Guid.NewGuid().ToString();
             if (user != null)
             {
                 string roleName = Job.CompanyManager.ToString().ToUpper();

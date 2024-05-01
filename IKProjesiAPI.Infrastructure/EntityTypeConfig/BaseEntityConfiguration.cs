@@ -17,6 +17,7 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
             builder.Property(x => x.UpdatedDate).IsRequired(false);
             builder.Property(x => x.DeletedDate).IsRequired(false);
 
+            
         }
     }
 }

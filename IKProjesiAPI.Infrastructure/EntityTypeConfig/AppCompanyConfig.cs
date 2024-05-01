@@ -9,20 +9,18 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
     {
         public override void Configure(EntityTypeBuilder<Company> builder)
         {
-            builder.HasKey(t => t.Id);
-
-           
             builder.Property(t => t.CompanyName).IsRequired();
-
-
-
+            builder.HasKey(x => x.Id);
+            builder.HasMany(x => x.CompanyManagers)
+                .WithOne(x => x.Company)
+                .HasForeignKey(x => x.CompanyId);
+           
             var company = new Company
             {
                 Id = 1,
                 CompanyName = "Company",
                 CreatedDate = DateTime.Now,
             };
-
 
 
             builder.HasData(company);

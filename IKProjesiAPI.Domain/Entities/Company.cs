@@ -11,8 +11,12 @@ namespace IKProjesiAPI.Domain.Entities
 {
     public class Company : IBaseEntity
     {
-        
-        public int Id { get; set; }
+        public Company()
+        {
+            CompanyManagers = new List<CompanyManager>();
+        }
+
+        public int? Id { get; set; }
         public string CompanyName { get; set; }
         public string? CompanyTitle { get; set; }
         public string? MersisNumber { get; set; }
@@ -28,13 +32,12 @@ namespace IKProjesiAPI.Domain.Entities
         public DateTime? EndContractDate { get; set; }
 
         public List<CompanyManager>? CompanyManagers { get; set; }
-        public Company()
-        {
-            CompanyManagers = new List<CompanyManager>();
-        }
+        
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
         public Status? Status { get; set; }
+
+       
     }
 }
