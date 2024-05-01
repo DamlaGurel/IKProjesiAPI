@@ -31,20 +31,19 @@ namespace IKProjesiAPI.API.Controllers
         {
             var user = await _context.AppUsers.FirstOrDefaultAsync(u => u.Email == email);
 
-            //var user = await _userManager.FindByEmailAsync(email);
             if (user != null)
             {
                 Guid newGuid = Guid.NewGuid();
                 string guidString = newGuid.ToString();
 
-
+                string jsonPassword = guidString.Replace("-", "");
 
                 MailMessage message = new MailMessage();
                 message.From = new MailAddress("mailadresi@mail.com");
                 message.To.Add(new MailAddress(email));
                 message.IsBodyHtml = true;
                 message.Subject = "Geçiçi Şifreniz";
-                message.Body = guidString;
+                message.Body = jsonPassword;
 
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
@@ -56,18 +55,9 @@ namespace IKProjesiAPI.API.Controllers
 
                 smtp.Send(message);
 
-                //user.Password = guidString;
-                //await _context.SaveChangesAsync();
-                //var temporaryPassword = new TemporaryPassword
-                //{
-                //    OldPassword = user.Password,
-                //    NewPassword = guidString,
-                //    UserId = user.Id
-                //};
-
-                //_context.TemporaryPassword.Add(temporaryPassword);
+                user.TemporaryPassword = jsonPassword;
                 await _context.SaveChangesAsync();
-                return Ok(user.Password);
+                return Ok(user.TemporaryPassword);
             }
             else
             {
