@@ -59,6 +59,15 @@ namespace IKProjesiAPI.API.Controllers
                 return NotFound("kullanıcı bulunamadı");
         }
 
+        [HttpGet]
+        [Route("GetCompanyManagerById/{id}")]
+        public async Task<IActionResult> GetCompanyManagerById(int id)
+        {
+            var companyManager = await _companyManagerService.GetCompanyManagerById(id);
+
+            return Ok(companyManager);
+        }
+
         [HttpPut]
         [Route("GetCompanyManagerUpdate")]
         public async Task<IActionResult> GetCompanyManagerUpdate([FromBody] UpdateCompanyManagerDto model)

@@ -62,6 +62,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
                 var companyManager = await _companyManagerRepo.GetFilteredList(
                     select: x => new ListCompanyManagerDto
                     {
+                        Id=x.Id,
                         FirstName = x.FirstName,
                         SecondName = x.SecondName,
                         LastName = x.LastName,
@@ -72,7 +73,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
                         CompanyName = x.Company.CompanyName,
                     },
                     where: x => !x.Status.Equals(Status.Pasive),
-                    orderBy: x => x.OrderBy(x => x.CompanyId),
+                    orderBy: x => x.OrderBy(x => x.CreatedDate),
                     include: query => query.Include(x => x.Company)); 
             
             return companyManager;
@@ -142,8 +143,10 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             companyManager.PhoneNumber = model.PhoneNumber;
             //companyManager.ImagePath = model.ImagePath;
 
+
             companyManager.Status = Status.Modified;
             companyManager.UpdatedDate = DateTime.Now;
+
 
             await _companyManagerRepo.Update(companyManager);
         }
