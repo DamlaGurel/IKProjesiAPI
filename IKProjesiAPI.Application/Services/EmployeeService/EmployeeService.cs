@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
 using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
+using IKProjesiAPI.Infrastructure.Repositories;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace IKProjesiAPI.Application.Services.EmployeeService
 {
@@ -31,11 +34,35 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             employee.UserName = employee.Email;
             employee.NormalizedUserName = employee.Email.ToUpper();
             employee.JobName = Job.Employee;
+            employee.ImageBytes = Convert.FromBase64String(model.ImageString);
 
             await _employeeRepo.Create(employee);
             return _mapper.Map<CreateEmployeeDto>(employee);
         }
 
+        public async Task<EmployeeSummaryDto> GetEmployeeSummary(int id)
+        {
+            var employee= await _employeeRepo.GetFilteredFirstOrDefault(select: x => _mapper.Map<EmployeeSummaryDto>(x),
+                                                                                     where: x => x.Id == id);
+            return employee;
+        }
+
+        public async Task<DetailEmployeeDto> GetEmployeeDetails(int id)
+        {
+            var employee = await _employeeRepo.GetFilteredFirstOrDefault(select: x => _mapper.Map<DetailEmployeeDto>(x),
+                                                                                     where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
+
+            string imageString = null;
+
+            if (employee != null && employee.ImageBytes != null)
+            {
+                imageString = Convert.ToBase64String(employee.ImageBytes);
+            }
+
+            employee.ImageString = imageString;
+
+            return employee;
+        }
 
         // Expence işlemleri 
 
