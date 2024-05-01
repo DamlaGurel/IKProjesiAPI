@@ -26,14 +26,14 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
         public async Task<CreateEmployeeDto> CreateEmployee(CreateEmployeeDto model)
         {
             var employee = _mapper.Map<Employee>(model);
+
             employee.Email = $"{employee.FirstName}.{employee.LastName}@bilgeadamboost.com";
             employee.UserName = employee.Email;
             employee.NormalizedUserName = employee.Email.ToUpper();
             employee.JobName = Job.Employee;
-            await _employeeRepo.Create(employee);
 
-            var p = _mapper.Map<CreateEmployeeDto>(employee);
-            return p;
+            await _employeeRepo.Create(employee);
+            return _mapper.Map<CreateEmployeeDto>(employee);
         }
 
 
@@ -42,6 +42,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
         public async Task CreateExpense(CreateExpenseDto model)
         {
             var employeeExpense = _mapper.Map<Expense>(model);
+
             employeeExpense.ApprovalType = ApprovalType.Waiting;
             employeeExpense.RequestDate = DateTime.Now;
 

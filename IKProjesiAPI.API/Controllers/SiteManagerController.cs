@@ -38,8 +38,8 @@ namespace IKProjesiAPI.API.Controllers
         // CompanyManager
 
         [HttpPost]
-        [Route("AddCompanyManager")]
-        public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
+        [Route("CreateCompanyManager")]
+        public async Task<IActionResult> CreateCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
         {
             if (!ModelState.IsValid)
             {
@@ -72,6 +72,7 @@ namespace IKProjesiAPI.API.Controllers
         public async Task<IActionResult> GetAllCompanyManagers()
         {
             var companyManagers = await _companyManagerService.GetCompanyManagers();
+
             if (companyManagers.Count > 0)
                 return Ok(companyManagers);
             else if (companyManagers.Count == 0)
@@ -109,9 +110,9 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpPut]
         [Route("UpdateSiteManager")]
-        public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManager)
+        public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManagerUpdate)
         {
-            await _siteManagerService.UpdateSiteManager(siteManager);
+            await _siteManagerService.UpdateSiteManager(siteManagerUpdate);
             return Ok();
         }
 
@@ -129,7 +130,7 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpPost]
         [Route("CreateCompany")]
-        public async Task<IActionResult> CreateCompany([FromBody] CreateCompanyDto model)
+        public async Task<IActionResult> CreateCompany([FromBody] CreateCompanyDto createCompany)
         {
             //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
             //{
@@ -139,7 +140,7 @@ namespace IKProjesiAPI.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _companyService.Create(model);
+            await _companyService.Create(createCompany);
             return Ok();
         }
 

@@ -25,51 +25,51 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         public async Task<CreateCompanyManagerDto> Create(CreateCompanyManagerDto model)
         {
             var companyManager = _mapper.Map<CompanyManager>(model);
+
             companyManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadamboost.com";
             companyManager.UserName = companyManager.Email;
             companyManager.NormalizedUserName = companyManager.Email.ToUpper();
             companyManager.Password= $"{model.FirstName}.{model.LastName}";
+
             Company company=await _companyRepo.GetDefault(c=>c.Id==model.CompanyId);
             companyManager.Company = company;
             companyManager.JobName = Job.CompanyManager;
             companyManager.ImageBytes = Convert.FromBase64String(model.ImageString);
+
             await _companyManagerRepo.Create(companyManager);
-
-
-            var cm = _mapper.Map<CreateCompanyManagerDto>(companyManager);
-            return cm;
+            return _mapper.Map<CreateCompanyManagerDto>(companyManager);
+            
         }
 
         public async Task Delete(int id)
         {
             var companyManager = await _companyManagerRepo.GetDefault(x => x.Id.Equals(id));
             await _companyManagerRepo.Delete(companyManager);
-
         }
 
         public async Task<UpdateCompanyManagerDto> GetCompanyManagerById(int id)
         {
-            var companyManager = await _companyManagerRepo.GetFilteredFirstOrDefault(select: x => _mapper.Map<UpdateCompanyManagerDto>(x), where: x => x.Id == id);
+            var companyManager = await _companyManagerRepo.GetFilteredFirstOrDefault(select: x => _mapper.Map<UpdateCompanyManagerDto>(x), 
+                                                                                     where: x => x.Id == id);
             return companyManager;
         }
 
         public async Task<List<ListCompanyManagerDto>> GetCompanyManagers()
         {
-                var companyManager = await _companyManagerRepo.GetFilteredList(
-                    select: x => new ListCompanyManagerDto
-                    {
-                        FirstName = x.FirstName,
-                        SecondName = x.SecondName,
-                        LastName = x.LastName,
-                        SecondLastName = x.SecondLastName,
-                        Email = x.Email,
-                        PhoneNumber = x.PhoneNumber,
-                        CompanyId = x.CompanyId,
-                        CompanyName = x.Company.CompanyName,
-                    },
-                    where: x => !x.Status.Equals(Status.Pasive),
-                    orderBy: x => x.OrderBy(x => x.CompanyId),
-                    include: query => query.Include(x => x.Company)); 
+                var companyManager = await _companyManagerRepo.GetFilteredList(select: x => new ListCompanyManagerDto
+                                                                                            {
+                                                                                                FirstName = x.FirstName,
+                                                                                                SecondName = x.SecondName,
+                                                                                                LastName = x.LastName,
+                                                                                                SecondLastName = x.SecondLastName,
+                                                                                                Email = x.Email,
+                                                                                                PhoneNumber = x.PhoneNumber,
+                                                                                                CompanyId = x.CompanyId,
+                                                                                                CompanyName = x.Company.CompanyName,
+                                                                                            },
+                                                                               where: x => !x.Status.Equals(Status.Pasive),
+                                                                               orderBy: x => x.OrderBy(x => x.CompanyId),
+                                                                               include: query => query.Include(x => x.Company)); 
             
             return companyManager;
         }
@@ -77,16 +77,15 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         public async Task<List<ListCompanyManagerDto>> GetCompanyManagersByCompany(int companyId)
         {
             var companyManager = await _companyManagerRepo.GetFilteredList(select: x => _mapper.Map<ListCompanyManagerDto>(x),
-                where: x => x.CompanyId.Equals(companyId),
-                orderBy: x => x.OrderBy(x => x.Id));
+                                                                           where: x => x.CompanyId.Equals(companyId),
+                                                                           orderBy: x => x.OrderBy(x => x.Id));
             return companyManager;
         }
 
         public async Task<SummaryCompanyManagerDto> GetCompanyManagerSummary(int id)
         {
-            var companyManager = await _companyManagerRepo.GetFilteredFirstOrDefault(
-                select: x => _mapper.Map<SummaryCompanyManagerDto>(x),
-                where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
+            var companyManager = await _companyManagerRepo.GetFilteredFirstOrDefault(select: x => _mapper.Map<SummaryCompanyManagerDto>(x),
+                                                                                     where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
 
             string imageString = null;
 
@@ -102,9 +101,8 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
         public async Task<DetailCompanyManagerDto> GetCompanyManagerDetails(int id)
         {
-            var companyManager = await _companyManagerRepo.GetFilteredFirstOrDefault(
-                select: x => _mapper.Map<DetailCompanyManagerDto>(x),
-                where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
+            var companyManager = await _companyManagerRepo.GetFilteredFirstOrDefault(select: x => _mapper.Map<DetailCompanyManagerDto>(x),
+                                                                                     where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
 
             string imageString = null;
 
@@ -122,6 +120,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         public async Task SoftDelete(int id)
         {
             var companyManager = await _companyManagerRepo.GetDefault(x => x.Id.Equals(id));
+
             if (companyManager is not null)
             {
                 companyManager.DeletedDate = DateTime.Now;
