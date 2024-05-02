@@ -33,6 +33,8 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             companyManager.UserName = companyManager.Email;
             companyManager.NormalizedUserName = companyManager.Email.ToUpper();
             companyManager.Password= $"{model.FirstName}.{model.LastName}";
+            companyManager.Status = Status.Active;
+            companyManager.CreatedDate = DateTime.Now;
             Company company=await _companyRepo.GetDefault(c=>c.Id==model.CompanyId);
             companyManager.Company = company;
             companyManager.JobName = Job.CompanyManager;

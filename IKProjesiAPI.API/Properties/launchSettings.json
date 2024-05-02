@@ -1,18 +1,10 @@
 {
-  "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:5766",
-      "sslPort": 44347
-    }
-  },
   "profiles": {
     "IkProjesiAPI.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:51072",
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:11060",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
