@@ -32,6 +32,10 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             companyManager.Password = $"{model.FirstName}.{model.LastName}";
 
             Company company = await _companyRepo.GetDefault(c => c.Id == model.CompanyId);
+            companyManager.Password= $"{model.FirstName}.{model.LastName}";
+            companyManager.Status = Status.Active;
+            companyManager.CreatedDate = DateTime.Now;
+            Company company=await _companyRepo.GetDefault(c=>c.Id==model.CompanyId);
             companyManager.Company = company;
             companyManager.JobName = Job.CompanyManager;
             companyManager.ImageBytes = Convert.FromBase64String(model.ImageString);

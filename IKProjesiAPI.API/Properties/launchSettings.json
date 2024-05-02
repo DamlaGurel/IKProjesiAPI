@@ -1,13 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:5766",
-      "sslPort": 44347
-    }
-  },
   "profiles": {
     "IKProjesiAPI": {
       "commandName": "Project",
