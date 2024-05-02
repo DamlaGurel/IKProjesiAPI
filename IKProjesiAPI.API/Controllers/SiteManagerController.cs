@@ -59,8 +59,6 @@ namespace IKProjesiAPI.API.Controllers
             {
                 string roleName = Job.CompanyManager.ToString().ToUpper();
                 await _userManager.AddToRoleAsync(user, roleName);
-                user.CreatedDate = DateTime.Now;
-                user.Status = Status.Active;
             }
             
             return Ok();

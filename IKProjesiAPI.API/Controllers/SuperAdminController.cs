@@ -38,14 +38,11 @@ namespace IKProjesiAPI.API.Controllers
             var sm = await _siteManagerService.CreateSiteManager(siteManager);
             var user = await _userManager.FindByNameAsync(sm.UserName.ToUpper());
             user.SecurityStamp = Guid.NewGuid().ToString();
+            
             if (user != null)
             {
                 string roleName = Job.SiteManager.ToString().ToUpper();
-
                 await _userManager.AddToRoleAsync(user, roleName);
-                user.CreatedDate = DateTime.Now;
-                user.Status = Status.Active;
-
             }
 
             return Ok("KAYIT BAŞARILI");
