@@ -1,4 +1,5 @@
-﻿using IKProjesiAPI.Domain.Enums;
+﻿using IKProjesiAPI.Application.Extensions;
+using IKProjesiAPI.Domain.Enums;
 
 namespace IKProjesiAPI.Application.Models.DTOs.CompanyDTOs
 {
@@ -15,8 +16,11 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyDTOs
         public string Address { get; set; }
         public string Email { get; set; }
         public int EmployeeNumber { get; set; }
+        [CompanyDateTimeValidation]
         public DateTime FoundationYear { get; set; }
+        [CompanyDateTimeValidation]
         public DateTime StartContractDate { get; set; }
+        [CompanyDateTimeValidation]
         public DateTime EndContractDate { get; set; }
         public DateTime CreatedDate => DateTime.Now;
         public Status Status => Status.Active;

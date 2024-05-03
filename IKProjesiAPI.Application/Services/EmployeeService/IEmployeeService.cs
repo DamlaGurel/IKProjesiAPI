@@ -6,5 +6,6 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
     {
         Task<CreateEmployeeDto> CreateEmployee(CreateEmployeeDto model);
         Task CreateExpense(CreateExpenseDto model);
+        Task CreateAdvancePayment(CreateAdvancePaymentDto model);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Domain.Entities;
+using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
 
@@ -21,6 +22,19 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             _expenseRepo = expenseRepo;
             _takeOffDayRepo = takeOffDayRepo;
             _advancePaymentRepo = advancePaymentRepo;
+        }
+
+        public async Task CreateAdvancePayment(CreateAdvancePaymentDto model)
+        {
+            var employee = _mapper.Map<AdvancePayment>(model);
+            employee.EmployeeId = model.EmployeeId;
+            employee.ApprovalType = ApprovalType.Waiting;
+            employee.RequestDate = DateTime.Now;
+            employee.AdvanceType = model.AdvanceType;
+            //employee.TotalAdvance = employee.Payment * 3;
+
+            await _advancePaymentRepo.Create(employee); 
+
         }
 
         public async Task<CreateEmployeeDto> CreateEmployee(CreateEmployeeDto model)

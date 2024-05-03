@@ -30,5 +30,12 @@ namespace IKProjesiAPI.API.Controllers
             await _employeeService.CreateExpense(createExpense);
         }
 
+        [HttpPost]
+        [Route("CreateAdvancePayment")]
+        public async Task<IActionResult> CreateAdvancePayment([FromBody] CreateAdvancePaymentDto createAdvancePayment)
+        {
+            await _employeeService.CreateAdvancePayment(createAdvancePayment);
+            return Ok();
+        }
     }
 }

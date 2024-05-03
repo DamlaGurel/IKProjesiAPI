@@ -1,4 +1,6 @@
-﻿using IKProjesiAPI.Domain.Enums;
+﻿using IKProjesiAPI.Application.Extensions;
+using IKProjesiAPI.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs
 {
@@ -14,10 +16,14 @@ namespace IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs
         public string? UserName { get; set; }
         //[NotMapped]
         //public IFormFile? ProfilePicture { get; set; }
+
+        [DateTimeValidation]
         public DateTime? BirthDate { get; set; }
         public string? BirthPlace { get; set; }
         public string? IdentityNumber { get; set; }
+
         public DateTime? StartDateOfWork { get; set; }
+
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
 
