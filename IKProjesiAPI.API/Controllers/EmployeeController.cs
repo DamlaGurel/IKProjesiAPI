@@ -36,7 +36,6 @@ namespace IKProjesiAPI.API.Controllers
                 return NotFound("Employee bulunamadı");
         }
 
-
         [HttpGet]
         [Route("GetEmployeeDetails/{id}")]
         public async Task<IActionResult> GetEmployeeDetails(int id)
@@ -68,7 +67,7 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpPost]
         [Route("CreateExpense")]
-        public async Task CreateExpense([FromBody] CreateExpenseDto createExpense)
+        public async Task CreateExpense(CreateExpenseDto createExpense)
         {
             await _employeeService.CreateExpense(createExpense);
         }
