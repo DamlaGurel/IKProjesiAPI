@@ -13,7 +13,8 @@ namespace IKProjesiAPI.Domain.Entities
         public ApprovalType? ApprovalType { get; set; }
         public DateTime? ResponseDate { get; set; }
         public DateTime? RequestDate { get; set; }
-        //public byte[]? FileByteArray { get; set; }
+        public byte[]? FileByteArray { get; set; }
+
     }
 }
 
