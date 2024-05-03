@@ -82,7 +82,7 @@ namespace IKProjesiAPI.API.Controllers
                 return BadRequest(ModelState);
             }
             var employee = await _employeService.CreateEmployee(model);
-            var p = await _userManager.FindByNameAsync(employee.Username.ToUpper());
+            var p = await _userManager.FindByNameAsync(employee.UserName.ToUpper());
             p.SecurityStamp = Guid.NewGuid().ToString();
             if (p != null)
             {

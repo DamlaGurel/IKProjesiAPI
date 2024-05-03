@@ -29,7 +29,10 @@ namespace IKProjesiAPI.Application.AutoMapper
             CreateMap<SiteManagerDetailsDto, SiteManager>().ReverseMap();
             CreateMap<SiteManagerSummaryDto, SiteManager>().ReverseMap();
 
-            CreateMap<CreateEmployeeDto,Employee>().ReverseMap();
+            CreateMap<Employee, CreateEmployeeDto>().ReverseMap();
+            CreateMap<Employee, EmployeeSummaryDto>().ReverseMap();
+            CreateMap<Employee, DetailEmployeeDto>().ReverseMap();
+            CreateMap<Employee, UpdateEmployeeDto>().ReverseMap();
 
             CreateMap<CreateAdvancePaymentDto, AdvancePayment>().ReverseMap();
 

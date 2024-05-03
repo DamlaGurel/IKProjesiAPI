@@ -1,4 +1,5 @@
-﻿using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
+﻿using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Application.Services.EmployeeService;
 using IKProjesiAPI.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -46,6 +47,23 @@ namespace IKProjesiAPI.API.Controllers
                 return Ok(employeeDetails);
             else
                 return NotFound("Employee bulunamadı");
+        }
+
+        [HttpPut]
+        [Route("UpdateEmployee")]
+        public async Task<IActionResult> UpdateEmployee([FromBody] UpdateEmployeeDto model)
+        {
+            await _employeeService.UpdateEmployee(model);
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("GetEmployeeById/{id}")]
+        public async Task<IActionResult> GetEmployeeById(int id)
+        {
+            var employee = await _employeeService.GetEmployeeById(id);
+
+            return Ok(employee);
         }
 
         [HttpPost]

@@ -17,14 +17,15 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
         private readonly ITakeOffDayRepo _takeOffDayRepo;
         private readonly IAdvancePaymentRepo _advancePaymentRepo;
         private readonly IMapper _mapper;
-
-        public EmployeeService(IEmployeeRepo employeeRepo, IMapper mapper, IExpenseRepo expenseRepo, ITakeOffDayRepo takeOffDayRepo, IAdvancePaymentRepo advancePaymentRepo)
+        private readonly ICompanyManagerRepo _companyManagerRepo;
+        public EmployeeService(IEmployeeRepo employeeRepo, IMapper mapper, IExpenseRepo expenseRepo, ITakeOffDayRepo takeOffDayRepo, IAdvancePaymentRepo advancePaymentRepo, ICompanyManagerRepo companyManagerRepo)
         {
             _employeeRepo = employeeRepo;
             _mapper = mapper;
             _expenseRepo = expenseRepo;
             _takeOffDayRepo = takeOffDayRepo;
             _advancePaymentRepo = advancePaymentRepo;
+            _companyManagerRepo = companyManagerRepo;
         }
 
         public async Task CreateAdvancePayment(CreateAdvancePaymentDto model)
@@ -49,7 +50,11 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             employee.NormalizedUserName = employee.Email.ToUpper();
             employee.JobName = Job.Employee;
             employee.ImageBytes = Convert.FromBase64String(model.ImageString);
-
+            //employee.CompanyManager=_
+            employee.DepartmentName = model.DepartmentName;
+            employee.CreatedDate = DateTime.Now;
+            employee.Status = Status.Active;
+            employee.Password = "123123";
             await _employeeRepo.Create(employee);
             return _mapper.Map<CreateEmployeeDto>(employee);
         }
@@ -78,6 +83,27 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             return employee;
         }
 
+        public async Task<UpdateEmployeeDto> GetEmployeeById(int id)
+        {
+            var employee = await _employeeRepo.GetFilteredFirstOrDefault(select: x => _mapper.Map<UpdateEmployeeDto>(x),
+                                                                                     where: x => x.Id == id);
+            return employee;
+        }
+
+        public async Task UpdateEmployee(UpdateEmployeeDto model)
+        {
+            var employee = await _employeeRepo.GetDefault(x => x.Id == model.Id);
+
+            employee.Address = model.Address;
+            employee.PhoneNumber = model.PhoneNumber;
+            //employee.ImageBytes = model.ImageBytes;
+            employee.ImageBytes = Convert.FromBase64String(model.ImageString);
+            employee.Status = Status.Modified;
+            employee.UpdatedDate = DateTime.Now;
+
+
+            await _employeeRepo.Update(employee);
+        }
         // Expence işlemleri 
 
         public async Task CreateExpense(CreateExpenseDto model)
