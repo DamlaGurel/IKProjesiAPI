@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
 using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
-using IKProjesiAPI.Infrastructure.Repositories;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace IKProjesiAPI.Application.Services.EmployeeService
 {
@@ -31,13 +28,14 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
         public async Task CreateAdvancePayment(CreateAdvancePaymentDto model)
         {
             var employee = _mapper.Map<AdvancePayment>(model);
+
             employee.EmployeeId = model.EmployeeId;
+            employee.AdvanceType = model.AdvanceType;
             employee.ApprovalType = ApprovalType.Waiting;
             employee.RequestDate = DateTime.Now;
-            employee.AdvanceType = model.AdvanceType;
             //employee.TotalAdvance = employee.Payment * 3;
 
-            await _advancePaymentRepo.Create(employee); 
+            await _advancePaymentRepo.Create(employee);
 
         }
 
@@ -55,6 +53,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             employee.CreatedDate = DateTime.Now;
             employee.Status = Status.Active;
             employee.Password = "123123";
+
             await _employeeRepo.Create(employee);
             return _mapper.Map<CreateEmployeeDto>(employee);
         }
@@ -72,11 +71,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
                                                                                      where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
 
             if (employee != null && employee.ImageBytes != null)
-            {
-                imageString = Convert.ToBase64String(employee.ImageBytes);
-            }
-
-            employee.ImageString = imageString;
+                employee.ImageString = Convert.ToBase64String(employee.ImageBytes);
 
             return employee;
         }
@@ -102,7 +97,6 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
             await _employeeRepo.Update(employee);
         }
-        // Expence işlemleri 
 
         public async Task CreateExpense(CreateExpenseDto model)
         {
