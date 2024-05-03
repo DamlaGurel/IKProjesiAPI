@@ -29,16 +29,17 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             companyManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadamboost.com";
             companyManager.UserName = companyManager.Email;
             companyManager.NormalizedUserName = companyManager.Email.ToUpper();
-            companyManager.Password= $"{model.FirstName}.{model.LastName}";
+            companyManager.Password = $"{model.FirstName}.{model.LastName}";
 
-            Company company=await _companyRepo.GetDefault(c=>c.Id==model.CompanyId);
+            Company company = await _companyRepo.GetDefault(c => c.Id == model.CompanyId);
             companyManager.Company = company;
             companyManager.JobName = Job.CompanyManager;
             companyManager.ImageBytes = Convert.FromBase64String(model.ImageString);
+            companyManager.CreatedDate = DateTime.Now;
+            companyManager.Status = Status.Active;
 
             await _companyManagerRepo.Create(companyManager);
             return _mapper.Map<CreateCompanyManagerDto>(companyManager);
-            
         }
 
         public async Task Delete(int id)
@@ -49,28 +50,28 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
         public async Task<UpdateCompanyManagerDto> GetCompanyManagerById(int id)
         {
-            var companyManager = await _companyManagerRepo.GetFilteredFirstOrDefault(select: x => _mapper.Map<UpdateCompanyManagerDto>(x), 
+            var companyManager = await _companyManagerRepo.GetFilteredFirstOrDefault(select: x => _mapper.Map<UpdateCompanyManagerDto>(x),
                                                                                      where: x => x.Id == id);
             return companyManager;
         }
 
         public async Task<List<ListCompanyManagerDto>> GetCompanyManagers()
         {
-                var companyManager = await _companyManagerRepo.GetFilteredList(select: x => new ListCompanyManagerDto
-                                                                                            {
-                                                                                                FirstName = x.FirstName,
-                                                                                                SecondName = x.SecondName,
-                                                                                                LastName = x.LastName,
-                                                                                                SecondLastName = x.SecondLastName,
-                                                                                                Email = x.Email,
-                                                                                                PhoneNumber = x.PhoneNumber,
-                                                                                                CompanyId = x.CompanyId,
-                                                                                                CompanyName = x.Company.CompanyName,
-                                                                                            },
-                                                                               where: x => !x.Status.Equals(Status.Pasive),
-                                                                               orderBy: x => x.OrderBy(x => x.CompanyId),
-                                                                               include: query => query.Include(x => x.Company)); 
-            
+            var companyManager = await _companyManagerRepo.GetFilteredList(select: x => new ListCompanyManagerDto
+                                                                                        {
+                                                                                            FirstName = x.FirstName,
+                                                                                            SecondName = x.SecondName,
+                                                                                            LastName = x.LastName,
+                                                                                            SecondLastName = x.SecondLastName,
+                                                                                            Email = x.Email,
+                                                                                            PhoneNumber = x.PhoneNumber,
+                                                                                            CompanyId = x.CompanyId,
+                                                                                            CompanyName = x.Company.CompanyName,
+                                                                                        },
+                                                                           where: x => !x.Status.Equals(Status.Pasive),
+                                                                           orderBy: x => x.OrderBy(x => x.CompanyId),
+                                                                           include: query => query.Include(x => x.Company));
+
             return companyManager;
         }
 
@@ -90,10 +91,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             string imageString = null;
 
             if (companyManager != null && companyManager.ImageBytes != null)
-            {
                 imageString = Convert.ToBase64String(companyManager.ImageBytes);
-            }
-
             companyManager.ImageString = imageString;
 
             return companyManager;
@@ -106,12 +104,9 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
             string imageString = null;
 
-            if (companyManager!=null && companyManager.ImageBytes!=null)
-            {
+            if (companyManager != null && companyManager.ImageBytes != null)
                 imageString = Convert.ToBase64String(companyManager.ImageBytes);
-            }
-
-            companyManager.ImageString=imageString;
+            companyManager.ImageString = imageString;
 
             return companyManager;
         }
@@ -137,10 +132,8 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             companyManager.PhoneNumber = model.PhoneNumber;
             //companyManager.ImagePath = model.ImagePath;
 
-
             companyManager.Status = Status.Modified;
             companyManager.UpdatedDate = DateTime.Now;
-
 
             await _companyManagerRepo.Update(companyManager);
         }
