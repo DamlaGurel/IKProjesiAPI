@@ -17,7 +17,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs
         //[NotMapped]
         //public IFormFile? ProfilePicture { get; set; }
 
-        [DateTimeValidation]
+        //[DateTimeValidation]
         public DateTime? BirthDate { get; set; }
         public string? BirthPlace { get; set; }
         public string? IdentityNumber { get; set; }
