@@ -46,7 +46,7 @@ namespace IKProjesiAPI.API.Controllers
                     };
 
                 var token = GetToken(authClaims);
-                var tokenString = "Bearer " +  new JwtSecurityTokenHandler().WriteToken(token);
+                var tokenString = "Bearer " + new JwtSecurityTokenHandler().WriteToken(token);
 
                 var isValidToken = await ValidateToken();
                 var cookieOptions = new CookieOptions

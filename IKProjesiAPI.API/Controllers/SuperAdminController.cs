@@ -11,7 +11,9 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(AuthenticationSchemes = "Bearer", Roles = "SUPERADMİN")]
     //[Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize]
 
     public class SuperAdminController : ControllerBase
     {
@@ -32,10 +34,10 @@ namespace IKProjesiAPI.API.Controllers
         //[Authorize(Roles = "SUPERADMİN")]
         public async Task<IActionResult> CreateSiteManager([FromBody] CreateSiteManagerDto siteManager)
         {
-            //if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
+            if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
+            {
+                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            }
 
             if (!ModelState.IsValid)
             {
@@ -68,6 +70,14 @@ namespace IKProjesiAPI.API.Controllers
             return Ok("SİLME BAŞARILI");
         }
 
+        //[HttpGet]
+        //[Route("SiteManagerDetail/{token}")]
+        //public async Task<IActionResult> SiteManagerDetail([FromHeader] string token)
+        //{
+        //    var siteManager = await _siteManagerService.SiteManagerDetails();
+        //    return Ok(siteManager);
+        //}
+
         [HttpGet]
         [Route("SiteManagerDetail")]
         public async Task<IActionResult> SiteManagerDetail()
@@ -75,5 +85,6 @@ namespace IKProjesiAPI.API.Controllers
             var siteManager = await _siteManagerService.SiteManagerDetails();
             return Ok(siteManager);
         }
+
     }
 }
