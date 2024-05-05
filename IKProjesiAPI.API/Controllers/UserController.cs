@@ -42,7 +42,8 @@ namespace IKProjesiAPI.API.Controllers
                 var authClaims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, login.Email),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(ClaimTypes.Role, ((Job)role.RoleId).ToString().ToUpper())
                     };
 
                 var token = GetToken(authClaims);
