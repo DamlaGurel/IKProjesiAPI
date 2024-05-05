@@ -1,7 +1,10 @@
 ﻿using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
 using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Application.Services.EmployeeService;
+using IKProjesiAPI.Domain.Entities;
+using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IKProjesiAPI.API.Controllers
@@ -12,10 +15,11 @@ namespace IKProjesiAPI.API.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;
-
-        public EmployeeController(IEmployeeService employeeService)
+        private readonly UserManager<AppUser> _userManager;
+        public EmployeeController(IEmployeeService employeeService, UserManager<AppUser> userManager)
         {
             _employeeService = employeeService;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -74,10 +78,26 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpPost]
         [Route("CreateAdvancePayment")]
-        public async Task<IActionResult> CreateAdvancePayment([FromBody] CreateAdvancePaymentDto createAdvancePayment)
+        public async Task CreateAdvancePayment([FromBody] CreateAdvancePaymentDto createAdvancePayment)
         {
             await _employeeService.CreateAdvancePayment(createAdvancePayment);
-            return Ok();
+        }
+
+        [HttpGet]
+        [Route("ListAdvancePayment")]
+        public async Task<IActionResult> ListAdvancePayment()
+        {
+            var advance = await _employeeService.ListAdvancePayments();
+            if (advance.Count > 0)
+            {
+                return Ok(advance);
+            }
+            else if (advance.Count == 0)
+            {
+                return BadRequest("Avans Talebiniz Bulunmamaktadır.");
+            }
+            else
+                return NotFound();
         }
     }
 }

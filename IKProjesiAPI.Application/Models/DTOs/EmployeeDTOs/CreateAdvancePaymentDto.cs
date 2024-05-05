@@ -12,10 +12,10 @@ namespace IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs
     {
         //public int? Id { get; set; }
         public int? EmployeeId { get; set; }
-        public AdvanceType? AdvanceType { get; set; }
+        public int AdvanceTypeId { get; set; }
         public double? TotalAdvance { get; set; }
         //public double? Payment { get; set; }
-        public MoneyType? MoneyType { get; set; }
+        public int MoneyTypeId { get; set; }
         public ApprovalType? ApprovalType { get; set; }
         public DateTime? ResponseTime { get; set; }
         public DateTime? RequestDate { get; set; }

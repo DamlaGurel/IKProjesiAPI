@@ -27,16 +27,16 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
         public async Task CreateAdvancePayment(CreateAdvancePaymentDto model)
         {
-            var employee = _mapper.Map<AdvancePayment>(model);
+            var advance = _mapper.Map<AdvancePayment>(model);
 
-            employee.EmployeeId = model.EmployeeId;
-            employee.AdvanceType = model.AdvanceType;
-            employee.ApprovalType = ApprovalType.Waiting;
-            employee.RequestDate = DateTime.Now;
-            //employee.TotalAdvance = employee.Payment * 3;
+            advance.EmployeeId = model.EmployeeId;
+            advance.AdvanceType = (AdvanceType)model.AdvanceTypeId;
+            advance.MoneyType = (MoneyType)model.MoneyTypeId;
+            advance.ApprovalType = ApprovalType.Waiting;
+            advance.RequestDate = DateTime.Now;
+            //advance.TotalAdvance = advance.Payment * 3;
 
-            await _advancePaymentRepo.Create(employee);
-
+            await _advancePaymentRepo.Create(advance);
         }
 
         public async Task<CreateEmployeeDto> CreateEmployee(CreateEmployeeDto model)
@@ -109,6 +109,15 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             employeeExpense.RequestDate = DateTime.Now;
 
             await _expenseRepo.Create(employeeExpense);
+        }
+
+        public async Task<List<ListAdvancePaymentDto>> ListAdvancePayments()
+        {
+            var advancePayment = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<ListAdvancePaymentDto>(x),
+                                                                      where: x => x.ApprovalType.Equals(ApprovalType.Waiting),
+                                                                      orderBy: x => x.OrderBy(x => x.RequestDate));
+            var advance = _mapper.Map<List<ListAdvancePaymentDto>>(advancePayment);
+            return advance;
         }
     }
 }
