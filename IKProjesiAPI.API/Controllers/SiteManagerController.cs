@@ -15,7 +15,7 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     //[Authorize(AuthenticationSchemes = "Bearer",Roles = "SiteManager")]
 
     public class SiteManagerController : Controller

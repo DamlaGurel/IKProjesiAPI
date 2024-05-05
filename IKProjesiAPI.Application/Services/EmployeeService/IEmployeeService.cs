@@ -11,5 +11,6 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
         Task<UpdateEmployeeDto> GetEmployeeById(int id);
         Task CreateExpense(CreateExpenseDto model);
         Task CreateAdvancePayment(CreateAdvancePaymentDto model);
+        Task<List<ListAdvancePaymentDto>> ListAdvancePayments(); 
     }
 }

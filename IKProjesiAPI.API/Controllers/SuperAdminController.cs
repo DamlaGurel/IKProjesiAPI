@@ -6,25 +6,27 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
 
     public class SuperAdminController : ControllerBase
     {
         private readonly ISiteManagerService _siteManagerService;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppRole> _roleManager;
-        
+
         public SuperAdminController(ISiteManagerService siteManagerService, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             _siteManagerService = siteManagerService;
             _userManager = userManager;
             _roleManager = roleManager;
-           
         }
 
         [HttpPost]
@@ -32,10 +34,10 @@ namespace IKProjesiAPI.API.Controllers
         //[Authorize(Roles = "SUPERADMİN")]
         public async Task<IActionResult> CreateSiteManager([FromBody] CreateSiteManagerDto siteManager)
         {
-            //if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
+            if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
+            {
+                return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
+            }
 
             if (!ModelState.IsValid)
             {
@@ -45,7 +47,7 @@ namespace IKProjesiAPI.API.Controllers
             var sm = await _siteManagerService.CreateSiteManager(siteManager);
             var user = await _userManager.FindByNameAsync(sm.UserName.ToUpper());
             user.SecurityStamp = Guid.NewGuid().ToString();
-            
+
             if (user != null)
             {
                 string roleName = Job.SiteManager.ToString().ToUpper();
