@@ -7,7 +7,7 @@
     <UserSecretsId>1d990c88-e928-41b1-a426-22c7ac19f8ea</UserSecretsId>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'IkProjesiAPI.API' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'IKProjesiAPI' " />
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.29" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.29" />

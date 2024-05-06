@@ -32,6 +32,15 @@ namespace IKProjesiAPI.Application.AutoMapper
 
             CreateMap<Expense,CreateExpenseDto>().ReverseMap();
 
+            CreateMap<TakeOffDay, CreateTakeDayOffDto>().ReverseMap();
+            CreateMap<TakeOffDay, ListOffDaysDto>().ReverseMap();
+            CreateMap<TakeOffDay, ApprovalForOffDayDto>().ReverseMap();
+            CreateMap<UpdateDayOffDto,TakeOffDay >().ReverseMap();
+
+
+
+
+
         }
     }
 }

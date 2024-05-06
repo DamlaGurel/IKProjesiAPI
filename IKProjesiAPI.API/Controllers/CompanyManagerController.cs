@@ -8,6 +8,7 @@ using System.Net;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Application.Services.EmployeeService;
+using IKProjesiAPI.Domain.Entities;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -16,13 +17,15 @@ namespace IKProjesiAPI.API.Controllers
     public class CompanyManagerController : ControllerBase
     {
         private readonly ICompanyManagerService _companyManagerService;
-        private readonly IEmployeeService _employeService;
+        private readonly IEmployeeService _employeeService;
         private readonly UserManager<AppUser> _userManager;
+
+
 
         public CompanyManagerController(ICompanyManagerService companyManagerService, IEmployeeService employeeService, UserManager<AppUser> userManager)
         {
             _companyManagerService = companyManagerService;
-            _employeService = employeeService;
+            _employeeService = employeeService;
             _userManager = userManager;
         }
 
@@ -81,7 +84,7 @@ namespace IKProjesiAPI.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var employee = await _employeService.CreateEmployee(model);
+            var employee = await _employeeService.CreateEmployee(model);
             var p = await _userManager.FindByNameAsync(employee.Username.ToUpper());
             p.SecurityStamp = Guid.NewGuid().ToString();
             if (p != null)
@@ -109,5 +112,34 @@ namespace IKProjesiAPI.API.Controllers
 
             return Ok("Kayıt Başarılı. Mail Gönderilmiştir.");
         }
+
+        [HttpGet]
+        [Route("ListApprovalForOffDay")]
+        public async Task<IActionResult> ListApprovalForOffDay()
+        {
+           var listofApprovalForOffDay = await _companyManagerService.WaitingApprovalForDayOff();
+            return Ok(listofApprovalForOffDay);
+
+
+        }
+
+        [HttpPut]
+        [Route("UpdateApprovalForOffDay")]
+        public async Task<IActionResult> UpdateApprovalForOffDay([FromBody] UpdateDayOffDto model)
+        {
+           await _employeeService.UpdateTakeDayOff(model);
+            return Ok();
+        }
+
+
+        [HttpGet]
+        [Route("GetApprovalForOffDay/{id}")]
+        public async Task<IActionResult> GetApprovalForOffDay(int id)
+        {
+           var offDay= await _employeeService.GetTakeDayOff(id);
+            return Ok(offDay);
+        }
+
+
     }
 }

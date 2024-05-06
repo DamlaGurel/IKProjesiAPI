@@ -1,5 +1,6 @@
 ﻿using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Application.Services.EmployeeService;
+using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,5 +31,25 @@ namespace IKProjesiAPI.API.Controllers
             await _employeeService.CreateExpense(createExpense);
         }
 
+
+        [HttpPost]
+        [Route("CreateTakeDayOff")]
+        public async Task CreateTakeDayOff([FromBody] CreateTakeDayOffDto model)
+        {
+            await _employeeService.CreateTakeDayOff(model);
+        }
+
+        [HttpGet]
+        [Route("ListTakeDayOff/{id}")]
+        public async Task<IActionResult> ListTakeDayOff(int id)
+        {
+            var offDays = await _employeeService.ListTakeDayOff(id);
+            
+
+            return Ok(offDays);
+
+        }
+
+       
     }
 }

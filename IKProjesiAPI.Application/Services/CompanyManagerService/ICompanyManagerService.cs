@@ -1,4 +1,7 @@
-﻿using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+﻿using System.Runtime.InteropServices;
+using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
+using IKProjesiAPI.Domain.Entities;
 
 namespace IKProjesiAPI.Application.Services.CompanyManagerService
 {
@@ -13,6 +16,11 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         Task<List<ListCompanyManagerDto>> GetCompanyManagersByCompany(int companyId);
         Task<SummaryCompanyManagerDto> GetCompanyManagerSummary(int id);
         Task<DetailCompanyManagerDto> GetCompanyManagerDetails(int id);
+        Task<List<ApprovalForOffDayDto>> WaitingApprovalForDayOff();
+
+        
+
+
     }
 }
 
