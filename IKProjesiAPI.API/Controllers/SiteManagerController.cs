@@ -1,19 +1,15 @@
 ﻿using IKProjesiAPI.Application.Models.DTOs.CompanyDTOs;
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
-
 using IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs;
-
 using IKProjesiAPI.Application.Services.CompanyManagerService;
 using IKProjesiAPI.Application.Services.CompanyService;
 using IKProjesiAPI.Application.Services.SiteManagerService;
-using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using Microsoft.IdentityModel.Tokens;
+
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -42,8 +38,8 @@ namespace IKProjesiAPI.API.Controllers
         // CompanyManager
 
         [HttpPost]
-        [Route("AddCompanyManager")]
-        public async Task<IActionResult> AddCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
+        [Route("CreateCompanyManager")]
+        public async Task<IActionResult> CreateCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
         {
             if (!ModelState.IsValid)
             {
@@ -58,11 +54,13 @@ namespace IKProjesiAPI.API.Controllers
 
             var user = await _userManager.FindByNameAsync(cm.UserName.ToUpper());
 
-            //user.SecurityStamp = Guid.NewGuid().ToString();
+            user.SecurityStamp = Guid.NewGuid().ToString();
             if (user != null)
             {
                 string roleName = Job.CompanyManager.ToString().ToUpper();
                 await _userManager.AddToRoleAsync(user, roleName);
+                user.CreatedDate = DateTime.Now;
+                user.Status = Status.Active;
             }
             
             return Ok();
@@ -74,6 +72,7 @@ namespace IKProjesiAPI.API.Controllers
         public async Task<IActionResult> GetAllCompanyManagers()
         {
             var companyManagers = await _companyManagerService.GetCompanyManagers();
+
             if (companyManagers.Count > 0)
                 return Ok(companyManagers);
             else if (companyManagers.Count == 0)
@@ -111,9 +110,9 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpPut]
         [Route("UpdateSiteManager")]
-        public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManager)
+        public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManagerUpdate)
         {
-            await _siteManagerService.UpdateSiteManager(siteManager);
+            await _siteManagerService.UpdateSiteManager(siteManagerUpdate);
             return Ok();
         }
 
@@ -131,7 +130,7 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpPost]
         [Route("CreateCompany")]
-        public async Task<IActionResult> CreateCompany([FromBody] CreateCompanyDto model)
+        public async Task<IActionResult> CreateCompany([FromBody] CreateCompanyDto createCompany)
         {
             //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
             //{
@@ -141,7 +140,7 @@ namespace IKProjesiAPI.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _companyService.Create(model);
+            await _companyService.Create(createCompany);
             return Ok();
         }
 

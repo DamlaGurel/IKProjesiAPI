@@ -1,21 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using IKProjesiAPI.Application.Models.DTOs.UserDTOs;
-using System.Security.Claims;
-using Microsoft.EntityFrameworkCore;
-
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using IKProjesiAPI.Application.Services.CompanyManagerService;
-using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
-using AutoMapper;
 using IKProjesiAPI.Domain.Enums;
-using IKProjesiAPI.Application.Services.PersonelService;
 using System.Net.Mail;
 using System.Net;
 using IKProjesiAPI.Domain.Entities.AppEntities;
+using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
+using IKProjesiAPI.Application.Services.EmployeeService;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -24,13 +16,13 @@ namespace IKProjesiAPI.API.Controllers
     public class CompanyManagerController : ControllerBase
     {
         private readonly ICompanyManagerService _companyManagerService;
-        private readonly IPersonelService _personelService;
+        private readonly IEmployeeService _employeService;
         private readonly UserManager<AppUser> _userManager;
 
-        public CompanyManagerController(ICompanyManagerService companyManagerService, IPersonelService personelService, UserManager<AppUser> userManager)
+        public CompanyManagerController(ICompanyManagerService companyManagerService, IEmployeeService employeeService, UserManager<AppUser> userManager)
         {
             _companyManagerService = companyManagerService;
-            _personelService = personelService;
+            _employeService = employeeService;
             _userManager = userManager;
         }
 
@@ -59,6 +51,15 @@ namespace IKProjesiAPI.API.Controllers
                 return NotFound("kullanıcı bulunamadı");
         }
 
+        [HttpGet]
+        [Route("GetCompanyManagerById/{id}")]
+        public async Task<IActionResult> GetCompanyManagerById(int id)
+        {
+            var companyManager = await _companyManagerService.GetCompanyManagerById(id);
+
+            return Ok(companyManager);
+        }
+
         [HttpPut]
         [Route("GetCompanyManagerUpdate")]
         public async Task<IActionResult> GetCompanyManagerUpdate([FromBody] UpdateCompanyManagerDto model)
@@ -68,8 +69,8 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpPost]
-        [Route("AddPersonel")]
-        public async Task<IActionResult> AddPersonel([FromBody] CreatePersonelDto model)
+        [Route("CreateEmployee")]
+        public async Task<IActionResult> CreateEmployee([FromBody] CreateEmployeeDto model)
         {
             //if (!User.IsInRole(Job.CompanyManager.ToString().ToUpper()))
             //{
@@ -80,12 +81,12 @@ namespace IKProjesiAPI.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var personel = await _personelService.CreatePersonel(model);
-            var p = await _userManager.FindByNameAsync(personel.Username.ToUpper());
+            var employee = await _employeService.CreateEmployee(model);
+            var p = await _userManager.FindByNameAsync(employee.Username.ToUpper());
             p.SecurityStamp = Guid.NewGuid().ToString();
             if (p != null)
             {
-                string roleName = Job.Personel.ToString().ToUpper();
+                string roleName = Job.Employee.ToString().ToUpper();
                 await _userManager.AddToRoleAsync(p, roleName);
             }
 

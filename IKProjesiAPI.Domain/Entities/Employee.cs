@@ -1,22 +1,15 @@
 ﻿using IKProjesiAPI.Domain.Entities.AppEntities;
-using IKProjesiAPI.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Domain.Entities
 {
-    public class Personel:AppUser
+    public class Employee : AppUser
     {
-        public Personel()
+        public Employee()
         {
             TakeOffDays = new List<TakeOffDay>();
             AdvancePayments = new List<AdvancePayment>();
             Expenses = new List<Expense>();
         }
-
         public string? UserName { get; set; }
         public int? CompanyManagerId { get; set; }
         public CompanyManager? CompanyManager { get; set; }

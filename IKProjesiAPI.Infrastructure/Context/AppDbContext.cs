@@ -1,15 +1,8 @@
 ﻿using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Infrastructure.EntityTypeConfig;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IKProjesiAPI.Infrastructure.Context
 {
@@ -34,7 +27,7 @@ namespace IKProjesiAPI.Infrastructure.Context
         public DbSet<SiteManager> SiteManagers { get; set; }
         public DbSet<CompanyManager> CompanyManagers { get; set; }
         public DbSet<Company> Companies { get; set; }
-        public DbSet<Personel> Personels { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<AdvancePayment> AdvancePayments { get; set; }
         public DbSet<TakeOffDay> TakeOffDays { get; set; }
@@ -53,7 +46,7 @@ namespace IKProjesiAPI.Infrastructure.Context
                     .ApplyConfiguration(new AdvancePaymentConfig())
                     .ApplyConfiguration(new CompanyManagerConfig())
                     .ApplyConfiguration(new ExpenseConfig())
-                    .ApplyConfiguration(new PersonelConfig())
+                    .ApplyConfiguration(new EmployeeConfig())
                     .ApplyConfiguration(new SiteManagerConfig())
                     .ApplyConfiguration(new TakeOffDayConfig());
 
