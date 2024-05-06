@@ -13,6 +13,21 @@ namespace IKProjesiAPI.Infrastructure.Repositories
         {
             _context = context;
         }
+
+        public async Task<string> GenerateUniqueEmail(string firstName, string lastName)
+        {
+            int count = 1;
+            string Email = $"{firstName.ToLower()}.{lastName.ToLower()}@bilgeadamboost.com";
+
+            while (await UniqueEmail(Email))
+            {
+                count++;
+                Email = $"{firstName.ToLower()}.{lastName.ToLower()}{count}@bilgeadamboost.com";
+            }
+
+            return Email;
+        }
+
         public virtual async Task<SignInResult> PasswordSignInEmail(string email, string password)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
@@ -23,6 +38,10 @@ namespace IKProjesiAPI.Infrastructure.Repositories
 
             return SignInResult.Success;
         }
-
+        public async Task<bool> UniqueEmail(string email)
+        {
+            var user = await _context.Users.AnyAsync(u => u.Email == email);
+            return user;
+        }
     }
 }

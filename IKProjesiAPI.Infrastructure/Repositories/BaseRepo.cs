@@ -3,6 +3,7 @@ using IKProjesiAPI.Domain.Repositories;
 using IKProjesiAPI.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using System.Globalization;
 using System.Linq.Expressions;
 
 namespace IKProjesiAPI.Infrastructure.Repositories

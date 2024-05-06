@@ -9,21 +9,25 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
     public class SiteManagerService : ISiteManagerService
     {
         private readonly ISiteManagerRepo _siteManagerRepo;
+        private readonly IAppUserRepo _appUserRepo;
         private readonly IMapper _mapper;
 
-        public SiteManagerService(ISiteManagerRepo siteManagerRepo, IMapper mapper)
+        public SiteManagerService(ISiteManagerRepo siteManagerRepo, IMapper mapper, IAppUserRepo appUserRepo)
         {
             _siteManagerRepo = siteManagerRepo;
             _mapper = mapper;
+            _appUserRepo = appUserRepo;
         }
 
 
         public async Task<CreateSiteManagerDto> CreateSiteManager(CreateSiteManagerDto model)
         {
+            var email = await _appUserRepo.GenerateUniqueEmail(model.FirstName, model.LastName);
+
             var siteManager = _mapper.Map<SiteManager>(model);
 
-            siteManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadamboost.com";
-            siteManager.NormalizedEmail = siteManager.Email.ToUpper();
+            siteManager.Email = email;
+            siteManager.NormalizedEmail = email.ToUpper();
             siteManager.UserName = siteManager.Email;
             siteManager.NormalizedUserName = siteManager.Email.ToUpper();
             siteManager.JobName = Job.SiteManager;
@@ -37,8 +41,8 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
         //public async Task<string> GetUserEmail(string firstName, string lastName)
         //{
         //    string email = $"{firstName}.{lastName}@bilgeadam.com";
-        //   var userEmail= await _siteManagerRepo.GetFilteredFirstOrDefault(select: u => u.Email,
-        //    where: u => u.Email == email);
+        //    var userEmail = await _siteManagerRepo.GetFilteredFirstOrDefault(select: u => u.Email,
+        //     where: u => u.Email == email);
         //    return email;
         //}
 

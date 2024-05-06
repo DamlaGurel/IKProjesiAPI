@@ -57,7 +57,8 @@ namespace IKProjesiAPI.API.Controllers
             }
             else
             {
-                return NotFound("Belirtilen e-postaya sahip bir kullanıcı bulunamadı.");
+                return Ok(user);
+                //return BadRequest("Belirtilen e-postaya sahip bir kullanıcı bulunamadı.");
             }
         }
     }

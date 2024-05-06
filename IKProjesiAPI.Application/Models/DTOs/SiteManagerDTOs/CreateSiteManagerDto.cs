@@ -20,6 +20,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs
         //[DateTimeValidation]
         public DateTime? BirthDate { get; set; }
         public string? BirthPlace { get; set; }
+        //[IdentificationNumberValidation(ErrorMessage = "Geçersiz T.C. Kimlik No girdiniz.")]
         public string? IdentityNumber { get; set; }
 
         public DateTime? StartDateOfWork { get; set; }
