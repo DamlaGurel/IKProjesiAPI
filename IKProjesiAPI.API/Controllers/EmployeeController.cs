@@ -125,10 +125,10 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpGet]
-        [Route("ListAdvancePayment")]
-        public async Task<IActionResult> ListAdvancePayment()
+        [Route("ListAdvancePayment/{id}")]
+        public async Task<IActionResult> ListAdvancePayment(int id)
         {
-            var advance = await _employeeService.ListAdvancePayments();
+            var advance = await _employeeService.ListAdvancePayments(id);
             if (advance.Count > 0)
             {
                 return Ok(advance);

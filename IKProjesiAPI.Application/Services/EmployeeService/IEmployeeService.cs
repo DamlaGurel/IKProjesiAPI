@@ -30,6 +30,6 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
         //AdvancePayment
         Task CreateAdvancePayment(CreateAdvancePaymentDto model);
-        Task<List<ListAdvancePaymentDto>> ListAdvancePayments(); 
+        Task<List<ListAdvancePaymentDto>> ListAdvancePayments(int id); 
     }
 }

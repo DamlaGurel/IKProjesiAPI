@@ -10,7 +10,7 @@ namespace IKProjesiAPI.Domain.Entities
             AdvancePayments = new List<AdvancePayment>();
             Expenses = new List<Expense>();
         }
-        public string? UserName { get; set; }
+        //public string? UserName { get; set; }
         public int? CompanyManagerId { get; set; }
         public CompanyManager? CompanyManager { get; set; }
         public int? DaysOffNumber { get; set; }

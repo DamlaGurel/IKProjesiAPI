@@ -222,11 +222,10 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
         }
 
 
-        public async Task<List<ListAdvancePaymentDto>> ListAdvancePayments()
+        public async Task<List<ListAdvancePaymentDto>> ListAdvancePayments(int id)
         {
             var advancePayment = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<ListAdvancePaymentDto>(x),
-                                                                      where: x => x.ApprovalType.Equals(ApprovalType.Waiting),
-                                                                      orderBy: x => x.OrderBy(x => x.RequestDate));
+                                                                      where: x => x.EmployeeId.Equals(id));
             var advance = _mapper.Map<List<ListAdvancePaymentDto>>(advancePayment);
             return advance;
         }
