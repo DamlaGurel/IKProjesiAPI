@@ -3,7 +3,7 @@ using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Enums;
 using Microsoft.AspNetCore.Http;
 
-namespace IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs
+namespace IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs
 {
     public class CreateExpenseDto
     {

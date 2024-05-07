@@ -1,5 +1,8 @@
-﻿using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+﻿using IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs;
+using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
 using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
+using IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs;
+using IKProjesiAPI.Application.Models.DTOs.OffDayDTOs;
 using IKProjesiAPI.Application.Services.EmployeeService;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Repositories;
@@ -25,6 +28,7 @@ namespace IKProjesiAPI.API.Controllers
             return View();
         }
 
+        //Employee İşlemleri
         [HttpGet]
         [Route("GetEmployeeSummary/{id}")]
         public async Task<IActionResult> GetEmployeeSummary(int id)
@@ -66,6 +70,7 @@ namespace IKProjesiAPI.API.Controllers
             return Ok(employee);
         }
 
+        //Expense İşlemleri
         [HttpPost]
         [Route("CreateExpense")]
         public async Task CreateExpense(CreateExpenseDto createExpense)
@@ -73,7 +78,7 @@ namespace IKProjesiAPI.API.Controllers
             await _employeeService.CreateExpense(createExpense);
         }
 
-
+        //OffDay İşlemleri
 
         [HttpPost]
         [Route("CreateTakeDayOff")]
@@ -93,7 +98,7 @@ namespace IKProjesiAPI.API.Controllers
 
         }
 
-       
+       //Advance Payment İşlemleri
 
         [HttpPost]
         [Route("CreateAdvancePayment")]

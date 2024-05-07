@@ -1,9 +1,9 @@
 ﻿using System;
 using IKProjesiAPI.Domain.Enums;
 
-namespace IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs
+namespace IKProjesiAPI.Application.Models.DTOs.OffDayDTOs
 {
-	public class CreateTakeDayOffDto
+    public class CreateTakeDayOffDto
 	{
         public DateTime DayOffStartTime { get; set; }
         public DateTime DayOffEndTime { get; set; }

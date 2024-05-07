@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+using IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs;
+using IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs;
+using IKProjesiAPI.Application.Models.DTOs.OffDayDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;

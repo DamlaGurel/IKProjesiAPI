@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs
+namespace IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs
 {
     public class CreateAdvancePaymentDto
     {

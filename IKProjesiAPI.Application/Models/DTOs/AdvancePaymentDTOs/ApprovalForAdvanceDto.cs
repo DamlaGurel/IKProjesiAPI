@@ -1,5 +1,5 @@
 ﻿using System;
-namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
+namespace IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs
 {
 	public class ApprovalForAdvanceDto
 	{
