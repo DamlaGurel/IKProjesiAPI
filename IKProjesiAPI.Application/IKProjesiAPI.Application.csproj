@@ -10,6 +10,9 @@
     <Folder Include="IoC\" />
     <Folder Include="Services\CompanyManagerService\" />
 
+    <Folder Include="Models\DTOs\ExpenseDTOs\" />
+    <Folder Include="Models\DTOs\AdvancePaymentDTOs\" />
+    <Folder Include="Models\DTOs\OffDayDTOs\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +30,9 @@
   <ItemGroup>
     <None Remove="Services\CompanyManagerService\" />
     <None Remove="Models\DTOs\CompanyManagerDTOs\" />
+    <None Remove="Models\DTOs\ExpenseDTOs\" />
+    <None Remove="Models\DTOs\AdvancePaymentDTOs\" />
+    <None Remove="Models\DTOs\OffDayDTOs\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IKProjesiAPI.Domain\IKProjesiAPI.Domain.csproj" />

@@ -1,7 +1,7 @@
 ﻿using System;
 using IKProjesiAPI.Domain.Enums;
 
-namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
+namespace IKProjesiAPI.Application.Models.DTOs.OffDayDTOs
 {
 	public class ApprovalForOffDayDto
 	{

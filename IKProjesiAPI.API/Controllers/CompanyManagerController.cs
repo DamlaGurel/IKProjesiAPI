@@ -9,6 +9,7 @@ using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Application.Services.EmployeeService;
 using IKProjesiAPI.Domain.Entities;
+using IKProjesiAPI.Application.Models.DTOs.OffDayDTOs;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -115,6 +116,7 @@ namespace IKProjesiAPI.API.Controllers
             return Ok("Kayıt Başarılı. Mail Gönderilmiştir.");
         }
 
+        //OffDay İşlemleri
         [HttpGet]
         [Route("ListApprovalForOffDay")]
         public async Task<IActionResult> ListApprovalForOffDay()
@@ -140,6 +142,7 @@ namespace IKProjesiAPI.API.Controllers
             return Ok(offDay);
         }
 
+        //Expense İşlemleri
         [HttpGet]
         [Route("ListApprovalForExpense")]
         public async Task<IActionResult> ListApprovalForExpense()
@@ -163,6 +166,10 @@ namespace IKProjesiAPI.API.Controllers
         //    var expense = await _employeeService.GetExpense(id);
         //    return Ok(expense);
         //}
+
+
+
+        //AdvancePayment İşlemleri
         //[HttpGet]
         //[Route("ListApprovalForAdvancePayment")]
         //public async Task<IActionResult> ListApprovalForAdvancePayment()

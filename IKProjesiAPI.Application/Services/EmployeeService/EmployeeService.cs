@@ -1,7 +1,10 @@
 ﻿using System.ComponentModel.Design;
 using AutoMapper;
+using IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs;
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
 using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
+using IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs;
+using IKProjesiAPI.Application.Models.DTOs.OffDayDTOs;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;
@@ -28,19 +31,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             _companyManagerRepo = companyManagerRepo;
         }
 
-        public async Task CreateAdvancePayment(CreateAdvancePaymentDto model)
-        {
-            var advance = _mapper.Map<AdvancePayment>(model);
-
-            advance.EmployeeId = model.EmployeeId;
-            advance.AdvanceType = (AdvanceType)model.AdvanceTypeId;
-            advance.MoneyType = (MoneyType)model.MoneyTypeId;
-            advance.ApprovalType = ApprovalType.Waiting;
-            advance.RequestDate = DateTime.Now;
-            //advance.TotalAdvance = advance.Payment * 3;
-
-            await _advancePaymentRepo.Create(advance);
-        }
+        
 
         public async Task<CreateEmployeeDto> CreateEmployee(CreateEmployeeDto model)
         {
@@ -101,6 +92,8 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             await _employeeRepo.Update(employee);
         }
 
+
+        //Expense İşlemleri
         public async Task CreateExpense(CreateExpenseDto model)
         {
             var employeeExpense = _mapper.Map<Expense>(model);
@@ -125,10 +118,8 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             dayOff.ApprovalType = ApprovalType.Waiting;
             dayOff.RequestTime = DateTime.Now;
 
-            // Günler arasındaki farkı hesaplayın
             int numberOfDays = (int)(model.DayOffEndTime - model.DayOffStartTime).TotalDays;
 
-            // Toplam gün sayısını ayarlayın
             dayOff.DayNumber = numberOfDays;
 
             await _takeOffDayRepo.Create(dayOff);
@@ -193,8 +184,20 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
 
         }
+        //Advance Payment İşlemleri
+        public async Task CreateAdvancePayment(CreateAdvancePaymentDto model)
+        {
+            var employee = _mapper.Map<AdvancePayment>(model);
 
-        
+            employee.EmployeeId = model.EmployeeId;
+            employee.AdvanceType = model.AdvanceType;
+            employee.ApprovalType = ApprovalType.Waiting;
+            employee.RequestDate = DateTime.Now;
+            //employee.TotalAdvance = employee.Payment * 3;
+
+            await _advancePaymentRepo.Create(employee);
+
+        }
 
 
         public async Task<List<ListAdvancePaymentDto>> ListAdvancePayments()
