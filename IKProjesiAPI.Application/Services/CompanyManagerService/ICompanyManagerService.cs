@@ -5,8 +5,8 @@ using IKProjesiAPI.Domain.Entities;
 
 namespace IKProjesiAPI.Application.Services.CompanyManagerService
 {
-	public interface ICompanyManagerService
-	{
+    public interface ICompanyManagerService
+    {
         Task<CreateCompanyManagerDto> Create(CreateCompanyManagerDto model);
         Task Update(UpdateCompanyManagerDto model);
         Task Delete(int id);
@@ -18,7 +18,10 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         Task<DetailCompanyManagerDto> GetCompanyManagerDetails(int id);
         Task<List<ApprovalForOffDayDto>> WaitingApprovalForDayOff();
 
-        
+        Task<List<ApprovalForExpenseDto>> WaitingApprovalForExpense();
+
+        Task<List<ApprovalForAdvanceDto>> WaitingApprovalForAdvance();
+
 
 
     }

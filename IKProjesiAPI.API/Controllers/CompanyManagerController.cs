@@ -84,8 +84,10 @@ namespace IKProjesiAPI.API.Controllers
             {
                 return BadRequest(ModelState);
             }
+
             var employee = await _employeeService.CreateEmployee(model);
-            var p = await _userManager.FindByNameAsync(employee.Username.ToUpper());
+            var p = await _userManager.FindByNameAsync(employee.UserName.ToUpper());
+
             p.SecurityStamp = Guid.NewGuid().ToString();
             if (p != null)
             {
@@ -119,8 +121,6 @@ namespace IKProjesiAPI.API.Controllers
         {
            var listofApprovalForOffDay = await _companyManagerService.WaitingApprovalForDayOff();
             return Ok(listofApprovalForOffDay);
-
-
         }
 
         [HttpPut]
@@ -140,6 +140,52 @@ namespace IKProjesiAPI.API.Controllers
             return Ok(offDay);
         }
 
+        [HttpGet]
+        [Route("ListApprovalForExpense")]
+        public async Task<IActionResult> ListApprovalForExpense()
+        {
+            var listApprovalForExpense = await _companyManagerService.WaitingApprovalForExpense();
+            return Ok(listApprovalForExpense);
+        }
+        //[HttpPut]
+        //[Route("UpdateApprovalForExpense")]
+        //public async Task<IActionResult> UpdateApprovalForExpense([FromBody] UpdateExpenseDto model)
+        //{
+        //    await _employeeService.UpdateExpense(model);
+        //    return Ok();
+        //}
 
+
+        //[HttpGet]
+        //[Route("GetApprovalForExpense/{id}")]
+        //public async Task<IActionResult> GetApprovalForExpense(int id)
+        //{
+        //    var expense = await _employeeService.GetExpense(id);
+        //    return Ok(expense);
+        //}
+        //[HttpGet]
+        //[Route("ListApprovalForAdvancePayment")]
+        //public async Task<IActionResult> ListApprovalForAdvancePayment()
+        //{
+        //    var listApprovalForAdvancePayment = await _companyManagerService.WaitingApprovalForAdvance();
+        //    return Ok(listApprovalForAdvancePayment);
+        //}
+
+        //[HttpPut]
+        //[Route("UpdateApprovalForAdvance")]
+        //public async Task<IActionResult> UpdateApprovalForAdvance([FromBody] UpdateAdvanceDto model)
+        //{
+        //    await _employeeService.UpdateAdvance(model);
+        //    return Ok();
+        //}
+
+
+        //[HttpGet]
+        //[Route("GetApprovalForAdvance/{id}")]
+        //public async Task<IActionResult> GetApprovalForAdvance(int id)
+        //{
+        //    var advance = await _employeeService.GetAdvance(id);
+        //    return Ok(advance);
+        //}
     }
 }

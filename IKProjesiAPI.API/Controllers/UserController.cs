@@ -9,6 +9,7 @@ using System.Text;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Application.Services.AppUserService;
 using IKProjesiAPI.Application.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -45,7 +46,9 @@ namespace IKProjesiAPI.API.Controllers
                     };
 
                 var token = GetToken(authClaims);
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+                var tokenString = "Bearer " +  new JwtSecurityTokenHandler().WriteToken(token);
+
+                var isValidToken = await ValidateToken();
                 var cookieOptions = new CookieOptions
                 {
                     HttpOnly = true,
@@ -67,6 +70,14 @@ namespace IKProjesiAPI.API.Controllers
             await _appUserService.ChangePassword(changePassword);
             await _context.SaveChangesAsync();
             return Ok("Şifreniz Değiştirildi");
+        }
+
+        [HttpGet]
+        [Route("ValidateToken")]
+        public async Task<IActionResult> ValidateToken()
+        {
+            var token = HttpContext.Request.Headers["Authorization"].ToString();
+            return Ok(token);
         }
 
 

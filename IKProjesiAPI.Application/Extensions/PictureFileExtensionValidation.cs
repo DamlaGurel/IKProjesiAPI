@@ -21,12 +21,8 @@ namespace IKProjesiAPI.Application.Extensions
                     return new ValidationResult("Geçerli formatta bir dosya yükleyiniz. (\"jpg\", \"jpeg\", \"png\") ");
                 }
                 return ValidationResult.Success;
-
             }
-
             return new ValidationResult("Null Değer geldi.");
-
-
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
+﻿using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Application.Services.EmployeeService;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Repositories;
@@ -24,12 +25,54 @@ namespace IKProjesiAPI.API.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Route("GetEmployeeSummary/{id}")]
+        public async Task<IActionResult> GetEmployeeSummary(int id)
+        {
+            var employeeSummary = await _employeeService.GetEmployeeSummary(id);
+
+            if (employeeSummary != null)
+                return Ok(employeeSummary);
+            else
+                return NotFound("Employee bulunamadı");
+        }
+
+        [HttpGet]
+        [Route("GetEmployeeDetails/{id}")]
+        public async Task<IActionResult> GetEmployeeDetails(int id)
+        {
+            var employeeDetails = await _employeeService.GetEmployeeDetails(id);
+
+            if (employeeDetails != null)
+                return Ok(employeeDetails);
+            else
+                return NotFound("Employee bulunamadı");
+        }
+
+        [HttpPut]
+        [Route("UpdateEmployee")]
+        public async Task<IActionResult> UpdateEmployee([FromBody] UpdateEmployeeDto model)
+        {
+            await _employeeService.UpdateEmployee(model);
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("GetEmployeeById/{id}")]
+        public async Task<IActionResult> GetEmployeeById(int id)
+        {
+            var employee = await _employeeService.GetEmployeeById(id);
+
+            return Ok(employee);
+        }
+
         [HttpPost]
         [Route("CreateExpense")]
-        public async Task CreateExpense([FromBody] CreateExpenseDto createExpense)
+        public async Task CreateExpense(CreateExpenseDto createExpense)
         {
             await _employeeService.CreateExpense(createExpense);
         }
+
 
 
         [HttpPost]
@@ -51,5 +94,14 @@ namespace IKProjesiAPI.API.Controllers
         }
 
        
+
+        [HttpPost]
+        [Route("CreateAdvancePayment")]
+        public async Task<IActionResult> CreateAdvancePayment([FromBody] CreateAdvancePaymentDto createAdvancePayment)
+        {
+            await _employeeService.CreateAdvancePayment(createAdvancePayment);
+            return Ok();
+        }
+
     }
 }

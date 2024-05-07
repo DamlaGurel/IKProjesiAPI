@@ -17,5 +17,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
 
         public string? ImageString { get; set; }
         public byte[]? ImageBytes { get; set; }
+
+        public double? Payment { get; set; }
     }
 }

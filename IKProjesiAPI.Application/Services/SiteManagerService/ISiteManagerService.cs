@@ -12,6 +12,7 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
         Task<SiteManager> GetSiteManager(int id);
         Task<SiteManagerDetailsDto> GetSiteManagerDetails(int id);
         Task<SiteManagerSummaryDto> GetSiteManagerSummary(int id);
+        Task<List<SiteManagerDetailsDto>> SiteManagerDetails();
         //Task<string> GetUserEmail(string firstName, string lastName);
 
     }

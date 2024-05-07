@@ -37,8 +37,6 @@ namespace IKProjesiAPI.Application.Extensions
                 return false;
 
             return true; 
-
-            return base.IsValid(value);
         }
     }
 }

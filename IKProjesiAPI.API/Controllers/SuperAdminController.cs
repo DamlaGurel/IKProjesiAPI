@@ -5,6 +5,7 @@ using IKProjesiAPI.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -28,6 +29,7 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpPost]
         [Route("CreateSiteManager")]
+        //[Authorize(Roles = "SUPERADMİN")]
         public async Task<IActionResult> CreateSiteManager([FromBody] CreateSiteManagerDto siteManager)
         {
             //if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
@@ -35,17 +37,19 @@ namespace IKProjesiAPI.API.Controllers
             //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
             //}
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var sm = await _siteManagerService.CreateSiteManager(siteManager);
             var user = await _userManager.FindByNameAsync(sm.UserName.ToUpper());
             user.SecurityStamp = Guid.NewGuid().ToString();
+            
             if (user != null)
             {
                 string roleName = Job.SiteManager.ToString().ToUpper();
-
                 await _userManager.AddToRoleAsync(user, roleName);
-                user.CreatedDate = DateTime.Now;
-                user.Status = Status.Active;
-
             }
 
             return Ok("KAYIT BAŞARILI");
@@ -64,5 +68,12 @@ namespace IKProjesiAPI.API.Controllers
             return Ok("SİLME BAŞARILI");
         }
 
+        [HttpGet]
+        [Route("SiteManagerDetail")]
+        public async Task<IActionResult> SiteManagerDetail()
+        {
+            var siteManager = await _siteManagerService.SiteManagerDetails();
+            return Ok(siteManager);
+        }
     }
 }

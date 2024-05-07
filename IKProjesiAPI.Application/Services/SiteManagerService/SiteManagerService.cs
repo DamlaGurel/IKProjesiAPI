@@ -105,5 +105,11 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
             }
         }
 
+        public async Task<List<SiteManagerDetailsDto>> SiteManagerDetails()
+        {
+            var siteManager = await _siteManagerRepo.GetFilteredList(select: s => _mapper.Map<SiteManagerDetailsDto>(s),
+                                                                     where: s => !s.Status.Equals(Status.Pasive));
+            return siteManager;
+        }
     }
 }
