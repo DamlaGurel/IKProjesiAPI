@@ -80,12 +80,36 @@ namespace IKProjesiAPI.API.Controllers
         {
             await _employeeService.CreateExpense(createExpense);
         }
+        //[HttpGet]
+        //[Route("ListExpense/{id}")]
+        //public async Task<IActionResult> ListExpense(int id)
+        //{
+        //    var expense = await _employeeService.ListExpenses(id);
+        //    if (expense.Count > 0)
+        //    {
+        //        return Ok(expense);
+        //    }
+        //    else if (expense.Count == 0)
+        //    {
+        //        return BadRequest("Harcama Talebiniz Bulunmamaktadır.");
+        //    }
+        //    else
+        //        return NotFound();
+        //}
+        [HttpGet]
+        [Route("ListExpense/{id}")]
+        public async Task<IActionResult> ListExpense(int id)
+        {
+            var expenseList = await _employeeService.ListExpense(id);
 
-        
+            return Ok(expenseList);
+
+        }
+
         //OffDay İşlemleri
 
         [HttpPost]
-        [Route("CreateOffDayy")]
+        [Route("CreateOffDay")]
         public async Task CreateOffDayy([FromBody] CreateOffDayDto model)
         {
             await _employeeService.CreateOffDay(model);
@@ -96,7 +120,6 @@ namespace IKProjesiAPI.API.Controllers
         public async Task<IActionResult> ListOffDay(int id)
         {
             var offDays = await _employeeService.ListOffDay(id);
-            
 
             return Ok(offDays);
 
@@ -112,8 +135,8 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpGet]
-        [Route("ListAdvancePayment")]
-        public async Task<IActionResult> ListAdvancePayment()
+        [Route("ListAdvancePayments")]
+        public async Task<IActionResult> ListAdvancePayments()
         {
             var advance = await _employeeService.ListAdvancePayments();
             if (advance.Count > 0)
@@ -126,6 +149,16 @@ namespace IKProjesiAPI.API.Controllers
             }
             else
                 return NotFound();
+        }
+
+        [HttpGet]
+        [Route("ListAdvancePayment/{id}")]
+        public async Task<IActionResult> ListAdvancePayment(int id)
+        {
+            var advancePayment = await _employeeService.ListAdvancePayment(id);
+
+            return Ok(advancePayment);
+
         }
 
     }

@@ -1,4 +1,4 @@
-﻿using IKProjesiAPI.Domain.Entities.AppEntities;
+﻿using IKProjesiAPI.Domain.Entities;
 
 namespace IKProjesiAPI.Domain.Repositories
 {

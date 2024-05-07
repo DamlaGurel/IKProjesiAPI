@@ -6,7 +6,6 @@ using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs;
 using IKProjesiAPI.Application.Models.DTOs.OffDayDTOs;
 using IKProjesiAPI.Domain.Entities;
-using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
 using IKProjesiAPI.Infrastructure.Repositories;
@@ -31,29 +30,30 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             _companyManagerRepo = companyManagerRepo;
         }
 
-        
+
 
         public async Task<CreateEmployeeDto> CreateEmployee(CreateEmployeeDto model)
         {
             var employee = _mapper.Map<Employee>(model);
 
             employee.Email = $"{employee.FirstName}.{employee.LastName}@bilgeadamboost.com";
+            employee.NormalizedEmail = employee.Email.ToUpper();
             employee.UserName = employee.Email;
             employee.NormalizedUserName = employee.Email.ToUpper();
             employee.JobName = Job.Employee;
-            
-            if (model.ImageString is not null)
-            {
-                employee.ImageBytes = Convert.FromBase64String(model.ImageString);
-                            
-            }
-            
-            //employee.CompanyManager=_
 
-            if (model.DepartmentNumber is not null)
-            {
-                employee.DepartmentName = (Department)model.DepartmentNumber;                
-            }
+            //if (model.ImageString is not null)
+            //{
+            //    employee.ImageBytes = Convert.FromBase64String(model.ImageString);
+
+            //}
+
+            ////employee.CompanyManager=_
+
+            //if (model.DepartmentNumber is not null)
+            //{
+            //    employee.DepartmentName = (Department)model.DepartmentNumber;                
+            //}
 
             employee.CreatedDate = DateTime.Now;
             employee.Status = Status.Active;
@@ -66,7 +66,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
         public async Task<EmployeeSummaryDto> GetEmployeeSummary(int id)
         {
             var employee = await _employeeRepo.GetFilteredFirstOrDefault(select: x => _mapper.Map<EmployeeSummaryDto>(x),
-                                                                                     where: x => x.Id == id);
+                                                                         where: x => x.Id == id);
             return employee;
         }
 
@@ -100,7 +100,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
                 employee.ImageBytes = Convert.FromBase64String(model.ImageString);
             }
 
-           
+
             employee.Status = Status.Modified;
             employee.UpdatedDate = DateTime.Now;
 
@@ -125,8 +125,34 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             await _expenseRepo.Create(employeeExpense);
         }
 
+        public async Task<List<ListExpenseDto>> ListExpense(int id)
+        {
+            var listExpenses = await _expenseRepo.GetFilteredList(select: x => _mapper.Map<ListExpenseDto>(x),
+                                                                  where: x => x.EmployeeId.Equals(id));
+            return listExpenses;
+        }
+
+        public async Task UpdateExpense(UpdateExpenseDto model)
+        {
+            var Expense = _mapper.Map<Expense>(model);
 
 
+            Expense.ResponseDate = DateTime.Now;
+
+            Expense.ApprovalType = (ApprovalType)model.ApprovalType;
+
+            await _expenseRepo.Update(Expense);
+        }
+
+
+        public async Task<UpdateExpenseDto> GetExpense(int id)
+        {
+            var expense = await _expenseRepo.GetDefault(x => x.Id == id);
+
+            return _mapper.Map<UpdateExpenseDto>(expense);
+
+
+        }
         //İzin İşlemleri
 
         public async Task CreateOffDay(CreateOffDayDto model)
@@ -175,23 +201,22 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
             dayOff.ResponseTime = DateTime.Now;
 
-           dayOff.ApprovalType= (ApprovalType)model.ApprovalType;
-            
+            dayOff.ApprovalType = (ApprovalType)model.ApprovalType;
 
 
-           await _takeOffDayRepo.Update(dayOff);
+
+            await _takeOffDayRepo.Update(dayOff);
 
 
         }
 
         public async Task<List<ListOffDayDto>> ListOffDay(int id)
         {
-
             var listTakeDayOff = await _takeOffDayRepo.GetFilteredList(select: x => _mapper.Map<ListOffDayDto>(x), where: x => x.EmployeeId.Equals(id));
 
 
-            return listTakeDayOff;
 
+            return listTakeDayOff;
         }
 
         public async Task<UpdateOffDayDto> GetOffDay(int id)
@@ -202,13 +227,17 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
 
         }
+
         //Advance Payment İşlemleri
         public async Task CreateAdvancePayment(CreateAdvancePaymentDto model)
         {
             var employee = _mapper.Map<AdvancePayment>(model);
 
             employee.EmployeeId = model.EmployeeId;
-            //employee.AdvanceType = model.AdvanceType;
+
+            employee.AdvanceType = (AdvanceType)model.AdvanceTypeId;
+            employee.MoneyType = (MoneyType)model.MoneyTypeId;
+
             employee.ApprovalType = ApprovalType.Waiting;
             employee.RequestDate = DateTime.Now;
             //employee.TotalAdvance = employee.Payment * 3;
@@ -226,5 +255,40 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             var advance = _mapper.Map<List<ListAdvancePaymentDto>>(advancePayment);
             return advance;
         }
+
+        public async Task UpdateAdvancePayment(UpdateAdvancePaymentDto model)
+        {
+            var advancePayment = _mapper.Map<AdvancePayment>(model);
+
+
+            advancePayment.ResponseTime = DateTime.Now;
+
+            advancePayment.ApprovalType = (ApprovalType)model.ApprovalType;
+
+
+
+            await _advancePaymentRepo.Update(advancePayment);
+
+
+        }
+
+        public async Task<List<ListAdvancePaymentDto>> ListAdvancePayment(int id)
+        {
+            var listAdvancePayment = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<ListAdvancePaymentDto>(x), where: x => x.EmployeeId.Equals(id));
+
+
+
+            return listAdvancePayment;
+        }
+
+        public async Task<UpdateAdvancePaymentDto> GetAdvancePayment(int id)
+        {
+            var advancePayment = await _advancePaymentRepo.GetDefault(x => x.Id == id);
+
+            return _mapper.Map<UpdateAdvancePaymentDto>(advancePayment);
+
+
+        }
+
     }
 }

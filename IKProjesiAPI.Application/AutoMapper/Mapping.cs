@@ -41,6 +41,7 @@ namespace IKProjesiAPI.Application.AutoMapper
             CreateMap<ListAdvancePaymentDto, AdvancePayment>().ReverseMap();
 
             CreateMap<Expense,CreateExpenseDto>().ReverseMap();
+            CreateMap<Expense, ListExpenseDto>().ReverseMap();
 
             CreateMap<TakeOffDay, CreateOffDayDto>().ReverseMap();
             CreateMap<TakeOffDay, ListOffDayDto>().ReverseMap();

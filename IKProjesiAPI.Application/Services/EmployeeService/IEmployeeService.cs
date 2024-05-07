@@ -19,6 +19,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
         //Expense
         Task CreateExpense(CreateExpenseDto model);
+        Task<List<ListExpenseDto>> ListExpenses(int id);
 
         //DayOff
         Task CreateOffDay(CreateOffDayDto model);

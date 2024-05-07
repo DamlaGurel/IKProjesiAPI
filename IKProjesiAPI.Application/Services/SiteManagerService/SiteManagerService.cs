@@ -31,7 +31,7 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
             siteManager.UserName = siteManager.Email;
             siteManager.NormalizedUserName = siteManager.Email.ToUpper();
             siteManager.JobName = Job.SiteManager;
-            siteManager.ImageBytes = Convert.FromBase64String(model.ImageString);
+            //siteManager.ImageBytes = Convert.FromBase64String(model.ImageString);
             siteManager.CreatedDate = DateTime.Now;
             siteManager.Status = Status.Active;
 
