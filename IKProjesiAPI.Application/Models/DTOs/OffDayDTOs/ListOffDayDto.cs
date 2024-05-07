@@ -4,7 +4,7 @@ using IKProjesiAPI.Domain.Enums;
 
 namespace IKProjesiAPI.Application.Models.DTOs.OffDayDTOs
 {
-    public class ListOffDaysDto
+    public class ListOffDayDto
 	{
         public int? ApprovalType { get; set; }
         public DateTime? RequestTime { get; set; }

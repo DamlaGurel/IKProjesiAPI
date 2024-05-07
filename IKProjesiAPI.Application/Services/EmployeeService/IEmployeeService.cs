@@ -21,11 +21,11 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
         Task CreateExpense(CreateExpenseDto model);
 
         //DayOff
-        Task CreateTakeDayOff(CreateTakeDayOffDto model);
+        Task CreateOffDay(CreateOffDayDto model);
         Task<int> CalculateAnnualOffDay(DateTime startDateOfWork);
-        Task UpdateTakeDayOff(UpdateDayOffDto model);
-        Task<List<ListOffDaysDto>> ListTakeDayOff(int id);
-        Task<UpdateDayOffDto> GetTakeDayOff(int id);
+        Task UpdateOffDay(UpdateOffDayDto model);
+        Task<List<ListOffDayDto>> ListOffDay(int id);
+        Task<UpdateOffDayDto> GetOffDay(int id);
 
         //AdvancePayment
         Task CreateAdvancePayment(CreateAdvancePaymentDto model);

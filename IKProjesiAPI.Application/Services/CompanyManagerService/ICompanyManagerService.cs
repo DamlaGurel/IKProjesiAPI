@@ -24,7 +24,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         Task<DetailCompanyManagerDto> GetCompanyManagerDetails(int id);
 
 
-        Task<List<ApprovalForOffDayDto>> WaitingApprovalForDayOff();
+        Task<List<ApprovalOffDayDto>> WaitingApprovalForDayOff();
 
         Task<List<ApprovalForExpenseDto>> WaitingApprovalForExpense();
 

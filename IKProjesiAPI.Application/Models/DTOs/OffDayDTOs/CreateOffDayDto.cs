@@ -3,7 +3,7 @@ using IKProjesiAPI.Domain.Enums;
 
 namespace IKProjesiAPI.Application.Models.DTOs.OffDayDTOs
 {
-    public class CreateTakeDayOffDto
+    public class CreateOffDayDto
 	{
         public DateTime DayOffStartTime { get; set; }
         public DateTime DayOffEndTime { get; set; }

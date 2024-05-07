@@ -155,12 +155,12 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             await _companyManagerRepo.Update(companyManager);
         }
 
-        public async Task<List<ApprovalForOffDayDto>> WaitingApprovalForDayOff()
+        public async Task<List<ApprovalOffDayDto>> WaitingApprovalForDayOff()
         {
             var listOfWaitingApprovalForDayOff = await _takeOffDayRepo.GetFilteredList(select: x => _mapper.Map<TakeOffDay>(x),
                 where: x => x.ApprovalType == ApprovalType.Waiting);
 
-            var dtoList = _mapper.Map<List<ApprovalForOffDayDto>>(listOfWaitingApprovalForDayOff);
+            var dtoList = _mapper.Map<List<ApprovalOffDayDto>>(listOfWaitingApprovalForDayOff);
 
             return dtoList;
 

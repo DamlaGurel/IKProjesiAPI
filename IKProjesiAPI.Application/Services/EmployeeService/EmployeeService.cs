@@ -129,7 +129,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
         //İzin İşlemleri
 
-        public async Task CreateTakeDayOff(CreateTakeDayOffDto model)
+        public async Task CreateOffDay(CreateOffDayDto model)
         {
             var dayOff = _mapper.Map<TakeOffDay>(model);
 
@@ -168,7 +168,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             return annualOffDays;
         }
 
-        public async Task UpdateTakeDayOff(UpdateDayOffDto model)
+        public async Task UpdateOffDay(UpdateOffDayDto model)
         {
             var dayOff = _mapper.Map<TakeOffDay>(model);
 
@@ -184,21 +184,21 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
         }
 
-        public async Task<List<ListOffDaysDto>> ListTakeDayOff(int id)
+        public async Task<List<ListOffDayDto>> ListOffDay(int id)
         {
 
-            var listTakeDayOff = await _takeOffDayRepo.GetFilteredList(select: x => _mapper.Map<ListOffDaysDto>(x), where: x => x.EmployeeId.Equals(id));
+            var listTakeDayOff = await _takeOffDayRepo.GetFilteredList(select: x => _mapper.Map<ListOffDayDto>(x), where: x => x.EmployeeId.Equals(id));
 
 
             return listTakeDayOff;
 
         }
 
-        public async Task<UpdateDayOffDto> GetTakeDayOff(int id)
+        public async Task<UpdateOffDayDto> GetOffDay(int id)
         {
             var takeDayOff = await _takeOffDayRepo.GetDefault(x => x.Id == id);
 
-            return _mapper.Map<UpdateDayOffDto>(takeDayOff);
+            return _mapper.Map<UpdateOffDayDto>(takeDayOff);
 
 
         }
@@ -208,7 +208,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             var employee = _mapper.Map<AdvancePayment>(model);
 
             employee.EmployeeId = model.EmployeeId;
-            employee.AdvanceType = model.AdvanceType;
+            //employee.AdvanceType = model.AdvanceType;
             employee.ApprovalType = ApprovalType.Waiting;
             employee.RequestDate = DateTime.Now;
             //employee.TotalAdvance = employee.Payment * 3;

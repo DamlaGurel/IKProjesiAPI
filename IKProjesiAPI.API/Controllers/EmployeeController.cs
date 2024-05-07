@@ -81,20 +81,21 @@ namespace IKProjesiAPI.API.Controllers
             await _employeeService.CreateExpense(createExpense);
         }
 
+        
         //OffDay İşlemleri
 
         [HttpPost]
-        [Route("CreateTakeDayOff")]
-        public async Task CreateTakeDayOff([FromBody] CreateTakeDayOffDto model)
+        [Route("CreateOffDayy")]
+        public async Task CreateOffDayy([FromBody] CreateOffDayDto model)
         {
-            await _employeeService.CreateTakeDayOff(model);
+            await _employeeService.CreateOffDay(model);
         }
 
         [HttpGet]
-        [Route("ListTakeDayOff/{id}")]
-        public async Task<IActionResult> ListTakeDayOff(int id)
+        [Route("ListOffDay/{id}")]
+        public async Task<IActionResult> ListOffDay(int id)
         {
-            var offDays = await _employeeService.ListTakeDayOff(id);
+            var offDays = await _employeeService.ListOffDay(id);
             
 
             return Ok(offDays);

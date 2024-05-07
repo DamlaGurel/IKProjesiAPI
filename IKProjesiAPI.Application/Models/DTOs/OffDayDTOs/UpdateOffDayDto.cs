@@ -3,7 +3,7 @@ using IKProjesiAPI.Domain.Enums;
 
 namespace IKProjesiAPI.Application.Models.DTOs.OffDayDTOs
 {
-    public class UpdateDayOffDto
+    public class UpdateOffDayDto
 	{
         public int Id { get; set; }
         public int? EmployeeId { get; set; }

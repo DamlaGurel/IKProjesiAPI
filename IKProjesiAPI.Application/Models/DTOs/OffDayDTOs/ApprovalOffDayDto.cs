@@ -3,7 +3,7 @@ using IKProjesiAPI.Domain.Enums;
 
 namespace IKProjesiAPI.Application.Models.DTOs.OffDayDTOs
 {
-	public class ApprovalForOffDayDto
+	public class ApprovalOffDayDto
 	{
         public int? Id { get; set; }
         public int ApprovalType { get; set; }
