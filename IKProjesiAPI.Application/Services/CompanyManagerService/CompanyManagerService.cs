@@ -155,7 +155,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             await _companyManagerRepo.Update(companyManager);
         }
 
-        public async Task<List<ApprovalOffDayDto>> WaitingApprovalForDayOff()
+        public async Task<List<ApprovalOffDayDto>> WaitingApprovalForOffDay()
         {
             var listOfWaitingApprovalForDayOff = await _takeOffDayRepo.GetFilteredList(select: x => _mapper.Map<TakeOffDay>(x),
                 where: x => x.ApprovalType == ApprovalType.Waiting);
@@ -163,8 +163,6 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             var dtoList = _mapper.Map<List<ApprovalOffDayDto>>(listOfWaitingApprovalForDayOff);
 
             return dtoList;
-
-
         }
 
         public async Task<List<ApprovalForExpenseDto>> WaitingApprovalForExpense()
@@ -175,20 +173,16 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             var dtoList = _mapper.Map<List<ApprovalForExpenseDto>>(listOfWaitingApprovalForExpense);
 
             return dtoList;
-
-
         }
 
-        public async Task<List<ApprovalForAdvanceDto>> WaitingApprovalForAdvance()
+        public async Task<List<ApprovalForAdvancePaymentDto>> WaitingApprovalForAdvancePayment()
         {
             var listOfWaitingApprovalForAdvance = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<AdvancePayment>(x),
                 where: x => x.ApprovalType == ApprovalType.Waiting);
 
-            var dtoList = _mapper.Map<List<ApprovalForAdvanceDto>>(listOfWaitingApprovalForAdvance);
+            var dtoList = _mapper.Map<List<ApprovalForAdvancePaymentDto>>(listOfWaitingApprovalForAdvance);
 
             return dtoList;
-
-
         }
 
     }

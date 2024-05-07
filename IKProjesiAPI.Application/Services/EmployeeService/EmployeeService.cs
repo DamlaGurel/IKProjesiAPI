@@ -247,7 +247,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
         }
 
 
-        public async Task<List<ListAdvancePaymentDto>> ListAdvancePayments(int id)
+        public async Task<List<ListAdvancePaymentDto>> ListAdvancePayment(int id)
         {
             var advancePayment = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<ListAdvancePaymentDto>(x),
                                                                       where: x => x.EmployeeId.Equals(id));
@@ -271,14 +271,6 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
         }
 
-        public async Task<List<ListAdvancePaymentDto>> ListAdvancePayment(int id)
-        {
-            var listAdvancePayment = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<ListAdvancePaymentDto>(x), where: x => x.EmployeeId.Equals(id));
-
-
-
-            return listAdvancePayment;
-        }
 
         public async Task<UpdateAdvancePaymentDto> GetAdvancePayment(int id)
         {

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs
 {
-	public class ApprovalForAdvanceDto
+	public class ApprovalForAdvancePaymentDto
 	{
         public int? Id { get; set; }
         public int? EmployeeId { get; set; }

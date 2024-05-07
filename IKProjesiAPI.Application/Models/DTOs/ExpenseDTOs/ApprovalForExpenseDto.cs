@@ -1,4 +1,6 @@
 ﻿using System;
+using IKProjesiAPI.Domain.Enums;
+
 namespace IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs
 {
 	public class ApprovalForExpenseDto
@@ -12,6 +14,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs
         public DateTime? ResponseDate { get; set; }
         public DateTime? RequestDate { get; set; }
         public string? EmployeeFullName { get; set; }
+
 
     }
 }

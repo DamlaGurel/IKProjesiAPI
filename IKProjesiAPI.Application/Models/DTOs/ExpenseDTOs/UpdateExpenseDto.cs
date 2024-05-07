@@ -10,7 +10,6 @@ namespace IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs
         public int? MoneyType { get; set; }
         public int? ApprovalType { get; set; }
         public DateTime? ResponseDate { get; set; }
-        public DateTime? RequestDate { get; set; }
         public string? EmployeeFullName { get; set; }
     }
 }

@@ -10,6 +10,8 @@ using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Application.Services.EmployeeService;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Application.Models.DTOs.OffDayDTOs;
+using IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs;
+using IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -121,7 +123,7 @@ namespace IKProjesiAPI.API.Controllers
         [Route("ListApprovalForOffDay")]
         public async Task<IActionResult> ListApprovalForOffDay()
         {
-           var listofApprovalForOffDay = await _companyManagerService.WaitingApprovalForDayOff();
+           var listofApprovalForOffDay = await _companyManagerService.WaitingApprovalForOffDay();
             return Ok(listofApprovalForOffDay);
         }
 
@@ -174,24 +176,24 @@ namespace IKProjesiAPI.API.Controllers
         [Route("ListApprovalForAdvancePayment")]
         public async Task<IActionResult> ListApprovalForAdvancePayment()
         {
-            var listApprovalForAdvancePayment = await _companyManagerService.WaitingApprovalForAdvance();
+            var listApprovalForAdvancePayment = await _companyManagerService.WaitingApprovalForAdvancePayment();
             return Ok(listApprovalForAdvancePayment);
         }
 
         [HttpPut]
-        [Route("UpdateApprovalForAdvance")]
-        public async Task<IActionResult> UpdateApprovalForAdvance([FromBody] UpdateAdvanceDto model)
+        [Route("UpdateApprovalForAdvancePayment")]
+        public async Task<IActionResult> UpdateApprovalForAdvancePayment([FromBody] UpdateAdvancePaymentDto model)
         {
-            await _employeeService.UpdateAdvance(model);
+            await _employeeService.UpdateAdvancePayment(model);
             return Ok();
         }
 
 
         [HttpGet]
         [Route("GetApprovalForAdvance/{id}")]
-        public async Task<IActionResult> GetApprovalForAdvance(int id)
+        public async Task<IActionResult> GetApprovalForAdvancePayment(int id)
         {
-            var advance = await _employeeService.GetAdvance(id);
+            var advance = await _employeeService.GetAdvancePayment(id);
             return Ok(advance);
         }
     }
