@@ -94,7 +94,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             return employee;
         }
 
-        public async Task UpdateEmployee(UpdateEmployeeDto model)
+        public async Task<Employee> UpdateEmployee(UpdateEmployeeDto model)
         {
             var employee = await _employeeRepo.GetDefault(x => x.Id == model.Id);
 
@@ -112,6 +112,8 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
 
             await _employeeRepo.Update(employee);
+
+            return employee;
         }
 
         public async Task CreateExpense(CreateExpenseDto model)
