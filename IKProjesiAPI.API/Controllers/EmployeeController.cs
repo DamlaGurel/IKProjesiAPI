@@ -80,30 +80,21 @@ namespace IKProjesiAPI.API.Controllers
         {
             await _employeeService.CreateExpense(createExpense);
         }
-        //[HttpGet]
-        //[Route("ListExpense/{id}")]
-        //public async Task<IActionResult> ListExpense(int id)
-        //{
-        //    var expense = await _employeeService.ListExpenses(id);
-        //    if (expense.Count > 0)
-        //    {
-        //        return Ok(expense);
-        //    }
-        //    else if (expense.Count == 0)
-        //    {
-        //        return BadRequest("Harcama Talebiniz Bulunmamaktadır.");
-        //    }
-        //    else
-        //        return NotFound();
-        //}
         [HttpGet]
         [Route("ListExpense/{id}")]
         public async Task<IActionResult> ListExpense(int id)
         {
-            var expenseList = await _employeeService.ListExpense(id);
-
-            return Ok(expenseList);
-
+            var expense = await _employeeService.ListExpense(id);
+            if (expense.Count > 0)
+            {
+                return Ok(expense);
+            }
+            else if (expense.Count == 0)
+            {
+                return BadRequest("Harcama Talebiniz Bulunmamaktadır.");
+            }
+            else
+                return NotFound();
         }
 
         //OffDay İşlemleri
@@ -135,10 +126,11 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpGet]
-        [Route("ListAdvancePayments")]
-        public async Task<IActionResult> ListAdvancePayments()
+        [Route("ListAdvancePayment/{id}")]
+        public async Task<IActionResult> ListAdvancePayment(int id)
+
         {
-            var advance = await _employeeService.ListAdvancePayments();
+            var advance = await _employeeService.ListAdvancePayment(id);
             if (advance.Count > 0)
             {
                 return Ok(advance);
@@ -151,15 +143,7 @@ namespace IKProjesiAPI.API.Controllers
                 return NotFound();
         }
 
-        [HttpGet]
-        [Route("ListAdvancePayment/{id}")]
-        public async Task<IActionResult> ListAdvancePayment(int id)
-        {
-            var advancePayment = await _employeeService.ListAdvancePayment(id);
-
-            return Ok(advancePayment);
-
-        }
+       
 
     }
 }
