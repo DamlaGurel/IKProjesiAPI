@@ -3,6 +3,7 @@ using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
 using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs;
 using IKProjesiAPI.Application.Models.DTOs.OffDayDTOs;
+using IKProjesiAPI.Domain.Entities;
 
 namespace IKProjesiAPI.Application.Services.EmployeeService
 {
