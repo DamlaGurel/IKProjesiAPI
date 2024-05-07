@@ -42,11 +42,12 @@ namespace IKProjesiAPI.API.Controllers
                 var authClaims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, login.Email),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(ClaimTypes.Role, ((Job)role.RoleId).ToString().ToUpper())
                     };
 
                 var token = GetToken(authClaims);
-                var tokenString = "Bearer " +  new JwtSecurityTokenHandler().WriteToken(token);
+                var tokenString = "Bearer " + new JwtSecurityTokenHandler().WriteToken(token);
 
                 var isValidToken = await ValidateToken();
                 var cookieOptions = new CookieOptions
@@ -77,7 +78,25 @@ namespace IKProjesiAPI.API.Controllers
         public async Task<IActionResult> ValidateToken()
         {
             var token = HttpContext.Request.Headers["Authorization"].ToString();
-            return Ok(token);
+            if (!token.IsNullOrEmpty())
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:secretKey"]);
+
+                tokenHandler.ValidateToken(token.Replace("Bearer ", ""), new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidIssuer = _configuration["JwtSettings:validIssuer"],
+                    ValidAudience = _configuration["JwtSettings:validAudience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true
+                }, out SecurityToken validatedToken);
+
+                return Ok("Token doğrulandı");
+            }
+            return Ok();
         }
 
 

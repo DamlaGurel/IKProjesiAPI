@@ -2,6 +2,7 @@
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Repositories;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace IKProjesiAPI.Application.Services.AppUserService
 {
@@ -28,12 +29,6 @@ namespace IKProjesiAPI.Application.Services.AppUserService
             user.Password = password.NewPassword;
         }
 
-        //public async Task<bool> ForgotPassword(LoginDto model)
-        //{
-        //    var user = await _userManager.FindByEmailAsync(model.Email);
-        //    return user;
-        //}
-
         public async Task<SignInResult> Login(LoginDto model)
         {
             var result = await _repo.PasswordSignInEmail(model.Email, model.Password);
@@ -44,8 +39,5 @@ namespace IKProjesiAPI.Application.Services.AppUserService
         {
             await _signInManager.SignOutAsync();
         }
-
-        
-
     }
 }
