@@ -19,7 +19,9 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
         //Expense
         Task CreateExpense(CreateExpenseDto model);
-        Task<List<ListExpenseDto>> ListExpenses(int id);
+        Task UpdateExpense(UpdateExpenseDto model);
+        Task<List<ListExpenseDto>> ListExpense(int id);
+        Task<UpdateExpenseDto> GetExpense(int id);
 
         //DayOff
         Task CreateOffDay(CreateOffDayDto model);
@@ -30,6 +32,9 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
         //AdvancePayment
         Task CreateAdvancePayment(CreateAdvancePaymentDto model);
-        Task<List<ListAdvancePaymentDto>> ListAdvancePayments(); 
+        Task<List<ListAdvancePaymentDto>> ListAdvancePayments();
+        Task UpdateAdvancePayment(UpdateAdvancePaymentDto model);
+        Task<List<ListAdvancePaymentDto>> ListAdvancePayment(int id);
+        Task<UpdateAdvancePaymentDto> GetAdvancePayment(int id);
     }
 }
