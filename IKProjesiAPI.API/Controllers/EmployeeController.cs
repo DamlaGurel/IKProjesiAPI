@@ -80,6 +80,22 @@ namespace IKProjesiAPI.API.Controllers
         {
             await _employeeService.CreateExpense(createExpense);
         }
+        [HttpGet]
+        [Route("ListExpense/{id}")]
+        public async Task<IActionResult> ListExpense(int id)
+        {
+            var expense = await _employeeService.ListExpenses(id);
+            if (expense.Count > 0)
+            {
+                return Ok(expense);
+            }
+            else if (expense.Count == 0)
+            {
+                return BadRequest("Harcama Talebiniz Bulunmamaktadır.");
+            }
+            else
+                return NotFound();
+        }
 
         //OffDay İşlemleri
 
@@ -95,8 +111,6 @@ namespace IKProjesiAPI.API.Controllers
         public async Task<IActionResult> ListTakeDayOff(int id)
         {
             var offDays = await _employeeService.ListTakeDayOff(id);
-            
-
             return Ok(offDays);
 
         }

@@ -39,6 +39,7 @@ namespace IKProjesiAPI.API.Controllers
                 await _appUserService.Login(model);
 
                 var role = await _context.AppUserRoles.FirstAsync(x => x.UserId == login.Id);
+
                 var authClaims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, login.Email),
