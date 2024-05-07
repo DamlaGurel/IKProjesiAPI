@@ -41,12 +41,23 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             employee.UserName = employee.Email;
             employee.NormalizedUserName = employee.Email.ToUpper();
             employee.JobName = Job.Employee;
-            employee.ImageBytes = Convert.FromBase64String(model.ImageString);
+            
+            if (model.ImageString is not null)
+            {
+                employee.ImageBytes = Convert.FromBase64String(model.ImageString);
+                            
+            }
+            
             //employee.CompanyManager=_
-            employee.DepartmentName = model.DepartmentName;
+
+            if (model.DepartmentNumber is not null)
+            {
+                employee.DepartmentName = (Department)model.DepartmentNumber;                
+            }
+
             employee.CreatedDate = DateTime.Now;
             employee.Status = Status.Active;
-            employee.Password = "123123";
+            employee.Password = $"{employee.FirstName}.{employee.LastName}";
 
             await _employeeRepo.Create(employee);
             return _mapper.Map<CreateEmployeeDto>(employee);
@@ -77,19 +88,26 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             return employee;
         }
 
-        public async Task UpdateEmployee(UpdateEmployeeDto model)
+        public async Task<Employee> UpdateEmployee(UpdateEmployeeDto model)
         {
             var employee = await _employeeRepo.GetDefault(x => x.Id == model.Id);
 
             employee.Address = model.Address;
             employee.PhoneNumber = model.PhoneNumber;
-            //employee.ImageBytes = model.ImageBytes;
-            employee.ImageBytes = Convert.FromBase64String(model.ImageString);
+
+            if (model.ImageString is not null)
+            {
+                employee.ImageBytes = Convert.FromBase64String(model.ImageString);
+            }
+
+           
             employee.Status = Status.Modified;
             employee.UpdatedDate = DateTime.Now;
 
 
             await _employeeRepo.Update(employee);
+
+            return employee;
         }
 
 
