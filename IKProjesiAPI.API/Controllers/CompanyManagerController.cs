@@ -32,6 +32,7 @@ namespace IKProjesiAPI.API.Controllers
             _userManager = userManager;
         }
 
+        #region Company Manager
         [HttpGet]
         [Route("GetCompanyManagerSummary/{id}")]
         public async Task<IActionResult> GetCompanyManagerSummary(int id)
@@ -73,7 +74,9 @@ namespace IKProjesiAPI.API.Controllers
             await _companyManagerService.Update(model);
             return Ok();
         }
+        #endregion
 
+        #region Employee
         [HttpPost]
         [Route("CreateEmployee")]
         public async Task<IActionResult> CreateEmployee([FromBody] CreateEmployeeDto model)
@@ -117,8 +120,9 @@ namespace IKProjesiAPI.API.Controllers
 
             return Ok("Kayıt Başarılı. Mail Gönderilmiştir.");
         }
+        #endregion
 
-        //OffDay İşlemleri
+        #region Off Day
         [HttpGet]
         [Route("ListApprovalForOffDay")]
         public async Task<IActionResult> ListApprovalForOffDay()
@@ -143,8 +147,9 @@ namespace IKProjesiAPI.API.Controllers
            var offDay= await _employeeService.GetOffDay(id);
             return Ok(offDay);
         }
+        #endregion
 
-        //Expense İşlemleri
+        #region Expense
         [HttpGet]
         [Route("ListApprovalForExpense")]
         public async Task<IActionResult> ListApprovalForExpense()
@@ -152,6 +157,7 @@ namespace IKProjesiAPI.API.Controllers
             var listApprovalForExpense = await _companyManagerService.WaitingApprovalForExpense();
             return Ok(listApprovalForExpense);
         }
+
         [HttpPut]
         [Route("UpdateApprovalForExpense")]
         public async Task<IActionResult> UpdateApprovalForExpense([FromBody] UpdateExpenseDto model)
@@ -160,7 +166,6 @@ namespace IKProjesiAPI.API.Controllers
             return Ok();
         }
 
-
         [HttpGet]
         [Route("GetApprovalForExpense/{id}")]
         public async Task<IActionResult> GetApprovalForExpense(int id)
@@ -168,10 +173,9 @@ namespace IKProjesiAPI.API.Controllers
             var expense = await _employeeService.GetExpense(id);
             return Ok(expense);
         }
+        #endregion
 
-
-
-        //AdvancePayment İşlemleri
+        #region Advance Payment
         [HttpGet]
         [Route("ListApprovalForAdvancePayment")]
         public async Task<IActionResult> ListApprovalForAdvancePayment()
@@ -196,5 +200,6 @@ namespace IKProjesiAPI.API.Controllers
             var advance = await _employeeService.GetAdvancePayment(id);
             return Ok(advance);
         }
+        #endregion 
     }
 }

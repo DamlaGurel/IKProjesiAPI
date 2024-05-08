@@ -31,7 +31,7 @@ namespace IKProjesiAPI.API.Controllers
             return View();
         }
 
-        //Employee İşlemleri
+        #region Employee
         [HttpGet]
         [Route("GetEmployeeSummary/{id}")]
         public async Task<IActionResult> GetEmployeeSummary(int id)
@@ -72,14 +72,16 @@ namespace IKProjesiAPI.API.Controllers
 
             return Ok(employee);
         }
+        #endregion
 
-        //Expense İşlemleri
+        #region Expense
         [HttpPost]
         [Route("CreateExpense")]
         public async Task CreateExpense(CreateExpenseDto createExpense)
         {
             await _employeeService.CreateExpense(createExpense);
         }
+
         [HttpGet]
         [Route("ListExpense/{id}")]
         public async Task<IActionResult> ListExpense(int id)
@@ -96,12 +98,12 @@ namespace IKProjesiAPI.API.Controllers
             else
                 return NotFound();
         }
+        #endregion
 
-        //OffDay İşlemleri
-
+        #region Expense
         [HttpPost]
         [Route("CreateOffDay")]
-        public async Task CreateOffDayy([FromBody] CreateOffDayDto model)
+        public async Task CreateOffDay([FromBody] CreateOffDayDto model)
         {
             await _employeeService.CreateOffDay(model);
         }
@@ -115,9 +117,9 @@ namespace IKProjesiAPI.API.Controllers
             return Ok(offDays);
 
         }
+        #endregion
 
-       //Advance Payment İşlemleri
-
+        #region Advance Payment
         [HttpPost]
         [Route("CreateAdvancePayment")]
         public async Task CreateAdvancePayment([FromBody] CreateAdvancePaymentDto createAdvancePayment)
@@ -128,7 +130,6 @@ namespace IKProjesiAPI.API.Controllers
         [HttpGet]
         [Route("ListAdvancePayment/{id}")]
         public async Task<IActionResult> ListAdvancePayment(int id)
-
         {
             var advance = await _employeeService.ListAdvancePayment(id);
             if (advance.Count > 0)
@@ -142,8 +143,6 @@ namespace IKProjesiAPI.API.Controllers
             else
                 return NotFound();
         }
-
-       
-
+        #endregion
     }
 }

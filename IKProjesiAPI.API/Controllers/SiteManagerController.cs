@@ -35,8 +35,7 @@ namespace IKProjesiAPI.API.Controllers
             _userManager = userManager;
         }
 
-        // CompanyManager
-
+        #region Site Manager
         [HttpPost]
         [Route("CreateCompanyManager")]
         public async Task<IActionResult> CreateCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
@@ -78,10 +77,9 @@ namespace IKProjesiAPI.API.Controllers
             else
                 return NotFound();
         }
+        #endregion
 
-
-        // SiteManager
-
+        #region Site Manager
         [HttpGet]
         [Route("SiteManagerSummary/{id}")]
         public async Task<IActionResult> SiteManagerSummary(int id)
@@ -113,10 +111,9 @@ namespace IKProjesiAPI.API.Controllers
             await _siteManagerService.UpdateSiteManager(siteManagerUpdate);
             return Ok();
         }
+#endregion
 
-
-        // Company
-
+        #region Company
         [HttpGet]
         [Route("CompanyIndex")]
         public async Task<List<CompanyListDto>> CompanyIndex()
@@ -164,7 +161,7 @@ namespace IKProjesiAPI.API.Controllers
             await _companyService.SoftDelete(id);
             return Ok();
         }
-
+        #endregion
 
     }
 }

@@ -13,6 +13,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs
         public int MoneyTypeId { get; set; }
         public int? ApprovalType { get; set; }
         public DateTime? ResponseTime { get; set; }
+        public DateTime? RequestDate { get; set; }
         public string? Description { get; set; }
         public string? EmployeeFullName { get; set; }
     }

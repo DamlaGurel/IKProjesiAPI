@@ -13,6 +13,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 {
     public interface ICompanyManagerService
     {
+        #region Company Manager
         Task<CreateCompanyManagerDto> Create(CreateCompanyManagerDto model);
         Task Update(UpdateCompanyManagerDto model);
         Task Delete(int id);
@@ -22,16 +23,19 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         Task<List<ListCompanyManagerDto>> GetCompanyManagersByCompany(int companyId);
         Task<SummaryCompanyManagerDto> GetCompanyManagerSummary(int id);
         Task<DetailCompanyManagerDto> GetCompanyManagerDetails(int id);
+        #endregion
 
-
+        #region Off Day
         Task<List<ApprovalOffDayDto>> WaitingApprovalForOffDay();
+        #endregion
 
+        #region Expense
         Task<List<ApprovalForExpenseDto>> WaitingApprovalForExpense();
+        #endregion
 
+        #region Advance Payment
         Task<List<ApprovalForAdvancePaymentDto>> WaitingApprovalForAdvancePayment();
-
-
-
+        #endregion
     }
 }
 

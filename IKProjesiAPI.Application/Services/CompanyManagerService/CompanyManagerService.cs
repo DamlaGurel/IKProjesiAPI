@@ -21,9 +21,6 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         private readonly IExpenseRepo _expenseRepo;
         private readonly IAdvancePaymentRepo _advancePaymentRepo;
 
-
-
-
         public CompanyManagerService(ICompanyManagerRepo companyManagerRepo, ICompanyRepo companyRepo, IMapper mapper, ITakeOffDayRepo takeOffDayRepo, IExpenseRepo expenseRepo, IAdvancePaymentRepo advancePaymentRepo)
         {
             _companyRepo = companyRepo;
@@ -34,6 +31,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             _advancePaymentRepo = advancePaymentRepo;
         }
 
+        #region Company Manager
         public async Task<CreateCompanyManagerDto> Create(CreateCompanyManagerDto model)
         {
             var companyManager = _mapper.Map<CompanyManager>(model);
@@ -154,7 +152,9 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
             await _companyManagerRepo.Update(companyManager);
         }
+        #endregion
 
+        #region Off Day
         public async Task<List<ApprovalOffDayDto>> WaitingApprovalForOffDay()
         {
             var listOfWaitingApprovalForDayOff = await _takeOffDayRepo.GetFilteredList(select: x => _mapper.Map<TakeOffDay>(x),
@@ -164,7 +164,9 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
             return dtoList;
         }
+        #endregion
 
+        #region Expense
         public async Task<List<ApprovalForExpenseDto>> WaitingApprovalForExpense()
         {
             var listOfWaitingApprovalForExpense = await _expenseRepo.GetFilteredList(select: x => _mapper.Map<Expense>(x),
@@ -174,7 +176,9 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
             return dtoList;
         }
+        #endregion
 
+        #region Advance Payment
         public async Task<List<ApprovalForAdvancePaymentDto>> WaitingApprovalForAdvancePayment()
         {
             var listOfWaitingApprovalForAdvance = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<AdvancePayment>(x),
@@ -184,6 +188,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
             return dtoList;
         }
+        #endregion
 
     }
 }

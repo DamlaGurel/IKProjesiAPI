@@ -31,7 +31,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
         }
 
 
-
+        #region Employee
         public async Task<CreateEmployeeDto> CreateEmployee(CreateEmployeeDto model)
         {
             var employee = _mapper.Map<Employee>(model);
@@ -109,9 +109,9 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
             return employee;
         }
+#endregion
 
-
-        //Expense İşlemleri
+        #region Expense
         public async Task CreateExpense(CreateExpenseDto model)
         {
             var employeeExpense = _mapper.Map<Expense>(model);
@@ -150,11 +150,10 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             var expense = await _expenseRepo.GetDefault(x => x.Id == id);
 
             return _mapper.Map<UpdateExpenseDto>(expense);
-
-
         }
-        //İzin İşlemleri
+        #endregion
 
+        #region Off Day
         public async Task CreateOffDay(CreateOffDayDto model)
         {
             var dayOff = _mapper.Map<TakeOffDay>(model);
@@ -206,15 +205,11 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
 
             await _takeOffDayRepo.Update(dayOff);
-
-
         }
 
         public async Task<List<ListOffDayDto>> ListOffDay(int id)
         {
             var listTakeDayOff = await _takeOffDayRepo.GetFilteredList(select: x => _mapper.Map<ListOffDayDto>(x), where: x => x.EmployeeId.Equals(id));
-
-
 
             return listTakeDayOff;
         }
@@ -224,11 +219,10 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             var takeDayOff = await _takeOffDayRepo.GetDefault(x => x.Id == id);
 
             return _mapper.Map<UpdateOffDayDto>(takeDayOff);
-
-
         }
+        #endregion
 
-        //Advance Payment İşlemleri
+        #region Advance Payment
         public async Task CreateAdvancePayment(CreateAdvancePaymentDto model)
         {
             var employee = _mapper.Map<AdvancePayment>(model);
@@ -243,7 +237,6 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             //employee.TotalAdvance = employee.Payment * 3;
 
             await _advancePaymentRepo.Create(employee);
-
         }
 
 
@@ -267,8 +260,6 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
 
             await _advancePaymentRepo.Update(advancePayment);
-
-
         }
 
 
@@ -277,9 +268,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             var advancePayment = await _advancePaymentRepo.GetDefault(x => x.Id == id);
 
             return _mapper.Map<UpdateAdvancePaymentDto>(advancePayment);
-
-
         }
-
+        #endregion
     }
 }
