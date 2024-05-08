@@ -29,6 +29,18 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpPost]
+        [Route("ValidateCredentials/{email}/{password}")]
+        public async Task<bool> ValidateCredentials(string email, string password)
+        {
+            var user = await _context.AppUsers.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
+            if (user == null) 
+            {
+                return false;
+            }
+            return true;
+        }
+
+        [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
