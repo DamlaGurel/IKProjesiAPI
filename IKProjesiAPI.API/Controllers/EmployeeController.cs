@@ -1,5 +1,8 @@
-﻿using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+﻿using IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs;
+using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
 using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
+using IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs;
+using IKProjesiAPI.Application.Models.DTOs.OffDayDTOs;
 using IKProjesiAPI.Application.Services.EmployeeService;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
@@ -28,6 +31,7 @@ namespace IKProjesiAPI.API.Controllers
             return View();
         }
 
+        #region Employee
         [HttpGet]
         [Route("GetEmployeeSummary/{id}")]
         public async Task<IActionResult> GetEmployeeSummary(int id)
@@ -56,8 +60,8 @@ namespace IKProjesiAPI.API.Controllers
         [Route("UpdateEmployee")]
         public async Task<IActionResult> UpdateEmployee([FromBody] UpdateEmployeeDto model)
         {
-            await _employeeService.UpdateEmployee(model);
-            return Ok();
+            var updatedEmployee=await _employeeService.UpdateEmployee(model);
+            return Ok(updatedEmployee);
         }
 
         [HttpGet]
@@ -68,7 +72,9 @@ namespace IKProjesiAPI.API.Controllers
 
             return Ok(employee);
         }
+        #endregion
 
+        #region Expense
         [HttpPost]
         [Route("CreateExpense")]
         public async Task CreateExpense(CreateExpenseDto createExpense)
@@ -76,6 +82,44 @@ namespace IKProjesiAPI.API.Controllers
             await _employeeService.CreateExpense(createExpense);
         }
 
+        [HttpGet]
+        [Route("ListExpense/{id}")]
+        public async Task<IActionResult> ListExpense(int id)
+        {
+            var expense = await _employeeService.ListExpense(id);
+            if (expense.Count > 0)
+            {
+                return Ok(expense);
+            }
+            else if (expense.Count == 0)
+            {
+                return BadRequest("Harcama Talebiniz Bulunmamaktadır.");
+            }
+            else
+                return NotFound();
+        }
+        #endregion
+
+        #region Expense
+        [HttpPost]
+        [Route("CreateOffDay")]
+        public async Task CreateOffDay([FromBody] CreateOffDayDto model)
+        {
+            await _employeeService.CreateOffDay(model);
+        }
+
+        [HttpGet]
+        [Route("ListOffDay/{id}")]
+        public async Task<IActionResult> ListOffDay(int id)
+        {
+            var offDays = await _employeeService.ListOffDay(id);
+
+            return Ok(offDays);
+
+        }
+        #endregion
+
+        #region Advance Payment
         [HttpPost]
         [Route("CreateAdvancePayment")]
         public async Task CreateAdvancePayment([FromBody] CreateAdvancePaymentDto createAdvancePayment)
@@ -84,10 +128,10 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpGet]
-        [Route("ListAdvancePayment")]
-        public async Task<IActionResult> ListAdvancePayment()
+        [Route("ListAdvancePayment/{id}")]
+        public async Task<IActionResult> ListAdvancePayment(int id)
         {
-            var advance = await _employeeService.ListAdvancePayments();
+            var advance = await _employeeService.ListAdvancePayment(id);
             if (advance.Count > 0)
             {
                 return Ok(advance);
@@ -99,5 +143,6 @@ namespace IKProjesiAPI.API.Controllers
             else
                 return NotFound();
         }
+        #endregion
     }
 }

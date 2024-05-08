@@ -1,6 +1,6 @@
 ﻿using IKProjesiAPI.Domain.Enums;
 
-namespace IKProjesiAPI.Domain.Entities.AppEntities
+namespace IKProjesiAPI.Domain.Entities
 {
 	public class AdvancePayment : IBaseEmployee
 	{

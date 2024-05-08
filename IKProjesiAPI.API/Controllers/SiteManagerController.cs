@@ -15,7 +15,7 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    //[Authorize(AuthenticationSchemes = "Bearer")]
     //[Authorize(AuthenticationSchemes = "Bearer",Roles = "SiteManager")]
 
     public class SiteManagerController : Controller
@@ -35,8 +35,7 @@ namespace IKProjesiAPI.API.Controllers
             _userManager = userManager;
         }
 
-        // CompanyManager
-
+        #region Site Manager
         [HttpPost]
         [Route("CreateCompanyManager")]
         public async Task<IActionResult> CreateCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
@@ -77,10 +76,9 @@ namespace IKProjesiAPI.API.Controllers
             else
                 return NotFound();
         }
+        #endregion
 
-
-        // SiteManager
-
+        #region Site Manager
         [HttpGet]
         [Route("SiteManagerSummary/{id}")]
         public async Task<IActionResult> SiteManagerSummary(int id)
@@ -116,13 +114,22 @@ namespace IKProjesiAPI.API.Controllers
         [Route("UpdateSiteManager")]
         public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManagerUpdate)
         {
-            await _siteManagerService.UpdateSiteManager(siteManagerUpdate);
-            return Ok();
+            var updatedSiteManager= await _siteManagerService.UpdateSiteManager(siteManagerUpdate);
+            return Ok(updatedSiteManager);
         }
 
+        [HttpGet]
+        [Route("GetSiteManagerById/{id}")]
+        public async Task<IActionResult> GetSiteManagerById(int id)
+        {
+            var siteManager = await _siteManagerService.GetSiteManagerById(id);
+
+            return Ok(siteManager);
+        }
 
         // Company
 
+        #region Company
         [HttpGet]
         [Route("CompanyIndex")]
         public async Task<List<CompanyListDto>> CompanyIndex()
@@ -170,7 +177,7 @@ namespace IKProjesiAPI.API.Controllers
             await _companyService.SoftDelete(id);
             return Ok();
         }
-
+        #endregion
 
     }
 }

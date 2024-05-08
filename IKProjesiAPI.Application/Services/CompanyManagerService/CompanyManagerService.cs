@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
+using IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs;
+using IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs;
+using IKProjesiAPI.Application.Models.DTOs.OffDayDTOs;
 using IKProjesiAPI.Domain.Entities;
+using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,15 +17,21 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         private readonly ICompanyManagerRepo _companyManagerRepo;
         private readonly ICompanyRepo _companyRepo;
         private readonly IMapper _mapper;
+        private readonly ITakeOffDayRepo _takeOffDayRepo;
+        private readonly IExpenseRepo _expenseRepo;
+        private readonly IAdvancePaymentRepo _advancePaymentRepo;
 
-
-        public CompanyManagerService(ICompanyManagerRepo companyManagerRepo, ICompanyRepo companyRepo, IMapper mapper)
+        public CompanyManagerService(ICompanyManagerRepo companyManagerRepo, ICompanyRepo companyRepo, IMapper mapper, ITakeOffDayRepo takeOffDayRepo, IExpenseRepo expenseRepo, IAdvancePaymentRepo advancePaymentRepo)
         {
             _companyRepo = companyRepo;
             _companyManagerRepo = companyManagerRepo;
             _mapper = mapper;
+            _takeOffDayRepo = takeOffDayRepo;
+            _expenseRepo = expenseRepo;
+            _advancePaymentRepo = advancePaymentRepo;
         }
 
+        #region Company Manager
         public async Task<CreateCompanyManagerDto> Create(CreateCompanyManagerDto model)
         {
             var companyManager = _mapper.Map<CompanyManager>(model);
@@ -30,6 +40,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             companyManager.UserName = companyManager.Email;
             companyManager.NormalizedUserName = companyManager.Email.ToUpper();
             companyManager.Password = $"{model.FirstName}.{model.LastName}";
+
 
             Company company = await _companyRepo.GetDefault(c => c.Id == model.CompanyId);
             companyManager.Company = company;
@@ -58,16 +69,18 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         public async Task<List<ListCompanyManagerDto>> GetCompanyManagers()
         {
             var companyManager = await _companyManagerRepo.GetFilteredList(select: x => new ListCompanyManagerDto
-                                                                                        {
-                                                                                            FirstName = x.FirstName,
-                                                                                            SecondName = x.SecondName,
-                                                                                            LastName = x.LastName,
-                                                                                            SecondLastName = x.SecondLastName,
-                                                                                            Email = x.Email,
-                                                                                            PhoneNumber = x.PhoneNumber,
-                                                                                            CompanyId = x.CompanyId,
-                                                                                            CompanyName = x.Company.CompanyName,
-                                                                                        },
+
+            {
+                FirstName = x.FirstName,
+                SecondName = x.SecondName,
+                LastName = x.LastName,
+                SecondLastName = x.SecondLastName,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
+                CompanyId = x.CompanyId,
+                CompanyName = x.Company.CompanyName,
+            },
+
                                                                            where: x => !x.Status.Equals(Status.Pasive),
                                                                            orderBy: x => x.OrderBy(x => x.CompanyId),
                                                                            include: query => query.Include(x => x.Company));
@@ -105,7 +118,9 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             string imageString = null;
 
             if (companyManager != null && companyManager.ImageBytes != null)
+
                 imageString = Convert.ToBase64String(companyManager.ImageBytes);
+
             companyManager.ImageString = imageString;
 
             return companyManager;
@@ -137,7 +152,43 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
             await _companyManagerRepo.Update(companyManager);
         }
+        #endregion
 
+        #region Off Day
+        public async Task<List<ApprovalOffDayDto>> WaitingApprovalForOffDay()
+        {
+            var listOfWaitingApprovalForDayOff = await _takeOffDayRepo.GetFilteredList(select: x => _mapper.Map<TakeOffDay>(x),
+                where: x => x.ApprovalType == ApprovalType.Waiting);
+
+            var dtoList = _mapper.Map<List<ApprovalOffDayDto>>(listOfWaitingApprovalForDayOff);
+
+            return dtoList;
+        }
+        #endregion
+
+        #region Expense
+        public async Task<List<ApprovalForExpenseDto>> WaitingApprovalForExpense()
+        {
+            var listOfWaitingApprovalForExpense = await _expenseRepo.GetFilteredList(select: x => _mapper.Map<Expense>(x),
+                where: x => x.ApprovalType == ApprovalType.Waiting);
+
+            var dtoList = _mapper.Map<List<ApprovalForExpenseDto>>(listOfWaitingApprovalForExpense);
+
+            return dtoList;
+        }
+        #endregion
+
+        #region Advance Payment
+        public async Task<List<ApprovalForAdvancePaymentDto>> WaitingApprovalForAdvancePayment()
+        {
+            var listOfWaitingApprovalForAdvance = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<AdvancePayment>(x),
+                where: x => x.ApprovalType == ApprovalType.Waiting);
+
+            var dtoList = _mapper.Map<List<ApprovalForAdvancePaymentDto>>(listOfWaitingApprovalForAdvance);
+
+            return dtoList;
+        }
+        #endregion
 
     }
 }

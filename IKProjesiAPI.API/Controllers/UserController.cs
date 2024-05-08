@@ -29,6 +29,18 @@ namespace IKProjesiAPI.API.Controllers
         }
 
         [HttpPost]
+        [Route("ValidateCredentials/{email}/{password}")]
+        public async Task<bool> ValidateCredentials(string email, string password)
+        {
+            var user = await _context.AppUsers.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
+            if (user == null) 
+            {
+                return false;
+            }
+            return true;
+        }
+
+        [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
@@ -39,6 +51,7 @@ namespace IKProjesiAPI.API.Controllers
                 await _appUserService.Login(model);
 
                 var role = await _context.AppUserRoles.FirstAsync(x => x.UserId == login.Id);
+
                 var authClaims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, login.Email),
@@ -78,24 +91,24 @@ namespace IKProjesiAPI.API.Controllers
         public async Task<IActionResult> ValidateToken()
         {
             var token = HttpContext.Request.Headers["Authorization"].ToString();
-            //if (!token.IsNullOrEmpty())
-            //{
-            //    var tokenHandler = new JwtSecurityTokenHandler();
-            //    var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:secretKey"]);
+            if (!token.IsNullOrEmpty())
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:secretKey"]);
 
-            //    tokenHandler.ValidateToken(token.Replace("Bearer ", ""), new TokenValidationParameters
-            //    {
-            //        ValidateIssuer = true,
-            //        ValidateAudience = true,
-            //        ValidIssuer = _configuration["JwtSettings:validIssuer"],
-            //        ValidAudience = _configuration["JwtSettings:validAudience"],
-            //        IssuerSigningKey = new SymmetricSecurityKey(key),
-            //        ValidateIssuerSigningKey = true,
-            //        ValidateLifetime = true
-            //    }, out SecurityToken validatedToken);
+                tokenHandler.ValidateToken(token.Replace("Bearer ", ""), new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidIssuer = _configuration["JwtSettings:validIssuer"],
+                    ValidAudience = _configuration["JwtSettings:validAudience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true
+                }, out SecurityToken validatedToken);
 
-            //    return Ok("Token doğrulandı");
-            //}
+                return Ok("Token doğrulandı");
+            }
             return Ok();
         }
 
