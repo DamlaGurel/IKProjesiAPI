@@ -15,8 +15,8 @@ namespace IKProjesiAPI.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize(AuthenticationSchemes = "Bearer", Roles = "SUPERADMİN")]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    //[Authorize]
 
     public class SuperAdminController : ControllerBase
     {
@@ -86,6 +86,15 @@ namespace IKProjesiAPI.API.Controllers
         {
             var siteManager = await _siteManagerService.SiteManagerDetails();
             return Ok(siteManager);
+        }
+
+        [HttpGet]
+        [Route("Deneme")]
+        //[Authorize(Roles = "SUPERADMİN")]
+        //[Authorize]
+        public async Task<IActionResult> Deneme()
+        {
+            return Ok();
         }
 
     }
