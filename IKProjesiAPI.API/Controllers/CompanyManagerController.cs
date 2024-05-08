@@ -79,17 +79,17 @@ namespace IKProjesiAPI.API.Controllers
         #region Employee
         [HttpPost]
         [Route("CreateEmployee")]
-        public async Task<IActionResult> CreateEmployee([FromBody] CreateEmployeeDto model)
+        public async Task<CreateEmployeeDto> CreateEmployee([FromBody] CreateEmployeeDto model)
         {
             //if (!User.IsInRole(Job.CompanyManager.ToString().ToUpper()))
             //{
             //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
             //}
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
             var employee = await _employeeService.CreateEmployee(model);
             var p = await _userManager.FindByNameAsync(employee.UserName.ToUpper());
@@ -118,7 +118,8 @@ namespace IKProjesiAPI.API.Controllers
 
             //smtp.Send(message);
 
-            return Ok("Kayıt Başarılı. Mail Gönderilmiştir.");
+            //return Ok("Kayıt Başarılı. Mail Gönderilmiştir.");
+            return employee;
         }
         #endregion
 

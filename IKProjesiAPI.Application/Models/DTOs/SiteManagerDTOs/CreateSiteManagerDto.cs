@@ -12,16 +12,8 @@ namespace IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs
         public string? SecondLastName { get; set; }
         public string Password { get; set; }
         public string? UserName { get; set; }
-
-        //public string? ImagePath { get; set; }
-        //[NotMapped]
-        //public IFormFile? ProfilePicture { get; set; }
-
-
         public string? ImageString { get; set; }
         public byte[]? ImageBytes { get; set; }
-
-
 
         //[DateTimeValidation]
         public DateTime? BirthDate { get; set; }

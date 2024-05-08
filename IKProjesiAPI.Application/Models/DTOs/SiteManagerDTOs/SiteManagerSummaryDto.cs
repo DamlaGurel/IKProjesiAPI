@@ -9,7 +9,8 @@ namespace IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs
 
         public string? LastName { get; set; }
         public string? SecondLastName { get; set; }
-        public string? ImagePath { get; set; }
+        public string? ImageString { get; set; }
+        public byte[]? ImageBytes { get; set; }
         public string? Email { get; set; }
         public Job? JobName { get; set; }
         public Department? DepartmentName { get; set; }

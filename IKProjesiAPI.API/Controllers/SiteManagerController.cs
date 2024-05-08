@@ -108,10 +108,20 @@ namespace IKProjesiAPI.API.Controllers
         [Route("UpdateSiteManager")]
         public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManagerUpdate)
         {
-            await _siteManagerService.UpdateSiteManager(siteManagerUpdate);
-            return Ok();
+            var updatedSiteManager= await _siteManagerService.UpdateSiteManager(siteManagerUpdate);
+            return Ok(updatedSiteManager);
         }
-#endregion
+
+        [HttpGet]
+        [Route("GetSiteManagerById/{id}")]
+        public async Task<IActionResult> GetSiteManagerById(int id)
+        {
+            var siteManager = await _siteManagerService.GetSiteManagerById(id);
+
+            return Ok(siteManager);
+        }
+
+        // Company
 
         #region Company
         [HttpGet]

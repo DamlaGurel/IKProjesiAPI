@@ -62,6 +62,9 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
             var siteManager = await _siteManagerRepo.GetFilteredFirstOrDefault(select: x => _mapper.Map<SiteManagerDetailsDto>(x),
                                                                                where: s => s.Id.Equals(id) && s.Status != Status.Pasive);
 
+            if (siteManager is not null && siteManager.ImageBytes is not null)
+                siteManager.ImageString = Convert.ToBase64String(siteManager.ImageBytes);
+
             return siteManager;
         }
 
@@ -73,18 +76,23 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
             return siteManager;
         }
 
-        public async Task UpdateSiteManager(SiteManagerUpdateDto model)
+        public async Task<SiteManager> UpdateSiteManager(SiteManagerUpdateDto model)
         {
             var siteManager = await _siteManagerRepo.GetDefault(x => x.Id == model.Id);
 
             siteManager.Address = model.Address;
             siteManager.PhoneNumber = model.PhoneNumber;
-            //siteManager.ImagePath = model.ImagePath;
+            
+            if (model.ImageString is not null)
+                siteManager.ImageBytes = Convert.FromBase64String(model.ImageString);
+
 
             siteManager.Status = Status.Modified;
             siteManager.UpdatedDate = DateTime.Now;
 
             await _siteManagerRepo.Update(siteManager);
+
+            return siteManager;
         }
 
         public async Task DeleteSiteManager(int id)
@@ -114,6 +122,13 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
         {
             var siteManager = await _siteManagerRepo.GetFilteredList(select: s => _mapper.Map<SiteManagerDetailsDto>(s),
                                                                      where: s => !s.Status.Equals(Status.Pasive));
+            return siteManager;
+        }
+
+        public async Task<SiteManagerUpdateDto> GetSiteManagerById(int id)
+        {
+            var siteManager = await _siteManagerRepo.GetFilteredFirstOrDefault(select: x => _mapper.Map<SiteManagerUpdateDto>(x),
+                where: x => x.Id == id);
             return siteManager;
         }
     }
