@@ -97,7 +97,15 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
             if (model.ImageString is not null)
             {
-                employee.ImageBytes = Convert.FromBase64String(model.ImageString);
+                Console.WriteLine("Input base64 string: " + model.ImageString);
+                //employee.ImageBytes = Convert.FromBase64String(model.ImageString);
+                byte[] imageBytes = Convert.FromBase64String(model.ImageString);
+
+                // Log the resulting byte array
+                Console.WriteLine("Converted byte array: " + BitConverter.ToString(imageBytes));
+
+                // Assign the byte array to the employee's ImageBytes property
+                employee.ImageBytes = imageBytes;
             }
 
            
@@ -208,7 +216,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             var employee = _mapper.Map<AdvancePayment>(model);
 
             employee.EmployeeId = model.EmployeeId;
-            employee.AdvanceType = model.AdvanceType;
+            //employee.AdvanceType = model.AdvanceType;
             employee.ApprovalType = ApprovalType.Waiting;
             employee.RequestDate = DateTime.Now;
             //employee.TotalAdvance = employee.Payment * 3;
