@@ -14,9 +14,7 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = "Bearer", Roles = "SUPERADMİN")]
     [Authorize(AuthenticationSchemes = "Bearer")]
-    //[Authorize]
 
     public class SuperAdminController : ControllerBase
     {
