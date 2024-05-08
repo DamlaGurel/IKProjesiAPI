@@ -79,7 +79,6 @@ namespace IKProjesiAPI.API.Controllers
         }
         #endregion
 
-        #region Site Manager
         [HttpGet]
         [Route("SiteManagerSummary/{id}")]
         public async Task<IActionResult> SiteManagerSummary(int id)
