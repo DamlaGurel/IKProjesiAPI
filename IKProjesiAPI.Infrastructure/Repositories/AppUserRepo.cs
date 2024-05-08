@@ -35,7 +35,6 @@ namespace IKProjesiAPI.Infrastructure.Repositories
             {
                 return SignInResult.Failed;
             }
-
             return SignInResult.Success;
         }
         public async Task<bool> UniqueEmail(string email)
