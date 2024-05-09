@@ -139,18 +139,22 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             }
         }
 
-        public async Task Update(UpdateCompanyManagerDto model)
+        public async Task<CompanyManager> Update(UpdateCompanyManagerDto model)
         {
             var companyManager = await _companyManagerRepo.GetDefault(x => x.Id == model.Id);
 
             companyManager.Address = model.Address;
             companyManager.PhoneNumber = model.PhoneNumber;
-            //companyManager.ImagePath = model.ImagePath;
+
+            if (model.ImageString is not null)
+                companyManager.ImageBytes = Convert.FromBase64String(model.ImageString);
 
             companyManager.Status = Status.Modified;
             companyManager.UpdatedDate = DateTime.Now;
 
             await _companyManagerRepo.Update(companyManager);
+
+            return companyManager;
         }
         #endregion
 
