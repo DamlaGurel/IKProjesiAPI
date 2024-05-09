@@ -36,6 +36,10 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
         {
             var employee = _mapper.Map<Employee>(model);
 
+            var companyManager = await _companyManagerRepo.GetDefault(x => x.Id == model.CompanyManagerId);
+
+            employee.CompanyManagerId = companyManager.Id;
+
             employee.Email = $"{employee.FirstName}.{employee.LastName}@bilgeadamboost.com";
             employee.NormalizedEmail = employee.Email.ToUpper();
             employee.UserName = employee.Email;
@@ -45,7 +49,6 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             if (model.ImageString is not null)
             {
                 employee.ImageBytes = Convert.FromBase64String(model.ImageString);
-
             }
 
             if (model.DepartmentNumber is not null)
@@ -239,6 +242,8 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
         public async Task<List<ListAdvancePaymentDto>> ListAdvancePayment(int id)
         {
+            //var companyManager = await _employeeRepo.GetFilteredFirstOrDefault();
+
             var advancePayment = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<ListAdvancePaymentDto>(x),
                                                                       where: x => x.EmployeeId.Equals(id));
             var advance = _mapper.Map<List<ListAdvancePaymentDto>>(advancePayment);

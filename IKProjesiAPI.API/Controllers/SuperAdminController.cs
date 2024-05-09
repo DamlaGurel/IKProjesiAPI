@@ -14,8 +14,7 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
-
+    [Authorize(AuthenticationSchemes = "Bearer", Roles = "SUPERADMİN")]
     public class SuperAdminController : ControllerBase
     {
         private readonly ISiteManagerService _siteManagerService;
