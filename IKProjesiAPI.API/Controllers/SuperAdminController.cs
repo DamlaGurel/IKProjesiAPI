@@ -31,7 +31,6 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpPost]
         [Route("CreateSiteManager")]
-        //[Authorize(Roles = "SUPERADMİN")]
         public async Task<IActionResult> CreateSiteManager([FromBody] CreateSiteManagerDto siteManager)
         {
             //if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
@@ -72,6 +71,7 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpGet]
         [Route("SiteManagerDetail")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> SiteManagerDetail()
         {
             var siteManager = await _siteManagerService.SiteManagerDetails();

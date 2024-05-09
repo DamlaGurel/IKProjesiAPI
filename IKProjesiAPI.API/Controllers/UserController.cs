@@ -10,6 +10,7 @@ using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Application.Services.AppUserService;
 using IKProjesiAPI.Application.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Principal;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -33,7 +34,7 @@ namespace IKProjesiAPI.API.Controllers
         public async Task<bool> ValidateCredentials(string email, string password)
         {
             var user = await _context.AppUsers.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
-            if (user == null) 
+            if (user == null)
             {
                 return false;
             }
@@ -96,7 +97,7 @@ namespace IKProjesiAPI.API.Controllers
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:secretKey"]);
 
-                tokenHandler.ValidateToken(token.Replace("Bearer ", ""), new TokenValidationParameters
+                var principal = tokenHandler.ValidateToken(token.Replace("Bearer ", ""), new TokenValidationParameters
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,

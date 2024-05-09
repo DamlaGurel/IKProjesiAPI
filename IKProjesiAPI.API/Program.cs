@@ -49,6 +49,12 @@ namespace IkProjesiAPI.API
                     ValidAudience = jwtSettings["validAudience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                 };
+
+                opt.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = context => { var claims = context.Principal.Claims; return Task.CompletedTask; }
+                };
+
             });
 
             builder.Services.AddControllers();
