@@ -239,8 +239,6 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
             employee.AdvanceType = (AdvanceType)model.AdvanceTypeId;
             employee.MoneyType = (MoneyType)model.MoneyTypeId;
-
-            //employee.AdvanceType = model.AdvanceType;
             employee.ApprovalType = ApprovalType.Waiting;
             employee.RequestDate = DateTime.Now;
             //employee.TotalAdvance = employee.Payment * 3;
