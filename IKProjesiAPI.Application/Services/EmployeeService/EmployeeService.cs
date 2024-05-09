@@ -42,18 +42,16 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             employee.NormalizedUserName = employee.Email.ToUpper();
             employee.JobName = Job.Employee;
 
-            //if (model.ImageString is not null)
-            //{
-            //    employee.ImageBytes = Convert.FromBase64String(model.ImageString);
+            if (model.ImageString is not null)
+            {
+                employee.ImageBytes = Convert.FromBase64String(model.ImageString);
 
-            //}
+            }
 
-            ////employee.CompanyManager=_
-
-            //if (model.DepartmentNumber is not null)
-            //{
-            //    employee.DepartmentName = (Department)model.DepartmentNumber;                
-            //}
+            if (model.DepartmentNumber is not null)
+            {
+                employee.DepartmentName = (Department)model.DepartmentNumber;
+            }
 
             employee.CreatedDate = DateTime.Now;
             employee.Status = Status.Active;
@@ -97,15 +95,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
             if (model.ImageString is not null)
             {
-                Console.WriteLine("Input base64 string: " + model.ImageString);
-                //employee.ImageBytes = Convert.FromBase64String(model.ImageString);
-                byte[] imageBytes = Convert.FromBase64String(model.ImageString);
-
-                // Log the resulting byte array
-                Console.WriteLine("Converted byte array: " + BitConverter.ToString(imageBytes));
-
-                // Assign the byte array to the employee's ImageBytes property
-                employee.ImageBytes = imageBytes;
+             employee.ImageBytes = Convert.FromBase64String(model.ImageString);
             }
 
 

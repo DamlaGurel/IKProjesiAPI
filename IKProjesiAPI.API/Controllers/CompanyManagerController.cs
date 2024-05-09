@@ -71,8 +71,8 @@ namespace IKProjesiAPI.API.Controllers
         [Route("GetCompanyManagerUpdate")]
         public async Task<IActionResult> GetCompanyManagerUpdate([FromBody] UpdateCompanyManagerDto model)
         {
-            await _companyManagerService.Update(model);
-            return Ok();
+            var updatedCompanyManager=await _companyManagerService.Update(model);
+            return Ok(updatedCompanyManager);
         }
         #endregion
 
@@ -121,6 +121,8 @@ namespace IKProjesiAPI.API.Controllers
             //return Ok("Kayıt Başarılı. Mail Gönderilmiştir.");
             return employee;
         }
+
+        
         #endregion
 
         #region Off Day
