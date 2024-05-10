@@ -1,14 +1,9 @@
 using Autofac;
-using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using IKProjesiAPI.Application.IoC;
-using IKProjesiAPI.Application.Services.SiteManagerService;
 using IKProjesiAPI.Domain.Entities.AppEntities;
-using IKProjesiAPI.Domain.Repositories;
 using IKProjesiAPI.Infrastructure.Context;
-using IKProjesiAPI.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -92,9 +87,6 @@ namespace IkProjesiAPI.API
             {
                 builder.RegisterModule(new DependencyResolver());
             });
-
-
-           
 
             var app = builder.Build();
 

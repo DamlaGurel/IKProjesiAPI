@@ -62,7 +62,6 @@ namespace IKProjesiAPI.API.Controllers
             
             return Ok();
         }
-       
 
         [HttpGet]
         [Route("GetAllCompanyManagers")]
@@ -79,7 +78,6 @@ namespace IKProjesiAPI.API.Controllers
         }
         #endregion
 
-        #region Site Manager
         [HttpGet]
         [Route("SiteManagerSummary/{id}")]
         public async Task<IActionResult> SiteManagerSummary(int id)
@@ -102,6 +100,13 @@ namespace IKProjesiAPI.API.Controllers
                 return Ok(siteManagerDetails);
             else
                 return NotFound("kullanıcı bulunamadı");
+        }
+
+        [HttpGet]
+        [Route("GetSiteManager/{id}")]
+        public async Task<IActionResult> GetSiteManager(int id)
+        {
+            return Ok(await _siteManagerService.GetSiteManager(id));
         }
 
         [HttpPut]
