@@ -34,7 +34,7 @@ namespace IKProjesiAPI.API.Controllers
             _userManager = userManager;
         }
 
-        #region Site Manager
+        #region Company Manager
         [HttpPost]
         [Route("CreateCompanyManager")]
         public async Task<IActionResult> CreateCompanyManager([FromBody] CreateCompanyManagerDto createCompanyManager)
@@ -76,6 +76,8 @@ namespace IKProjesiAPI.API.Controllers
                 return NotFound();
         }
         #endregion
+
+        #region Site Manager
 
         [HttpGet]
         [Route("SiteManagerSummary/{id}")]
