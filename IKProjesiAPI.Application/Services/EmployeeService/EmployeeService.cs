@@ -44,7 +44,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             employee.NormalizedEmail = employee.Email.ToUpper();
             employee.UserName = employee.Email;
             employee.NormalizedUserName = employee.Email.ToUpper();
-            employee.JobName = Job.Employee;
+            employee.JobName = Job.EMPLOYEE;
 
             if (model.ImageString is not null)
             {

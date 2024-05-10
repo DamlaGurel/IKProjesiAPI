@@ -15,7 +15,7 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer", Roles = "SİTEMANAGER")]
+    [Authorize(AuthenticationSchemes = "Bearer", Roles = "SITEMANAGER")]
 
     public class SiteManagerController : Controller
     {
@@ -55,7 +55,7 @@ namespace IKProjesiAPI.API.Controllers
             user.SecurityStamp = Guid.NewGuid().ToString();
             if (user != null)
             {
-                string roleName = Job.CompanyManager.ToString().ToUpper();
+                string roleName = Job.COMPANYMANAGER.ToString().ToUpper();
                 await _userManager.AddToRoleAsync(user, roleName);
             }
             

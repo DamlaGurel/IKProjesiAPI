@@ -100,7 +100,7 @@ namespace IKProjesiAPI.API.Controllers
             p.SecurityStamp = Guid.NewGuid().ToString();
             if (p != null)
             {
-                string roleName = Job.Employee.ToString().ToUpper();
+                string roleName = Job.EMPLOYEE.ToString().ToUpper();
                 await _userManager.AddToRoleAsync(p, roleName);
             }
 

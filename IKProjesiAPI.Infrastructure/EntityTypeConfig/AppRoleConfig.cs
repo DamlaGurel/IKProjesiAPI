@@ -17,8 +17,8 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
             var superAdmin = new AppRole
             {
                 Id = 1,
-                Name = "SuperAdmin",
-                NormalizedName = "SuperAdmin".ToUpper(),
+                Name = Job.SUPERADMIN.ToString(),
+                NormalizedName = Job.SUPERADMIN.ToString().ToUpper(),
                 ConcurrencyStamp = Guid.NewGuid().ToString(),
                 CreatedDate = DateTime.Now
             };
@@ -26,8 +26,8 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
             var siteManager = new AppRole
             {
                 Id = 2,
-                Name = Job.SiteManager.ToString(),
-                NormalizedName = Job.SiteManager.ToString().ToUpper(),
+                Name = Job.SITEMANAGER.ToString(),
+                NormalizedName = Job.SITEMANAGER.ToString().ToUpper(),
                 ConcurrencyStamp = Guid.NewGuid().ToString(),
                 CreatedDate = DateTime.Now
             };
@@ -35,16 +35,16 @@ namespace IKProjesiAPI.Infrastructure.EntityTypeConfig
             var companyManager = new AppRole
             {
                 Id = 3,
-                Name = "CompanyManager",
-                NormalizedName = "CompanyManager".ToUpper(),
+                Name = Job.COMPANYMANAGER.ToString(),
+                NormalizedName = Job.COMPANYMANAGER.ToString().ToUpper(),
                 ConcurrencyStamp = Guid.NewGuid().ToString(),
                 CreatedDate = DateTime.Now
             };
             var employee = new AppRole
             {
                 Id = 4,
-                Name = "Employee",
-                NormalizedName = "Employee".ToUpper(),
+                Name = Job.EMPLOYEE.ToString(),
+                NormalizedName = Job.EMPLOYEE.ToString().ToUpper(),
                 ConcurrencyStamp = Guid.NewGuid().ToString(),
                 CreatedDate = DateTime.Now
             };

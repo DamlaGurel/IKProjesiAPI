@@ -44,7 +44,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
 
             Company company = await _companyRepo.GetDefault(c => c.Id == model.CompanyId);
             companyManager.Company = company;
-            companyManager.JobName = Job.CompanyManager;
+            companyManager.JobName = Job.COMPANYMANAGER;
             companyManager.ImageBytes = Convert.FromBase64String(model.ImageString);
             companyManager.CreatedDate = DateTime.Now;
             companyManager.Status = Status.Active;

@@ -14,7 +14,7 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer", Roles = "SUPERADMİN")]
+    [Authorize(AuthenticationSchemes = "Bearer", Roles = "SUPERADMIN")]
 
     public class SuperAdminController : ControllerBase
     {
@@ -49,7 +49,7 @@ namespace IKProjesiAPI.API.Controllers
 
             if (user != null)
             {
-                string roleName = Job.SiteManager.ToString().ToUpper();
+                string roleName = Job.SITEMANAGER.ToString().ToUpper();
                 await _userManager.AddToRoleAsync(user, roleName);
             }
 
