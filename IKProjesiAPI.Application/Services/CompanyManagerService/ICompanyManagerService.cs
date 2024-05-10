@@ -15,7 +15,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
     {
         #region Company Manager
         Task<CreateCompanyManagerDto> Create(CreateCompanyManagerDto model);
-        Task Update(UpdateCompanyManagerDto model);
+        Task<CompanyManager> Update(UpdateCompanyManagerDto model);
         Task Delete(int id);
         Task SoftDelete(int id);
         Task<List<ListCompanyManagerDto>> GetCompanyManagers();
