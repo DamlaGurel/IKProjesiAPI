@@ -10,6 +10,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs
         public string? SecondLastName { get; set; }
         public string? Password { get; set; }
         public string? UserName { get; set; }
+        public int? CompanyManagerId { get; set; }
         public string? ImageString { get; set; }
         public byte[]? ImageBytes { get; set; }
         public DateTime? BirthDate { get; set; }

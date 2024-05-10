@@ -10,6 +10,7 @@ using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Application.Services.AppUserService;
 using IKProjesiAPI.Application.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Principal;
 
 namespace IKProjesiAPI.API.Controllers
 {
@@ -33,7 +34,7 @@ namespace IKProjesiAPI.API.Controllers
         public async Task<bool> ValidateCredentials(string email, string password)
         {
             var user = await _context.AppUsers.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
-            if (user == null) 
+            if (user == null)
             {
                 return false;
             }
@@ -56,11 +57,13 @@ namespace IKProjesiAPI.API.Controllers
                     {
                         new Claim(ClaimTypes.Email, login.Email),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(ClaimTypes.Role, ((Job)role.RoleId).ToString().ToUpper())
+                        new Claim(ClaimTypes.Role, ((Job)role.RoleId).ToString().ToUpper()),
+                        new Claim("UserId", login.Id.ToString())
                     };
 
                 var token = GetToken(authClaims);
                 var tokenString = "Bearer " + new JwtSecurityTokenHandler().WriteToken(token);
+                var userId = token.Claims.First(claim => claim.Type == "UserId").Value;
 
                 var isValidToken = await ValidateToken();
                 var cookieOptions = new CookieOptions
@@ -72,7 +75,7 @@ namespace IKProjesiAPI.API.Controllers
                 };
                 HttpContext.Response.Cookies.Append("token", tokenString, cookieOptions);
 
-                return Ok(new TokenDto { Token = tokenString, Expiration = token.ValidTo, Role = ((Job)role.RoleId).ToString().ToUpper() });
+                return Ok(new TokenDto { UserId = userId, Token = tokenString, Expiration = token.ValidTo, Role = ((Job)role.RoleId).ToString().ToUpper() });
             }
             else
                 return Unauthorized("Kullanıcı yetkisiz");
@@ -96,6 +99,16 @@ namespace IKProjesiAPI.API.Controllers
             //    var tokenHandler = new JwtSecurityTokenHandler();
             //    var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:secretKey"]);
 
+                var principal = tokenHandler.ValidateToken(token.Replace("Bearer ", ""), new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidIssuer = _configuration["JwtSettings:validIssuer"],
+                    ValidAudience = _configuration["JwtSettings:validAudience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true
+                }, out SecurityToken validatedToken);
             //    tokenHandler.ValidateToken(token.Replace("Bearer ", ""), new TokenValidationParameters
             //    {
             //        ValidateIssuer = true,
@@ -113,7 +126,7 @@ namespace IKProjesiAPI.API.Controllers
         }
 
 
-        private JwtSecurityToken GetToken(List<Claim> authClaims)
+        private JwtSecurityToken GetToken( List<Claim> authClaims)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:secretKey"]));
             var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

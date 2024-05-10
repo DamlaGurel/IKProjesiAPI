@@ -38,12 +38,20 @@ namespace IkProjesiAPI.API
                 opt.RequireHttpsMetadata = false;
                 opt.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidIssuer = jwtSettings["vaildIssuer"],
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = jwtSettings["validIssuer"],
                     ValidAudience = jwtSettings["validAudience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                 };
+
+                opt.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = context => { var claims = context.Principal.Claims; return Task.CompletedTask; }
+                };
+
             });
 
             builder.Services.AddControllers();

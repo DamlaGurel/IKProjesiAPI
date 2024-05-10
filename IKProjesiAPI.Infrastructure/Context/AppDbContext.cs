@@ -33,10 +33,6 @@ namespace IKProjesiAPI.Infrastructure.Context
         public DbSet<TakeOffDay> TakeOffDays { get; set; }
 
 
-
-
-
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new AppUserConfig())
