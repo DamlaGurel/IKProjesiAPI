@@ -99,16 +99,6 @@ namespace IKProjesiAPI.API.Controllers
             //    var tokenHandler = new JwtSecurityTokenHandler();
             //    var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:secretKey"]);
 
-                var principal = tokenHandler.ValidateToken(token.Replace("Bearer ", ""), new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidIssuer = _configuration["JwtSettings:validIssuer"],
-                    ValidAudience = _configuration["JwtSettings:validAudience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuerSigningKey = true,
-                    ValidateLifetime = true
-                }, out SecurityToken validatedToken);
             //    tokenHandler.ValidateToken(token.Replace("Bearer ", ""), new TokenValidationParameters
             //    {
             //        ValidateIssuer = true,
