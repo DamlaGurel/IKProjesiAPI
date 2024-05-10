@@ -90,25 +90,25 @@ namespace IKProjesiAPI.API.Controllers
         [Route("ValidateToken")]
         public async Task<IActionResult> ValidateToken()
         {
-            var token = HttpContext.Request.Headers["Authorization"].ToString();
-            if (!token.IsNullOrEmpty())
-            {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:secretKey"]);
+            //var token = HttpContext.Request.Headers["Authorization"].ToString();
+            //if (!token.IsNullOrEmpty())
+            //{
+            //    var tokenHandler = new JwtSecurityTokenHandler();
+            //    var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:secretKey"]);
 
-                tokenHandler.ValidateToken(token.Replace("Bearer ", ""), new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidIssuer = _configuration["JwtSettings:validIssuer"],
-                    ValidAudience = _configuration["JwtSettings:validAudience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuerSigningKey = true,
-                    ValidateLifetime = true
-                }, out SecurityToken validatedToken);
+            //    tokenHandler.ValidateToken(token.Replace("Bearer ", ""), new TokenValidationParameters
+            //    {
+            //        ValidateIssuer = true,
+            //        ValidateAudience = true,
+            //        ValidIssuer = _configuration["JwtSettings:validIssuer"],
+            //        ValidAudience = _configuration["JwtSettings:validAudience"],
+            //        IssuerSigningKey = new SymmetricSecurityKey(key),
+            //        ValidateIssuerSigningKey = true,
+            //        ValidateLifetime = true
+            //    }, out SecurityToken validatedToken);
 
-                return Ok("Token doğrulandı");
-            }
+            //    return Ok("Token doğrulandı");
+            //}
             return Ok();
         }
 

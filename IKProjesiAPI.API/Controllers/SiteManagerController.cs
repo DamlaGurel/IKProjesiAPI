@@ -125,7 +125,6 @@ namespace IKProjesiAPI.API.Controllers
 
             return Ok(siteManager);
         }
-        #endregion
         // Company
 
         #region Company
