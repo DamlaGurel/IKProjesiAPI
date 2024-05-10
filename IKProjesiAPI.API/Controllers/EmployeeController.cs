@@ -1,4 +1,5 @@
-﻿using IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs;
+﻿using System.Data;
+using IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs;
 using IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs;
 using IKProjesiAPI.Application.Models.DTOs.EmployeeDTOs;
 using IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs;
@@ -7,6 +8,7 @@ using IKProjesiAPI.Application.Services.EmployeeService;
 using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +16,7 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
+    [Authorize(AuthenticationSchemes = "Bearer", Roles = "EMPLOYEE")]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;

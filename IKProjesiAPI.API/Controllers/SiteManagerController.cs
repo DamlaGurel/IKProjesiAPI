@@ -16,7 +16,7 @@ namespace IKProjesiAPI.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize(AuthenticationSchemes = "Bearer")]
-    //[Authorize(AuthenticationSchemes = "Bearer",Roles = "SiteManager")]
+    [Authorize(AuthenticationSchemes = "Bearer", Roles = "SİTEMANAGER")]
 
     public class SiteManagerController : Controller
     {
@@ -121,7 +121,7 @@ namespace IKProjesiAPI.API.Controllers
             return Ok(siteManager);
         }
 
-        // Company
+        #endregion
 
         #region Company
         [HttpGet]

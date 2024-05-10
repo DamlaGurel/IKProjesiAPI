@@ -14,7 +14,9 @@ namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer", Roles = "SUPERADMİN")]
+    //[Authorize(Roles = "SUPERADMİN")]
+
 
     public class SuperAdminController : ControllerBase
     {
@@ -31,7 +33,6 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpPost]
         [Route("CreateSiteManager")]
-        //[Authorize(Roles = "SUPERADMİN")]
         public async Task<IActionResult> CreateSiteManager([FromBody] CreateSiteManagerDto siteManager)
         {
             //if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))

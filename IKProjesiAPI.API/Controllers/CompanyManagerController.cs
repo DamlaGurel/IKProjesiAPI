@@ -12,11 +12,14 @@ using IKProjesiAPI.Domain.Entities;
 using IKProjesiAPI.Application.Models.DTOs.OffDayDTOs;
 using IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs;
 using IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace IKProjesiAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer", Roles = "COMPANYMANAGER")]
     public class CompanyManagerController : ControllerBase
     {
         private readonly ICompanyManagerService _companyManagerService;
