@@ -114,7 +114,7 @@ namespace IKProjesiAPI.API.Controllers
         [Route("UpdateSiteManager")]
         public async Task<IActionResult> UpdateSiteManager([FromBody] SiteManagerUpdateDto siteManagerUpdate)
         {
-            var updatedSiteManager= await _siteManagerService.UpdateSiteManager(siteManagerUpdate);
+            var updatedSiteManager = await _siteManagerService.UpdateSiteManager(siteManagerUpdate);
             return Ok(updatedSiteManager);
         }
 

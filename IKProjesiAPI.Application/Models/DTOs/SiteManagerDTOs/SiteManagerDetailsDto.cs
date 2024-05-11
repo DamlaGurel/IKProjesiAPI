@@ -12,6 +12,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.SiteManagerDTOs
         public string LastName { get; set; }
         public string? SecondLastName { get; set; }
         public string Password { get; set; }
+        public string Email { get; set; }
         public string? ImageString { get; set; }
         public byte[]? ImageBytes { get; set; }
         public DateTime BirthDate { get; set; }

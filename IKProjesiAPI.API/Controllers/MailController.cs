@@ -61,5 +61,34 @@ namespace IKProjesiAPI.API.Controllers
                 //return BadRequest("Belirtilen e-postaya sahip bir kullanıcı bulunamadı.");
             }
         }
+
+        [HttpPost]
+        [Route("SendPassword/{personalEmail}")]
+        public async Task<IActionResult> SendPassword(string personalEmail)
+        {
+            var user = await _context.AppUsers.FirstOrDefaultAsync(u => u.PersonalEmail == personalEmail);
+
+            if (user != null)
+            {
+                string information = $"Mail adresiniz: {user.Email}" + "\n" + $"Sifreniz: {user.Password}";
+                MailMessage message = new MailMessage();
+                message.From = new MailAddress("mailadresi@mail.com");
+                message.To.Add(new MailAddress(personalEmail));
+                message.IsBodyHtml = true;
+                message.Subject = "Giriş yapabilmek için bilgileriniz";
+                message.Body = information;
+
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential("arslanilkay06@gmail.com", "xbishuykxbcmashq");
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+                smtp.Send(message);
+            }
+            return Ok(user);
+        }
     }
 }

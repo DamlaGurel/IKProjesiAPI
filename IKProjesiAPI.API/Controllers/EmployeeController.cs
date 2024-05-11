@@ -62,7 +62,7 @@ namespace IKProjesiAPI.API.Controllers
         [Route("UpdateEmployee")]
         public async Task<IActionResult> UpdateEmployee([FromBody] UpdateEmployeeDto model)
         {
-            var updatedEmployee=await _employeeService.UpdateEmployee(model);
+            var updatedEmployee = await _employeeService.UpdateEmployee(model);
             return Ok(updatedEmployee);
         }
 
