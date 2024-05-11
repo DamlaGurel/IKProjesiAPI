@@ -7,6 +7,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.ExpenseDTOs
 {
     public class CreateExpenseDto
     {
+        public int EmployeeId { get; set; }
         public int ExpenseTypeId { get; set; }
         public double? TotalExpense { get; set; }
         public int MoneyTypeId { get; set; }

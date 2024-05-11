@@ -6,6 +6,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.OffDayDTOs
 	public class ApprovalOffDayDto
 	{
         public int? Id { get; set; }
+        public int EmployeeId { get; set; }
         public int ApprovalType { get; set; }
         public DateTime? RequestTime { get; set; }
         public DateTime? DayOffStartTime { get; set; }
@@ -14,8 +15,6 @@ namespace IKProjesiAPI.Application.Models.DTOs.OffDayDTOs
         public DateTime? ResponseTime { get; set; }
         public DayOffType? DayOffType { get; set; }
         public int? DaysOffNumber { get; set; }
-
-        public int? EmployeeId { get; set; }
         public string? EmployeeFullName { get; set; }
     }
 }
