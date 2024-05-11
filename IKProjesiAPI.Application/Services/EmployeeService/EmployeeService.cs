@@ -104,10 +104,8 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
              employee.ImageBytes = Convert.FromBase64String(model.ImageString);
             }
 
-
             employee.Status = Status.Modified;
             employee.UpdatedDate = DateTime.Now;
-
 
             await _employeeRepo.Update(employee);
 
@@ -232,12 +230,10 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             var employee = _mapper.Map<AdvancePayment>(model);
 
             employee.EmployeeId = model.EmployeeId;
-
             employee.AdvanceType = (AdvanceType)model.AdvanceTypeId;
             employee.MoneyType = (MoneyType)model.MoneyTypeId;
             employee.ApprovalType = ApprovalType.Waiting;
             employee.RequestDate = DateTime.Now;
-            //employee.TotalAdvance = employee.Payment * 3;
 
             await _advancePaymentRepo.Create(employee);
         }
@@ -245,24 +241,26 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
         public async Task<List<ListAdvancePaymentDto>> ListAdvancePayment(int id)
         {
-            //var companyManager = await _employeeRepo.GetFilteredFirstOrDefault();
-
             var advancePayment = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<ListAdvancePaymentDto>(x),
-                                                                      where: x => x.EmployeeId.Equals(id));
+                                                                           where: x => x.EmployeeId.Equals(id));
             var advance = _mapper.Map<List<ListAdvancePaymentDto>>(advancePayment);
             return advance;
+        }
+
+        public async Task<double?> TotalAdvancePayment(int employeeId)
+        {
+            var advancePayment = await _employeeRepo.GetFilteredFirstOrDefault(select: a => a.Payment,
+                                                                               where: a => a.Id == employeeId);
+            return advancePayment;
         }
 
         public async Task UpdateAdvancePayment(UpdateAdvancePaymentDto model)
         {
             var advancePayment = _mapper.Map<AdvancePayment>(model);
 
-
             advancePayment.ResponseTime = DateTime.Now;
 
             advancePayment.ApprovalType = (ApprovalType)model.ApprovalType;
-
-
 
             await _advancePaymentRepo.Update(advancePayment);
         }

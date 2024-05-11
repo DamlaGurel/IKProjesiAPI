@@ -44,14 +44,7 @@ namespace IKProjesiAPI.API.Controllers
                 return BadRequest(ModelState);
             }
             var cm = await _companyManagerService.Create(createCompanyManager);
-
-            //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
-
             var user = await _userManager.FindByNameAsync(cm.UserName.ToUpper());
-
             user.SecurityStamp = Guid.NewGuid().ToString();
             if (user != null)
             {
@@ -127,6 +120,7 @@ namespace IKProjesiAPI.API.Controllers
             return Ok(siteManager);
         }
         #endregion
+
         #region Company
         [HttpGet]
         [Route("CompanyIndex")]
@@ -141,10 +135,6 @@ namespace IKProjesiAPI.API.Controllers
         [Route("CreateCompany")]
         public async Task<IActionResult> CreateCompany([FromBody] CreateCompanyDto createCompany)
         {
-            //if (!User.IsInRole(Job.SiteManager.ToString().ToUpper()))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -156,7 +146,6 @@ namespace IKProjesiAPI.API.Controllers
         [HttpGet]
         [Route("CompanyDetails/{id}")]
         public async Task<IActionResult> CompanyDetails(int id)
-
         {
             var companyDetails = await _companyService.GetCompanyDetails(id);
 

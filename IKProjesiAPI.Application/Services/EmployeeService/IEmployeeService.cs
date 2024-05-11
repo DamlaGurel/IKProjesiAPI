@@ -38,6 +38,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
         Task UpdateAdvancePayment(UpdateAdvancePaymentDto model);
         Task<UpdateAdvancePaymentDto> GetAdvancePayment(int id);
         Task<List<ListAdvancePaymentDto>> ListAdvancePayment(int id);
+        Task<double?> TotalAdvancePayment(int employeeId);
         #endregion
     }
 }

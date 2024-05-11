@@ -26,8 +26,6 @@ namespace IKProjesiAPI.API.Controllers
         private readonly IEmployeeService _employeeService;
         private readonly UserManager<AppUser> _userManager;
 
-
-
         public CompanyManagerController(ICompanyManagerService companyManagerService, IEmployeeService employeeService, UserManager<AppUser> userManager)
         {
             _companyManagerService = companyManagerService;
@@ -104,28 +102,25 @@ namespace IKProjesiAPI.API.Controllers
                 await _userManager.AddToRoleAsync(p, roleName);
             }
 
-            //MailMessage message = new MailMessage();
-            //message.From = new MailAddress("mailadresi@mail.com");
-            //message.To.Add(new MailAddress(p.Email));
-            //message.IsBodyHtml = true;
-            //message.Subject = "Hoşgeldiniz";
-            //message.Body = "Şirketimize hoşgeldiniz";
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress("mailadresi@mail.com");
+            message.To.Add(new MailAddress(p.Email));
+            message.IsBodyHtml = true;
+            message.Subject = "Hoşgeldiniz";
+            message.Body = "Şirketimize hoşgeldiniz";
 
-            //SmtpClient smtp = new SmtpClient();
-            //smtp.Host = "smtp.gmail.com";
-            //smtp.Port = 587;
-            //smtp.EnableSsl = true;
-            //smtp.UseDefaultCredentials = false;
-            //smtp.Credentials = new NetworkCredential("arslanilkay06@gmail.com", "xbishuykxbcmashq");
-            //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new NetworkCredential("arslanilkay06@gmail.com", "xbishuykxbcmashq");
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 
-            //smtp.Send(message);
+            smtp.Send(message);
 
-            //return Ok("Kayıt Başarılı. Mail Gönderilmiştir.");
             return employee;
         }
-
-        
         #endregion
 
         #region Off Day
