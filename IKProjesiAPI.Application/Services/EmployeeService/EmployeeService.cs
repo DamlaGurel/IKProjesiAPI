@@ -14,13 +14,14 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 {
     public class EmployeeService : IEmployeeService
     {
+        private readonly IAppUserRepo _appUserRepo;
         private readonly IEmployeeRepo _employeeRepo;
         private readonly IExpenseRepo _expenseRepo;
         private readonly ITakeOffDayRepo _takeOffDayRepo;
         private readonly IAdvancePaymentRepo _advancePaymentRepo;
         private readonly IMapper _mapper;
         private readonly ICompanyManagerRepo _companyManagerRepo;
-        public EmployeeService(IEmployeeRepo employeeRepo, IMapper mapper, IExpenseRepo expenseRepo, ITakeOffDayRepo takeOffDayRepo, IAdvancePaymentRepo advancePaymentRepo, ICompanyManagerRepo companyManagerRepo)
+        public EmployeeService(IEmployeeRepo employeeRepo, IMapper mapper, IExpenseRepo expenseRepo, ITakeOffDayRepo takeOffDayRepo, IAdvancePaymentRepo advancePaymentRepo, ICompanyManagerRepo companyManagerRepo, IAppUserRepo appUserRepo)
         {
             _employeeRepo = employeeRepo;
             _mapper = mapper;
@@ -28,19 +29,21 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             _takeOffDayRepo = takeOffDayRepo;
             _advancePaymentRepo = advancePaymentRepo;
             _companyManagerRepo = companyManagerRepo;
+            _appUserRepo = appUserRepo;
         }
 
 
         #region Employee
         public async Task<CreateEmployeeDto> CreateEmployee(CreateEmployeeDto model)
         {
+            var email = await _appUserRepo.GenerateUniqueEmail(model.FirstName, model.LastName);
             var employee = _mapper.Map<Employee>(model);
 
             var companyManager = await _companyManagerRepo.GetDefault(x => x.Id == model.CompanyManagerId);
 
             employee.CompanyManagerId = companyManager.Id;
 
-            employee.Email = $"{employee.FirstName}.{employee.LastName}@bilgeadamboost.com";
+            employee.Email = email;
             employee.NormalizedEmail = employee.Email.ToUpper();
             employee.UserName = employee.Email;
             employee.NormalizedUserName = employee.Email.ToUpper();

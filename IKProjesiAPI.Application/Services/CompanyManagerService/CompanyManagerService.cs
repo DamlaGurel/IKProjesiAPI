@@ -8,12 +8,13 @@ using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
+using IKProjesiAPI.Infrastructure.Repositories;
 
 namespace IKProjesiAPI.Application.Services.CompanyManagerService
 {
     public class CompanyManagerService : ICompanyManagerService
     {
-
+        private readonly IAppUserRepo _appUserRepo;
         private readonly ICompanyManagerRepo _companyManagerRepo;
         private readonly ICompanyRepo _companyRepo;
         private readonly IMapper _mapper;
@@ -21,7 +22,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         private readonly IExpenseRepo _expenseRepo;
         private readonly IAdvancePaymentRepo _advancePaymentRepo;
 
-        public CompanyManagerService(ICompanyManagerRepo companyManagerRepo, ICompanyRepo companyRepo, IMapper mapper, ITakeOffDayRepo takeOffDayRepo, IExpenseRepo expenseRepo, IAdvancePaymentRepo advancePaymentRepo)
+        public CompanyManagerService(ICompanyManagerRepo companyManagerRepo, ICompanyRepo companyRepo, IMapper mapper, ITakeOffDayRepo takeOffDayRepo, IExpenseRepo expenseRepo, IAdvancePaymentRepo advancePaymentRepo, IAppUserRepo appUserRepo)
         {
             _companyRepo = companyRepo;
             _companyManagerRepo = companyManagerRepo;
@@ -29,14 +30,16 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             _takeOffDayRepo = takeOffDayRepo;
             _expenseRepo = expenseRepo;
             _advancePaymentRepo = advancePaymentRepo;
+            _appUserRepo = appUserRepo;
         }
 
         #region Company Manager
         public async Task<CreateCompanyManagerDto> Create(CreateCompanyManagerDto model)
         {
+            var email = await _appUserRepo.GenerateUniqueEmail(model.FirstName, model.LastName);
             var companyManager = _mapper.Map<CompanyManager>(model);
 
-            companyManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadamboost.com";
+            companyManager.Email = email;
             companyManager.UserName = companyManager.Email;
             companyManager.NormalizedUserName = companyManager.Email.ToUpper();
             companyManager.Password = $"{model.FirstName}.{model.LastName}";
