@@ -21,8 +21,9 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         private readonly ITakeOffDayRepo _takeOffDayRepo;
         private readonly IExpenseRepo _expenseRepo;
         private readonly IAdvancePaymentRepo _advancePaymentRepo;
+        private readonly IEmployeeRepo _employeeRepo;
 
-        public CompanyManagerService(ICompanyManagerRepo companyManagerRepo, ICompanyRepo companyRepo, IMapper mapper, ITakeOffDayRepo takeOffDayRepo, IExpenseRepo expenseRepo, IAdvancePaymentRepo advancePaymentRepo, IAppUserRepo appUserRepo)
+        public CompanyManagerService(ICompanyManagerRepo companyManagerRepo, ICompanyRepo companyRepo, IMapper mapper, ITakeOffDayRepo takeOffDayRepo, IExpenseRepo expenseRepo, IAdvancePaymentRepo advancePaymentRepo, IAppUserRepo appUserRepo, IEmployeeRepo employeeRepo)
         {
             _companyRepo = companyRepo;
             _companyManagerRepo = companyManagerRepo;
@@ -31,6 +32,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             _expenseRepo = expenseRepo;
             _advancePaymentRepo = advancePaymentRepo;
             _appUserRepo = appUserRepo;
+            _employeeRepo = employeeRepo;
         }
 
         #region Company Manager
@@ -186,10 +188,14 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         #endregion
 
         #region Advance Payment
-        public async Task<List<ApprovalForAdvancePaymentDto>> WaitingApprovalForAdvancePayment()
+        public async Task<List<ApprovalForAdvancePaymentDto>> WaitingApprovalForAdvancePayment(int companyManagerId)
         {
+            var employeesAssignedToManager = await _employeeRepo.GetFilteredList(select: x => _mapper.Map<Employee>(x),where: x => x.CompanyManagerId == companyManagerId);
+
+            var employeeIds = employeesAssignedToManager.Select(u => u.Id).ToList();
+
             var listOfWaitingApprovalForAdvance = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<AdvancePayment>(x),
-                where: x => x.ApprovalType == ApprovalType.Waiting);
+                where: x => x.ApprovalType == ApprovalType.Waiting && employeeIds.Contains(x.EmployeeId.Value));
 
             var dtoList = _mapper.Map<List<ApprovalForAdvancePaymentDto>>(listOfWaitingApprovalForAdvance);
 

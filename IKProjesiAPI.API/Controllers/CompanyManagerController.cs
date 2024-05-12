@@ -178,10 +178,10 @@ namespace IKProjesiAPI.API.Controllers
 
         #region Advance Payment
         [HttpGet]
-        [Route("ListApprovalForAdvancePayment")]
-        public async Task<IActionResult> ListApprovalForAdvancePayment()
+        [Route("ListApprovalForAdvancePayment/{id}")]
+        public async Task<IActionResult> ListApprovalForAdvancePayment(int id)
         {
-            var listApprovalForAdvancePayment = await _companyManagerService.WaitingApprovalForAdvancePayment();
+            var listApprovalForAdvancePayment = await _companyManagerService.WaitingApprovalForAdvancePayment(id);
             return Ok(listApprovalForAdvancePayment);
         }
 

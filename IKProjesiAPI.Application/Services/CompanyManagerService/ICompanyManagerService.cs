@@ -34,7 +34,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         #endregion
 
         #region Advance Payment
-        Task<List<ApprovalForAdvancePaymentDto>> WaitingApprovalForAdvancePayment();
+        Task<List<ApprovalForAdvancePaymentDto>> WaitingApprovalForAdvancePayment(int id);
         #endregion
     }
 }
