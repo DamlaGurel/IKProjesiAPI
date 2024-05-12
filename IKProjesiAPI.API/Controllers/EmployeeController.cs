@@ -102,7 +102,8 @@ namespace IKProjesiAPI.API.Controllers
         }
         #endregion
 
-        #region Expense
+        #region CreateOffDay
+
         [HttpPost]
         [Route("CreateOffDay")]
         public async Task CreateOffDay([FromBody] CreateOffDayDto model)
@@ -115,9 +116,7 @@ namespace IKProjesiAPI.API.Controllers
         public async Task<IActionResult> ListOffDay(int id)
         {
             var offDays = await _employeeService.ListOffDay(id);
-
             return Ok(offDays);
-
         }
         #endregion
 

@@ -82,16 +82,6 @@ namespace IKProjesiAPI.API.Controllers
         [Route("CreateEmployee")]
         public async Task<CreateEmployeeDto> CreateEmployee([FromBody] CreateEmployeeDto model)
         {
-            //if (!User.IsInRole(Job.CompanyManager.ToString().ToUpper()))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-
             var employee = await _employeeService.CreateEmployee(model);
             var p = await _userManager.FindByNameAsync(employee.UserName.ToUpper());
 
@@ -152,10 +142,10 @@ namespace IKProjesiAPI.API.Controllers
 
         #region Expense
         [HttpGet]
-        [Route("ListApprovalForExpense")]
-        public async Task<IActionResult> ListApprovalForExpense()
+        [Route("ListApprovalForExpense/{id}")]
+        public async Task<IActionResult> ListApprovalForExpense(int id)
         {
-            var listApprovalForExpense = await _companyManagerService.WaitingApprovalForExpense();
+            var listApprovalForExpense = await _companyManagerService.WaitingApprovalForExpense(id);
             return Ok(listApprovalForExpense);
         }
 

@@ -176,10 +176,13 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         #endregion
 
         #region Expense
-        public async Task<List<ApprovalForExpenseDto>> WaitingApprovalForExpense()
+        public async Task<List<ApprovalForExpenseDto>> WaitingApprovalForExpense(int id)
         {
-            var listOfWaitingApprovalForExpense = await _expenseRepo.GetFilteredList(select: x => _mapper.Map<Expense>(x),
-                where: x => x.ApprovalType == ApprovalType.Waiting);
+            var listOfWaitingApprovalForExpense = await _employeeRepo.GetFilteredList(select: x => _mapper.Map<Employee>(x), where: x => x.Id == id);
+            var employeeIds = listOfWaitingApprovalForExpense.Select(u => u.Id).ToList();
+
+            var listOfWaitingApprovalForAdvance = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<Expense>(x),
+                where: x => x.ApprovalType == ApprovalType.Waiting && employeeIds.Contains(x.EmployeeId.Value));
 
             var dtoList = _mapper.Map<List<ApprovalForExpenseDto>>(listOfWaitingApprovalForExpense);
 

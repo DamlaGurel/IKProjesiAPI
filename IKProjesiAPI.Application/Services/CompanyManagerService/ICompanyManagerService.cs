@@ -30,7 +30,7 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         #endregion
 
         #region Expense
-        Task<List<ApprovalForExpenseDto>> WaitingApprovalForExpense();
+        Task<List<ApprovalForExpenseDto>> WaitingApprovalForExpense(int id);
         #endregion
 
         #region Advance Payment
