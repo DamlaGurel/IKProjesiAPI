@@ -117,7 +117,7 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
         public async Task CreateExpense(CreateExpenseDto model)
         {
             var employeeExpense = _mapper.Map<Expense>(model);
-
+            employeeExpense.EmployeeId = model.EmployeeId;
             employeeExpense.ExpenseType = (ExpenseType)model.ExpenseTypeId;
             employeeExpense.MoneyType = (MoneyType)model.MoneyTypeId;
 
