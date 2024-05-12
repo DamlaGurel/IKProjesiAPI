@@ -33,11 +33,6 @@ namespace IKProjesiAPI.API.Controllers
         [Route("CreateSiteManager")]
         public async Task<IActionResult> CreateSiteManager([FromBody] CreateSiteManagerDto siteManager)
         {
-            //if (!User.IsInRole(Job.SuperAdmin.ToString().ToUpper()))
-            //{
-            //    return StatusCode(403, "Yetkisiz erişim: Bu işlemi gerçekleştirmek için yeterli izniniz yok.");
-            //}
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -56,12 +51,6 @@ namespace IKProjesiAPI.API.Controllers
             return Ok("KAYIT BAŞARILI");
         }
 
-        //[HttpPut]
-        //public IActionResult UpdateSiteManager(SiteManagerUpdateDto siteManager)
-        //{
-        //    return Ok(_siteManagerService.Update(siteManager));
-        //}
-
         [HttpDelete("DeleteSiteManager")]
         public async Task<IActionResult> DeleteSiteManager(int id)
         {
@@ -71,7 +60,6 @@ namespace IKProjesiAPI.API.Controllers
 
         [HttpGet]
         [Route("SiteManagerDetail")]
-        //[Authorize(AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> SiteManagerDetail()
         {
             var siteManager = await _siteManagerService.SiteManagerDetails();
