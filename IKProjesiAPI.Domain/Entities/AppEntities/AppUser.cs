@@ -12,6 +12,7 @@ namespace IKProjesiAPI.Domain.Entities.AppEntities
         public string? LastName { get; set; }
         public string? SecondLastName { get; set; }
         public string? Password { get; set; }
+        public string? PersonalEmail { get; set; }
         public byte[]? ImageBytes { get; set; }
         public DateTime? BirthDate { get; set; }
         public string? BirthPlace { get; set; }

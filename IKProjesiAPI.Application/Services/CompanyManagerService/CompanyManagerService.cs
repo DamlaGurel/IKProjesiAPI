@@ -8,20 +8,22 @@ using IKProjesiAPI.Domain.Entities.AppEntities;
 using IKProjesiAPI.Domain.Enums;
 using IKProjesiAPI.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
+using IKProjesiAPI.Infrastructure.Repositories;
 
 namespace IKProjesiAPI.Application.Services.CompanyManagerService
 {
     public class CompanyManagerService : ICompanyManagerService
     {
-
+        private readonly IAppUserRepo _appUserRepo;
         private readonly ICompanyManagerRepo _companyManagerRepo;
         private readonly ICompanyRepo _companyRepo;
         private readonly IMapper _mapper;
         private readonly ITakeOffDayRepo _takeOffDayRepo;
         private readonly IExpenseRepo _expenseRepo;
         private readonly IAdvancePaymentRepo _advancePaymentRepo;
+        private readonly IEmployeeRepo _employeeRepo;
 
-        public CompanyManagerService(ICompanyManagerRepo companyManagerRepo, ICompanyRepo companyRepo, IMapper mapper, ITakeOffDayRepo takeOffDayRepo, IExpenseRepo expenseRepo, IAdvancePaymentRepo advancePaymentRepo)
+        public CompanyManagerService(ICompanyManagerRepo companyManagerRepo, ICompanyRepo companyRepo, IMapper mapper, ITakeOffDayRepo takeOffDayRepo, IExpenseRepo expenseRepo, IAdvancePaymentRepo advancePaymentRepo, IAppUserRepo appUserRepo, IEmployeeRepo employeeRepo)
         {
             _companyRepo = companyRepo;
             _companyManagerRepo = companyManagerRepo;
@@ -29,14 +31,17 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
             _takeOffDayRepo = takeOffDayRepo;
             _expenseRepo = expenseRepo;
             _advancePaymentRepo = advancePaymentRepo;
+            _appUserRepo = appUserRepo;
+            _employeeRepo = employeeRepo;
         }
 
         #region Company Manager
         public async Task<CreateCompanyManagerDto> Create(CreateCompanyManagerDto model)
         {
+            var email = await _appUserRepo.GenerateUniqueEmail(model.FirstName, model.LastName);
             var companyManager = _mapper.Map<CompanyManager>(model);
 
-            companyManager.Email = $"{model.FirstName}.{model.LastName}@bilgeadamboost.com";
+            companyManager.Email = email;
             companyManager.UserName = companyManager.Email;
             companyManager.NormalizedUserName = companyManager.Email.ToUpper();
             companyManager.Password = $"{model.FirstName}.{model.LastName}";
@@ -183,10 +188,14 @@ namespace IKProjesiAPI.Application.Services.CompanyManagerService
         #endregion
 
         #region Advance Payment
-        public async Task<List<ApprovalForAdvancePaymentDto>> WaitingApprovalForAdvancePayment()
+        public async Task<List<ApprovalForAdvancePaymentDto>> WaitingApprovalForAdvancePayment(int companyManagerId)
         {
+            var employeesAssignedToManager = await _employeeRepo.GetFilteredList(select: x => _mapper.Map<Employee>(x),where: x => x.CompanyManagerId == companyManagerId);
+
+            var employeeIds = employeesAssignedToManager.Select(u => u.Id).ToList();
+
             var listOfWaitingApprovalForAdvance = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<AdvancePayment>(x),
-                where: x => x.ApprovalType == ApprovalType.Waiting);
+                where: x => x.ApprovalType == ApprovalType.Waiting && employeeIds.Contains(x.EmployeeId.Value));
 
             var dtoList = _mapper.Map<List<ApprovalForAdvancePaymentDto>>(listOfWaitingApprovalForAdvance);
 

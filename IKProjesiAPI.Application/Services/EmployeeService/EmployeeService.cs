@@ -14,13 +14,14 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 {
     public class EmployeeService : IEmployeeService
     {
+        private readonly IAppUserRepo _appUserRepo;
         private readonly IEmployeeRepo _employeeRepo;
         private readonly IExpenseRepo _expenseRepo;
         private readonly ITakeOffDayRepo _takeOffDayRepo;
         private readonly IAdvancePaymentRepo _advancePaymentRepo;
         private readonly IMapper _mapper;
         private readonly ICompanyManagerRepo _companyManagerRepo;
-        public EmployeeService(IEmployeeRepo employeeRepo, IMapper mapper, IExpenseRepo expenseRepo, ITakeOffDayRepo takeOffDayRepo, IAdvancePaymentRepo advancePaymentRepo, ICompanyManagerRepo companyManagerRepo)
+        public EmployeeService(IEmployeeRepo employeeRepo, IMapper mapper, IExpenseRepo expenseRepo, ITakeOffDayRepo takeOffDayRepo, IAdvancePaymentRepo advancePaymentRepo, ICompanyManagerRepo companyManagerRepo, IAppUserRepo appUserRepo)
         {
             _employeeRepo = employeeRepo;
             _mapper = mapper;
@@ -28,19 +29,21 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             _takeOffDayRepo = takeOffDayRepo;
             _advancePaymentRepo = advancePaymentRepo;
             _companyManagerRepo = companyManagerRepo;
+            _appUserRepo = appUserRepo;
         }
 
 
         #region Employee
         public async Task<CreateEmployeeDto> CreateEmployee(CreateEmployeeDto model)
         {
+            var email = await _appUserRepo.GenerateUniqueEmail(model.FirstName, model.LastName);
             var employee = _mapper.Map<Employee>(model);
 
             var companyManager = await _companyManagerRepo.GetDefault(x => x.Id == model.CompanyManagerId);
 
             employee.CompanyManagerId = companyManager.Id;
 
-            employee.Email = $"{employee.FirstName}.{employee.LastName}@bilgeadamboost.com";
+            employee.Email = email;
             employee.NormalizedEmail = employee.Email.ToUpper();
             employee.UserName = employee.Email;
             employee.NormalizedUserName = employee.Email.ToUpper();
@@ -101,10 +104,8 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
              employee.ImageBytes = Convert.FromBase64String(model.ImageString);
             }
 
-
             employee.Status = Status.Modified;
             employee.UpdatedDate = DateTime.Now;
-
 
             await _employeeRepo.Update(employee);
 
@@ -229,12 +230,10 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
             var employee = _mapper.Map<AdvancePayment>(model);
 
             employee.EmployeeId = model.EmployeeId;
-
             employee.AdvanceType = (AdvanceType)model.AdvanceTypeId;
             employee.MoneyType = (MoneyType)model.MoneyTypeId;
             employee.ApprovalType = ApprovalType.Waiting;
             employee.RequestDate = DateTime.Now;
-            //employee.TotalAdvance = employee.Payment * 3;
 
             await _advancePaymentRepo.Create(employee);
         }
@@ -242,24 +241,26 @@ namespace IKProjesiAPI.Application.Services.EmployeeService
 
         public async Task<List<ListAdvancePaymentDto>> ListAdvancePayment(int id)
         {
-            //var companyManager = await _employeeRepo.GetFilteredFirstOrDefault();
-
             var advancePayment = await _advancePaymentRepo.GetFilteredList(select: x => _mapper.Map<ListAdvancePaymentDto>(x),
-                                                                      where: x => x.EmployeeId.Equals(id));
+                                                                           where: x => x.EmployeeId.Equals(id));
             var advance = _mapper.Map<List<ListAdvancePaymentDto>>(advancePayment);
             return advance;
+        }
+
+        public async Task<double?> TotalAdvancePayment(int employeeId)
+        {
+            var advancePayment = await _employeeRepo.GetFilteredFirstOrDefault(select: a => a.Payment,
+                                                                               where: a => a.Id == employeeId);
+            return advancePayment;
         }
 
         public async Task UpdateAdvancePayment(UpdateAdvancePaymentDto model)
         {
             var advancePayment = _mapper.Map<AdvancePayment>(model);
 
-
             advancePayment.ResponseTime = DateTime.Now;
 
             advancePayment.ApprovalType = (ApprovalType)model.ApprovalType;
-
-
 
             await _advancePaymentRepo.Update(advancePayment);
         }

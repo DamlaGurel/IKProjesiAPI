@@ -12,6 +12,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.CompanyManagerDTOs
         public DateTime? BirthDate { get; set; }
         public string? BirthPlace { get; set; }
         public string? IdentityNumber { get; set; }
+        public string PersonalEmail { get; set; }
         public DateTime? StartDateOfWork { get; set; }
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }

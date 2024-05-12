@@ -14,7 +14,7 @@ namespace IKProjesiAPI.Application.Models.DTOs.AdvancePaymentDTOs
         public int? EmployeeId { get; set; }
         public int AdvanceTypeId { get; set; }
         public double? TotalAdvance { get; set; }
-        //public double? Payment { get; set; }
+        public double? Payment { get; set; }
         public int MoneyTypeId { get; set; }
         public ApprovalType? ApprovalType { get; set; }
         public DateTime? ResponseTime { get; set; }
