@@ -62,7 +62,7 @@ namespace IKProjesiAPI.API.Controllers
         [Route("UpdateEmployee")]
         public async Task<IActionResult> UpdateEmployee([FromBody] UpdateEmployeeDto model)
         {
-            var updatedEmployee=await _employeeService.UpdateEmployee(model);
+            var updatedEmployee = await _employeeService.UpdateEmployee(model);
             return Ok(updatedEmployee);
         }
 
@@ -122,6 +122,13 @@ namespace IKProjesiAPI.API.Controllers
         #endregion
 
         #region Advance Payment
+        [HttpGet]
+        [Route("TotalAdvancePayment/{employeeId}")]
+        public async Task<IActionResult> TotalAdvancePayment(int employeeId)
+        {
+            var payment = await _employeeService.TotalAdvancePayment(employeeId);
+            return Ok(payment);
+        }
         [HttpPost]
         [Route("CreateAdvancePayment")]
         public async Task CreateAdvancePayment([FromBody] CreateAdvancePaymentDto createAdvancePayment)

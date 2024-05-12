@@ -39,14 +39,6 @@ namespace IKProjesiAPI.Application.Services.SiteManagerService
             return _mapper.Map<CreateSiteManagerDto>(siteManager);
         }
 
-        //public async Task<string> GetUserEmail(string firstName, string lastName)
-        //{
-        //    string email = $"{firstName}.{lastName}@bilgeadam.com";
-        //    var userEmail = await _siteManagerRepo.GetFilteredFirstOrDefault(select: u => u.Email,
-        //     where: u => u.Email == email);
-        //    return email;
-        //}
-
         public async Task<SiteManager> GetSiteManager(int id)
         {
             var siteManager = await _siteManagerRepo.GetDefault(x => x.Id == id);

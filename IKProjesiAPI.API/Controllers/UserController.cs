@@ -58,12 +58,14 @@ namespace IKProjesiAPI.API.Controllers
                         new Claim(ClaimTypes.Email, login.Email),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(ClaimTypes.Role, ((Job)role.RoleId).ToString().ToUpper()),
-                        new Claim("UserId", login.Id.ToString())
+                        new Claim("UserId", login.Id.ToString()),
+                        new Claim("FirstName", login.FirstName.ToString())
                     };
 
                 var token = GetToken(authClaims);
                 var tokenString = "Bearer " + new JwtSecurityTokenHandler().WriteToken(token);
                 var userId = token.Claims.First(claim => claim.Type == "UserId").Value;
+                var firstName = token.Claims.First(claim => claim.Type == "FirstName").Value;
 
                 var isValidToken = await ValidateToken();
                 var cookieOptions = new CookieOptions
@@ -75,7 +77,7 @@ namespace IKProjesiAPI.API.Controllers
                 };
                 HttpContext.Response.Cookies.Append("token", tokenString, cookieOptions);
 
-                return Ok(new TokenDto { UserId = userId, Token = tokenString, Expiration = token.ValidTo, Role = ((Job)role.RoleId).ToString().ToUpper() });
+                return Ok(new TokenDto { UserId = userId, FirstName = firstName, Token = tokenString, Expiration = token.ValidTo, Role = ((Job)role.RoleId).ToString().ToUpper() });
             }
             else
                 return Unauthorized("Kullanıcı yetkisiz");
