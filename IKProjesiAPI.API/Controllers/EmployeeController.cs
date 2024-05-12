@@ -116,9 +116,7 @@ namespace IKProjesiAPI.API.Controllers
         public async Task<IActionResult> ListOffDay(int id)
         {
             var offDays = await _employeeService.ListOffDay(id);
-
             return Ok(offDays);
-
         }
         #endregion
 
